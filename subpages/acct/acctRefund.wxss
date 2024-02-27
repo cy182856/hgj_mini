@@ -1,0 +1,133 @@
+Page{
+  background-color: #F9F9F9;
+}
+.refund_Info{
+  background-color: #FFF;
+  margin: 30rpx 20rpx;
+  border-radius: 20rpx;
+}
+.refund_acct_bal{
+  height: 220rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #363F4D;
+  flex-direction: column;
+}
+.refund_acct_bal_title{
+  font-size: 28rpx;
+}
+.refund_acct_bal_content{
+  font-size: 45rpx;
+  font-weight: bold;
+}
+.refund_amt{
+  display: flex;
+  font-size: 28rpx;
+  color: #999999;
+  padding-bottom: 30rpx;
+}
+.refund_amt_left{
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.refund_amt_title{
+  color: #363F4D;
+}
+.refund_amt_right{
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.deadline{
+  border-top:1px solid #f2f2f2;
+}
+.refund_info_instru{
+  font-size: 30rpx;
+    line-height: 40rpx;
+    margin: 20rpx 30rpx;
+    color: #666666;
+}
+.save_content_instru_step{
+  display:flex;
+  padding: 5rpx;
+}
+
+.refund_btn{
+  width: 100%;
+  background-color: #258BFF;
+  margin-left: 10%;
+  margin-right: 10%;
+  height: 90rpx;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  font-size: 30rpx;
+}
+.refund_btn_shadow{
+  bottom: 0rpx;
+  position: fixed;
+  width: 100%;
+  background-color: #fff;
+  height: 140rpx;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    box-shadow: 0px -1px 3px 0px rgb(216 211 211 / 75%);
+    -webkit-box-shadow: 0px -1px 3px 0px rgb(216 211 211 / 75%);
+    -moz-box-shadow: 0px -1px 3px 0px rgb(216 211 211 / 75%);
+}
+.refund_contact_Img{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 30rpx;
+}
+.refund_contact_instru{
+  font-size: 30rpx;
+  color: #666666;
+  text-align: center;
+  margin-bottom: 30rpx;
+  padding-bottom: 120rpx;
+}
+.obj_intru_list{
+  text-align: center;
+  padding-left: 32rpx;
+  padding-right: 38rpx;
+  margin-top: 40rpx;
+  margin-bottom: 40rpx;
+  font-size: 30rpx;
+}
+.obj_intru{
+  margin-bottom: 10rpx;
+  line-height: 44rpx
+}
+.obj_title{
+  text-align: center;
+  color: #323233;
+  line-height: 44rpx;
+  margin-left: 10rpx;
+}
+.obj_desc{
+  color: #646566;
+  margin-top: 10rpx;
+  margin-left: 10rpx;
+}
+.obj_instru_close_btn{
+  font-size: 32rpx;
+  padding: 30rpx;
+  color: #189AFE;
+  text-align: center;
+  border-radius: 20rpx;
+}

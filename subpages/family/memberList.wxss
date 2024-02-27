@@ -1,0 +1,210 @@
+/* pages/family/memberList.wxss */
+@import '../../template/houseinfo_header/houseInfo.wxss';
+
+.title-view {
+  padding-top: 16rpx;
+  padding-left: 38rpx;
+  height: 62rpx;
+  text-align: left;
+  font-size: 30rpx;
+  background-color: #eeeeee;
+  border-top-left-radius:10rpx;
+  border-top-right-radius: 10rpx;
+}
+.title-view-noradius {
+  padding-top: 16rpx;
+  padding-left: 38rpx;
+  height: 62rpx;
+  text-align: left;
+  font-size: 30rpx;
+  background-color: #eeeeee;
+}
+.text-title{
+  height: 30rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  text-align: left;
+  color: #3c3c3c;
+  
+}
+
+.item-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  height: 90rpx;
+  padding-left: 32rpx;
+  padding-right: 32rpx;
+}
+
+.member_name {
+  width: 180rpx;
+  font-size: 28rpx;
+  text-align: center;
+  color: #777777;
+}
+.member_name-title {
+  width: 180rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  text-align: center;
+  color: #777777;
+}
+.member-list {
+
+  background-color: white;
+
+}
+
+.member_title {
+
+  text-align: left;
+  font-weight: 600;
+}
+
+.line {
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  background-color: lightgrey;
+  height: 2rpx;
+
+}
+
+.btn-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+  height: 100%;
+  margin-top: 40rpx;
+  margin-left: 36rpx;
+  margin-right: 36rpx;
+}
+
+.btn-margin {
+  margin-left: 5rpx;
+  margin-right: 5rpx;
+
+}
+
+.btn-two {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 88rpx;
+  width: 340rpx;
+  background-color: #189afe;
+  color: #fff;
+  border-radius: 20rpx;
+
+}
+.btn-two-unregist {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 88rpx;
+  width: 340rpx;
+  background-color: #eeeeee;
+  color: #989898;
+  border-radius: 20rpx;
+
+}
+
+.btn-one-unregist {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 88rpx;
+  width: 344px;
+  background-color: #eeeeee;
+  color: #989898;
+  border-radius: 20rpx;
+
+}
+
+.btn-two::after {
+  border: none;
+}
+
+.btn-two_hover {
+  background-color: #0576cc;
+}
+.btn-two_hover-unregist {
+  background-color: #f2f2f2;
+}
+.btn-two[disabled] {
+  color: #fff !important;
+  background-color: rgba(23, 152, 220, 0.5) !important;
+}
+
+.item-margin {
+  margin-right: 46rpx;
+  margin-left: 46rpx;
+
+}
+
+.notice-text {
+  font-size: 26rpx;
+  color: #999999;
+}
+
+.notice-row {
+  margin-top: 40rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+}
+
+.single-line {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fun-card{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  background: white;
+  margin-top: 16rpx;
+  margin-left: 26rpx;
+  margin-right: 26rpx;
+  border-radius: 10rpx;
+}
+.card-body{
+  position: relative;
+  top: 260rpx;
+}
+.root {
+  width: 100%;
+  height: 100%;
+  
+  position: relative;
+}
+
+.background-image{
+  width : 100%;
+   position: absolute;
+   height: 320rpx;
+   left: 0px;
+   top: 0px;
+}
+.content{
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   left: 0px;
+   top: 0px;
+}
+.splite-line-dashed {
+  height: 1px;
+  border: none;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  border-top:1px dashed #d5d5d5;
+  
+}
+

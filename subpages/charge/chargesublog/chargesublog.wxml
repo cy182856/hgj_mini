@@ -1,0 +1,64 @@
+<import src="../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<import src="../../../template/empty/empty.wxml"></import>
+<view class="weui-loadmore" wx:if="{{isRefreshing}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore-tips">正在刷新...</view>
+</view>
+<block wx:if="{{chargeSubLogs && chargeSubLogs.length > 0}}">
+  <view style=" padding-bottom:{{padding_bottom}}rpx;">
+    <block wx:for="{{chargeSubLogs}}" wx:for-item="chargeSubLog" wx:key="key">
+      <view class="sub-log-item">
+        <van-cell-group custom-class="vant-cell-custom-class" border="{{false}}">
+          <van-cell border="{{true}}">
+            <view slot="title">
+              <view class="sub-log-title">{{chargeSubLog.subDateDesc}} </view>
+            </view>   
+            <view slot="">
+              <view class="">
+                {{chargeSubLog.subStatDesc}}
+              </view>
+            </view>  
+          </van-cell>
+          <view class="van-cell-item">
+            <van-cell 
+            title="{{chargeSubLog.subType=='A' ? '订阅区域' : '订阅充电桩'}}" 
+            value="{{chargeSubLog.subObjName}}" 
+            custom-class="van-cell-item-line" border="{{ false }}" />
+            <van-cell title="开始通知时间" 
+            value="{{chargeSubLog.subStartTimeDesc}}" 
+            custom-class="van-cell-item-line" border="{{ false }}"/>
+            <van-cell custom-class="van-cell-item-line" border="{{ false }}">
+              <view slot="title">
+                <view ></view>
+              </view>  
+              <view slot="">
+                <view>
+                  <block wx:if="{{chargeSubLog.subStat == 'N'}}">
+                  <van-button 
+                    data-item="{{chargeSubLog}}" 
+                    bind:click="doCancelChargeSub" 
+                    round type="primary"
+                    form-type="submit"
+                    size="small"
+                    custom-style="font-size:24rpx;">
+                    <text> 取消订阅</text> 
+                  </van-button>
+                  </block>
+                </view>
+              </view> 
+            </van-cell>
+          </view>
+        </van-cell-group>
+      </view>
+    </block>
+    
+  </view>
+</block>
+<block wx:else>
+  <view class="empty-view">
+    <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无订阅信息'}}"></template>
+  </view>
+</block>
+
+<van-dialog id="van-dialog" overlay-style ="z-index:6666 !important;"  confirm-button-color ="#189AFE" />

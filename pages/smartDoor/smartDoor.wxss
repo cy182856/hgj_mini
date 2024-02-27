@@ -1,0 +1,173 @@
+
+page{
+  overflow: hidden;
+}
+.smartdoor-header-view{
+  text-align:center;
+  margin-top:10rpx;
+  padding-top:20rpx;
+  background-color:#fff;
+  border-radius:0.5em 0.5em 0em 0em;
+}
+
+.smartdoor-code-view{
+  width:100%;
+  text-align:center;
+  background-color:#fff;
+  margin-top:-2rpx;
+}
+
+.smartdoor-detail-bg{
+  position: absolute;
+  top:0;
+  left:0;
+  width:calc(100% - 20rpx);
+  margin: 40rpx 10rpx 0rpx 10rpx;
+  height:1062rpx;
+  z-index:-1;
+  border-radius:.5em;
+}
+
+.smartdoor-house-info{
+  color: #666666;
+  padding: 40rpx;
+  background-color: #fff;
+  font-size: 32rpx;
+}
+
+.houseinfo-flex-display{
+  display:flex;
+  width:100%;
+  padding: 0px 40rpx;
+  text-align:left;
+  margin-bottom: 20rpx;
+}
+
+.smart-door-view{
+  padding:40rpx 30rpx 0rpx 30rpx;
+}
+
+.smartdoor-toast{
+  margin-top: 40rpx;
+  font-size: 32rpx;
+  color: #363F4D;
+}
+
+.house-info-control{
+  flex:2;
+  margin: 0 auto;
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+} 
+
+.smart-door-tip{
+  position: fixed;
+  right: 60rpx;
+  top: 80rpx;
+  z-index: 10;
+}
+
+.jia-tishi1{
+  font-size: 42rpx;
+  color: #189AFE;
+}
+
+.obj_instru_close{
+  display: flex;
+  justify-content: center;
+}
+.obj_instru_close_btn{
+  margin: 10rpx;
+  font-size: 32rpx;
+  padding: 20rpx;
+  background-color: #189AFE;
+  color: #FFFFFF;
+  width: 200rpx;
+  text-align: center;
+  border-radius: 20rpx;
+}
+
+.text-paragraph{
+  margin-top:10rpx;
+}
+
+.barcode {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.qrcode {
+  height: 560rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.barcode > canvas {
+  width: 600rpx;
+  height: 100rpx;  
+}
+
+.qrcode > canvas {
+  width: 560rpx;
+  height: 560rpx;
+}
+
+.iconfont{
+  font-size: 48rpx;
+}
+
+.gg{
+  padding: 0rpx 40rpx;
+  height: 80%;
+  color: #666666;
+  font-size: 28rpx;
+}
+
+.minx{
+  float:right  ;
+  height: 70rpx;
+  width: 70rpx;
+}
+
+.van-dialog__header {
+  padding: 20rpx 0rpx !important;
+}
+
+.refresh-passcode-view{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  font-size: 20rpx;
+  color: #666666;
+}
+
+.background-view{
+  width: 100%;
+  height: 100%;
+  background: -webkit-linear-gradient(180deg,#6daff9, #268bff); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(180deg,#6daff9, #268bff); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(180deg,#6daff9, #268bff); /* Firefox 3.6 - 15 */
+  background: linear-gradient(180deg,#6daff9, #268bff); /* 标准的语法 */
+}
+
+.tips-container{
+  border-radius: 0em 0em .5em .5em;
+  background-color: #fff;
+  padding: 20rpx 60rpx 60rpx 40rpx;
+}
+
+.tips-title{
+  font-size: 32rpx;
+  color: #363F4D;
+}
+
+.tips-content{
+  font-size: 28rpx;
+  color: #666666;
+}

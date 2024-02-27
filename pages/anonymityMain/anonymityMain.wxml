@@ -1,0 +1,82 @@
+<!-- 引用 -->
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<!-- 弹窗 -->
+<van-dialog id="van-dialog"/>
+<view class="content">
+    <!-- pannel -->
+    <view class="section">
+      <swiper indicator-dots="{{indicatorDots}}"
+          autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="height:320rpx;">
+          <block wx:for="{{background}}" wx:key="*this">
+          <swiper-item>
+              <image style="height: 320rpx;width:100%;" mode="scaleToFill" src="{{item}}" />
+          </swiper-item>
+          </block>
+      </swiper>
+    </view>
+
+    <view class="view_bg"  wx:if="{{obj.partOne.length > 0}}">
+      <van-cell title="报事报修" value="报修记录" border="{{false}}" bindtap="toRepairListPage"/>
+      <view style="">
+        <van-grid border="{{false}}">
+          <van-grid-item wx:for="{{obj.partOne}}" wx:key="*this" 
+                          wx:if="{{item.open}}"
+                          text="{{item.title}}" 
+                          bind:click="{{item.funName}}"
+                          data-url="{{item.pagePath}}"
+                          >
+                          <van-icon
+                          slot="icon"
+                          name="{{item.logoPath}}"
+                          size="48"/>
+          </van-grid-item>
+        </van-grid>
+      </view>
+    </view>
+
+    <view class="view_bg" wx:if="{{obj.partTwo.length > 0}}">
+      <van-cell value="反馈记录" border="{{false}}" bindtap="toAdviceListPage">
+        <view slot="title">
+          <text class="van-cell-text" style="margin-right:24rpx;">问题反馈</text>
+          <van-tag  plain  text-color="#EAEAEA">匿名</van-tag>
+        </view>
+      </van-cell>
+      <van-grid border="{{false}}">
+        <van-grid-item wx:for="{{obj.partTwo}}" wx:key="*this" 
+                          wx:if="{{item.open}}"
+                          text="{{item.title}}" 
+                          bind:click="{{item.funName}}"
+                          data-url="{{item.pagePath}}" 
+                          >
+                          <van-icon
+                          slot="icon"
+                          name="{{item.logoPath}}"
+                          size="48"/>
+          </van-grid-item>
+      </van-grid>
+    </view>
+
+    <view class="view_bg"  wx:if="{{obj.partThree.length > 0}}">
+      <van-cell title="其他"  border="{{false}}"/>
+      <van-grid border="{{false}}">
+        <van-grid-item wx:for="{{obj.partThree}}" wx:key="*this" 
+                          wx:if="{{item.open}}"
+                          text="{{item.title}}"
+                          bind:click="{{item.funName}}"
+                          data-url="{{item.pagePath}}" 
+                          >
+                          <van-icon
+                          slot="icon"
+                          name="{{item.logoPath}}"
+                          size="48"/>
+          </van-grid-item>
+      </van-grid>
+    </view>
+</view>
+<view class="login" bindtap="toLoginPage">
+    <view class="login_font">
+      <view>未登录</view>
+      <view>注册/登录</view>
+    </view>
+</view>

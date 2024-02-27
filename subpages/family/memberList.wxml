@@ -1,0 +1,77 @@
+<import src="../../template/houseinfo_header/houseInfo.wxml"></import>
+<wxs src="./tools.wxs" module="m" />
+<van-dialog id="van-dialog" />
+<view class="rootpage" >
+ <view class="root">
+  <image class='background-image' src='../../images/home/houseinfo_bg.png' mode="aspectFill"></image>
+  <view class="content">
+    <template is="houseInfo"   data="{{areaName:commanyShortName,houseNo:areaName}}"></template>
+ </view>
+<view class="card-body">
+  <view class="fun-card" style="z-index:199">
+
+  <view class="title-view">
+      <text class="text-title">{{ funcType=='N'?'房屋成员':'请选择转让成员'}}</text>
+  </view>
+  <view wx:if="{{funcType=='N'}}" class = "member-list">
+    <view class="item-container">
+
+      <text class="member_name-title">昵称</text>
+      <text class="member_name-title">角色</text>
+      <text class="member_name-title">状态</text>
+    <van-icon name="arrow" size="36rpx" color="#ffffff" />
+    </view>
+    <view class="line"></view>
+    <view wx:for="{{houseUsrInfo}}" wx:key="huSeqId">
+      <view class="item-container" bindtap="onTapMemberDetail" data-bitem='{{item}}'>
+        <text class="member_name single-line">{{item.nickName}}</text>
+        <text class="member_name">{{m.getRole(item.huRole,propType)}}</text>
+        <text class="member_name">{{m.getStat(item.stat)}}</text>
+     
+        <van-icon name="arrow" size="36rpx" color="#b7b7b7" />
+      </view>
+      <view class="splite-line-dashed" wx:if="{{index!=houseUsrInfo.length-1}}"></view>
+    </view>
+  </view>
+
+  <view wx:else class = "member-list">
+    <view wx:for="{{houseUsrInfo}}" wx:key="*this">
+      <view class="item-container">
+        <van-checkbox value="{{ item.Checked  }}" data-index="{{index}}"  icon-size="20px" checked-color="#169aff"
+          custom-class="item-margin" bind:change="onMemberChange" disabled="{{(item.huRole!='M'||item.stat=='C')}}" />
+        <text class="member_name single-line">{{item.nickName}}</text>
+        <text class="member_name">{{m.getRole(item.huRole,propType)}}</text>
+      </view>
+      <view class="splite-line-dashed" wx:if="{{index!=houseUsrInfo.length-1}}"></view>
+
+    </view>
+  </view>
+</view>  
+  <view wx:if="{{funcType=='C'}}" class="notice-row">
+    <text class="notice-text"> 您的“{{propType=="R"?'户主':'管理员'}}”身份转出后，您的账户将变更为“{{propType=="R"?'家庭':''}}成员”角色。</text>
+  </view>
+<block  wx:if="{{huSeqId==houseOwerId}}">
+  <view class="btn-row" wx:if="{{funcType=='N'}}">
+    <view class="btn-margin">
+      <view class="btn-two" hover-class="btn-two_hover" bindtap="onTaAddMembers">添加成员</view>
+    </view>
+    <view class="btn-margin">
+      <view class="btn-two" hover-class="btn-two_hover" disabled="{{isLoading}}" bindtap="onTapTransfer">{{propType=="R"?'户主':'管理员'}}转让</view>
+    </view>
+  </view>
+
+  <view class="btn-row" wx:else>
+    <view class="btn-margin">
+      <view class="btn-two" hover-class="btn-two_hover" bindtap="onTapCancle">取消</view>
+    </view>
+    <view class="btn-margin">
+      <view class="btn-two" hover-class="btn-two_hover" disabled="{{isLoading}}" bindtap="onTapConfirmChange">确认转让
+      </view>
+    </view>
+  </view>
+</block>
+</view></view>
+<view wx:if="{{iphoneX}}" style="height:68rpx"> </view>
+
+
+</view>

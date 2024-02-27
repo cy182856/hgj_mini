@@ -1,0 +1,109 @@
+.contant{
+  background-color: #ffffff;
+  width: 100%;
+  height: 100%;
+}
+.view_jd{
+  width: 94%;
+  margin-left: 6%;
+  padding-top: 42rpx;
+}
+.jd{
+  text-align: center;
+  padding-top: 5rpx;
+}
+/* panel */
+.view_panal{
+  padding: var(--cell-vertical-padding,10px) var(--cell-horizontal-padding,16px) !important;
+}
+
+/* .step_desc{
+  display: none;
+} */
+
+/* 详情 */
+.view_detail{
+  width: 94%;
+  margin-left: 3%;
+  border: 2rpx solid #B5B5B5;
+  border-radius: 10rpx;
+  margin-top: 56rpx;
+}
+.txt_detail{
+  color: #189AFE !important;
+}
+.txt_title{
+  color: #777777;
+}
+.txt_time{
+  color: #ABABAB;
+  width: 30%;
+}
+
+.view_mrg{
+  margin: 2rpx;
+  font-size: 28rpx;
+}
+
+.view_add{
+  width: 48%;
+  margin-left: 26%;
+  margin-top: 124rpx;
+  border: 2rpx solid #F1F1F1;
+  border-radius: 10rpx;
+  background-color: #F1F1F1;
+  color: #919191;
+}
+.view_pading{
+  padding: 18rpx 5rpx 15rpx 25rpx;
+}
+.txt_add{
+  text-align: left;
+}
+/* 默认属性 */ 
+ .van-step--horizontal .van-step__circle-container{
+  bottom: 43px!important;
+}
+.van-step--horizontal .van-step__line  {
+  bottom: 43px!important;
+}
+.van-step--horizontal .van-step__title{
+  margin-top: 16px;
+}
+
+.van-icon{
+  color: #189AFE;
+}
+
+.van-hairline--top-bottom:after {
+  border-width: 0px 0 !important;
+}
+
+/* vant dialog弹窗的确定按钮统一改为 */
+.dialog-index--van-dialog__confirm{
+  color: #189AFE !important;
+}
+/* .txt_value{
+  text-align: left !important;
+} */
+
+.btn_add{
+  text-align:center;
+  color:#189AFE;
+  position: absolute;
+  font-size: 28rpx;
+  bottom: 100rpx;
+  left: 235rpx;
+}
+
+.txt{
+  text-overflow:ellipsis;
+  /* z-index: -1; */
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 20;
+  overflow: hidden;
+ }
+
+  

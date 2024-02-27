@@ -1,0 +1,60 @@
+/* pages/wuyeInfo/wuyeInfo.wxss */
+.cellTime {
+  display: flex;
+  flex-direction: column;
+}
+.fun-card{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  background: white;
+  margin-top: 16rpx;
+  margin-left: 26rpx;
+  margin-right: 26rpx;
+  border-radius: 10rpx;
+  box-shadow:0px 1px 2px 2px #f2f2f2;
+  
+}.splite-line-dashed {
+  height: 1px;
+  border: none;
+  margin-left: 26rpx;
+  margin-right: 26rpx;
+  border-top:1px dashed #d5d5d5;
+  margin-bottom: 28rpx;
+}
+.text-row{
+  background-color: turquoise;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center; 
+  margin: 10rpx 30rpx;
+  box-sizing: border-box;
+}
+.card-title{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center; 
+  margin: 40rpx 26rpx;
+  font-size: 32rpx;
+  color: #1296db;
+}
+.text-label{
+  color: #ababab;
+  font-size: 28rpx;
+  text-align: start;
+}
+.text-content{
+  color: black;
+  font-size: 28rpx;
+  margin-left: 20rpx;
+  text-align: start;
+  
+}
+.content-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}

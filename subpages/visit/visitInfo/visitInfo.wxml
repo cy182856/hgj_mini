@@ -1,0 +1,126 @@
+<view class="margin-top head">
+  <view>
+    <view class="rq-name">{{proName}}</view>
+  </view>
+  <view class="visit-log-view" bindtap="checkVisitInfos">
+    <view class="visit-log-btn">访客记录</view>
+  </view>
+  <image class='visit-info-bg' mode="aspectFill" src='/images/home/back-img2.png'></image>
+</view>
+<view class="visit-log-tab">
+  <van-tabs active="{{ active }}" 
+    nav-class = "nav-class"
+    tab-class = "tab-class"
+    tab-active-class="tab-active-class"
+    color = "#1B1B1B"
+    type="card">
+    <van-tab title="访客通行证" 
+    custom-class = "custom-class"
+    >
+    <view class="visit-passcode-view">
+      <van-cell-group border="{{false}}">
+          <view style="margin-left:30rpx;">
+            <view style="height:20rpx;"></view>
+            <view style="padding:20rpx 0px 0px 32rpx;"><text>访客称呼</text><text style="color:red">*</text></view>
+            <van-cell custom-class ="van-cell-input-class" border="{{ false }}">
+              <view class="weui-search-bar__box">
+                <input class="weui-search-bar__input"
+                style="color:black;"
+                type="text"
+                bindinput="inputVisitName"
+                value="{{visitName}}"
+                placeholder="请输入访客称呼" />
+                <view class="weui-icon-clear" wx:if="{{visitName.length > 0}}" bindtap="clearVisitName">
+                  <icon type="clear" size="14"></icon>
+                </view>
+              </view>
+            </van-cell>
+
+        <view style="padding:20rpx 0px 0px 32rpx;"><text>房屋选择</text><text style="color:red">*</text></view>
+        <view style="position:relative;top:20rpx;">
+          <!-- 选中之后的数据展示 -->
+          <view class="inputPlaceholder" wx:if='{{value}}' bindtap="changejiantou">
+            <text style="color:black;">{{value}}</text>
+            <view class="jiantou1" wx:if='{{isjiantou}}'><i class="iconfont icon-jiantou"></i></view>
+            <view class="jiantou1" wx:else='{{isjiantou}}'><i class="iconfont icon-jiantou1"></i></view>
+          </view>
+          <!-- 未选择时的Placeholder展示 -->
+          <view class="inputPlaceholder" wx:else bindtap="changejiantou">
+            <text>请选择房屋</text>
+            <view class="jiantou1" wx:if='{{isjiantou}}'><i class="iconfont icon-jiantou"></i></view>
+            <view class="jiantou1" wx:else='{{isjiantou}}'><i class="iconfont icon-jiantou1"></i></view>
+          </view>
+          <!-- 下拉展开后的可选择内容 -->
+          <view class="content" wx:if='{{!isjiantou}}'>
+            <view class="{{item.id==valueid ? 'active':''}}" wx:for="{{selectcontent}}" wx:key="index" bindtap="changecontent" data-datavalue="{{item}}">
+              {{item.resName}}
+            </view>
+          </view>
+        </view>
+
+
+        <view style="margin-top: 15px;"></view>
+        <view style="padding:20rpx 0px 0px 32rpx;"><text>车牌号</text></view>
+            <van-cell custom-class ="van-cell-input-class" border="{{ false }}">
+              <view class="weui-search-bar__box">
+                <input class="weui-search-bar__input"
+                type="text"
+                maxlength="4"
+                bindinput="inputCarNum"
+                bindblur="onCarNumBlur"
+                value="{{carNum}}"
+                placeholder="请输入车牌号后四位" />
+                <view class="weui-icon-clear" wx:if="{{carNum.length > 0}}" bindtap="clearCarNum">
+                  <icon type="clear" size="14"></icon>
+                </view>
+              </view>
+            </van-cell>
+            <van-cell title="可用次数" title-class="van-cell-title-class" border="{{ false }}">
+              <van-radio-group value="{{ radio }}"  bind:change="onChangeRadio">
+                <van-radio custom-class="vant-radio1-class"  name="1">无次数限制</van-radio>
+                <van-radio custom-class="vant-radio2-class"  name="2">
+                    <van-stepper value="{{ expNum }}" disable-input max="10" bind:change="onChangeExpCnt" />
+                </van-radio>
+              </van-radio-group>
+            </van-cell>
+            <van-cell title-class="van-cell-title-class" value-class="vant-cell-value-class" title="有效期" value="当天有效" border="{{ false }}"/>
+          </view>
+          <view class="create-passcode-btn">
+            <van-button bindtap="createPassCode" custom-class="vant-btn-class" type="info">生成通行证</van-button>
+          </view>
+        </van-cell-group>
+      </view>
+    </van-tab>
+    <van-tab title="快速通行码"
+      custom-class = "custom-class"
+    >
+      <view class="visit-quickcode-view">
+        <view class="visit-quickcode-label">
+          <!-- <block wx:for="{{quickCodes}}" wx:for-item="quickCode">
+              <text style="margin-left:20rpx;">{{quickCode}}</text>
+          </block> -->
+          <text style="margin-left:20rpx;">{{randomNum}}</text>
+        </view>
+        <view style="margin-top:100rpx;padding-bottom:20rpx;">
+          <van-button bindtap="createQuickCode" custom-class="vant-btn-class" type="info">生成快速通行码</van-button>
+        </view>
+      </view>
+      <van-panel title="说明" desc="快速通行码主要针对外卖员、快递员等来访人员，当天最多可生成50个快速通行码，当天有效。" >
+      </van-panel>
+    </van-tab>
+  </van-tabs>
+</view>
+<van-popup show="{{ showCheckExpTime }}"
+   bind:close="onClose"
+   position="bottom"
+   bind:click-overlay="hideCheckExpTime"
+   >
+  <van-datetime-picker
+    type="datetime"
+    value="{{ currentDate }}"
+    min-date="{{ minDate }}"
+    max-date="{{ maxDate }}"
+    bind:cancel = "hideCheckExpTime"
+    bind:confirm="checkExpTime"
+  />
+</van-popup>

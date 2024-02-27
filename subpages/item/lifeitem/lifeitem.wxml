@@ -1,0 +1,41 @@
+<import src="../../../template/empty/empty.wxml"></import>
+<import src="../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<!--
+<view wx:if="{{showErrMsg}}">
+  <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:msg}}"></template>
+</view>
+-->
+<van-empty wx:if="{{showErrMsg}}" description="{{msg}}" />
+<view wx:else>
+  <view class="item-container" wx:for="{{lifeItemShowDtos}}" wx:for-item="lifeItemShowDto" wx:key="key" ontap="itemshow" data-itemid="{{lifeItemShowDto.itemId}}" data-itemname="{{lifeItemShowDto.itemName}}" data-supseqid="{{lifeItemShowDto.supSeqId}}" data-shopid="{{lifeItemShowDto.shopId}}">
+    <view class="item-img">
+      <van-image width="100%" height="100%" fit="cover" image-class="img-item-class" src="{{lifeItemShowDto.imgUrl}}" />
+    </view>
+    <view class="item-desc">
+      <view class="item-title">
+        <view class="item-title-name">{{lifeItemShowDto.itemName}}</view>
+        <view class="item-title-desc"><text wx:if="{{lifeItemShowDto.shortDesc != null}}">{{lifeItemShowDto.shortDesc}}</text></view>
+      </view>
+      <view class="item-amount amount-top">
+        <view wx:if="{{lifeItemShowDto.salePrice != null && lifeItemShowDto.orgPrice != null}}">
+          <text class="amount-symbol" >￥</text>
+          <text class="amount-sale-price">{{lifeItemShowDto.salePrice}}</text>
+          <text class="amount-org-price">{{lifeItemShowDto.orgPrice}}</text>
+        </view>
+      </view>
+      <!--
+          <view wx:else class="item-amount">
+            <view class="life-pricedesc">价格描述：{{lifeItemShowDto.priceDesc}}</view>
+          </view>
+          -->
+      <view class="item-belong-shop">
+        <view class="shop-img">
+          <van-image width="13" height="12" fit="cover" image-class="img-item-class" src="/images/item/shop_mer.png" />
+        </view>
+        <text class="item-shop-name">{{lifeItemShowDto.shopName}}</text>
+        <text class="item-shop-full-disc item-shop-left" wx:if="{{lifeItemShowDto.isFullDisc == 'Y' && lifeItemShowDto.fullPurAmt != null && lifeItemShowDto.discOffAmt != null}}">满{{lifeItemShowDto.fullPurAmt}}减{{lifeItemShowDto.discOffAmt}}</text>
+      </view>
+    </view>
+  </view>
+</view>

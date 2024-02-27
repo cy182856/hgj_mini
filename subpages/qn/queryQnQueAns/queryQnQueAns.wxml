@@ -1,0 +1,178 @@
+<import src="../../../template/empty/empty.wxml"></import>
+<import src="../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+
+<view class="page-container" wx:if="{{qnQueListDtoList && qnQueListDtoList.length > 0}}">
+  <view class="qnName-view">
+      {{qnName}}
+  </view>
+  <view style="padding: 0 50rpx 20rpx 50rpx;text-align: left;font-size: 28rpx;font-weight: 400;">
+      <text space="{{true}}" decode="{{true}}">{{qnDesc}}</text>
+    </view>
+  <view wx:for="{{qnQueListDtoList}}" wx:for-index="index" wx:for-item="item" wx:key="queId" class="queClass">
+    <view class="queDesc-mb">
+      <block wx:if="{{item.isMustReply == 'Y'}}"><span style="color:red;">＊</span></block>
+      <!-- <text class="queDesc">问题{{index+1}} {{item.queDesc}}{{item.queDesc2}}</text> -->
+      <text class="queDesc">{{index+1}}、 {{item.queDesc}}{{item.queDesc2}}</text>
+    </view>
+    <!-- 单选题 -->
+    <block wx:if="{{item.queType == 'S'}}">
+      <van-radio-group name="{{item.queId}}" value="{{ item.queAnsOptIds[0] }}" >
+        <block wx:if="{{item.qnQueOptDtoList.length > 0}}">
+          <block wx:for="{{item.qnQueOptDtoList}}" wx:for-index="index2" wx:for-item="item2" wx:key="optId" class="optClass">
+            <view class="optClass">
+              <van-radio name="{{item2.optId}}" icon-size="32rpx" disabled="{{disabled}}" class="optDesc">
+                <block wx:for="{{optIdArray}}" wx:for-index="index3" wx:for-item="item3" wx:key="id">
+                  <block wx:if="{{item3.id == item2.optId}}">
+                   {{item3.desc}}. {{item2.optDesc}}
+                  </block>
+                </block>
+              </van-radio>
+              <block wx:if="{{item2.statistics && item2.statistics != null && item2.statistics != ''}}">
+                  <text decode="{{true}}">&nbsp;&nbsp;&nbsp;</text>
+                  <view class="statistics_cls">
+                    {{item2.statistics}}
+                  </view>
+                </block>
+            </view>
+            <block wx:if="{{item2.choseFill == 'Y'}}">
+              <van-cell-group custom-class="cellgroup" >
+                <van-field
+                  name="{{item2.optId}}"
+                  maxlength="60"
+                  show-word-limit="{{true}}"
+                  value="{{ item2.queAnsOptAns }}"
+                  placeholder="{{item2.optDesc}}"
+                  border="{{ true }}"
+                  disabled="{{disabled}}"
+                  custom-style="padding: 8rpx 16rpx;background-color:#F6F6F6"
+                  type="textarea"
+                  autosize
+                />
+              </van-cell-group>
+            </block>
+          </block>
+        </block>
+      </van-radio-group>
+    </block>
+    <!-- 多选题 -->
+    <block wx:if="{{item.queType == 'M' || item.queType == 'N'}}">
+      <van-checkbox-group name="{{item.queId}}" value="{{ item.queAnsOptIds }}" disabled="{{disabled}}" max="{{ item.maxOptCnt }}">
+        <block wx:if="{{item.qnQueOptDtoList.length > 0}}">
+          <block wx:for="{{item.qnQueOptDtoList}}" wx:for-index="index2" wx:for-item="item2" wx:key="optId" >
+            <view class="optClass">
+              <van-checkbox shape="square" name="{{item2.optId}}" icon-size="32rpx" class="optDesc">
+                <block wx:for="{{optIdArray}}" wx:for-index="index3" wx:for-item="item3" wx:key="id">
+                  <block wx:if="{{item3.id == item2.optId}}">
+                   {{item3.desc}}. {{item2.optDesc}}
+                  </block>
+                </block>
+              </van-checkbox>
+              <block wx:if="{{item2.statistics && item2.statistics != null && item2.statistics != ''}}">
+                  <text decode="{{true}}">&nbsp;&nbsp;&nbsp;</text>
+                  <view class="statistics_cls">
+                    {{item2.statistics}}
+                  </view>
+              </block>
+            </view>
+            <block wx:if="{{item2.choseFill == 'Y'}}">
+              <van-cell-group custom-class="cellgroup" >
+                <van-field
+                  name="{{item2.optId}}"
+                  maxlength="60"
+                  show-word-limit="{{true}}"
+                  value="{{ item2.queAnsOptAns }}"
+                  placeholder="{{item2.optDesc}}"
+                  border="{{ true }}"
+                  disabled="{{disabled}}"
+                  custom-style="padding: 8rpx 16rpx;background-color:#F6F6F6"
+                  type="textarea"
+                  autosize
+                />
+              </van-cell-group>
+            </block>
+          </block>
+        </block>
+      </van-checkbox-group>
+    </block>
+    <!-- 填空题 -->
+    <block wx:if="{{item.queType == 'F'}}">
+      <van-cell-group custom-class="cellgroup" >
+        <van-field
+          name="{{item.queId}}"
+          maxlength="{{item.maxlength}}"
+          show-word-limit="{{true}}"
+          value="{{ item.queAnsOptIds[0] }}"
+          placeholder="请输入您的答案{{item.placeholder}}"
+          border="{{ true }}"
+          disabled="{{disabled}}"
+          custom-style="padding: 8rpx 16rpx;background-color:#F6F6F6"
+          type="{{item.type}}"
+          autosize="{{autosize}}"
+        />
+      </van-cell-group>
+    </block>
+    
+  </view>
+
+  <block wx:if="{{qnRemark != null && qnRemark != ''}}">
+    <view style="padding: 20rpx 50rpx;text-align: left;">
+      <text space="{{true}}" decode="{{true}}">{{qnRemark}}</text>
+    </view>
+  </block>
+  
+  
+  <van-row custom-class="sign-area">
+    <van-col span="7" custom-class="sign-house">
+      <text space="{{true}}" decode="{{true}}">提&nbsp;&nbsp; 交&nbsp;&nbsp; 人：</text>
+    </van-col>
+    <van-col span="17" custom-class="sign-house">
+      {{houseName}}
+    </van-col>
+  </van-row>
+  <block wx:if="{{submitRespCode && submitRespCode != null && submitRespCode != ''}}">
+    <van-row custom-class="sign-area">
+      <van-col span="7" custom-class="sign-house">
+        电子签名码：
+      </van-col>
+      <van-col span="17" custom-class="sign-house">
+        {{submitRespCode}}
+      </van-col>
+      <!-- <van-col span="24" custom-class="sign-house">
+        <view>
+          提交人：{{houseName}}
+        </view>
+        <view style="background-color: #E9F3FF;color:#56A5FF;font-size: 26rpx;">
+          电子签名码 {{submitRespCode}}
+        </view>
+      </van-col> -->
+    </van-row>
+  </block>
+  <block wx:if="{{signImgUrl != ''}}">
+    <van-row custom-class="sign-area">
+      <van-col span="7" custom-class="sign-img-title">
+        <text space="{{true}}" decode="{{true}}">业 主 签 字：</text>
+      </van-col>
+      <van-col span="15" custom-class="sign-img-area">
+        <image src="{{signImgUrl}}" mode="aspectFit"  class="sign-img"></image>
+      </van-col>
+    </van-row>
+    <van-row custom-class="sign-area">
+      <van-col span="7" custom-class="sign-house">
+        <text space="{{true}}" decode="{{true}}">签 字 日 期：</text>
+      </van-col>
+      <van-col span="17" custom-class="sign-house">
+        {{submitDateDesc}}
+      </van-col>
+    </van-row>
+  </block>
+
+    
+  <block wx:else>
+    <view style="height:32rpx;"></view>
+  </block>
+  
+</view>
+<view wx:else class="no-data-container">
+  <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'哎呀，暂无数据!'}}"></template>
+</view>

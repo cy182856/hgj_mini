@@ -1,0 +1,43 @@
+<!--subpages/mine/appt/apptOrd_success.wxml-->
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<view class="appt_pay_success_img">
+   <image style="height:130rpx;width:132rpx;" src="../../images/appt/appt_pay_success.png" />
+</view>
+<view class="appt_pay_success_desc">
+    <text>支付成功</text>
+</view>
+<view class="apptOrd_success_bgImg">
+  <view wx:for="{{APPTORDLOGDTOS}}" wx:for-item="value">
+    <view class="confirm_ord">
+      <view class="confirm_ord_title">
+        <text>{{value.OBJNAME}}</text>
+      </view>
+    </view>
+    <view>
+      <image style="height:50rpx;width:100%; background-color: #F3F5F5;" src="../../images/appt/appt_middle.png" />
+    </view>
+    <view class="confirm_ord_content">
+      <view class="confirm_ord_content_title">
+          <van-row>
+            <van-col span="18">预约时间</van-col>
+            <van-col span="6" style="text-align:center;">数量</van-col>
+          </van-row>
+      </view>
+      <view class="confirm_ord_content_detail" wx:for="{{value.APPTORDDTLDTOS}}" wx:for-item="content">
+           <van-row>
+            <van-col span="18">{{content.APPTDATEDESC}} {{content.BEGINTIMEDESC}}-{{content.ENDTIMEDESC}}</van-col>
+            <van-col span="6" style="text-align:center;">x{{content.OBJCNT}}</van-col>
+          </van-row>
+      </view>
+    </view>  
+    <view style="background-color: #F3F5F5;">
+      <image style="height:66rpx;width:100%; background-color: #F3F5F5;" src="../../images/appt/appt_bottom.png" />
+    </view>
+  <view style="padding-top: 30px;display: flex;justify-content: center;background-color: #F3F5F5;">
+    <view class="return_ord_btn" bindtap="doReturn">
+      <text>返回</text>
+    </view>
+  </view>
+  </view>
+</view> 

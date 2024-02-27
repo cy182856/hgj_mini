@@ -1,0 +1,82 @@
+/* subpages/pfee/pfeeMonBill.wxss */
+.img-view{
+  height: 180rpx;
+  width: 95%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 26rpx 20rpx 0 20rpx;
+  display: block;
+  z-index: -1;
+  background-color: white;
+}
+.head-img{
+  height: 180rpx;
+  width: 100%;
+}
+.head-text-view{
+  margin-left: 40rpx;
+  padding-top: 60rpx;
+  color:white;
+  height: 150rpx;
+}
+.head-text{
+  line-height: 50rpx;
+}
+
+.default-font-size{
+  font-size: 32rpx;
+}
+
+.year-condition{
+  /* margin: 34rpx auto; */
+  /* margin-top: 10rpx; */
+  background-color: white;
+  height: 100rpx;
+  line-height: 100rpx;
+  padding: 0 34rpx;
+}
+.next-after-year{
+  color: #666666;
+  font-size: 28rpx;
+}
+.billMon{
+  background-color: white;
+  font-size: 28rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  color: #363F4D;
+}
+.billMonDetail{
+  padding: 25rpx 0;
+  line-height: 45rpx;
+}
+.foot{
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #A0A0A0;
+}
+.icon-class:before{
+  position: relative;
+  top:5rpx;
+}
+
+.global-empty{
+  padding-top: 0;
+}
+
+
+
+.main_container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+
+.icron-img{
+  width: 24rpx;
+  height: 18rpx;
+}

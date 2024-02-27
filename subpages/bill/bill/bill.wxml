@@ -1,0 +1,128 @@
+<!-- 引用 -->
+<import src="../../template/empty/empty.wxml"></import>
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<!-- 弹窗 -->
+<van-dialog id="van-dialog"/>
+<!-- 根据UI，距离顶端始终保持14rpx，14+9 -->
+<view style="height:5rpx;"></view>
+
+<view class="weui-loadmore" wx:if="{{isRefreshing}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore-tips">正在刷新...</view>
+</view>
+
+<view bindtap="payLogChange" style="margin-left:80%; margin-top: 5px; color: rgb(112, 192, 192);">缴费记录</view>
+
+<view style="background-color:rgb(135, 175, 185);height: 110px;margin-right:3%; width: 100%;margin-top: 10px;">
+	<van-row >
+        <view>	
+            <van-col span="19"> 
+                <view style="margin-left: 3%;font-size: 24px; margin-top: 15px;color:rgb(252, 248, 248)">房屋账单</view>
+                <view style="margin-left: 3%;font-size: 16px;color:rgb(252, 248, 248);margin-top: 5px;">{{proName}}</view>
+            </van-col>
+            <van-col span="5">    
+            </van-col>
+        </view>
+  </van-row>
+</view>
+
+<view style="background-color: rgb(247, 253, 253);border-radius:30px;">
+  <view class="divcss5-max">
+    <view class="page-section ">
+      <view class="weui-cells weui-cells_after-title "></view>
+      <view>
+        <!-- 第一层 -->
+        <view wx:if="{{menuTree == null || menuTree.length == 0}}" >
+        <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无我的账单记录'}}"></template>
+        </view>
+        <block class="weui-cell weui-check__label line-center" wx:for="{{menuTree}}" wx:for-index="index"
+            wx:for-item="item" wx:key="id">
+            <view class="paddingBottom_10 "></view>
+            <view class="paddingLeft_10">
+              <view class="treeMenuCenter">
+                <checkbox-group bindchange="checkboxChangeAll" data-index="{{index}}" data-id="{{item.id}}" >
+                  <checkbox wx:if="{{item.priRev > 0}}" value="{{item.year}}" checked="{{item.checked}}" />
+                  <checkbox wx:if="{{item.priRev <= 0}}" disabled="true" />
+                </checkbox-group>
+                <!-- 箭头图标 -->
+                <view class="treeMenuCenter"  bindtap="openAndHide" data-id="{{item.id}}" data-index="{{index}}">
+                  <image wx:if="{{item.isHidden == true}}"  class="icon-chioce-right" src="../../../images/bill/right.jpg"></image>
+                  <image wx:if="{{item.isHidden == false}}"  class="icon-chioce-down" src="../../../images/bill/down.jpg"></image>
+                  <text style="color:black" decode="{{true}}">&nbsp;{{item.title}} &nbsp;</text>
+                  <text style="margin-left: 50px;">¥{{item.priRev}}</text>
+                </view>
+              </view>
+            </view>
+
+            <!-- 第二层 -->
+            <view class="" hidden="{{item.isHidden}}" wx:for="{{item.children}}" wx:for-index="index2" wx:for-item="item2"
+              wx:key="id">
+              <view class="paddingLeft_20 ">
+                <view class="treeMenuCenter">
+                  <checkbox-group bindchange="checkboxChangeAll" data-id="{{item2.id}}" data-index="{{index}}"  data-index2="{{index2}}" >
+                    <checkbox wx:if="{{item2.priRev > 0}}" value="{{item2.itemName}}" checked="{{item2.checked}}" />
+                    <checkbox wx:if="{{item2.priRev <= 0}}" disabled="true" />
+                  </checkbox-group>
+                  <view class="treeMenuCenter" style="width: auto;"  bindtap="openAndHide"  data-id="{{item2.id}}"
+                      data-index="{{index}}" data-index2="{{index2}}" >
+                      <image wx:if="{{item2.isHidden == true}}" class="icon-chioce-right" src="../../../images/bill/right.jpg"></image>
+                      <image wx:if="{{item2.isHidden == false}}"   class="icon-chioce-down" src="../../../images/bill/down.jpg"></image>
+                      <text style="color:#0094aa;" decode="{{true}}">&nbsp;{{item2.title}}</text>  
+                      <text style="margin-left: 50px;">¥{{item2.priRev}}</text>                
+                  </view>        
+                </view>
+              </view>
+              <!-- 第三层 -->
+              <block class="" wx:for="{{item2.children}}" wx:for-item="item3"  wx:for-index="index3" wx:key="id">
+                  <view class="paddingLeft_30 " hidden="{{item2.isHidden}}">
+                    <checkbox-group bindchange="checkboxChangeAll" data-id="{{item3.id}}"
+                      data-index="{{index}}" data-index2="{{index2}}"  data-index3="{{index3}}" >
+                        <van-row >
+                          <view>	
+                              <van-col span="2" > 
+                                <view> 
+                                  <checkbox wx:if="{{item3.priRev > 0}}" value="{{item3}}" checked="{{item3.checked}}" />
+                                  <checkbox wx:if="{{item3.priRev <= 0}}" disabled="true" />
+                                </view>
+                              </van-col>
+                              <van-col span="10"><view>{{item3.title}}</view></van-col>
+                              <van-col span="12">    
+                                <view bindtap="billMonthDetailChange" data-datavalue="{{item3}}">¥{{item3.priRev}}
+                                  <image style="height: 12px; width: 10px;" src="../../../images/bill/right.jpg" bindtap="billMonthDetailChange" data-datavalue="{{item3}}" ></image>
+                                </view>
+                              </van-col>
+                          </view>
+                        </van-row>
+                    </checkbox-group>
+                  </view>
+              </block>
+            </view>
+            <view class="paddingBottom_10 "></view>
+            <view class="weui-cells weui-cells_after-title "></view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view style="height:20px;"></view>
+
+<view wx:if="{{menuTree.length > 0 && pageNum < pages}}" 
+        class="last_font" bindtap="loadMore" data-pageNum="{{pageNum}}" data-pageSize="{{pageSize}}">点击加载更多</view>
+<view wx:elif="{{billYearList.length > 0 && pageNum == pages}}" class="last_font">已经到底了</view> 
+<view wx:else class="last_font">暂无记录</view>
+<view style="height:20px;"></view>
+
+<view wx:if="{{nav_type == 0}}" style="position: fixed;bottom: 0;width: 750rpx; height: 80px;background-color: rgb(250, 248, 248);">
+		<van-row>
+        <van-col span="16"><text style="color:#ABABAB;margin-left: 5%;">实付金额： <text style="color: red;">¥{{totalAmount}}</text></text></van-col>
+        <van-col span="8">
+          <button  class="bill_button_payment" hover-class="bill_button_payment_class" bindtap="mergeBill" data-datavalue="{{item}}">去缴费</button>
+        </van-col>
+		</van-row>
+</view>
+
+
+
+

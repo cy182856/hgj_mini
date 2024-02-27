@@ -1,0 +1,33 @@
+@import '../carfee.wxss';
+@import '../feelog/feelog.wxss';
+
+.img-view{
+  margin: 14rpx 30rpx;
+  width: 690rpx;
+  height: 180rpx;
+}
+
+.head-text-view{
+  margin-left: 68rpx;
+}
+
+.house-name-view{
+  margin: 44rpx 0rpx 0rpx 0rpx;
+}
+
+.house-no-info{
+  margin: 16rpx 0rpx 0rpx 0rpx;
+}
+
+.choose-car-view{
+  background-color: #fff;
+  border-radius:.5em;
+  margin-top: 44rpx;
+}
+
+.car-info-item{
+  background-color: #fff;
+  display: block;
+  margin: 0rpx;
+  border-radius: .25em;
+}

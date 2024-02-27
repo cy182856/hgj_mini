@@ -1,0 +1,444 @@
+<!-- 引用 -->
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<!-- 问题反馈以及其他的菜单 -->
+<import src="../../template/popup_menu/menu.wxml"></import>
+<template is="menuTemplate" data="{{...menu}}"></template>
+<!-- 弹窗 -->
+<van-dialog id="van-dialog"/>
+
+<view class="weui-loadmore" wx:if="{{isRefreshing}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore-tips">正在刷新...</view>
+</view>
+
+<view class="content">
+    <!-- 首页 -->
+    <block wx:if="{{active == 0}}">
+        
+        <view class="head">         
+            <van-row >
+                <view>	
+                    <van-col span="16" > 
+                        <view style="color: white; text-align: left;font-size: 14px;margin-left: 6%;">{{proName}}</view>
+                    </van-col>
+                    <van-col span="8">      
+                        <view style="color: white; text-align: left;font-size: 14px;">您好，{{intoUserName}}</view>
+                    </van-col>
+                </view>
+            </van-row>
+
+            <!-- pannel -->
+            <view class="section">
+            <!-- 欢迎提示语 -->
+                <!-- <view class="welcome">欢迎<text>{{commanyShortName}}</text>的业主</view> -->
+                    <swiper indicator-dots="{{indicatorDots}}"
+                        autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="height:320rpx;">
+                        <block wx:for="{{background}}" wx:key="*this">
+                        <swiper-item>
+                            <!-- <view class="swiper-item {{item}}"></view> -->
+                            <image style="height: 320rpx;width:100%;" mode="scaleToFill" src="{{item}}" />
+                        </swiper-item>
+                        </block>
+                    </swiper>
+            </view>  
+
+              <!-- 公告 -->
+            <view class="bulletin" >
+                <van-notice-bar
+                        wx:if="{{ gobj != null && gobj.noticeDesc != ''}}"
+                        custom-class="gonggao"
+                        data-gg="showPost"
+                        color="#F28F45"
+                        background="#FDFBEB"
+                        left-icon="/images/home/bulletin.png"
+                        scrollable="{{true}}"
+                        wrapable="{{false}}"
+                        bind:click="gonggao"
+                        speed="30"
+                        text="{{gobj.noticeDesc}}"
+                        text-class="fSize"
+                />
+                <van-notice-bar 
+                        wx:else 
+                        custom-class="gonggao"
+                        color="#F28F45"
+                        background="#ffffff"
+                        left-icon="/images/home/bulletin.png"
+                        scrollable="{{false}}"
+                        wrapable="{{false}}"
+                        speed="30"
+                        text="暂无公告"
+                        text-class="fSize"
+                />
+            </view>    
+
+        <!-- 功能集 -->
+        <view class="bulletin">
+            <van-grid column-num="4" border="{{false}}"  custom-class="gonggao">
+                <!-- <block wx:for="{{functionList}}"  wx:key="*this">
+                    <van-grid-item wx:if="{{item.hasAuth && item.index == 1}}"
+                            bind:click="toFun"
+                            data-auth="{{item.checkAuth}}"
+                            data-url="{{item.pagePath}}"
+                            data-index="1"
+                            data-ordId="{{item.ordId}}" 
+                            text="{{item.funName}}"
+                            text-class="fSize">
+                        <van-icon
+                                slot="icon"
+                                name="{{item.logoPath}}"
+                                size="48"/>
+                    </van-grid-item>
+                </block> -->
+                <!-- dot="true"加红点 ， info="99"加气泡数字 -->
+                <block wx:for="{{functionList}}"  wx:key="*this">
+                    <van-grid-item wx:if="{{item.index == 1}}"
+                            bind:click="toFun"
+                            data-url="{{item.pagePath}}"
+                            data-index="1"
+                            text="{{item.funName}}"
+                            text-class="fSize">
+                        <van-icon
+                                slot="icon"
+                                dot = "{{item.dot}}"
+                                name="{{item.logoPath}}"
+                                size="40"/>
+                    </van-grid-item>
+                </block>
+            </van-grid>
+        </view> 
+
+
+
+        </view>
+
+        <view style="width: 100%;height: 100%; background-color:  #dbdbe098; border-radius: 36px; margin-top: 45px;"></view>
+
+    </block>
+    <block wx:elif="{{(showLife && active == 2)||(!showLife && active == 1)}}">
+        <!-- <button open-type="chooseAvatar" bindtap="getUserProfile">获取头像</button> -->
+        <!-- <button bind:tap="getUserProfile">
+         获取头像
+        </button> -->
+        <view style="filter:blur({{bg}}px);">
+        <!-- 个人中心 -->
+        <!-- <view style="width:100%;padding-top:0rpx;height:132rpx;"> -->
+        <view style="width:100%;padding-top:0rpx;height:30px;">
+            <van-row>
+                <!-- WeChat logo -->
+                <van-col custom-class="logo">
+                    <!-- <van-image round width="66" height="66" src="{{headImgUrl}}"/> -->
+                    <!-- <view class="userinfo-avatar">
+                        <open-data type="userAvatarUrl"></open-data>
+                    </view> -->
+                    <button class="touxiang" open-type="chooseAvatar" bindchooseavatar="bindchooseavatar">
+                        <van-image round width="75" height="70" src="{{userAvatarUrl}}"/> 
+                   </button>
+                </van-col>
+                <!-- 个人描述 -->
+                <van-col custom-class="person_desc">
+                    <view class="person_desc">
+                        <van-row>
+                            <!-- <van-col span="12" >
+                                <open-data type="userNickName"></open-data>
+                            </van-col> -->
+                            <van-col span="22" >
+                                <!-- <text>{{userNickName}}</text> -->
+                                <text class="cust_name">{{cstName}}</text>
+                            </van-col>                                 
+                            <van-col>
+                                <van-row>
+                                    <!-- <van-col>
+                                        <view style="padding-top:8rpx">
+                                            <van-icon name="/images/mine/xunzhang.png" size="20" custom-class="xunzhang"/>
+                                        </view>
+                                    </van-col> -->
+                                    <!-- <van-col>
+                                        <text style="color:#666666;font-size:24rpx;padding-left:10rpx">家园勋章 {{obj.scoreSum}}</text>
+                                    </van-col> -->
+                                </van-row>
+                            </van-col>
+                        </van-row>
+                    </view> 
+                    <view class="person_desc" style="color: #999999;font-size:28rpx;padding-top: 22rpx;">
+                        <van-row>
+                            <van-col span="19">
+                                <!-- <view wx:if="{{eye}}">
+                                    <text>{{obj.completeAddr}}</text>
+                                    <van-icon name="/images/mine/see.png" custom-class="eye" bind:click="eye"/>
+                                </view> -->
+                                <!-- <view wx:else>
+                                    <text>{{obj.hideAddr}}</text> <van-icon name="/images/mine/see0.png" custom-class="eye" bind:click="eye"/>
+                                </view>  -->
+                            </van-col>
+                            <!-- <van-col span="5">
+                                <view wx:if="{{userList.length > 1}}" style="color:#258BFF;font-size:24rpx;text-align:left;" bindtap="changeUser">切换</view>
+                            </van-col> -->
+                        </van-row>
+                    </view>
+                </van-col>
+            </van-row>
+        </view>
+        
+        <view class="guanjia">
+            <van-row>
+                <van-col span="15">
+                    <view class="guan_desc">我的管家</view>
+                </van-col>
+                <van-col span="5">
+                    <van-image bind:click="showTel" custom-class="img_com" src="/images/mine/dianhua.png" width="32" height="32" alt="电话"></van-image>
+                    <!-- <van-image wx:else bind:click="call" custom-class="img_com" src="/images/mine/dianhua.png" width="32" height="32" alt="电话"></van-image> -->
+                </van-col>
+                <van-col span="4">
+                    <van-image bind:click="wechat" custom-class="img_com" src="/images/mine/wechat.png" width="32" height="32" alt="wechat"></van-image>
+                </van-col>
+            </van-row>
+        </view>
+
+        <!-- 功能列表 -->
+        <view class="me_font">
+            <block wx:for="{{functionList}}"  wx:key="*this">
+                <block wx:if="{{item.index == 2}}">
+                    <!-- 我的发布 -->
+                    <!-- <van-cell 
+                        wx:if="{{item.ordId==5 && canShowMineRelease}}"
+                        custom-class="vcell" 
+                        bind:click="{{item.bindEvent}}"
+                        title="{{item.funName}}"
+                        data-index="{{item.index}}"
+                        data-ordId="{{item.ordId}}" 
+                        data-auth="{{item.checkAuth}}"
+                        data-url="{{item.pagePath}}"
+                        data-bit="{{item.bit}}"
+                        data-title="{{item.funName}}"
+                        is-link 
+                        border="{{false}}">
+                    <van-icon
+                            slot="icon"
+                            name="{{item.logoPath}}"
+                            size="20"
+                        />
+                    </van-cell> -->
+                    <van-cell
+                        custom-class="vcell" 
+                        bind:click="{{item.bindEvent}}"
+                        title="{{item.funName}}"
+                        data-url="{{item.pagePath}}"
+                        data-title="{{item.funName}}"
+                        is-link 
+                        border="{{false}}">
+                    <van-icon
+                            slot="icon"
+                            dot = "{{item.dot}}"
+                            name="{{item.logoPath}}"
+                            size="20"
+                    />
+                    </van-cell>
+                    <!-- 成员管理 -->
+                    <!-- <van-cell 
+                        wx:if="{{item.ordId==6 && obj.huRole == 'O'}}"
+                        custom-class="vcell" 
+                        bind:click="{{item.bindEvent}}"
+                        title="{{item.funName}}"
+                        data-index="{{item.index}}"
+                        data-ordId="{{item.ordId}}" 
+                        data-auth="{{item.checkAuth}}"
+                        data-url="{{item.pagePath}}"
+                        data-bit="{{item.bit}}"
+                        data-title="{{item.funName}}"
+                        is-link 
+                        border="{{false}}">
+                    <van-icon
+                            slot="icon"
+                            name="{{item.logoPath}}"
+                            size="20"
+                        />
+                    </van-cell> -->
+                    <!-- 其他默认均随权限位图控制 -->
+                    <!-- <van-cell 
+                        wx:if="{{item.ordId != 5 && item.ordId != 6}}"
+                        custom-class="vcell" 
+                        bind:click="{{item.bindEvent}}"
+                        title="{{item.funName}}"
+                        data-index="{{item.index}}"
+                        data-ordId="{{item.ordId}}" 
+                        data-auth="{{item.checkAuth}}"
+                        data-url="{{item.pagePath}}"
+                        data-bit="{{item.bit}}"
+                        data-title="{{item.funName}}"
+                        is-link 
+                        border="{{false}}">
+                    <van-icon
+                            slot="icon"
+                            name="{{item.logoPath}}"
+                            size="20"
+                        />
+                    </van-cell> -->
+                </block>
+            </block>
+            <!-- <block wx:if="{{menuList}}" wx:for="{{menuList}}" wx:key="menuItem" wx:for-item="menuItem">
+                <van-cell
+                        custom-class="vcell"
+                        bind:click="toWebPage"
+                        title="{{menuItem.menuName}}"
+                        data-url="{{menuItem.menuUrl}}"
+                        data-title="{{menuItem.menuName}}"
+                        is-link
+                        border="{{false}}">
+                    <van-icon
+                            slot="icon"
+                            name=""
+                            size="20"
+                    />
+                </van-cell>
+            </block> -->
+        </view>
+        <!-- 之后需要跳转到公司主页，可以添加如下函数 bindtap="toCompany" -->
+        <view style="text-align:center;font-size:20rpx;color:#ABABAB;background-color:#ffffff;padding:70rpx 0rpx 50rpx 0rpx;height:64rpx;">
+            <view>{{version}}</view>
+            <text>©2023-由</text>
+                <text>凡享资产</text>
+            <text>提供技术支持</text>
+        </view>
+    </view>
+    </block>
+    <block wx:elif="{{showLife && active == 1}}">
+<!--        <view>生活服务</view>-->
+<!--        <include src="/template/home/life.wxml"/>-->
+            <include src="../../template/life/home/home.wxml"/>
+    </block>
+
+<!-- 选择电话 -->
+<van-dialog
+  use-slot
+  title="联系电话"
+  show="{{ showTel }}"
+  bind:close="closeTel"
+  close-on-click-overlay="{{true}}"
+  show-confirm-button="{{false}}"
+  show-cancel-button="{{false}}"
+  confirm-button-color="{{'#189AFE'}}"
+>
+<van-cell-group>
+    <view wx:for="{{houseKeepList}}" wx:key="*this" style="padding:20rpx 10%;" bindtap="call" data-tel="{{item.mobile}}">
+        <view wx:if="{{item.isWorkTime == 1}}">
+            <text style="color:#4f4f4f;font-size:30rpx;">姓名：{{item.userName}} \n 电话：{{item.mobile}}</text>
+        </view>
+        <view wx:if="{{item.isWorkTime == 0 && item.mobile != null}}">
+            <text style="color:#4f4f4f;font-size:30rpx;">电话：{{item.mobile}}</text>
+        </view>
+        <view wx:if="{{item.isWorkTime == 0 && item.mobile == null}}">
+            <text style="color:#4f4f4f;font-size:30rpx;">请联系物业设置联系方式</text>
+        </view>
+    </view>
+</van-cell-group>
+
+</van-dialog>
+
+<!-- 企业微信 -->
+<van-dialog
+  use-slot
+  title="长按识别二维码添加管家"
+  custom-style="border: 2rpx solid #F2F2F2;"	
+  show="{{ showWechat }}"
+  showConfirmButton="{{false}}"
+  bind:close="closWechat"
+  close-on-click-overlay="{{true}}"
+  confirm-button-color="{{'#189AFE'}}"
+>
+    <van-cell-group>
+        <!-- <cell wx:if="{{obj.poWxId != ''}}" bind:startmessage='startmessage' bind:completemessage="completemessage" plugid='{{obj.poWxId}}' styleType='1' paddingStyle="30"/> -->
+        <image src="{{qrCode}}" show-menu-by-longpress="{{true}}" mode="widthFix"></image>
+    </van-cell-group>
+</van-dialog>
+
+<!-- 联系我指引 -->
+<van-dialog
+  use-slot
+  width="74%"
+  show="{{ showWechatImg }}"
+  close-on-click-overlay="{{true}}"
+  show-confirm-button="{{false}}"
+  confirm-button-color="{{'#189AFE'}}"
+>
+  <view style="width:560rpx;height:100%;" bindtap="closWechat">
+    <image src="../../images/wechat/wechat.jpg" style="width:100%;" mode="widthFix"/>
+  </view>
+</van-dialog>
+
+<!-- 公告 -->
+<van-dialog
+  use-slot
+  use-title-slot
+  custom-style=""
+  show="{{ showPost }}"
+  confirm-button-text="{{ggBtn}}"
+  confirm-button-color="{{'#189AFE'}}"
+  bind:confirm="ggDetail"	
+>
+<view slot="title" style="font-size:32rpx;color:#666666;">
+    <view class="minx"><van-icon name="close" bind:click="onClickHide"/></view>
+    {{gobj.noticeTitle}}
+</view>
+<view  class="gg" style="">
+    <view style="">
+        {{gobj.noticeDesc}}
+    </view>
+
+    <view wx:if="{{gobj.signName}}" style="text-align:right;padding:20rpx 0rpx;">
+        {{gobj.signName}}
+    </view>
+    <view style="text-align:right;padding:15rpx 0rpx;">
+        公告日期：{{gobj.noticeDate}}
+    </view>
+</view> 
+</van-dialog> 
+
+<!-- 多账户 -->
+<van-dialog
+  use-slot
+  title="我的房屋"
+  show="{{ showHouse }}"
+  show-cancel-button="{{showCancel}}"
+  bind:close="onClose"
+  close-on-click-overlay="{{showCancel}}"
+  bind:confirm="sureChangeMan"
+  confirm-button-color="{{'#189AFE'}}"
+>
+<van-radio-group value="{{ houseNum }}" bind:change="chouseHouseLogin">
+  <van-cell-group>
+        <van-cell wx:for="{{userList}}" wx:key="*this" title="{{item.name}}" 
+                custom-class="diag"
+                label-class="diag"
+                bind:click="onChoseHouse"
+                label="{{item.areaName}}{{item.buildingName}}{{item.houseNo}}" data-name="{{index}}">
+            <van-radio slot="right-icon" style="padding-top:50rpx;" name="{{index}}" />
+        </van-cell>
+  </van-cell-group>
+  <view style="width:100%;background-color:#F1F1F1;height:166rpx;text-align:center;">
+      <text style="color:#B0B0B0;font-size:20rpx;">注册其他房屋请联系相关物业公司</text>
+  </view>
+</van-radio-group>
+</van-dialog>
+
+
+
+<!-- 固定底边高度 -->
+<!--<view style="height:100rpx;background-color:#ffffff;"></view> -->
+<!-- tabbar -->
+<van-tabbar active="{{ active }}" bind:change="onChange">
+    <van-tabbar-item icon="{{ active == 0 ? '/images/home/home0.png':'/images/home/home.png'}}">首页
+    </van-tabbar-item>
+    <!-- <van-tabbar-item wx:if="{{showLife}}" icon="{{ active == 1 ? '/images/home/life1.png':'/images/home/life.png'}}">生活服务</van-tabbar-item> -->
+    <van-tabbar-item wx:if="{{showLife}}" icon="{{active == 2  ? '/images/home/me2.png':'/images/home/me.png'}}">我的</van-tabbar-item>
+    <van-tabbar-item wx:else icon="{{active == 1  ? '/images/home/me2.png':'/images/home/me.png'}}">我的
+        <!-- <view wx:if="{{isShowAvatarUrl == null || userAvatarUrl == ''}}">
+            <button class="my_btn" open-type="chooseAvatar" bindchooseavatar="bindchooseavatar">我的</button>
+        </view>
+        <view wx:else>
+            <button class="my_btn">我的</button>
+        </view> -->
+    </van-tabbar-item>
+</van-tabbar>
+</view>

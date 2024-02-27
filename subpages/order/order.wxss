@@ -1,0 +1,109 @@
+.block-container {
+  margin: 3% 3%;
+  width: 94%;
+  background-color: white;
+  border-radius: 8rpx;
+  height: 184rpx;
+  color:#000000;
+}
+
+.pay-title{
+  display: flex;
+  align-items: center;
+  font-size:28rpx;
+  padding: 15rpx 15rpx 0rpx 15rpx;
+}
+.pay-ordamt{
+  font-size: 28rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20rpx 15rpx;
+}
+.pay-ordamt-lable{
+  font-size:22rpx;
+  color:#ABABAB;
+  vertical-align: middle;
+}
+.van-row{
+  text-align: center!important;
+}
+.align-middle{
+  vertical-align: middle;
+  margin-left: 16rpx;
+}
+van-image{
+  display: flex!important;
+}
+.page{
+  text-align: center;
+  padding: 20rpx 0 60rpx 0;
+  font-size: 24rpx;
+  color: #999999;
+}
+.top-container{
+  display: flex;
+  justify-content: space-between;
+  padding: 0rpx 46rpx 0rpx 26rpx;
+  height:80rpx;
+}
+.top-row-container{
+  padding: 0rpx 46rpx 0rpx 26rpx;height:80rpx;
+}
+.top-lable{
+  display: flex;
+  align-items: center;
+}
+.top-body{
+  display: flex;
+  align-items: center;
+}
+.van-cell__label {
+  width:90%!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+
+.calendar-style{
+  height: 1020rpx;
+  background-color: white;
+  padding-top: 10px;
+  border-radius: 15px;
+}
+
+.header-style{
+  font-size: large;
+}
+
+.board-style{
+  color: #666666;
+}
+
+.weeks-style{
+  color: #666666;
+  padding-top:20rpx !important;
+  box-shadow: 0px 10rpx 20rpx rgba(125, 126, 128, 0.16)!important;
+}
+
+.month-btn-style{
+  color: #1798DC!important;
+}
+
+.calendar-day{
+  width:70rpx;
+  height:70rpx;
+  line-height: 70rpx;
+}
+
+.confirm-btn-style{
+  background: #1798DC!important;
+  color: #fff;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 32rpx;
+}
+
+.calendar-days-style{
+  height:750rpx;
+}

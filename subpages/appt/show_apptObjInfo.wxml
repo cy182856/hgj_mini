@@ -1,0 +1,101 @@
+<import src="../../template/empty/empty.wxml"></import>
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<view style="min-height:100%;background-color:{{bgColor}};padding-bottom: {{btuBottom}};">
+  <view wx:if="{{!isLoading&&APPTOBJINFODTOS.length==0}}">
+    <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无预约标的开放记录'}}"></template>
+  </view>
+  <view wx:else>
+    <scroll-view scroll-y  style="margin-bottom:130rpx;height: {{windowHeight}});">
+      <view class="appt_obj_bg">
+          <image src="../../images/appt/appt_obj_bg.png" style="width:100%;height: 356rpx;"></image>
+      </view>
+        <view wx:for="{{APPTOBJINFODTOS}}" wx:for-item="value" class="appt_obj_content">
+          <view class="appt_obj_content_left">
+            <view class="appt_obj_content_title">
+              <view>
+                <image src="../../images/appt/appt_obj_{{value.objType}}.png" style="width: 90rpx;height: 90rpx;"></image>
+              </view>
+              <view style="border-bottom: 1px dashed #D5D5D5;display: flex;margin-left: 20rpx;margin-right: 20rpx;width:100%;">
+                <view class="appt_obj_content_title_obj">
+                    <text>{{value.objName}}</text>
+                </view>
+                <view style="display: flex;align-items: center;justify-content: center;width: 100rpx;" bindtap="showApptObjDesc" data-objId="{{value.objId}}">
+                  <!-- <image src="../../images/appt/appt_obj_tip.png" style="width: 38rpx;height: 38rpx;margin-bottom: 10rpx;"></image> -->
+                  <view class="iconfont jia-tishi1"></view>
+                </view>
+              </view>
+            </view>
+            <view data-objId="{{value.objId}}" bindtap="getApptDtl">
+              <view class="appt_obj_content_value">
+                <view>
+                  <text>{{value.apptObjDesc1}}</text>
+                </view>
+                <view style="margin-top: 10rpx;">
+                  <text>{{value.apptObjDesc2}}</text>
+                </view>
+              </view>
+              <view class="appt_obj_content_right">
+                <view class="appt_obj_content_doAppt">预约</view>  
+              </view>
+            </view>
+          </view>
+        </view>
+      <view id="obj_over"></view>
+    </scroll-view>
+  </view>
+  <view class="mine_appt_obj">
+    <view class="mine_appt_obj_content" bindtap="goToMineAppt">
+          <text>我的预约</text>
+    </view>
+  </view>
+</view> 
+<van-popup show="{{ show }}" bind:click-overlay="closeInstru" custom-style="width: 93%;height: auto;">
+  <view style="padding-top: 30rpx;">
+    <view class="apptObjName">{{APPTOBJINFO.objName}}标的说明</view>
+    <view class="obj_intru_list">
+      <view class="obj_intru" wx:if="{{APPTOBJINFO.objTitle1&& APPTOBJINFO.objDesc1}}">
+        <van-row>
+          <van-col span="1"><van-icon name="volume-o" custom-class="icon_appt_instru"/></van-col>
+          <van-col span="23">  
+            <view class="obj_title">{{APPTOBJINFO.objTitle1}}</view>
+            <view class="obj_desc">{{APPTOBJINFO.objDesc1}}</view>
+          </van-col>
+        </van-row>
+      </view>
+      <view class="obj_intru" wx:if="{{APPTOBJINFO.objTitle2&& APPTOBJINFO.objDesc2}}">
+        <van-row>
+          <van-col span="1"><van-icon name="volume-o" custom-class="icon_appt_instru"/></van-col>
+          <van-col span="23">  
+            <view class="obj_title">{{APPTOBJINFO.objTitle2}}</view>
+            <view class="obj_desc">{{APPTOBJINFO.objDesc2}}</view>
+          </van-col>
+        </van-row>
+      </view>
+      <view class="obj_intru" wx:if="{{APPTOBJINFO.objTitle3&& APPTOBJINFO.objDesc3}}">
+        <van-row>
+          <van-col span="1"><van-icon name="volume-o" custom-class="icon_appt_instru"/></van-col>
+          <van-col span="23">  
+            <view class="obj_title">{{APPTOBJINFO.objTitle3}}</view>
+            <view class="obj_desc">{{APPTOBJINFO.objDesc3}}</view>
+          </van-col>
+        </van-row>
+      </view>
+      <view class="obj_intru" wx:if="{{APPTOBJINFO.objTitle4&& APPTOBJINFO.objDesc4}}">
+        <van-row>
+          <van-col span="1"><van-icon name="volume-o" custom-class="icon_appt_instru"/></van-col>
+          <van-col span="23">  
+            <view class="obj_title">{{APPTOBJINFO.objTitle4}}</view>
+            <view class="obj_desc">{{APPTOBJINFO.objDesc4}}</view>
+          </van-col>
+        </van-row>
+      </view>
+    </view>
+    <view class="dead_line"></view>
+    <view class="obj_instru_close">
+      <view class="obj_instru_close_btn" bindtap="closeInstru">
+        <text>关闭</text>
+      </view>
+    </view>
+  </view>
+</van-popup>

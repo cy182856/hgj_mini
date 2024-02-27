@@ -1,0 +1,130 @@
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<import src="../../template/empty/empty.wxml"></import>
+<view wx:if="{{APPTORDLOGDTOS.length==0&&!isLoading}}">
+    <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无我的预约记录'}}"></template>
+</view>
+<view wx:else> 
+  <view style="margin-top: 20rpx;"></view>
+  <view wx:for="{{APPTORDLOGDTOS}}" wx:for-item="value">
+    <view class="mine_ord">
+      <view class="mine_ord_title" wx:if="{{value.STAT=='I'}}">
+        <image src="../../images/appt/mine_appt_I.png" mode="aspectFit" style="width: 100%;height: 246rpx;background-color: #F3F5F5;"></image>
+      </view>
+      <view class="mine_ord_title" wx:elif="{{value.STAT=='D'||value.STAT=='H'}}">  
+        <image src="../../images/appt/mine_appt_DH.png" mode="aspectFit" style="width: 100%;height: 246rpx;background-color: #F3F5F5;"></image>
+      </view>          
+      <view class="mine_ord_title" wx:elif="{{value.STAT=='R'}}">
+        <image src="../../images/appt/mine_appt_R.png" mode="aspectFit" style="width: 100%;height: 246rpx;background-color: #F3F5F5;"></image>
+      </view> 
+      <view class="mine_ord_title"  wx:elif="{{value.STAT=='O'}}"> 
+        <image src="../../images/appt/mine_appt_O.png" mode="aspectFit" style="width: 100%;height: 246rpx;background-color: #F3F5F5;"></image>
+      </view>  
+      <view class="mine_ord_title" wx:elif="{{value.STAT=='P'}}"> 
+         <image src="../../images/appt/mine_appt_P.png" mode="aspectFit" style="width: 100%;height: 246rpx;background-color: #F3F5F5;"></image>
+      </view> 
+      <view class="mine_ord_title" wx:else="{{value.STAT=='S'}}"> 
+        <image src="../../images/appt/mine_appt_S.png" mode="aspectFit" style="width: 100%;height: 246rpx;  background-color: #F3F5F5;"></image>
+      </view> 
+      <view class="mine_ord_top">
+          <view class="mine_ord_title_objName">{{value.OBJNAME}}</view>
+          <view class="mine_ord_tilte_createTime">
+            <view class="mine_ord_tilte_createTime_left">下单时间</view>
+            <view class="mine_ord_tilte_createTime_right">{{value.ORDDATETIME}}</view>
+          </view>
+      </view>
+      <view class="mine_ord_content">
+        <view class="mine_ord_content_title">
+            <van-row>
+              <van-col span="12">预约时间</van-col>
+              <van-col span="6" style="text-align:center;">
+                <view wx:if="{{value.STAT=='R'||value.STAT=='P'||value.STAT=='0'}}">已退/数量</view>
+                <view wx:else>
+                  数量
+                </view>
+              </van-col>
+              <van-col span="6" style="text-align:center;">单价</van-col>
+            </van-row>
+        </view>
+        <view class="mine_ord_content_detail" wx:for="{{value.APPTORDDTLDTOS}}" wx:for-item="content">
+            <van-row>
+              <van-col span="12">{{content.APPTDATEDAY}} {{content.BEGINTIMEDESC}}-{{content.ENDTIMEDESC}}</van-col>
+              <van-col span="6" style="text-align:center;">
+                <view wx:if="{{value.STAT=='R'||value.STAT=='P'||value.STAT=='0'}}">{{content.CANCELCNT+content.ONCANCELCNT}}/{{content.OBJCNT}}</view>
+                <view wx:else>
+                 {{content.OBJCNT}}
+                </view>
+              </van-col>
+              <van-col span="6" style="text-align:center;">￥{{content.APPTPRICEDESC}}</van-col>
+            </van-row>
+        </view>
+        <view class="mine_ord_img" >
+          <image style="height:50rpx;width:100%; background-color: #F3F5F5;"
+  src="../../images/appt/appt_middle.png" />
+        </view>
+
+        <view class="mine_ord_bottom">
+          <van-row>
+              <van-col span="8"><text style="font-size:36rpx;color:#169AFF;">￥{{value.ORDAMTDESC}}</text></van-col>
+              <van-col span="16">
+                <block wx:if="{{value.STAT=='I'}}">
+                  <block wx:if="{{value.downTime}}">
+                    <van-col span="9">
+                        <view class="mine_ord_bottom_cancel" bindtap="doOrdProcess" data-ordDate="{{value.ORDDATE}}" data-ordSeqId="{{value.ORDSEQID}}" data-operType="cancel">
+                          <text>取消</text>
+                        </view>
+                      </van-col>
+                      <van-col span="15">
+                        <view class="mine_ord_bottom_pay" bindtap="doOrdProcess" data-ordDate="{{value.ORDDATE}}" data-ordSeqId="{{value.ORDSEQID}}" data-operType="pay">
+                          <text>{{value.downTime}}内支付</text>
+                        </view>
+                      </van-col>
+                  </block>
+                </block>
+                <block wx:elif="{{value.STAT=='D'||value.STAT=='H'}}">
+                    
+                </block>
+                <block wx:elif="{{value.STAT=='R'}}">
+
+                </block>
+                <block wx:elif="{{value.STAT=='O'}}">
+                  <van-col span="24" custom-class="mine_ord_right" wx:if="{{value.APPTISCANREFUND=='Y'}}">
+                    <view class="mine_ord_bottom_refund" bindtap="doOrdProcess" data-ordDate="{{value.ORDDATE}}" data-ordSeqId="{{value.ORDSEQID}}" data-operType="refund">
+                      <text>退款</text>
+                    </view>
+                  </van-col>
+                </block>
+                <block wx:elif="{{value.STAT=='P'}}">
+                  <van-col span="24" custom-class="mine_ord_right" wx:if="{{value.APPTISCANREFUND=='Y'}}">
+                    <view class="mine_ord_bottom_refund" bindtap="doOrdProcess" data-ordDate="{{value.ORDDATE}}" data-ordSeqId="{{value.ORDSEQID}}" data-operType="refund">
+                      <text>退款</text>
+                    </view>
+                  </van-col>
+                </block>
+                <block wx:elif="{{value.STAT=='S'}}">
+                  <van-col span="24" custom-class="mine_ord_right"  wx:if="{{value.APPTISCANREFUND=='Y'}}">
+                    <view class="mine_ord_bottom_refund" bindtap="doOrdProcess" data-ordDate="{{value.ORDDATE}}" data-ordSeqId="{{value.ORDSEQID}}" data-operType="refund">
+                      <text>退款</text>
+                    </view>
+                  </van-col>
+                </block>
+              </van-col>
+            </van-row>
+        </view>
+      </view>  
+    </view>
+      <view>
+        <image style="height:66rpx;width:100%; background-color: #F3F5F5;" src="../../images/appt/mine_appt_bottom.png" />
+      </view>
+  </view>
+    <view wx:if="{{!isLoading&&TOTALCOUNT!=CURRENTCOUNT}}" class="record_more" bindtap="queryMore">
+            <text>点击加载更多...</text>
+    </view>
+    <view wx:elif="{{isLoading&&CURRENTCOUNT!=0}}" style="text-align:center;padding-bottom: 20rpx;font-size: 30rpx;  color: #999999;">
+          <van-loading type="spinner" size="30rpx" text-size="30rpx" >加载中...</van-loading>
+    </view>
+    <view wx:else class="record_none">
+        <text></text>
+    </view>
+</view>
+

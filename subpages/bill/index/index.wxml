@@ -1,0 +1,39 @@
+<!-- 引用 -->
+<import src="../../template/empty/empty.wxml"></import>
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<!-- 弹窗 -->
+<van-dialog id="van-dialog"/>
+<!-- 根据UI，距离顶端始终保持14rpx，14+9 -->
+<view style="height:5rpx;"></view>
+
+<view class="weui-loadmore" wx:if="{{isRefreshing}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore-tips">正在刷新...</view>
+</view>
+
+<view class="li" style="margin-top: 10px;" data-index="0" bindtap=''>
+    <view class="left" style="font-size: 20px; margin-left: 10px;color:rgb(82, 77, 77)">{{proName}}</view><text style="color:rgb(82, 77, 77)">¥{{priRevAmount}}</text>
+</view>
+
+<view class="index_head">
+	<van-row >
+        <view>	
+            <van-col  span="15" style="font-size: 22px;color:rgb(82, 77, 77);"> 
+				<view wx:if="{{priRevAmount > 0}}" style="margin-left: 10px;margin-top: 10px;">未缴清</view>
+				<view wx:if="{{priRevAmount == 0}}" style="margin-left: 10px;margin-top: 10px;">已缴清</view>
+            </van-col>
+            <van-col span="7" style="font-size: 22px;color:rgb(82, 77, 77)">    
+				<view bindtap='billDetail' style="margin-top: 10px;">详细账单</view>
+            </van-col>
+			<van-col span="2">    
+				<view bindtap='billDetail' class="jiantou_up"></view>
+            </van-col>
+        </view>
+    </van-row>
+
+
+</view>
+
+
+

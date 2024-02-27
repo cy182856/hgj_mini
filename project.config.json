@@ -1,0 +1,157 @@
+{
+  "description": "项目配置文件",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": false,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": false,
+    "coverView": true,
+    "nodeModules": true,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "useMultiFrameRuntime": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "enableEngineNative": false,
+    "useIsolateContext": true,
+    "userConfirmedBundleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "showES6CompileOption": false,
+    "condition": false,
+    "ignoreUploadUnusedFiles": true
+  },
+  "compileType": "miniprogram",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "subpages/mine/appt/show_apptObjInfo",
+          "pathName": "subpages/mine/appt/show_apptObjInfo",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "subpages/mine/appt/show_apptTimeInfo",
+          "pathName": "subpages/mine/appt/show_apptTimeInfo",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/hu/hubind/hubind",
+          "pathName": "pages/hu/hubind/hubind",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/repairApply/repairApply",
+          "pathName": "pages/repairApply/repairApply",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/repair/repairQuery/repairQuery",
+          "pathName": "pages/repair/repairQuery/repairQuery",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/main/main",
+          "pathName": "pages/main/main",
+          "query": "hgjModuleId=032&custId=3048000060&huSeqId=00000002&heoDate=20201116&heoSeqId=00000600&queryType=R",
+          "scene": null
+        },
+        {
+          "name": "subpages/repair/pages/repairApply/repairApply",
+          "pathName": "subpages/repair/pages/repairApply/repairApply",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "subpages/pfee/pfeeOrdLogList",
+          "pathName": "subpages/pfee/pfeeOrdLogList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "subpages/pfee/pfeeMonBillPay",
+          "pathName": "subpages/pfee/pfeeMonBillPay",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pfeeOrdDtlList",
+          "pathName": "subpages/pfee/pfeeOrdDtlList",
+          "query": "ordDate=20200908&ordSeqId=0000002",
+          "scene": null
+        },
+        {
+          "name": "subpages/repair/pages/repairDetail/repairDetail",
+          "pathName": "subpages/repair/pages/repairDetail/repairDetail",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/family/memberList",
+          "pathName": "pages/family/memberList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "subpages/family/memberList",
+          "pathName": "subpages/family/memberList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "subpages/pfee/pfeeMonBillPay",
+          "pathName": "subpages/pfee/pfeeMonBillPay",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "subpages/pfee/pfeeOrdLogList",
+          "pathName": "subpages/pfee/pfeeOrdLogList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "subpages/appt/apptOrd_success",
+          "pathName": "subpages/appt/apptOrd_success",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "subpages/pfee/test",
+          "pathName": "subpages/pfee/test",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  },
+  "editorSetting": {
+    "tabIndent": "auto",
+    "tabSize": 2
+  },
+  "appid": "wxf2dfa410991adfcb",
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  }
+}

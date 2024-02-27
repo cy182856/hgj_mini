@@ -1,0 +1,47 @@
+.global-icons {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.global-icons image {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.global-image {
+  display: block;
+  position: relative;
+}
+
+.global-image image {
+  display: block;
+}
+
+.global-image-modal {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: rgba(255,255,255,.6);
+}
+
+.table-footer {
+  display: flex;
+  width: 100%;
+  height: 110rpx;
+  justify-content: center;
+  align-items: center;
+}
+
+.table-footer-image {
+  height: 56rpx;
+}
+
+.table-footer .icon-car-list-bottom {
+  color: #D8D8D8;
+  font-size: 80rpx;
+}

@@ -1,0 +1,17 @@
+/* vant dialog弹窗的确定按钮统一改为 */
+.dialog-index--van-dialog__confirm{
+  color: #189AFE !important;
+}
+.view_btn{
+  background-color: #ffffff;
+  position:fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+.height{
+  height: 180rpx;
+}
+.btn{
+  width: 80%;
+}

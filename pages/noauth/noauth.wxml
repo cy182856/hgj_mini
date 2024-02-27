@@ -1,0 +1,2 @@
+<!--pages/noauth/noauth.wxml-->
+<van-empty style="white-space:pre-line;" image="network" description="{{errDesc}}" />

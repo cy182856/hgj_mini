@@ -1,0 +1,53 @@
+<!--subpages/pfee/pfeeMonBillDtl.wxml-->
+<import src="../../template/empty/empty.wxml"></import>
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+
+<scroll-view class="main_container" scroll-y>
+<view>
+  <view  class="img-view">
+    <image class="head-img" src="../../images/pfee/headbackgroung.png"/>
+  </view>
+
+  <view class="head-text-view">
+    <view class="head-text" style="font-size:32rpx"><text>{{shortName}}</text></view>
+    <view class="head-text" style="font-size:28rpx"><text>{{houseName}}</text></view>
+  </view>
+</view>
+
+<view class="bill-detail-view">
+  <van-row custom-class="row-view">
+    <van-col span="6" >账单金额</van-col>
+    <van-col span="18" custom-class="row-desc">¥{{pfeeMonBillDto.billAmtDesc}}</van-col>
+  </van-row>
+  <van-row custom-class="row-view">
+    <van-col span="6" >状态</van-col>
+    <van-col span="18" custom-class="row-desc">{{pfeeMonBillDto.statDesc}}</van-col>
+  </van-row>
+  <van-row custom-class="row-view">
+    <van-col span="6" >付费方式</van-col>
+    <van-col span="18" custom-class="row-desc">
+      {{pfeeMonBillDto.payChnlDesc==null?'-':pfeeMonBillDto.payChnlDesc}}
+    </van-col>
+  </van-row>
+  <van-row custom-class="row-view">
+    <van-col span="6" >付款时间</van-col>
+    <van-col span="18" custom-class="row-desc">
+      {{pfeeMonBillDto.ordDate==null?'-':pfeeMonBillDto.ordDate}}
+    </van-col>
+  </van-row>
+  <van-row custom-class="row-view">
+    <van-col span="6" >付款流水号</van-col>
+    <van-col span="18" custom-class="row-desc">
+      {{pfeeMonBillDto.ordSeqId==null?'-':pfeeMonBillDto.ordSeqId}}
+    </van-col>
+  </van-row>
+  <van-row custom-class="row-view">
+    <van-col span="6" >备注</van-col>
+    <van-col span="18">
+      {{pfeeMonBillDto.billRemark==null?'':pfeeMonBillDto.billRemark}}
+    </van-col>
+  </van-row>
+</view>
+
+</scroll-view>

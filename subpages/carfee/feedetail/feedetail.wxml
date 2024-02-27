@@ -1,0 +1,48 @@
+<import src="../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<view class="house-info-view">
+  <view  class="img-view">
+    <image class="head-img" src="/images/carfee/logs-bg.png"/>
+  </view>
+  <view class="house-left-view">
+    <view class="head-text-view">
+      <view class="house-name-view">
+        <text>{{userInfo.commanyShortName}}</text>
+      </view>
+      <view class="house-no-info">
+        <text>{{userInfo.completeAddr}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="choose-car-view">
+  <view class="car-info-title">
+    车辆信息
+  </view>
+  <view class="car-info-item" >
+    <van-cell-group custom-class="vant-cell-custom-class" border="{{false}}">
+        <view style="height:20rpx;"></view>
+        <van-cell title-class="vant-cell-title-class"  title="车牌号" value="{{carfeeLogDetail.carNumber}}" border="{{ false }}" />  
+        <van-cell title-class="vant-cell-title-class" title="缴费周期" value="{{carfeeLogDetail.cfeePayCycDesc}}" border="{{ false }}" />
+        <van-cell title-class="vant-cell-title-class" title="每月费用" value="{{carfeeLogDetail.monFee}}元/月" border="{{ false }}"/>
+        <view style="height:20rpx;"></view>
+    </van-cell-group>
+  </view>
+  <view style="height:20rpx;"></view>
+</view>
+<view class="select-payupdate-view">
+  <view class="car-info-title">
+    缴费信息
+  </view>
+  <view class="check-paymonth-view">
+    <van-cell-group border="{{false}}">
+      <view style="height:20rpx;"></view>
+      <van-cell title-class="vant-cell-title-class"  title="支付时间" value="{{carfeeLogDetail.ordDateDesc}} {{carfeeLogDetail.payTimeDesc}}" border="{{ false }}" />  
+      <van-cell title-class="vant-cell-title-class" title="缴费时长" value="{{carfeeLogDetail.payMon}}个月" border="{{ false }}" />
+      <van-cell title-class="vant-cell-title-class" title="总金额" value="{{carfeeLogDetail.ordAmt}}元" border="{{ false }}"/>
+      <van-cell title-class="vant-cell-title-class" title="生效日期" value="{{carfeeLogDetail.feeStartDateDesc}} 至 {{carfeeLogDetail.feeEndDateDesc}}" border="{{ false }}"/>
+      <view class="payupdate-desc">因断缴等原因该时间仅做参考，请以停车管理系统中的时间为准。</view>
+    </van-cell-group>
+  </view>
+</view>
+

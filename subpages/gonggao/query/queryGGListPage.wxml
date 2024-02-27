@@ -1,0 +1,31 @@
+<!-- 引用 -->
+<import src="../../../template/empty/empty.wxml"></import>
+<import src="../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<!-- 弹窗 -->
+<van-dialog id="van-dialog"/>
+<!-- 根据UI，距离顶端始终保持14rpx，14+9 -->
+<view style="height:14rpx;"></view>
+  <view wx:if="{{glist == null || glist.length == 0}}" >
+    <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无公告'}}"></template>
+  </view>
+<view wx:else>
+  <view style="height:100%;">
+    <van-cell-group wx:for="{{glist}}" wx:key="item">
+      <van-cell title-class="txt"
+                title="{{item.noticeTitle}}"
+                value="{{item.noticeDateDesc}} {{item.noticeTimeDesc}}" border="{{ false }}"
+                is-link
+                url="../detail/gongDetail?title={{item.noticeTitle}}&date={{item.noticeDateDesc}}{{item.noticeTimeDesc}}&msg={{item.noticeDesc}}&signName={{item.signName}}&url={{item.noticeUrl}}"/>
+      <view class="bg">
+        <view class="label">
+            <text class="txt">{{item.noticeDesc}}</text>
+        </view>
+      </view>
+    </van-cell-group>
+  </view>
+  <view wx:if="{{loadMore}}" bindtap="loadMore" class="view_load_more">上拉/点击加载更多</view>
+  <view  wx:else class="view_load_more">已经到底了</view>
+</view>
+
+

@@ -1,0 +1,94 @@
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<van-dialog id="van-dialog" />
+<view>
+  <view class="deadline"></view>
+  <view class="acct_content">
+      <view class="acct_bal">
+          <view class="acct_bal_head">
+              账户余额(元)
+          </view>
+          <view class="acct_bal_content">
+              {{acctBal}}
+          </view>
+          <view class="acct_query_btn">
+              <view class="acct_change_record">
+                <view class="acct_change_btn" bindtap="doQueryAcctLog">账户明细</view>
+              </view>
+              <view class="acct_refund">
+                <view class="acct_refund_btn" bindtap="toRefund">退款</view>
+              </view>
+          </view>
+      </view>
+  </view>
+  <view class="save_oweFee" wx:if="{{oweFeeAmt!='0.00'}}">
+     <view class="iconfont jia-tishi" style="font-size: 30rpx;">您当前欠费金额：{{oweFeeAmt}}元，充值后将自动抵扣。</view>
+  </view>
+  <view class="save_conent">
+    <view class="save_amt_title">充值金额</view>
+    <block wx:if="{{acctBal>=200.00}}">
+        <view class="iconfont jia-tishi1 save_un_support">
+          非常抱歉,账户余额超过(包含)200时,不能进行充值
+        </view>
+    </block>
+    <block wx:else>
+        <view class="save_amt_num">
+          <view class="save_amt {{CHOOSED_SAVE_AMT==50?'selecedSaveAmt':''}}" bindtap="chooseSaveAmt" data-saveamt="50">
+            50元
+          </view>  
+          <view class="save_amt {{CHOOSED_SAVE_AMT==100?'selecedSaveAmt':''}}" bindtap="chooseSaveAmt" data-saveamt="100">
+            100元
+          </view>  
+          <view class="save_amt {{CHOOSED_SAVE_AMT==200?'selecedSaveAmt':''}}" bindtap="chooseSaveAmt" data-saveamt="200">
+            200元
+          </view>  
+      </view>
+    </block>
+     
+     <view class="save_content_instru">
+         <view class="save_content_instru_step">
+          <view class="save_cotnet_instru_idNo">1、</view> 
+          <view class="save_content_instru_desc">充值金额可用于新能源车充电（不包括预约、物业费缴纳功能）</view>
+         </view>
+         <view class="save_content_instru_step">
+           2、充值仅限当前系统消费，无法在其他系统使用
+         </view>
+         <view class="save_content_instru_step">
+          <view class="save_cotnet_instru_idNo">3、</view> 
+          <view class="save_content_instru_desc">充值后于160天内(含)页面发起退款，可退回原支付账户。</view>
+         </view>
+         <view class="save_content_instru_step">
+          <view class="save_cotnet_instru_idNo">4、</view> 
+          <view class="save_content_instru_desc">充值后超过160天需要联系客服进行人工退款，每笔退款服务费10.00元。</view>
+         </view>
+     </view>
+  </view>
+  <view class="save_bottom" wx:if="{{acctBal<200.00}}">
+     <view class="save_agree">
+      <van-checkbox value="{{ AGREE_INSTU }}" shape="square" icon-size="16px"  bindtap="choosedAgree">
+        <view style="display:flex;color: #999999;">请仔细阅读后同意<view class="save_agree_btn" catchtap="seeProtoco">《充值协议》</view></view>
+      </van-checkbox>
+     </view>
+     <view class="save_btn_shadow">
+      <view class="save_btn" bindtap="doSaveAmt">
+       立即充值
+      </view>
+     </view>
+  </view>
+</view>
+<van-popup show="{{ isShowDialog }}" bind:click-overlay="closeInstru" custom-style="width: 93%;height: auto; border-radius: 20rpx !important">
+  <view style="padding-top: 30rpx;">
+    <view class="obj_title">操作提示</view>
+    <view class="obj_intru_list">
+      <view class="obj_intru">
+        <text>{{showDialogDesc}}</text>
+      </view>
+    </view>
+    <view class="deadline"></view>
+    <view class="obj_instru_close">
+      <view class="obj_instru_close_btn" bindtap="closeInstru">
+        <text>关闭</text>
+      </view>
+    </view>
+  </view>
+</van-popup>

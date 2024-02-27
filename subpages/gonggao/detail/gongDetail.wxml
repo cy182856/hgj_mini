@@ -1,0 +1,14 @@
+<view class="contains">
+  <view class="sectionOne">
+    <view class="title">{{title}}</view>
+    <view class="date">{{date}}</view>
+  </view>
+  <view class="msg">
+    <text decode="{{true}}">{{msg}}</text>
+  </view>
+  <view class="sign" wx:if="{{signName}}">
+    <text decode="{{true}}">{{signName}}</text>
+  </view>
+
+</view>
+<view class="org_file" wx:if="{{url}}" data-url="{{url}}" bindtap="toOrgPage">查看原文</view>

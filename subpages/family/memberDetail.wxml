@@ -1,0 +1,132 @@
+<!--pages/family/memberDetail.wxml-->
+<wxs src="./tools.wxs" module="m" />
+<import src="../../template/houseinfo_header/houseInfo.wxml"></import>
+<van-dialog use-slot title="修改昵称" show="{{ nickNameShow }}" show-cancel-button bind:cancel="onTapCancleModify"
+  bind:confirm="onConfirm" confirm-button-color="#189afe">
+  <van-field value="{{ newNickName }}"   input-align="right" maxlength="20" show-word-limit placeholder="请输入新的昵称" border="{{ false }}" bind:input="onNKNChange" />
+</van-dialog>
+<van-dialog id="van-dialog" confirm-button-color="#189afe"/>
+<van-toast id="van-toast" />
+<view class="rootpage" > 
+  
+  <view class="root">
+  <image class='background-image' src='../../images/home/houseinfo_bg.png' mode="aspectFill"></image>
+  <view class="content">
+    <template is="houseInfo"   data="{{areaName:commanyShortName,houseNo:areaName}}"></template>
+ </view>
+<view class="card-body">
+  <view class="fun-card" style="z-index:199">
+
+  <view class="title-view"> 
+    <text class="text-title">基本信息</text></view>
+  <van-cell-group>
+    <van-field
+        value=""
+        label="头像"
+        title-width="140rpx"
+        readonly
+        bindtap="uploadHeadImg"
+        custom-style="line-height:35px;min-height:35px;display: flex;align-items: center;"
+        right-icon="{{headImgUrl}}"
+        right-icon-class="right_img_style"
+        is-link
+      />
+    <van-field
+      value="{{mNickName}}"
+      label="昵称"
+      title-width="140rpx"
+      readonly
+      input-align= "right"
+      bindtap="tapModify"
+      custom-style="line-height:35px;min-height:35px;display: flex;align-items: center;"
+      right-icon-class="right_img_style"
+      is-link = "{{pageType=='S'}}"
+      input-class = "input-class-style"
+    />
+    <van-cell title="角色" value="{{m.getRole(memberInfo.huRole,propType)}}" />
+    <van-cell wx:if="{{pageType=='O'}}" title="状态" value="{{m.getStat(memberInfo.stat)}}" border="{{ false }}" />
+   
+  </van-cell-group>
+  <view class="title-view-noradius" wx:if="{{pageType=='O'}}">
+     <text class="text-title">权限管理</text></view>
+  <van-cell-group wx:if="{{pageType=='O'}}">
+    <block wx:for="{{authList}}"  wx:key="name">
+      <van-cell  title-width="70%">
+        <view slot="title"  class="auth-title-row">
+          <text>{{item.name}}</text>
+          <text wx:if="{{item.hasAuth==2}}" class="notice-text">（房屋认证后可使用）</text>
+        </view>
+        <view slot="">
+          <view class="switch-view" slot="">
+            <van-switch checked="{{ item.hasAuth!=0 }}" loading="{{item.loading}}"  data-bItem="{{item}}"  data-index="{{index}}" bind:change="onAuthChange"  size="18px" active-color="#169aff" inactive-color="#f7f7f7"  />
+          </view>
+        </view>
+      </van-cell>
+    </block>
+  </van-cell-group>
+  <!-- <view wx:elif="{{memberInfo.huRole=='O'}}" style="background:white;padding-left:20rpx">
+    <van-grid direction="horizontal" column-num="3" border="{{false}}" icon-size="15">
+      <block wx:for="{{authList}}"  wx:key="name">
+        <van-grid-item icon="{{item.hasAuth==1?'success':'cross'}}" icon-color="{{item.hasAuth==1?'#169aff':'red'}}" 
+          text="{{item.name}}" custom-class="gridItem" />
+      </block>
+    </van-grid>
+  </view> -->
+  <block wx:if="{{pageType=='S'}}">
+  <view class="title-view-noradius"> 
+    <text class="text-title">通知管理</text></view>
+  <van-cell-group>
+    <block wx:for="{{notifyAuth}}" wx:key="name">
+      <van-cell title="{{item.name}}">
+        <view slot="">
+          <view class="switch-view" slot="">
+            <van-switch checked="{{ item.hasAuth==1 }}"  loading="{{item.loading}}" data-index="{{index}}"  bind:change="onNotifyChange" size="18px" active-color="#169aff" inactive-color="#f7f7f7" />
+          </view>
+        </view>
+      </van-cell>
+    </block>
+  </van-cell-group>
+</block>
+<block wx:if="{{pageType=='O'}}">
+  <view class="title-view-noradius"> 
+    <text class="text-title">其他</text></view>
+  <van-cell-group>
+      <van-cell border="{{ false }}" >
+        <view slot="title">
+          <view class="text-icon-row">
+            <view class="text-name">信息共享</view>
+            <van-icon name="info-o"  color="#169aff" bindtap="showInfo" ></van-icon>
+      </view>
+    </view>
+        <view slot="">
+          <view class="switch-view" slot="">
+            <van-switch checked="{{isQueryOther=='Y'}}"   loading="{{switchLoading}}"  bind:change="onShareChange" size="18px" active-color="#169aff" inactive-color="#f7f7f7" />
+          </view>
+        </view>
+      </van-cell>
+      <van-cell label="是否可查阅本房屋下其他成员提交的事务进度" border="{{ false }}" wx:if="{{isShowInfo}}">
+      </van-cell>
+  </van-cell-group>
+</block>
+</view> 
+  <view class="btn-row bottom_margin" >
+    <block wx:if="{{pageType=='O'}}">
+    <view class="btn-margin" >
+       <view wx:if="{{btnText=='打开账号'}}" class="btn-two" hover-class="btn-two_hover" disabled="{{isLoading}}" bindtap="onTapClosedMembers">{{btnText}}</view>
+      <view wx:else class="btn-two-unregist" hover-class="btn-two_hover-unregist" disabled="{{isLoading}}" bindtap="onTapClosedMembers">{{btnText}}</view>
+    </view>
+    <view class="btn-margin">
+      <view class="btn-two-unregist" hover-class="btn-two_hover-unregist" disabled="{{isLoading}}" bindtap="onTapUnRegist">注销账号</view>
+      <!-- <van-button color="#eeeeee" custom-class="btn-text" >注销账号</van-button> -->
+
+    </view>
+    </block>
+    <view wx:else class ="btn-container">
+     <!-- <van-button custom-style="border-radius: 20rpx;background-color: #eeeeee;color: #989898;" type="primary" size="large"  bind:click="onTapUnRegist">注销账号</van-button> -->
+      <van-button custom-style="border-radius: 20rpx;color: #989898;" type="primary" size="large" color="#eeeeee" bind:click="onTapUnRegist">注销账号</van-button>
+    </view>
+  </view>
+  <view wx:if="{{iphoneX}}" style="height:68rpx"> </view>
+  </view></view>
+  <!--<van-cell class="bottom_margin" title="{{btnText}}" bindtap="onTapUnRegist" />-->
+</view>

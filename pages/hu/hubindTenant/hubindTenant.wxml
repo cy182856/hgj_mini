@@ -1,0 +1,93 @@
+<wxs module="tool">
+  function getWordList(content, word) {
+  
+  }
+  
+  module.exports = {
+    getWordList : getWordList
+  };
+
+</wxs>
+<import src="../../../template/empty/empty.wxml"></import>
+<import src="../../../template/houseinfo_header/houseInfo.wxml"></import>
+<import src="../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<van-dialog id="van-dialog"/>
+<van-toast id="van-toast" />
+<van-overlay show="{{ showOverLay }}"/>
+
+<view wx:if="{{isCHeckShow}}">
+  <!-- <view>
+    <view style="font-size: 20px;margin-top: 15px;"  class="weui-cells__title">房屋名称：{{cstName}}：{{houseName}}</view>
+  </view> -->
+  
+  <!-- <view class="rowStyle" style="margin-top: 20px;">
+    <van-row >
+      <view >	
+        <van-col span="7" ><text style="font-size: 20px; "  class="weui-cells__title">姓名：<text style="color: red;">*</text></text></van-col>
+          <van-col span="8">
+          <view style="width: 245px; height: 40px;" class="weui-cells weui-cells_after-title">
+            <view >
+              <input style="padding-right:115px;padding-top: 7px;" maxlength="4" placeholder="" bindinput="inputChange" value="{{userName}}"/>
+            </view>
+          </view>
+        </van-col>
+      </view>
+    </van-row>
+  </view> -->
+
+  <van-row >
+    <view style="margin-top: 20px;">
+      <van-col span = "7">
+        <view>
+          <text style="font-size: 18px; margin-left: 10%; color: rgb(65, 62, 62);"  >客户名称:</text>
+        </view>       
+      </van-col>
+      <van-col span = "15">
+        <view>
+          <text style="font-size: 18px; color: rgb(65, 62, 62); word-wrap: break-word; white-space: pre-wrap;" >{{cstName}}</text>
+        </view>
+      </van-col>
+    </view>
+  </van-row>
+
+  <van-row >
+    <view style="margin-top: 20px;">
+      <van-col span = "7">
+        <view>
+          <text style="font-size: 18px; margin-left: 10%; color: rgb(65, 62, 62);"  >位置:</text>
+        </view>       
+      </van-col>
+      <van-col span = "15">
+        <view>
+          <text style="font-size: 18px; color: rgb(65, 62, 62); word-wrap: break-word; white-space: pre-wrap;" >{{houseName}}</text>
+        </view>
+      </van-col>
+    </view>
+  </van-row>
+  
+  <van-row >
+    <view style="margin-top: 20px;">
+      <van-col span = "7">
+        <view>
+          <text style="font-size: 18px; margin-left: 10%; color: rgb(65, 62, 62);">您的姓名:<text style="color: red;">*</text></text>
+        </view>
+      </van-col>
+      <van-col span = "15">
+        <view>
+          <input style="text-align: left; border-style: solid;border-width: 1px;width: 100%; height: 40px; color: rgb(65, 62, 62); padding-left: 5px;" placeholder="" bindinput="inputChange"
+          value="{{userName}}" maxlength="4"/>
+        </view>
+      </van-col>
+    </view>
+  </van-row>
+
+  <view style="margin-top: 40px;">
+    <button type="primary" size="default" bindtap="confirmCheckIn">确认入住</button>
+  </view>
+</view>
+
+<view wx:if="{{showErrMsg}}">
+  <template is="empty" data="{{src:empty_src,width:232,text:msg}}"></template>
+</view>
+

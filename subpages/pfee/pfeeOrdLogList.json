@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "物业费订单",
+  "usingComponents": {
+    "van-button": "@vant/weapp/button/index"
+  }
+}

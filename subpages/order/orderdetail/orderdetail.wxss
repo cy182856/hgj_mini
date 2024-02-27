@@ -1,0 +1,44 @@
+/* pages/order/orderdetail/orderdetail.wxss */
+page{
+  background-color: white;
+}
+.paycontainer{
+  margin: 3% 3%;
+  width: 94%;
+  background-color: white;
+  border-radius: 8rpx;
+  font-size:30rpx;
+  color:#3C3C3C;
+  line-height: 60rpx;
+}
+.main{
+  background-color: white;
+  padding: 10rpx 30rpx;
+}
+.main-title{
+  font-weight:700;
+}
+.col-left{
+  text-align:left;
+}
+.col-center{
+  text-align:center;
+}
+.col-text{
+  color:#999999;
+}
+
+.main-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer{
+  width: 100%;
+  height: 20rpx;
+}
+
+.orderdetail-head{
+  text-align: center;
+}

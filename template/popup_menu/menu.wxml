@@ -1,0 +1,35 @@
+<template name="menuTemplate">
+    <!-- 问题反馈 -->
+    <block>
+        <van-dialog
+                use-slot
+                title="{{title}}"
+                width="534rpx;"
+                custom-style="height:536rpx;"
+                show="{{ showAdvice }}"
+                show-confirm-button="{{false}}"
+                show-cancel-button="{{false}}"
+                close-on-click-overlay="{{true}}"
+                bind:close="closeAdvice"
+                confirm-button-color="{{'#189AFE'}}"
+        >
+            <van-grid column-num="3" clickable="{{true}}" border="{{ false }}">
+                <block wx:for="{{funList}}">
+                    <van-grid-item wx:if="{{item.parentBit == curBit && item.hasAuth}}" text="{{item.funDesc}}" >
+                        <van-icon
+                                bind:click="{{item.bindEvent}}"
+                                data-url="{{item.pagePath}}"
+                                data-pbit="{{item.parentBit}}"
+                                slot="icon"
+                                name="{{item.logoPath}}"
+                                size="48"/>
+                    </van-grid-item>
+                </block>
+            </van-grid>
+
+            <view wx:if="{{curBit == '10'}}" class="advice_list">
+                <van-button type="primary" custom-style="background-color:#E7EFF6;color:#0194D5;border:0rpx;"  size="small" bindtap="adviceList">反馈记录</van-button>
+            </view>
+        </van-dialog>
+    </block>
+</template>

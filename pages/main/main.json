@@ -1,0 +1,17 @@
+{
+  "usingComponents": {
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index",
+    "cell": "plugin://contactPlugin/cell"
+  },
+  "plugins": {
+    "contactPlugin": {
+        "version": "1.3.0",
+        "provider": "wx104a1a20c3f81ec2"
+    }
+   },
+  "navigationBarTitleText":"智慧管家",
+  "navigationBarBackgroundColor":"#81D8CF",
+  "enablePullDownRefresh": true
+}

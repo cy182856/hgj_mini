@@ -1,0 +1,274 @@
+<wxs module="tool">
+  function getWordList(content, word) {
+    // var wordList = [];
+    // if (content == word) {
+    //   wordList.push(content)
+    // }
+    // else {
+    //   var words = content.split(word);
+    //   for (var a = 0; a < words.length; a++) {
+    //     var str = words[a];
+    //     if (str.length != 0) {
+    //       if (a >=1 && a <= words.length) {
+    //         if (words[a-1].length == 0) {
+    //           wordList.push(str);
+    //         } else {
+    //           wordList.push(word);
+    //           wordList.push(str);
+    //         }
+    //       } else {
+    //         wordList.push(str);
+    //       }
+    //     } else {
+    //       wordList.push(word)
+    //     }
+    //   }
+    // }
+    // return wordList
+  }
+  
+  module.exports = {
+    getWordList : getWordList
+  };
+
+</wxs>
+<import src="../../../template/empty/empty.wxml"></import>
+<import src="../../../template/houseinfo_header/houseInfo.wxml"></import>
+<import src="../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<van-dialog id="van-dialog"/>
+<van-toast id="van-toast" />
+<van-overlay show="{{ showOverLay }}"/>
+
+<view wx:if="{{isCHeckShow}}">
+  <!-- <view>
+    <view style="font-size: 20px;margin-top: 15px;"  class="weui-cells__title">客户名称：{{cstName}}</view>
+  </view> -->
+  
+  <!-- <view class="rowStyle" style="margin-top: 20px;">
+    <van-row >
+      <view >	
+        <van-col span="7" ><text style="font-size: 20px; "  class="weui-cells__title">姓名：<text style="color: red;">*</text></text></van-col>
+          <van-col span="8">
+          <view style="width: 245px; height: 40px;" class="weui-cells weui-cells_after-title">
+            <view >
+              <input style="padding-right:115px;padding-top: 7px;" maxlength="4" placeholder="" bindinput="inputChange" value="{{userName}}"/>
+            </view>
+          </view>
+        </van-col>
+      </view>
+    </van-row>
+  </view> -->
+
+  <van-row >
+    <view style="margin-top: 20px;">
+      <van-col span = "7">
+        <view>
+          <text style="font-size: 18px; margin-left: 10%; color: rgb(65, 62, 62);"  >客户名称:</text>
+        </view>       
+      </van-col>
+      <van-col span = "15">
+        <view>
+          <text style="font-size: 18px; color: rgb(65, 62, 62); word-wrap: break-word; white-space: pre-wrap;" >{{cstName}}</text>
+        </view>
+      </van-col>
+    </view>
+  </van-row>
+  
+  <van-row >
+    <view style="margin-top: 20px;">
+      <van-col span = "7">
+        <view>
+          <text style="font-size: 18px; margin-left: 10%; color: rgb(65, 62, 62);">您的姓名:<text style="color: red;">*</text></text>
+        </view>
+      </van-col>
+      <van-col span = "15">
+        <view>
+          <input style="text-align: left; border-style: solid;border-width: 1px;width: 100%; height: 40px; color: rgb(65, 62, 62); padding-left: 5px;" placeholder="" bindinput="inputChange"
+          value="{{userName}}" maxlength="4"/>
+        </view>
+      </van-col>
+    </view>
+  </van-row>
+  
+  <view style="margin-top: 40px;">
+    <button type="primary" size="default" bindtap="confirmCheckIn">确认入住</button>
+  </view>
+</view>
+
+<view wx:if="{{showErrMsg}}">
+  <template is="empty" data="{{src:empty_src,width:232,text:msg}}"></template>
+</view>
+
+<!-- <view wx:if="{{skeletonShow}}">
+  <view style="padding:36rpx 0 36rpx 18rpx">
+    <van-skeleton title="房屋信息" row="4" />
+  </view>
+  <view style="padding:36rpx 0 36rpx 18rpx">
+    <van-skeleton title="认领码" row="1" />
+  </view>
+  <view style="padding:36rpx 0 36rpx 18rpx">
+    <van-skeleton title="说明" row="8" />
+  </view>
+</view>
+<view class="rootpage" wx:if="{{showConfirmHousePage}}"  >
+  <view class="root">
+    <image class='background-image' src='/images/home/houseinfo_bg.png' mode="aspectFill"></image>
+    <view class="content">
+        <template is="houseInfo"   data="{{areaName:commanyShortName,houseNo:''}}"></template>
+    </view>
+    <view class="card-body">
+      <view class="fun-card" style="z-index:199">
+        <view class="title-view">
+            <text class="text-title">请确认入住房屋信息</text>
+        </view>
+        <view  class = "member-list">
+          <view class="item-container" wx:if="{{areaName != ''}}">
+            <text class="member_name">所属区域</text>
+            <text class="member_name">{{ areaName }}</text>
+          </view>
+          <view class="item-container">
+            <text class="member_name">所属楼号</text>
+            <text class="member_name">{{ buildingName }}</text>
+          </view>
+          <view class="item-container">
+            <text class="member_name">室号</text>
+            <text class="member_name">{{ houseNo }}</text>
+          </view>
+          <view class="item-container">
+            <text class="member_name">角色</text>
+            <text class="member_name">{{ huRoleDesc }}</text>
+          </view>
+        </view>
+        <view class="margin_top protocol">
+           <van-checkbox value="{{ checked }}" shape="square" bind:change="onChange">入住即同意</van-checkbox>
+           <text class="protocol-text" bind:tap="protocolDetail">《物管平台服务协议》</text>
+        </view>
+        <view class="margin_top-button">
+          <van-button type="info" disabled = "{{disabled}}" block bind:click="confirmCheckIn">确认入住</van-button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> -->
+<!-- <view wx:if="{{showErrMsg}}">
+  <template is="empty" data="{{src:empty_src,width:232,text:msg}}"></template>
+</view> -->
+
+<!-- <view wx:if="{{showSuccess}}" style="padding:120rpx 40rpx;text-align:center;">
+  <view style="padding:0px 0px 60rpx 0rpx">
+    <van-icon name="passed" color="#07c160" size="50px"/>
+    <view>
+      <text>您已经绑定了该房屋</text>
+    </view>
+  </view>
+  <view class="margin_top-button" style="width:488rpx;margin-left: auto;margin-right: auto;">
+          <van-button type="info" plain block bind:click="redirectMainPage">点击前往主页</van-button>
+  </view>
+</view> -->
+
+<!--认领-->
+<!-- <view class="rootpage" wx:if="{{showClaim}}">
+  <view class="root">
+      <image class='background-image' src='/images/home/houseinfo_bg.png' mode="aspectFill"></image>
+      <view class="content">
+          <template is="houseInfo"   data="{{areaName:commanyShortName,houseNo:''}}"></template>
+      </view>
+     
+      <view class="card-body">
+        <view class="fun-card" style="z-index:199">
+          <view class="title-view">
+              <text class="text-title">房屋信息</text>
+          </view>
+          <view  class = "member-list">
+            <view class="item-container" wx:if="{{areaList != null && areaList.length != 0}}">
+              <text class="member_name">所属区域</text>
+              <view class="right-container">
+                <van-dropdown-menu >
+                    <van-dropdown-item id="area" title="{{selectArea.areaName}}" bind:open='onDropMenuOpen' bind:close='onDropMenuClose' bind:change=''>
+                      <scroll-view scroll-y="true" style="max-height:{{select_height}}rpx;overflow:auto;z-index:999;">
+                        <van-cell-group>
+                          <block wx:for='{{areaList}}' wx:key='areaId'>
+                            <van-cell  title-class="{{item.areaId == selectArea.areaId ? 'cell_titleClass_s' : 'cell_titleClass'}}"  title="{{item.areaName}}" data-index='{{index}}' bindtap='onAreaChange'>
+                              <van-icon wx:if="{{item.areaId == selectArea.areaId}}" slot="right-icon" name="success" color='#1798dc' size="40rpx" />
+                            </van-cell>
+                          </block>
+                        </van-cell-group>
+                      </scroll-view>
+                    </van-dropdown-item>
+                  </van-dropdown-menu>
+              </view>
+            </view>
+            <view class="item-container">
+              <text class="member_name">所属楼号</text>
+              <view class="right-container">
+                  <van-dropdown-menu>
+                    <van-dropdown-item id="building" title="{{selectBuilding.buildingName}}" bind:open='onDropMenuOpen' bind:close='onDropMenuClose' bind:change=''>
+                      <scroll-view scroll-y="true" style="max-height:{{select_height}}rpx;overflow:auto;z-index:999;">
+                        <van-cell-group>
+                          <block wx:for='{{buildingList}}' wx:key='buildingId'>
+                            <van-cell  title-class="{{item.buildingId == selectBuilding.buildingId ? 'cell_titleClass_s' : 'cell_titleClass'}}"  title="{{item.buildingName}}" data-index='{{index}}' bindtap='onBuildingChange'>
+                              <van-icon wx:if="{{item.buildingId == selectBuilding.buildingId}}" slot="right-icon" name="success" color='#1798dc' size="40rpx" />
+                            </van-cell>
+                          </block>
+                        </van-cell-group>
+                      </scroll-view>
+                    </van-dropdown-item>
+                  </van-dropdown-menu>
+                </view>
+            </view>
+            <view class="item-container" wx:if="{{showHouseNo}}">
+              <text class="member_name">室号</text>
+              <input name="houseNo" value="{{houseNo}}" bindinput="bindKeyInputHouseNo" maxlength="12" placeholder="请输入室号" placeholder-style="font-size:28rpx;color:#c8c9cc;"/>
+            </view>
+          </view>
+
+          <block wx:if="{{showQueryHouseNo}}">
+              <scroll-view scroll-y='true' style="max-height:320rpx;box-shadow: 0 0 5px rgb(0 0 0 / 10%);margin-bottom:26rpx">
+                <view class="house-no_list" data-houseno="{{item}}" ontap="chooseQueryHouseNo" wx:for="{{searchHouseNoList}}"  wx:key="*this">
+                  
+                    <text wx:for="{{tool.getWordList(item, searchText)}}" wx:for-item="itmWord" style="color:{{itmWord == searchText ? '#1798dc' : '#666666'}}">{{itmWord}}</text>
+                  
+                </view>
+              </scroll-view>
+          </block>
+        
+          <view class="title-view">
+              <text class="text-title">基本信息</text>
+          </view>
+          <view  class = "member-list">
+            <view class="item-container">
+              <text class="member_name">昵称</text>
+              <input name="nickName" bindinput="bindKeyInputNickName" maxlength="20" placeholder="请输入昵称" value="{{nickName}}" placeholder-style="font-size:28rpx;color:#c8c9cc;"/>
+            </view>
+            <view class="item-container" wx:if="{{isPackCode == 'Y'}}">
+              <text class="member_name">认领码</text>
+              <input style="width:80%;" name="claimCode" bindinput="bindKeyInputClaimCode" placeholder="{{packPageTip}}" placeholder-style="font-size:28rpx;color:#c8c9cc;"/>
+            </view>
+          </view>
+
+          <view class="margin_top protocol">
+            <van-checkbox value="{{ checked }}" shape="square" bind:change="onChange">入住即同意</van-checkbox>
+            <text class="protocol-text" bind:tap="protocolDetail">《物管平台服务协议》</text>
+          </view>
+          <view class="margin_top-button">
+            <van-button type="info" disabled = "{{disabled}}" block bind:click="applyConfirmCheckIn">申请入住</van-button>
+          </view>
+
+          <view class="shuoming">
+              <text class="shuoming-lable">相关说明</text>
+              <view class="shuoming-text">
+                <view wx:if="{{propType == 'B'}}">
+                  1. 房屋认领需为管理员，如为其他身份请管理员先进行认领并审核通过后，再由管理员添加成员；
+                </view>
+                <view wx:else>
+                  1. 房屋认领需为户主，如为其他身份请户主先进行认领并审核通过后，再由户主添加成员或租客；
+                </view>
+                <view>2. 如您扫描的是物业生成的二维码，房屋认领成功后将自动审核通过；</view>
+                <view>3. 如您手动搜索关注公众号发起的房屋认领，认领成功后需与物业联系，由物业核实后为您审核。</view>
+              </view>
+          </view>
+      </view>
+    </view>
+  </view>
+</view> -->

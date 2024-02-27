@@ -1,0 +1,8 @@
+<view bind:tap="register" data-fun="wuye" data-cust="666666">慧管物业</view>
+<view bind:tap="register" data-fun="shunfeng">顺丰快递</view>
+<view bind:tap="register" data-fun="quanjia">全家便利店</view>
+<view bind:tap="register" data-fun="quanjia">我是一个动态值{{name}}</view>
+<view>
+    我下面的是引入的其他模块
+    <include src="./test.wxml"/>
+</view>

@@ -1,0 +1,52 @@
+<!-- 引用 -->
+<import src="../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<!-- 弹窗 -->
+<van-dialog id="van-dialog"/>
+
+<view class="contant">
+  <view style="height:50rpx;"></view>
+  <!-- text -->
+  <view class="text_area">
+        <van-cell-group>
+          <van-field
+            value="{{ adviceDesc }}"
+            type="textarea"
+            placeholder="请简要描述一下您遇到的问题，以便我们更好的处理"
+            autosize="{{textArea}}"
+            border="{{ false }}"
+            custom-style="padding: var(--cell-vertical-padding,5px) var(--cell-horizontal-padding,2px);"
+            bind:input="insertDesc"
+            maxlength="140"
+            show-word-limit="{{true}}"
+          />
+        </van-cell-group>
+  </view>
+  <view class="upload">
+    <van-uploader   file-list="{{ fileList }}" 
+                    image-fit="aspectFill"
+                    bind:after-read="afterRead"
+                    bind:delete="delete"
+                    sizeType="{{sizeType}}"
+                    multiple="{{true}}"
+                    max-count="{{imgUse}}"
+                    upload-text="{{imgCnt}}/{{imgUse}}"
+                    />
+  </view>
+  <!-- submit -->
+  <view class="sub">
+    <van-button wx:if="{{disabled}}" type="info" custom-class="btn" disabled>提交</van-button>
+    <van-button wx:else type="info" custom-class="btn" bindtap="submitInfo">提交</van-button>
+  </view>
+</view>
+
+
+<canvas canvas-id="canvas0" 
+        style="width:{{cWidth}}px;height:{{cHeight}}px;position: absolute;left:-18000px;top:-18000px;">
+</canvas>
+<canvas canvas-id="canvas1" 
+        style="width:{{cWidth}}px;height:{{cHeight}}px;position: absolute;left:-20000px;top:-20000px;">
+</canvas>
+<canvas canvas-id="canvas2" 
+        style="width:{{cWidth}}px;height:{{cHeight}}px;position: absolute;left:-22000px;top:-22000px;">
+</canvas>

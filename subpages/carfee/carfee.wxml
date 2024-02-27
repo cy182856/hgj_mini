@@ -1,0 +1,108 @@
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<import src="../../template/empty/empty.wxml"></import>
+<van-dialog id="van-dialog" overlay-style ="z-index:6666 !important;"  confirm-button-color ="#189AFE" />
+<view style="height:calc(100% - 20rpx - {{padding_bottom}}rpx)">
+  <scroll-view scroll-y="{{true}}" style="height:100%;">
+    <view class="house-info-view">
+      <view  class="img-view">
+        <image class="head-img" src="../../images/carfee/background.png"/>
+      </view>
+      <view class="house-left-view">
+        <view class="head-text-view">
+          <view class="house-name-view">
+            <text>{{userInfo.commanyShortName}}</text>
+          </view>
+          <view class="house-no-info">
+            <text>{{userInfo.completeAddr}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="house-right-view">
+        <view bindtap="checkFeeRecord" class="check-record-class">缴费记录</view>
+      </view>
+    </view>
+    <!-- <view class="car-info-title">
+      测试数据配置
+    </view>
+    <van-cell-group border="{{false}}">
+        <van-field  label="当前年月" 
+        input-align="right" bind:change="onCurrentYmChange" value="{{currentYm}}" placeholder="请输入当前年月" />
+        <view class="payupdate-desc">说明：自定义当前年月，格式为yyyyMM</view>
+        <van-field  label="最大可配置月数" 
+        input-align="right" bind:change="onMaxMonChange" value="{{advCfeeMon}}" placeholder="请输入最大可配置月数" />
+        <view class="payupdate-desc">说明：输入1-12的数字。</view>
+        <van-field  border="{{false}}" value="{{payUpDate}}" input-align="right" label="缴清日期" bind:change="onPayUpDateChange"  placeholder="请输入缴清日前" /> 
+        <view class="payupdate-desc">说明：输入yyyyMMdd格式的日期。</view>
+    </van-cell-group> -->
+
+    <block wx:if="{{carInfos && carInfos.length > 0}}">
+      <view class="choose-car-view">
+        <view class="car-info-title">
+          请选择缴费车辆
+        </view>
+        <block wx:for="{{carInfos}}" for-item="item">
+          <view class="car-info-item" style="border:{{item.check ? '2px solid #258BFF' : '2px solid #EBEBEB'}}" bindtap="bindCheckCar" data-item="{{item}}">
+            <view class="car-left-view">
+              <view class="car-info-view">{{item.carNumber}} <text class="cfee-pay-desc"> （{{item.cfeePayCycDesc}}）</text></view>
+              <view class="car-payupdata-view">有效期：{{item.payUpDateDesc}}</view>
+            </view>
+            <view class="car-right-view">
+              <view class="check-car-radio">
+                <text class="iconfont {{item.check ? 'jia-xuanzhong' : 'jia-weixuanzhong'}}"></text>
+              </view>
+              <view class="monfee-view">{{item.monFee}}/月</view>
+            </view>
+          </view>
+        </block>
+        <view style="height:20rpx;"></view>
+      </view>
+      <view class="select-payupdate-view">
+        <view class="car-info-title">
+          请选择缴费时长
+        </view>
+        <view class="check-paymonth-view">
+          <van-cell-group border="{{false}}">
+              <van-field readonly label="缴费时长" disabled="{{paymonths.length == 1 ? true : false}}"
+              bindtap="showPyMonth" input-align="right" value="{{paymonths[payIndex].desc}}" placeholder="请选择" is-link/>
+              <van-field  border="{{false}}" value="{{finalPayUpDate}}" input-align="right"  readonly  label="缴费后有效期"  placeholder="请选择缴费时长" /> 
+              <view class="payupdate-desc">说明：缴费后有效期仅供参考，请以停车管理系统中的时间为准。</view>
+          </van-cell-group>
+        </view>
+      </view>
+    </block>
+    <block wx:elif ="{{!isFail}}">
+      <view class="choose-car-view" style="height:82%;">
+        <template is="empty" data="{{src:'/assets/icons/empty/no-record.png',width:232,text:'暂无车辆信息，请联系物业进行录入。'}}"></template>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="choose-car-view" style="height:82%;">
+        <view style="padding-top:40rpx;">
+          <van-skeleton row="6" />
+        </view>
+      </view>
+    </block>
+  </scroll-view>  
+</view>
+<block wx:if="{{carInfos && carInfos.length > 0}}">
+  <view class="pay-info-view" style="padding-bottom:{{isIphoneX ? '36rpx' : '0rpx'}}">
+    <view class="pay-flex-view">
+      <view class="pay-fee-view">
+        合计： <text class="payfee-desc">￥{{payfee}}</text>
+      </view>
+      <view class="pay-btn-view">
+        <van-button bindtap="bindPayFee" custom-class="pay-btn-class" type="info">立即支付</van-button>
+      </view>
+    </view>
+  </view>
+</block>
+<van-popup show="{{ showCheckPayMonth }}" position="bottom"  bind:close="onClose">
+  <van-picker columns="{{ paymonths }}" 
+    show-toolbar
+    title=""
+    default-index = "{{payIndex}}"
+    bind:cancel="onCancel"
+    bind:confirm="onConfirm"
+    value-key="desc" />
+</van-popup>

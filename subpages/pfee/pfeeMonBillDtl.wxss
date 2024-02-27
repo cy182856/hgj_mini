@@ -1,0 +1,48 @@
+/* subpages/pfee/pfeeMonBillDtl.wxss */
+.img-view{
+  height: 188rpx;
+  width: 95%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 26rpx 20rpx 0 20rpx;
+  display: block;
+  z-index: -1;
+}
+.head-img{
+  height: 188rpx;
+  width: 100%;
+}
+.head-text-view{
+  margin-left: 80rpx;
+  padding-top: 50rpx;
+  color:white;
+  height: 128rpx;  
+}
+.head-text{
+  line-height: 50rpx;
+}
+
+.bill-detail-view{
+  background-color:white;
+  margin:0 20rpx 0 20rpx;
+  padding: 20rpx 0 20rpx 0;
+  font-size: 28rpx;
+  color: #363F4D;
+  box-shadow: #EBEFF8 2rpx 2rpx 2rpx 2rpx;  
+  border-radius: 0 0 30rpx 30rpx ;
+}
+.row-view{
+  line-height: 70rpx;
+  padding: 0 60rpx 0 60rpx;
+}
+.row-desc{
+  text-align: right;
+}
+
+
+.main_container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}

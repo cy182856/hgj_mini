@@ -1,0 +1,111 @@
+<view style="min-height:100%;padding-bottom: {{btuBottom}};">
+  <view>
+    <block wx:if="{{!isLoading}}">
+      <block wx:if="{{ITEMINFODTO.IMAGEURLS.length>0}}">
+        <block wx:for="{{ITEMINFODTO.IMAGEURLS}}" wx:for-item="image" wx:for-index="key">
+          <view  wx:if="{{key==0}}">
+            <image src="{{image+'?t='+time}}" mode="aspectFill" style="width:100%;height500rpx;"></image> 
+          </view>
+        </block>
+      </block>
+      <block wx:if="{{ITEMINFODTO.IMAGEURLS.length==0}}">
+        <image src="https://jiaimginfo.huiguan.com/sup/default_item.png?t={{time}}" mode="aspectFill" style="width:100%;height500rpx;"></image>
+      </block>
+    </block>
+  </view>
+  <view class="item_instru">
+    <block wx:if="{{ITEMINFODTO.TRANSFLOW=='AD'}}">
+      <view class="item_name">
+        <view class="item_name_right">{{ITEMINFODTO.ITEMNAME}}</view>
+      </view>
+      <view class="item_price_desc" wx:if="{{ITEMINFODTO.ADITEMINFODTO}}">
+        <text>{{ITEMINFODTO.ADITEMINFODTO.PRICEDESC}}</text>
+      </view>
+    </block>
+    <block wx:if="{{ITEMINFODTO.TRANSFLOW=='GRP'}}">
+      <view class="item_name">
+        <view class="item_name_right">{{ITEMINFODTO.ITEMNAME}}</view>
+      </view>
+      <view class="item_price_desc">
+        <view style="color: red;font-weight: bold;">￥79.00<text style="color: #999999;font-size: 26rpx;margin-left: 20rpx;text-decoration: line-through;">￥128.00</text></view>
+      </view>
+    </block>
+    <block wx:if="{{ITEMINFODTO.TRANSFLOW=='TOSHOP'}}">
+      <view class="item_name">
+        <view class="item_name_right">{{ITEMINFODTO.ITEMNAME}}</view>
+      </view>
+      <view class="item_price_desc">
+        <view style="color: red;font-weight: bold;">￥79.00<text style="color: #999999;font-size: 26rpx;margin-left: 20rpx;text-decoration: line-through;">￥128.00</text></view>
+      </view>
+    </block>
+    <view class="item_shop_active">
+      <view style="display: flex;">
+        <image src="../../images/item/shop_mer.png" mode="aspectFill" style="width:56rpx;height:56rpx;"></image>
+      </view>
+      <view class="item_shop_name">{{SHOPNAME}}</view>
+      <view class="item_shop_disc" wx:if="{{ISFULLDISC=='Y'}}"><view style="color:#F65B23;">满{{FULLPURAMT}}减{{DISCOFFAMT}}</view></view>
+    </view>
+  </view>
+  <view class="item_instru">
+    <view class="item_detail_desc">
+      <view class="item_detail_desc_img">
+        <image src="../../images/item/item_detail_01.png" style="width:28rpx;height:30rpx;"></image>
+      </view>
+      <view class="item_detail_desc_left">
+        商品描述
+      </view>
+      <view class="item_detail_desc_right">
+        {{ITEMINFO.SHORTDESC}}
+      </view>
+    </view>
+    <view class="item_detail_desc">
+      <view class="item_detail_desc_img">
+        <image src="../../images/item/item_detail_03.png" style="width:28rpx;height:30rpx;"></image>
+      </view>
+      <view class="item_detail_desc_left">
+        补充说明
+      </view>
+      <view class="item_detail_desc_right">
+        <view>
+          {{ITEMINFO.KEYDESC1}}
+        </view>
+        <view>
+          {{ITEMINFO.KEYDESC2}}
+        </view>
+        <view>
+          {{ITEMINFO.KEYDESC3}}
+        </view>
+      </view>
+    </view>
+    <view class="item_detail_desc">
+      <view class="item_detail_desc_img">
+        <image src="../../images/item/item_detail_02.png" style="width:28rpx;height:30rpx;"></image>
+      </view>
+      <view class="item_detail_desc_left">
+        营业时间
+      </view>
+      <view class="item_detail_desc_right">
+        {{WORKTIMEDESC}}
+      </view>
+    </view>
+    <view class="item_detail_desc" wx:if="{{WKTIMETEL||URGENTTEL}}">
+      <view class="item_detail_desc_img">
+        <image src="../../images/item/item_detail_04.png" style="width:28rpx;height:30rpx;"></image>
+      </view>
+      <view class="item_detail_desc_left">
+         服务电话
+      </view>
+      <view class="item_detail_desc_right">
+        <view>营业时间：{{WKTIMETEL}}</view>
+        <view>非营业时间： {{URGENTTEL}}</view>
+      </view>
+    </view>
+  </view>
+  <block wx:if="{{ITEMINFODTO.IMAGEURLS.length>0}}">
+    <view class="item_detail_in">宝贝详情</view>
+    <view class="item_detail_image" wx:for="{{ITEMINFODTO.IMAGEURLS}}" wx:for-item="image">
+      <image src="{{image+'?t='+time}}" mode="widthFix" style="width:100%;"></image> 
+    </view>
+  </block>
+</view>
+  

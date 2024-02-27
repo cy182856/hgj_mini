@@ -1,0 +1,75 @@
+
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<page>
+  <view class="background-view">
+    <view class="smart-door-view">
+      <view class="smartdoor-header-view">
+        <view class="smartdoor-toast">扫码开门，智能通行</view>
+      </view>
+      <view class="smartdoor-code-view" style="display:{{showCode}}">
+          <view class="qrcode">
+            <canvas canvas-id="qrcode" />
+          </view>
+        </view>
+        <view class="smartdoor-house-info">
+          <view class="houseinfo-flex-display">
+            <view style="flex:6;">
+              <view>
+                <text style="font-size: 32rpx;color:#363F4D">小区：</text>
+                <text>{{ btnName == 'jia-closeeye'?'***':commanyShortName}}</text>
+                
+              </view>
+              <view>
+                <text style="font-size: 32rpx;color:#363F4D">地址：</text>
+                <text>{{houseInfo}}</text>
+              </view>
+            </view>
+            <view class="house-info-control" bindtap="controlHouseInfo">
+              <text class="iconfont {{btnName}}"></text>
+            </view>
+          </view>
+        </view>
+        <view style="width: 100%;height: 40rpx;">
+          <image src="/images/mine/radius_middle.png" mode="aspectFill" style="width:100%;height:100%;"/>
+        </view>
+        <view class="tips-container">
+          <view class="tips-title">注意：</view>
+          <view class="tips-content">
+            1、请将二维码对准门禁设备的摄像头，扫码后请等待开门
+          </view>
+          <view class="tips-content">
+            2、如反复尝试后仍不能打开，请使用门禁卡或联系物业人员
+          </view>
+        </view>
+    </view>
+  </view>
+</page>
+<van-dialog
+  use-slot
+  use-title-slot
+  show="{{ showTip }}"
+  bind:confirm = "closeTip"
+  bind:close = "closeTip"
+  confirmButtonColor="#189AFE"
+  custom-style=""	
+>
+<view slot="title" style="font-size:32rpx;color:#666666;">
+    <view class="minx"><van-icon name="close" bind:click="closeTip"/></view>
+        说明
+    </view>
+    <view  class="gg" style="">
+        <view style="text-align:left;">
+          1. 出入小区时展示该码给物管人员进行身份验证；
+        </view>
+        <view style="text-align:left;padding-top:20rpx;">
+          2. 如{{titleText}}生成失败，请点击下方刷新按钮重新生成;
+        </view>
+        <view style="text-align:left;padding-top:20rpx;">
+          3. 如验证失败可返回主页重新打开{{titleText}}进行刷新；
+        </view>
+        <view style="text-align:left;padding:20rpx 0rpx;">
+          4. {{titleText}}为出入社区的重要凭证，请勿发与他人；
+        </view>
+    </view> 
+</van-dialog> 

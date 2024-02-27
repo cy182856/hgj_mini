@@ -1,0 +1,33 @@
+/* pages/hu/protocol/protocol.wxss */
+.protocol-main{
+  font-size:30rpx;
+  line-height:48rpx;
+  padding:16rpx 38rpx;
+  background-color:white;
+  color:#4E4C57;
+}
+.title{
+  font-size:36rpx;
+  margin-bottom:32rpx;
+}
+.title-middle{
+  font-size:34rpx;
+  margin-bottom:32rpx;
+}
+.title-middle-top{
+  margin-top:32rpx;
+}
+.bottom{
+  margin-bottom:32rpx;
+}
+.bottom-dot{
+  font-size:12rpx;
+  vertical-align: middle;
+  margin-left:14rpx
+}
+.bottom-left{
+  margin-left:20rpx;
+}
+.block-text{
+  display: block;
+}

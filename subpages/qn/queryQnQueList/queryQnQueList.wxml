@@ -1,0 +1,183 @@
+<import src="../../../template/empty/empty.wxml"></import>
+<import src="../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+
+<view class="page-container" wx:if="{{qnQueListDtoList && qnQueListDtoList.length > 0}}">
+  <view>
+    <image src="/images/qn/anqbbg.png" mode="widthFix" class="qn-bg"></image>
+  </view>
+  <view class="qn-head">
+    <view style="padding: 0 60rpx 0 54rpx;">
+      {{qnName}}
+    </view>
+    <view style="padding: 20rpx 50rpx 0 50rpx;text-align: left;">
+      <text space="{{true}}" decode="{{true}}">{{qnDesc}}</text>
+    </view>
+  </view>
+  <!-- <view class="qnName-view">
+      {{qnName}}
+  </view>
+  <view class="qnDesc-view">
+      问卷描述：{{qnDesc}}
+  </view> -->
+  <view wx:for="{{qnQueListDtoList}}" wx:for-index="index" wx:for-item="item" wx:key="queId" class="queClass">
+    <view class="queDesc-mb">
+      <block wx:if="{{item.isMustReply == 'Y'}}"><span style="color:red;">＊</span></block>
+      <!-- <text class="queDesc">问题{{index+1}} {{item.queDesc}}{{item.queDesc2}}</text> -->
+      <text class="queDesc">{{index+1}}、 {{item.queDesc}}{{item.queDesc2}}</text>
+    </view>
+    <!-- 单选题 -->
+    <block wx:if="{{item.queType == 'S'}}">
+      <van-radio-group name="{{item.queId}}" value="{{ item.queAnsOptIds[0] }}" >
+        <block wx:if="{{item.qnQueOptDtoList.length > 0}}">
+          <block wx:for="{{item.qnQueOptDtoList}}" wx:for-index="index2" wx:for-item="item2" wx:key="optId" >
+            <view class="optClass" bindtap="onChangeS2" data-index="{{index}}" data-index2="{{index2}}" data-optid="{{item2.optId}}">
+              <van-radio name="{{item2.optId}}" icon-size="32rpx" disabled="{{disabled}}" class="optDesc">
+                <block wx:for="{{optIdArray}}" wx:for-index="index3" wx:for-item="item3" wx:key="id">
+                <block wx:if="{{item3.id == item2.optId}}">
+                  {{item3.desc}}.
+                  </block>
+                </block>
+                {{item2.optDesc}}
+                <block wx:if="{{item2.statistics && item2.statistics != null && item2.statistics != ''}}">
+                  <text decode="{{true}}">&nbsp;&nbsp;&nbsp;</text>
+                  {{item2.statistics}}
+                </block>
+              </van-radio>
+            </view>
+            <block wx:if="{{item2.choseFill == 'Y' && item2.isShow == 'Y'}}">
+              <van-cell-group custom-class="cellgroup" >
+                <van-field
+                  name="{{item2.optId}}"
+                  maxlength="60"
+                  show-word-limit="{{true}}"
+                  value="{{ item2.queAnsOptAns }}"
+                  placeholder="{{item2.optDesc}}"
+                  border="{{ true }}"
+                  bind:change="onChangeOptChoseFillY"
+                  data-index="{{index}}"
+                  data-index2="{{index2}}"
+                  disabled="{{disabled}}"
+                  custom-style="padding: 8rpx 16rpx;"
+                  type="textarea"
+                  autosize
+                  focus="{{item2.focus}}"
+                />
+              </van-cell-group>
+            </block>
+          </block>
+        </block>
+      </van-radio-group>
+    </block>
+    <!-- 多选题 -->
+    <block wx:if="{{item.queType == 'M' || item.queType == 'N'}}">
+      <van-checkbox-group name="{{item.queId}}" value="{{ item.queAnsOptIds }}" disabled="{{disabled}}" max="{{ item.maxOptCnt }}" >
+        <block wx:if="{{item.qnQueOptDtoList.length > 0}}">
+          <block wx:for="{{item.qnQueOptDtoList}}" wx:for-index="index2" wx:for-item="item2" wx:key="optId" >
+            <view class="optClass" bindtap="onChangeMn2" data-index="{{index}}" data-index2="{{index2}}" data-optid="{{item2.optId}}">
+              <van-checkbox shape="square" name="{{item2.optId}}" icon-size="32rpx" class="optDesc2">
+                <block wx:for="{{optIdArray}}" wx:for-index="index3" wx:for-item="item3" wx:key="id">
+                  <block wx:if="{{item3.id == item2.optId}}">
+                  {{item3.desc}}.
+                  </block>
+                </block>
+                {{item2.optDesc}}
+                <block wx:if="{{item2.statistics && item2.statistics != null && item2.statistics != ''}}">
+                  <text decode="{{true}}">&nbsp;&nbsp;&nbsp;</text>
+                  {{item2.statistics}}
+                </block>
+              </van-checkbox>
+            </view>
+            <block wx:if="{{item2.choseFill == 'Y' && item2.isShow == 'Y'}}">
+              <van-cell-group custom-class="cellgroup" >
+                <van-field
+                  name="{{item2.optId}}"
+                  maxlength="60"
+                  show-word-limit="{{true}}"
+                  value="{{ item2.queAnsOptAns }}"
+                  placeholder="{{item2.optDesc}}"
+                  border="{{ true }}"
+                  bind:change="onChangeOptChoseFillY"
+                  data-index="{{index}}"
+                  data-index2="{{index2}}"
+                  disabled="{{disabled}}"
+                  custom-style="padding: 8rpx 16rpx;"
+                  type="textarea"
+                  autosize
+                  focus="{{item2.focus}}"
+                />
+              </van-cell-group>
+            </block>
+          </block>
+        </block>
+      </van-checkbox-group>
+    </block>
+    <!-- 填空题 -->
+    <block wx:if="{{item.queType == 'F'}}">
+      <van-cell-group custom-class="cellgroup" bindtap="onClickF" data-index="{{index}}" >
+        <van-field
+          name="{{item.queId}}"
+          maxlength="{{item.maxlength}}"
+          show-word-limit="{{true}}"
+          value="{{ item.queAnsOptIds[0] }}"
+          placeholder="请输入您的答案{{item.placeholder}}"
+          border="{{ true }}"
+          bind:change="onChangeF"
+          data-index="{{index}}"
+          disabled="{{disabled}}"
+          custom-style="padding: 8rpx 16rpx;"
+          type="{{item.type}}"
+          autosize="{{autosize}}"
+          focus="{{item.focus}}"
+        />
+      </van-cell-group>
+    </block>
+    
+  </view>
+
+  <block wx:if="{{qnRemark != null && qnRemark != ''}}">
+    <view style="padding: 20rpx 50rpx;text-align: left;">
+      <text space="{{true}}" decode="{{true}}">{{qnRemark}}</text>
+    </view>
+  </block>
+
+
+<!--   
+  <block wx:if="{{submitRespCode && submitRespCode != null && submitRespCode != ''}}">
+    <view style="text-align:center; margin-top:20rpx; margin-bottom:20rpx;">
+      <van-row>
+        <text style="color:#315686; font-size:36rpx;" >感谢您的反馈</text>
+      </van-row>
+      <van-row>
+        <text style="color:#1296DB; font-size:28rpx;" >反馈码 {{submitRespCode}}</text>
+      </van-row>
+    </view>
+  </block> -->
+
+  <block wx:if="{{isNeedSign === 'Y'}}">
+    <van-row custom-class="sign">
+      <van-col span="6" custom-class="sign-title">
+        请签字<span style="color:red;">＊</span>
+      </van-col>
+      <van-col span="14" custom-class="sign-area" bindtap="goSign">
+        <block wx:if="{{signed}}">
+          <image src="{{'https://jiaimglog.huiguan.com/'+signImage}}" mode="aspectFit"  class="sign-img"></image>
+        </block>
+        <block wx:else>
+          点击该区域签字
+        </block>
+      </van-col>
+    </van-row>
+  </block>
+  
+
+  <view style="text-align:center; padding:16rpx 32rpx;">
+	  <van-button color="#258bff" size="normal" disabled="{{disabled}}" custom-style="width:100%;border-radius: 22px;" bind:click="onSubmit" >提交</van-button>
+  </view>
+  
+</view>
+<view wx:else class="no-data-container">
+  <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'哎呀，暂无数据!'}}"></template>
+</view>
+
+<van-dialog id="van-dialog" />

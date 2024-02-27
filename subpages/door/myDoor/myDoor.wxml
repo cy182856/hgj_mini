@@ -1,0 +1,86 @@
+<import src="../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<view class="remote-door-view">
+  <view  class="img-view">
+    <image class="head-img" src="../images/background.png"/>
+  </view>
+  <view class="remote-door-title">
+    欢迎使用远程开门
+  </view>
+  <view class="remote-door-desc" bindtap="checkDetail">什么是远程开门?</view>
+</view>
+<scroll-view scroll-y="true" class="scroll-view" style="padding-bottom: {{marginBottom}}rpx;">
+  <block wx:if="{{queryFinish}}">
+    <block wx:if="{{cellGates && cellGates.length > 0}}">
+      <view class="remote-door-list">   
+        <view class="cell-gate-title">请选择要打开单元门</view>
+          <block wx:for="{{cellGates}}" wx:for-item="cellGate">
+            <view class="cell-gate-item" bindtap="selectDoor" data-item="{{cellGate}}">
+              <view class="check-door-radio" >
+                <text class="iconfont {{cellGate.check ? 'jia-xuanzhong' : 'jia-weixuanzhong'}}"></text>
+              </view>
+              <view class="{{cellGate.check ? 'cell-gate-name-select' : 'cell-gate-name'}}">
+                <text class="ellipsis_view">{{cellGate.acDevName}}</text>
+              </view>
+            </view>
+          </block> 
+      </view>
+    </block>
+  </block>
+  <block wx:else>
+    <view class="remote-door-list">   
+      <view class="cell-gate-title">请选择要打开单元门</view>
+      <van-skeleton  row="3" />
+    </view>
+  </block>
+  <block wx:if="{{queryFinish}}">
+    <block wx:if="{{gates && gates.length > 0}}">
+      <view class="remote-door-list"> 
+        <view class="gate-title">请选择要打开小区大门</view>
+          <block wx:for="{{gates}}" wx:for-item="gate">
+            <view class="cell-gate-item" bindtap="selectDoor" data-item="{{gate}}">
+              <view class="check-door-radio" >
+                <text class="iconfont {{gate.check ? 'jia-xuanzhong' : 'jia-weixuanzhong'}}"></text>
+              </view>
+              <view class="{{gate.check ? 'cell-gate-name-select' : 'cell-gate-name'}}">
+                <text class="ellipsis_view">{{gate.acDevName}}</text>
+              </view>
+            </view>
+          </block>
+        </view>
+    </block>
+  </block>
+  <block wx:else>
+    <view class="remote-door-list"> 
+      <view class="gate-title">请选择要打开小区大门</view>
+      <van-skeleton  row="3" />
+    </view>
+  </block>
+</scroll-view>
+<view class="bottom-btn-view" style="padding-bottom:{{paddingBottom}}rpx;">
+  <van-button bindtap="openGate" custom-class="{{selectDoor ? 'select-class' : 'no-select-class'}}"  type="info">点击开门</van-button>
+</view>
+
+<van-popup show="{{ showDesc }}" bind:click-overlay="closeInstru" custom-style="width: 93%;height: auto;">
+  <view style="padding-top: 30rpx;">
+    <view class="open-door-title">什么是远程开门</view>
+    <view class="obj_intru_list">
+      <view class="obj_intru" >
+        <view class="obj_title">使用方法：</view>
+        <view class="obj_desc">选中要开启的门禁，点击【点击开门】按钮即可打开对应的门禁。</view>
+      </view>
+      <view class="obj_intru" >
+        <view class="obj_title">注意事项：</view>
+        <view class="obj_desc">1.远程开门功能为方便业主，不需要时请勿随意操作；</view>
+        <view class="obj_desc">2.开门需要连接网络，如手机无网络信号则不能开门；</view>
+        <view class="obj_desc">3.因网络等原因如操作后门禁未开启，请再次尝试或与物业联系开门。</view>
+      </view>
+    </view>
+    <view class="dead_line"></view>
+    <view class="obj_instru_close">
+      <view class="obj_instru_close_btn" bindtap="closeInstru">
+        <text>关闭</text>
+      </view>
+    </view>
+  </view>
+</van-popup>

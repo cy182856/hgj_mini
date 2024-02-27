@@ -1,0 +1,176 @@
+.bg{
+	background-color: #EDEFEF;
+  }
+  .vcell_title{
+	color: #474747;
+  }
+  .view_bg{
+	background-color: #ffffff;
+	width: 92%;
+	height: 290rpx;
+	margin-left: 3%;
+	margin-top: 15rpx;
+	border-radius: 10rpx;
+	font-size: 28rpx;
+	/*  */
+  }
+  .view_light{
+	line-height: 40rpx;
+  }
+  .text_right{
+	padding-right: 50rpx;
+  }
+  .view_desc{
+	color:#ABABAB;
+	padding: var(--cell-vertical-padding,10px) var(--cell-horizontal-padding,16px);
+  }
+  
+  .last_font{
+	margin-top: 50rpx;
+	font-size: 24rpx;
+	color: #C6C6C6;
+	line-height: 42rpx;
+	text-align: center;
+  }
+  
+  .yijiedan{
+	color: #189AFE !important;
+  }
+  .daipingjia{
+	color: #FE8F18 !important;
+  }
+  .yijieshu{
+	color: #ABABAB !important;
+  }
+  .daishouli{
+	color: #14D164 !important;
+  }
+  .daifukuan{
+	color:#F73809 !important;
+  }
+  
+  /* 默认属性变更 */
+  .van-cell::after {
+	border-bottom: 2rpx dashed #D5D5D5 !important;
+  }
+  .vb{
+	border-radius: 10rpx;
+  }
+  
+  /* vant dialog弹窗的确定按钮统一改为 */
+  .dialog-index--van-dialog__confirm{
+	color: #189AFE !important;
+  }
+  
+  .bill_button_payment {
+    text-align: center;
+    border-radius: 10px;
+    height:30px;
+    line-height: 30px;
+	width: 75%;
+	margin-left: 5%;
+	font-size: 16px;
+	color: rgb(244, 248, 246);
+	background-color: rgba(252, 6, 6, 0.637);
+}
+
+
+.jiantou_up{
+	width: 15px;
+	height: 15px;
+	margin-top: 20px;
+	border-top: 1px solid #999;
+	border-right: 1px solid #999;
+	transform: rotate(45deg);
+  }
+
+  .jiantou_down{
+	width: 15px;
+	height: 15px;
+	margin-top: 20px;
+	border-top: 1px solid #999;
+	border-right: 1px solid #999;
+	transform: rotate(135deg);
+  }
+
+  .empty{
+	padding: 5px 0px;
+  }
+
+  .paddingLeft_10{
+	padding-left: 10px;
+	padding-bottom: 5px;
+  }
+   
+  .paddingLeft_20{
+	padding-left: 40px;
+	padding-bottom: 5px;
+  }
+   
+  .paddingLeft_30{
+	padding-left: 80px;
+	padding-bottom: 5px;
+  }
+   
+  .paddingBottom_10{
+	padding-top: 10px;
+  }
+  .line-center{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-flow: column;
+  }
+  /**
+  *参考：https://cloud.tencent.com/developer/article/1690869
+  *
+  /
+  /* 选中后的 背景样式 （红色背景 无边框 可根据UI需求自己修改） */  
+  checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+	background: #0094aa;
+  }
+  /* 选中后的 对勾样式 （白色对勾 可根据UI需求自己修改） */
+  checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
+	color:#fff; /* 对勾颜色 白色 */
+  }
+   
+  .treeMenuCenter{
+	display: flex;
+	align-items: center;
+  }
+   
+  .dashedStyleWidth_80{
+	margin-left: 10px;
+	margin-right: 5px;
+	width: 80px;
+	height: 0px;
+	border: 0.5px dotted gray;
+  }
+   
+  .dashedStyleWidth_40{
+	margin-left: 10px;
+	margin-right: 5px;
+	width: 40px;
+	height: 0px;
+	border: 0.5px dotted gray;
+  }
+   
+	  
+  .icon-chioce-right {
+	height: 10px;
+	width: 12px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: fff;
+   }
+  
+   .icon-chioce-down {
+	height: 10px;
+	width: 12px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: fff;
+   }
+  
+
+  

@@ -1,0 +1,64 @@
+<!--subpages/pfee/pfeeMonBillPay.wxml-->
+<import src="../../template/empty/empty.wxml"></import>
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />
+
+<view wx:if="{{!hasAuth}}">
+    <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'您无缴费权限'}}"></template>
+</view>
+<view wx:else>
+  <view class="margin-top head">
+    <view>
+      <view class="rq-name">{{shortName}}</view>
+      <view class="rq-door">{{houseName}}</view>
+    </view>
+    <view class="log-button">
+      <van-button round color="#1A8AFA" type="info" size="small" plain 
+        custom-style="width:200rpx;height:80rpx;font-size:30rpx;"
+        bind:click="toLogs">
+        缴费记录
+      </van-button>
+    </view>
+  </view>
+
+  <!-- 查询日期条件 -->
+  <van-cell-group custom-class="margin-top" >
+    <van-cell title-class="mon-desc" title="缴纳开始月份" is-link 
+      value="{{startBillMonDesc}}" data-index="0" bind:click="showYearMon" />
+    <van-cell title-class="mon-desc" title="缴纳结束月份" is-link 
+      value="{{endBillMonDesc}}" data-index="1" bind:click="showYearMon" />
+  </van-cell-group>
+
+  <van-popup show="{{ show }}" position="bottom" custom-style="height: 40%;"  bind:close="hiddenYearMon" >
+    <van-datetime-picker
+      type="year-month"
+      value="{{ currentDate }}"
+      bind:confirm="confirmYearMon"
+      bind:cancel="hiddenYearMon"
+    />
+  </van-popup>
+
+  <!-- 查询结果 -->
+  <view wx:if="{{pfeeMonBillDtos != null &&  pfeeMonBillDtos != ''}}">
+    <view class="margin-top bill-greoup">
+      <view wx:for="{{pfeeMonBillDtos}}" wx:for-item="pfeeMonBillDto" wx:key="key" >
+        <view class="bill-row">
+          <text class="bill-col-1">{{pfeeMonBillDto.billMonDesc}}</text>
+          <text class="bill-col-2">¥{{pfeeMonBillDto.billAmtDesc}}</text>
+          <text class="bill-col-3">{{pfeeMonBillDto.statDesc}}</text>
+        </view>
+        <view wx:if="{{index != (pfeeMonBillDtos.length-1)}}"> <van-divider /> </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <van-submit-bar button-class="pfee-buttom"
+    price="{{ ordAmt }}"
+    button-text="立即缴费"
+    bind:submit="submitPfee"
+  />
+</view>

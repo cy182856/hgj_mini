@@ -1,0 +1,55 @@
+<import src="../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<view class="background-view">
+</view>
+<view class="upd-img-tabs">
+  <van-tabs active="{{ active }}"     
+    nav-class = "nav-class"
+    tab-class = "tab-class"
+    color = "#1B1B1B"
+    bind:change = "onTabChange"
+    tab-active-class="tab-active-class"
+    type="card">
+    <van-tab title="系统头像" 
+      custom-class = "custom-class">
+      <view style="height: 20rpx;"></view>
+      <block wx:for="{{imgList}}" wx:for-item="parent">
+        <view class="img-list-view" style="height: {{imgHeight}}px;">
+          <block wx:for="{{parent}}" wx:for-item="child">
+            <view class="img-flex-view" >
+                <image src="{{child.src}}" style="width: 100%;"  mode="widthFix">
+                </image>
+                <view class="check-shdow-view" data-item="{{child}}" bindtap="checkImg" style="opacity: {{child.check ? 0.6 : 0}};">
+                  <text class="iconfont {{child.check ? 'jia-xuanzhong1' : ''}}"></text>
+                </view>
+            </view>
+          </block>
+        </view>
+      </block>
+      <view style="height: 20rpx;"></view>
+    </van-tab>
+    <van-tab title="自定义" 
+      custom-class = "custom-class">
+      <view class="custom-tab-view">
+        <view style="display: flex; align-items: center;justify-content: left;">
+          <view class="upload" style="border: none;position: relative;">
+            <image src="{{updImg && updImg != ''? updImg : headImgUrl}}" style="width: 100%;"  mode="widthFix">
+            </image>
+          </view>
+          <view bindtap="chooseHeadImg" class="upload" style="margin-left:60rpx;">
+            <text class="iconfont jia-paishe"></text>
+            <view style="color: #cdcdcd;font-size: 24rpx;">上传图片</view>
+          </view> 
+        </view>
+      </view>
+    </van-tab>
+  </van-tabs>
+</view>
+
+<view class="commit-btn-view">
+  <van-button bindtap="bindCommitHeadImg"  custom-class="vant-btn-class" type="info">确认</van-button>
+</view>
+
+<canvas canvas-id="canvas0" 
+        style="width:{{cWidth}}px;height:{{cHeight}}px;position: absolute;left:-18000px;top:-18000px;">
+</canvas>

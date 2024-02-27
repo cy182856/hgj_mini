@@ -1,0 +1,36 @@
+page{
+  height: 100%;
+}
+
+.sub-log-item{
+  border-radius: 0.4em;
+  margin:20rpx 30rpx;
+  background-color:#fff;
+  box-shadow:rgba(0,0,0,0.07) 2rpx 2rpx 2rpx 2rpx ;
+}
+.van-cell {
+  border-radius: 0.4em;
+}
+.van-cell-item{
+  padding: 20rpx 0rpx;
+}
+.van-cell-item-line{
+  padding: var(--cell-vertical-padding,3px) var(--cell-horizontal-padding,16px) !important;
+}
+.van-cell__title{
+  flex: 2 !important;
+  color: #999999 !important;
+  font-size: 28rpx !important;
+}
+.van-cell__value{
+  flex: 4 !important;
+  color: #363F4D !important;
+  font-size: 28rpx !important;
+  text-align: right !important;
+}
+.sub-log-title{
+  font-size: 32rpx;
+  font-weight: 500;
+  text-align: left;
+  color: #363f4d;
+}

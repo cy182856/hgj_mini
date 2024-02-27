@@ -1,0 +1,95 @@
+page {
+  background: #fbfbfb;
+  height: auto;
+  overflow: hidden;
+}
+
+.wrapper {
+  width: 100%;
+  height: 95vh;
+  margin: 30rpx 0;
+  overflow: hidden;
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 28rpx;
+}
+
+.handWriting {
+  background: #fff;
+  width: 100%;
+  height: 95vh;
+}
+
+.handRight {
+  display: inline-flex;
+  align-items: left;
+  flex: 1;
+}
+
+.handCenter {
+  flex: 6;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.handTitle {
+  flex: 1;
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  margin-top:40rpx;
+  color: #666;
+}
+
+.transform-view{
+  transform: rotate(90deg);
+}
+
+.handBtn button {
+  font-size: 28rpx;
+}
+
+.handBtn {
+  height: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: space-between;
+  flex: 1;
+}
+
+.subBtn{
+  transform: rotate(90deg);
+  width: 20rpx !important;
+  color: #fff !important;
+  background-color: #258BFF !important;
+  border-radius: .5em !important;
+}
+
+.delBtn {
+  transform: rotate(90deg);
+  width: 60rpx !important; 
+  color: #258BFF !important;
+  background-color: #fff !important;
+  border-radius: .5em !important;
+}
+
+.checkBtn{
+  position: absolute;
+  top: 500rpx;
+  left: 0rpx;
+  transform: rotate(90deg);
+  width: 20rpx !important;
+}
+
+.toast-view{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 28rpx;
+  border:none;
+  color: #fbfbfb;
+  background-color: var(--overlay-background-color,rgba(0,0,0,0.7));
+}

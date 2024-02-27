@@ -1,0 +1,65 @@
+<!-- 引用 -->
+<import src="../../../../template/empty/empty.wxml"></import>
+<import src="../../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<!-- 弹窗 -->
+<van-dialog id="van-dialog"/>
+<!-- 根据UI，距离顶端始终保持14rpx，14+9 -->
+
+<!-- 查询账单列表 -->
+<view wx:if="{{billList == null || billList.length == 0}}" >
+  <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无我的账单记录'}}"></template>
+</view>
+
+<view style="margin-top: 0px;" wx:else>
+
+    <view style="height: auto;" class="view_bg" wx:for="{{billList}}" wx:key="*this">
+        <van-cell
+              custom-class="vb" 
+              title-class="vcell_title txt" 
+              value-class="daishouli" 
+              title="{{item.ipItemName}}" />
+        <view class="view_desc">
+        <view class="view_light">
+            <text class="text_right" decode="{{true}}" >订单编号</text>{{item.id}}
+        </view>
+        <view class="view_light">
+            <text class="text_right" decode="{{true}}" >所属账期</text><text>{{item.repYears}}</text>
+        </view>
+        <view class="view_light">
+            <text class="text_right">本金应收</text><text>{{item.priRev}}</text>
+        </view>
+        <view class="view_light">
+          <text class="text_right" decode="{{true}}" >本金已收</text><text>{{item.priPaid}}</text>
+        </view>
+        <view class="view_light">
+          <text class="text_right" decode="{{true}}" >房间名称</text><text>{{item.resName}}</text>
+        </view>
+        <view class="view_light" wx:if="{{item.lockLogo == 9}}">
+          <text class="text_right" decode="{{true}}" >支付状态</text><text>支付成功</text>
+        </view>
+        <view class="view_light" wx:if="{{item.lockLogo == 0}}">
+           <text class="text_right" decode="{{true}}" >支付状态</text><text>未支付</text>
+        </view>
+        <!-- <view class="view_light" wx:if="{{item.lockLogo == 1}}">
+          <text class="text_right" decode="{{true}}" >支付状态</text><text>部分缴费</text>
+        </view> -->
+        <!-- <view class="view_light" wx:if="{{item.lockLogo == 3 }}">
+          <text class="text_right" decode="{{true}}" >支付状态</text><text>缴费中</text>
+        </view> -->
+      </view>
+         
+    </view>
+
+  
+  <view wx:if="{{billList.length > 0 && pageNum < pages}}" 
+        class="last_font" bindtap="loadMore" data-pageNum="{{pageNum}}" data-pageSize="{{pageSize}}">点击加载更多</view>
+  <view wx:elif="{{billList.length > 0 && pageNum == pages}}" class="last_font">已经到底了</view> 
+  <view wx:else class="last_font">暂无记录</view>
+  <view style="height:20rpx;"></view>
+
+</view>
+
+
+
+

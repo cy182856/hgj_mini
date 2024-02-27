@@ -1,0 +1,75 @@
+<page>
+  <view class="visit-log-view">
+    <view class="visit-header-view">
+    </view>
+      <view style=" background-color:#fff; ">
+        <image style="margin-left: 5%;" src="data:image/png;base64,{{visitQrCode}}"></image>
+      </view>
+    <view class="visit-code-view" style="display:{{showCode}};">
+      <view class="barcode">
+        <canvas canvas-id="barcode"/>
+      </view>
+      <!-- <view style="font-size:28rpx;text-align:center;">
+        <block wx:for="{{barCodeStrs}}" wx:for-item="barStr">
+          <text style="margin-left:12rpx;">{{barStr}}</text>
+        </block>
+      </view> -->
+      <view class="qrcode" style="margin-top:20rpx;">
+        <canvas canvas-id="qrcode"/>
+      </view>
+      <!-- <view style="margin-top:10rpx;">通行码：{{visitLogInfo.visitCode}}</view> -->
+      
+      </view>
+      <view class="visit-house-info">
+        <view class="houseinfo-flex-display">
+          <view style="flex:2;">
+            <text>访问地址</text>
+          </view>
+          <view class="ellipsis_view text-align-right" style="flex:3;">
+            <text>{{houseName}}</text>
+          </view>
+        </view>
+        <view class="houseinfo-flex-display">
+          <view style="flex:2;">
+            <text>称呼</text>
+          </view>
+          <view class="ellipsis_view text-align-right" style="flex:3;">
+            <text>{{visitName}}</text>
+          </view>
+        </view>
+        <view class="houseinfo-flex-display">
+          <view style="flex:2;">
+            <text>车牌号</text>
+          </view>
+          <view style="flex:3; " class="text-align-right">
+            <text>{{carNum?carNum:'无'}}</text>
+          </view>
+        </view>
+        <view class="houseinfo-flex-display">
+          <view style="flex:2;">
+            <text>可用次数</text>
+          </view>
+          <view style="flex:3;" class="text-align-right">
+            <text>{{expNum == -1?'无限制' : expNum}}</text>
+          </view>
+        </view>
+        <view class="houseinfo-flex-display">
+          <view style="flex:2;">
+            <text>生效日期</text>
+          </view>
+          <view class="ellipsis_view text-align-right" style="flex:3;">
+            <text>{{effectuateDate}}</text>
+          </view>
+        </view>
+        <!-- <view class="houseinfo-flex-display">
+          <view style="flex:2;">
+            <text>失效日期</text>
+          </view>
+          <view class="ellipsis_view text-align-right" style="flex:3;">
+            <text>{{expDate}}</text>
+          </view>
+        </view> -->
+      </view>
+    <image class='visit-detail-bg'  src='/images/home/back-img.png'></image>
+</view>
+</page>

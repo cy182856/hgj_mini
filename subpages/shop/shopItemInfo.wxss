@@ -1,0 +1,106 @@
+Page{
+   background-color: #fff;
+}
+.shop_info{
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  border: 1px solid #f2f2f2;
+  border-radius: 20rpx;
+  margin-bottom: 30rpx;
+  margin-top: -110rpx;
+  background-color: #fff;
+  height: 220rpx;
+  position: absolute;
+  width: -webkit-fill-available;
+}
+.shop_active{
+  font-size: 28rpx;
+  color: #666666;
+  padding-left: 38rpx;
+  display: flex;
+  margin-bottom: 20rpx;
+}
+.shop_active_left{
+  font-weight: bold;
+}
+.shop_active_right{
+  padding: 0rpx 10rpx;
+  background-color: #f3beaa;
+  color: #F65B23;
+}
+.shop_active_right_qd{
+  color:#999999;
+  font-size: 24rpx;
+}
+.shop_desc{
+  padding: 20rpx 60rpx 20rpx 38rpx;
+  font-size: 28rpx;
+  color: #666666;
+  margin-bottom: 10rpx;
+}
+.shop_desc_title{
+  font-weight: bold;
+}
+.shop_desc_content{
+  color: #999999;
+  font-size: 24rpx;
+}
+.dead_line{
+  border-top: 1px solid #f2f2f2;
+}
+.shop_item_search{
+  background-color: #189AFE;
+  width: 110rpx;
+  text-align: center;
+  border-radius: 20rpx;
+}
+.shop_item_search_text{
+  color:white;
+}
+.shop_item_content{
+  display: flex;
+  margin: 20rpx 30rpx;
+  font-size: 28rpx;
+  color: #3C3C3C;
+  line-height: 40rpx;
+  border: 1px solid #f2f2f2;
+  border-radius: 20rpx;
+  padding: 20rpx;
+  background-color: #fff;
+}
+.shop_item_content_left{
+  width: 220rpx;
+  height: 220rpx;
+}
+.shop_item_content_right{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 20rpx;
+}
+.record_none{
+  color: #363F4D;
+  text-align: center;
+  font-size: 36rpx;
+  /* padding-top: 10px; */
+  background-color: white;
+}
+.record_more{
+  color: #999999;
+  text-align: center;
+  font-size: 30rpx;
+
+  padding-bottom: 20rpx;
+
+}
+
+/********组件样式的更改*******/
+/* .van-cell__left-icon-wrap{
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.van-icon-search{
+  margin-right: 20rpx;
+} */

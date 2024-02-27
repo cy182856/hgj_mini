@@ -1,0 +1,270 @@
+{
+  "pages": [
+    "pages/main/main",
+    "pages/hu/hubind/hubind",
+    "pages/hu/hubindTenant/hubindTenant",
+    "pages/noauth/noauth",
+    "pages/await/await",
+    "pages/smartDoor/smartDoor",
+    "pages/wuyeInfo/wuyeInfo",
+    "pages/wuyeInfo/mapPage",
+    "pages/hu/protocol/protocol",
+    "pages/manyCust/manyCust",
+    "pages/anonymityMain/anonymityMain",
+    "pages/web/menuToMain",
+    "components/cropper/cropper"
+  ],
+  "subpackages": [
+    {
+      "root": "subpages/repair",
+      "name": "repair",
+      "pages": [
+        "pages/repairQuery/repairQuery",
+        "pages/repairApply/repairApply",
+        "pages/repairDetail/repairDetail",
+        "pages/repairDetailPage/repairDetailPage",
+        "pages/repairCostDetailPage/repairCostDetailPage",
+        "pages/ranking/ranking",
+        "pages/otherManDetail/otherManDetail",
+        "pages/niming/addRepair",
+        "pages/niming/repairDetail",
+        "pages/niming/queryRepair"
+      ]
+    },
+    {
+      "root": "subpages/bill",
+      "name": "bill",
+      "pages": [
+        "index/index",
+        "bill",
+        "bill/bill",
+        "billMonthDetail/billMonthDetail",
+        "billDetailPage/billDetailPage",
+        "billMerge/billMerge",
+        "billMergeDetail/billMergeDetail"
+      ]
+    },
+    {
+      "root": "subpages/house",
+      "name": "house",
+      "pages": [
+        "house"
+      ]
+    },
+    {
+      "root": "subpages/qn",
+      "name": "qn",
+      "pages": [
+        "queryQnInfo/queryQnInfo",
+        "queryQnQueList/queryQnQueList",
+        "queryQnQueAns/queryQnQueAns",
+        "queryExpQnInfos/queryExpQnInfos",
+        "queryOngoingQnInfos/queryOngoingQnInfos",
+        "signboard/signboard"
+      ]
+    },
+    {
+      "root": "subpages/appt",
+      "name": "appt",
+      "pages": [
+        "show_apptObjInfo",
+        "show_apptTimeInfo",
+        "apptOrd_confirm",
+        "apptOrd_success",
+        "mine_appt",
+        "apptOrd_refund",
+        "apptOrd_Detail"
+      ]
+    },
+    {
+      "root": "subpages/pfee",
+      "name": "pfee",
+      "pages": [
+        "pfeeMonBillPay",
+        "pfeeOrdLogList",
+        "pfeeOrdDtlList",
+        "pfeeMonBillSubmit",
+        "pfeeMonBill",
+        "pfeeMonBillDtl"
+      ]
+    },
+    {
+      "root": "subpages/family",
+      "name": "family",
+      "pages": [
+        "memberList",
+        "members/addMembers",
+        "members/createQRCode",
+        "memberDetail",
+        "chooseImg/chooseImg"
+      ]
+    },
+    {
+      "root": "subpages/visit",
+      "name": "visit",
+      "pages": [
+        "visitInfo/visitInfo",
+        "checkVisit/checkVisit",
+        "visitDetail/visitDetail"
+      ]
+    },
+    {
+      "root": "subpages/heo",
+      "name": "heo",
+      "pages": [
+        "heoinfo/heoinfo",
+        "heodetail/heodetail",
+        "mineRelease/mineRelease",
+        "heorelease/heorelease",
+        "heopraislist/heopraislist"
+      ]
+    },
+    {
+      "root": "subpages/gonggao",
+      "name": "gonggao",
+      "pages": [
+        "query/queryGGListPage",
+        "detail/gongDetail",
+        "web/ggDetail"
+      ]
+    },
+    {
+      "root": "subpages/order",
+      "name": "order",
+      "pages": [
+        "order",
+        "orderdetail/orderdetail"
+      ]
+    },
+    {
+      "root": "subpages/advice",
+      "name": "advice",
+      "pages": [
+        "add/addAdvice",
+        "query/queryAdvice",
+        "detail/addviceDetail"
+      ]
+    },
+    {
+      "root": "subpages/shop",
+      "name": "shop",
+      "pages": [
+        "shopItemInfo"
+      ]
+    },
+    {
+      "root": "subpages/item",
+      "name": "item",
+      "pages": [
+        "itemInfoDetail",
+        "lifeitem/lifeitem"
+      ]
+    },
+    {
+      "root": "subpages/filepub",
+      "name": "filepub",
+      "pages": [
+        "filepub",
+        "checkpdf/checkpdf"
+      ]
+    },
+    {
+      "root": "subpages/carfee",
+      "name": "carfee",
+      "pages": [
+        "carfee",
+        "feelog/feelog",
+        "feedetail/feedetail"
+      ]
+    },
+    {
+      "root": "subpages/charge",
+      "name": "charge",
+      "pages": [
+        "charge",
+        "chargedetail/chargedetail",
+        "chargelog/chargelog",
+        "chargesublog/chargesublog",
+        "chargelogdtl/chargelogdtl"
+      ]
+    },
+    {
+      "root": "subpages/acct",
+      "name": "myAcctInfo",
+      "pages": [
+        "myAcctInfo",
+        "acctRecord",
+        "acctRefund",
+        "acctSaveProtocol"
+      ]
+    },
+    {
+      "root": "subpages/door",
+      "name": "door",
+      "pages": [
+        "myDoor/myDoor"
+      ]
+    }
+  ],
+  "plugins": {
+    "contactPlugin": {
+      "version": "1.3.0",
+      "provider": "wx104a1a20c3f81ec2"
+    },
+    "calendar": {
+      "version": "1.1.0",
+      "provider": "wxa3eebcbd5f0cd759"
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "智慧管家",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": false
+  },
+  "usingComponents": {
+    "van-nav-bar": "@vant/weapp/nav-bar/index",
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-grid": "@vant/weapp/grid/index",
+    "van-grid-item": "@vant/weapp/grid-item/index",
+    "van-empty": "@vant/weapp/empty/index",
+    "van-row": "@vant/weapp/row/index",
+    "van-col": "@vant/weapp/col/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-stepper": "@vant/weapp/stepper/index",
+    "van-toast": "@vant/weapp/toast/index",
+    "van-steps": "@vant/weapp/steps/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-notice-bar": "@vant/weapp/notice-bar/index",
+    "van-panel": "@vant/weapp/panel/index",
+    "van-skeleton": "@vant/weapp/skeleton/index",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-uploader": "@vant/weapp/uploader/index",
+    "van-switch": "@vant/weapp/switch/index",
+    "van-tag": "@vant/weapp/tag/index",
+    "van-divider": "@vant/weapp/divider/index",
+    "van-picker": "@vant/weapp/picker/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "van-search": "@vant/weapp/search/index",
+    "calendar": "plugin://calendar/calendar",
+    "van-sticky": "@vant/weapp/sticky/index"
+  },
+  "sitemapLocation": "sitemap.json"
+}

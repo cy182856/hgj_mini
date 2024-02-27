@@ -1,0 +1,84 @@
+page{
+  overflow: hidden;
+}
+
+canvas{
+  display: block;
+  margin: 0 auto;
+}
+
+.visit-header-view{
+  text-align:center;
+  margin-top:10rpx;
+  padding-top:20rpx;
+  background-color:#fff;
+  border-radius:0.5em 0.5em 0em 0em;
+}
+
+.visit-code-view{
+  width:100%;
+  text-align:center;
+  margin:0 auto;
+  background-color:#fff;
+  padding-top:60rpx;
+  padding-bottom:40rpx;
+  border-radius:0em 0em 0.5em 0.5em;
+}
+
+.visit-detail-bg{
+  position: absolute;
+  top:0;
+  left:0;
+  width:calc(100% - 20rpx);
+  margin: 40rpx 10rpx 0rpx 10rpx;
+  height:1092rpx;
+  z-index:-1;
+  border-radius:.5em;
+}
+
+.visit-house-info{
+  color:#fff;
+  margin:40rpx;
+  margin-top:30rpx;
+}
+
+.houseinfo-flex-display{
+  font-size: 28rpx;
+  display:flex;
+  width:100%;
+  text-align:left;
+  margin-bottom: 10rpx;
+}
+
+.visit-log-view{
+  padding:40rpx 20rpx 0rpx 20rpx;
+}
+
+.text-align-right{
+  text-align: right;
+}
+
+.barcode {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.qrcode {
+  height: 420rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.barcode > canvas {
+  width: 600rpx;
+  height: 100rpx;  
+}
+
+.qrcode > canvas {
+  width: 400rpx;
+  height: 400rpx;
+}

@@ -1,0 +1,154 @@
+<import src="../../template/empty/empty.wxml"></import>
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<van-toast id="van-toast" />
+<van-cell title="查询条件" is-link label="{{dateTypeDesc}} {{busiIdDesc}} {{payStatDesc}}" bind:click="showPopup" />
+<view class="top">
+  <van-popup show="{{showPopup}}" position="top"  custom-style="height: {{popupH}};" bind:close="onPopClose">
+    <view class="top-container">
+      <view class="top-lable">业务类型</view>
+      <view class="top-body">
+          <van-dropdown-menu>
+              <van-dropdown-item value="{{ busiId }}" options="{{ busiIds }}" bind:change='chooseBusiId' bind:open="dropdownmenuOpen" bind:close="dropdownmenuClose"/>
+          </van-dropdown-menu>
+      </view>
+    </view>
+    <view class="top-container">
+      <view class="top-lable">付款状态</view>
+      <view class="top-body">
+        <van-dropdown-menu>
+          <van-dropdown-item value="{{ payStat }}" options="{{ payStats }}" bind:change='choosePayStat' bind:open="dropdownmenuOpen" bind:close="dropdownmenuClose"/>
+        </van-dropdown-menu>
+      </view>
+    </view>
+    <view class="top-container">
+      <view class="top-lable">付款时间</view>
+    </view>
+    <view class="top-container">
+      <view class="top-body">
+        <van-button type="{{lastWeekButtonType}}" size="mini" custom-style="width:180rpx;height:60rpx;line-height:60rpx;border-radius:10rpx;" bind:click="lastWeek">上周</van-button>
+      </view>
+      <view class="top-body">
+        <van-button type="{{thisWeekButtonType}}" size="mini" custom-style="width:180rpx;height:60rpx;line-height:60rpx;border-radius:10rpx;" bind:click="thisWeek">本周</van-button>
+      </view>
+      <view class="top-body">
+        <van-button type="{{thisMonthButtonType}}" size="mini" custom-style="width:180rpx;height:60rpx;line-height:60rpx;border-radius:10rpx;" bind:click="thisMonth">本月</van-button>
+      </view>
+    </view>
+    <view class="top-container">
+      <view class="top-body">
+        <van-button type="{{thisCalendarButtonType}}" custom-style="width:180rpx;height:60rpx;line-height:60rpx;border-radius:10rpx;" size="mini" bind:click="showCalendarClick">按日历选择</van-button>
+      </view>
+      <view class="top-body" style="width:70%">
+        <text style="font-size:24rpx;color:#666666">{{dateChoosed}}</text>
+      </view>
+    </view>
+    <view style="top-row-container">
+      <van-row>
+        <van-col span="5" spa>
+            
+        </van-col>
+        <van-col span="12">
+           
+        </van-col>
+      </van-row>
+    </view>
+    <view style="text-align:center;margin-top: 20rpx;">
+      <van-button type="info" size="small" custom-style="width:280rpx;height:68rpx;border-radius:16rpx;" bind:click="confirmQuery">确认查询</van-button>
+    </view>
+  </van-popup>
+</view>
+<van-popup 
+  show="{{ calendarShow }}"
+  position="bottom"
+  z-index="666" 
+  bind:click-overlay="onCalendarClose">
+<view catchtouchmove='preventTouchMove' style="height:100%;">
+    <calendar 
+      year="{{curYear}}"
+      month="{{curMonth}}" 
+      day="{{today}}" 
+      
+      header="{{header}}" 
+      next="{{next}}" 
+      prev="{{prev}}"
+      
+      
+      weeks="{{week_title}}"
+      weeks-type="{{title_type}}" 
+      show-more-days="{{more}}" 
+      showOtherDesc = false
+      selectType = "multiple"
+
+      cell-size="{{cellSize}}"    
+      
+      days-color="{{style}}"
+      active-type="{{activeType}}"
+      next-month='hi'
+      bindnextMonth='nextMonth'                
+      bindprevMonth='prevMonth'
+      binddateChange='dateChange'
+      binddayClick='dayClick'
+      bindconfirmDate = "onCalendarConfirm"
+      calendar-style="calendar-style" 
+      header-style="header-style" 
+      board-style="board-style" 
+      weeks-style="weeks-style"
+      month-btn-style ="month-btn-style"
+      confirm-btn-style = "confirm-btn-style"
+      calendar-days-style = "calendar-days-style"
+      calendar-day = "calendar-day"
+      showBtn = "{{true}}"
+      selStartDate = "{{selStartDate}}"
+      selEndDate = "{{selEndDate}}"
+  />
+  </view>
+</van-popup>
+<view wx:if="{{showErrMsg}}">
+  <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:msg}}"></template>
+</view>
+<view wx:else>
+    <view class="block-container" wx:for="{{payTransLogDtos}}" wx:for-item="payTransLogDto" wx:key="key" data-payDate="{{payTransLogDto.payDate}}" data-paySeqId="{{payTransLogDto.paySeqId}}" data-payStat="{{payTransLogDto.payStat}}" bindtap="queryRefundDetail">
+      <van-row>
+          <van-col span="22">
+            <view class="pay">
+                <view class="pay-title">
+                  <view style="width:70%;display:flex;align-items:center;">
+
+                    <van-image round width="39" height="39" wx:if="{{ payTransLogDto.busiId == '01' }}" src="/images/home/icon_yuyue.png"/>
+                    <van-image round width="39" height="39" wx:elif="{{ payTransLogDto.busiId == '02' }}" src="/images/home/icon_wuyefei.png"/>
+                    <van-image round width="39" height="39" wx:elif="{{ payTransLogDto.busiId == '03' }}" src="/images/home/icon_baoxiu.png"/>
+                    <van-image round width="39" height="39" wx:elif="{{ payTransLogDto.busiId == '04' }}" src="/images/home/icon_shoukuan.png"/>
+                    <van-image round width="39" height="39" wx:elif="{{ payTransLogDto.busiId == '10' }}" src="/images/home/icon_car.png"/>
+                    <van-image round width="39" height="39" wx:else src="/images/home/icon_shoukuan.png"/>
+                    <text style="margin-left:26rpx;">{{ payTransLogDto.payDateShortDesc }}</text>
+                  </view>
+                  <view style="width:30%;text-align:right;">{{ payTransLogDto.busiIdDesc }}</view>
+                </view>
+                <view class="pay-ordamt">
+                  <view>
+                    <text class="pay-ordamt-lable">总金额</text>
+                    <text class="align-middle">￥{{ payTransLogDto.ordAmt }}</text>
+                  </view>
+                  <view wx:if="{{ payTransLogDto.payStat == 'R' }}">
+                    <text class="pay-ordamt-lable">已退总额</text> 
+                    <text class="align-middle" style="color:red;">￥{{ payTransLogDto.refAmt }}</text>
+                  </view>
+                  <view wx:else>
+                    <text class="pay-ordamt-lable"></text> 
+                    <text class="align-middle"></text>
+                  </view>
+                  <view style="font-size:28rpx;">{{ payTransLogDto.payStatDesc }}</view>
+                </view>
+            </view>
+          </van-col>
+          <van-col span="2">
+            <van-icon name="arrow" custom-style ="margin-top:80rpx;color:#969799"/>
+          </van-col>
+      </van-row>
+    </view>
+    <!--翻页-->
+    <view class="page" bindtap="scrolltolower" wx:if="{{showBottom}}" >
+      {{bottomText}}
+    </view>
+</view>

@@ -1,0 +1,26 @@
+<view class="page-body">
+  <view class="page-section page-section-gap">
+    <map
+      id="myMap"
+      class="bgMap"
+      latitude="{{latitude}}"
+      longitude="{{longitude}}"    
+      markers="{{markers}}"      
+      show-location="true"
+      show-compass = "true"
+    ></map>
+  </view>
+  <view>
+
+  </view>
+  <view class="{{iphoneX?'button-buttom-row-ipx':'button-buttom-row'}}"  bindtap="onClickBottomContainerTap">
+    <view class="address-view">
+      <view class="name-text">
+        {{shopName}}
+      </view>
+      <view class="address-text">
+{{shopAddress}}
+</view>
+    </view>
+  </view>
+</view>

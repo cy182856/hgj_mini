@@ -1,0 +1,290 @@
+@import "../../template/life/home/home.wxss";
+/* 全局的 */
+.content{
+  background-color: #fffffff8;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+
+}
+.van-grid{
+  background-color: #ffffff !important;
+}
+.content-head{
+  margin-top: 200rpx;
+  height: 500rpx;
+  width: 100%;
+  background-color: brown;
+}
+/* section相关的 */
+.section{
+  height: 320rpx;
+  width: 690rpx;
+  margin-left: 30rpx;
+  padding-top: 28rpx;
+  margin-bottom: 20rpx;
+  /* border-radius: 1rpx solid; */
+  /* padding-top: -50rpx; */
+  /* margin-bottom: 60rpx; */
+  /* box-shadow: 0px 7px 3px #BFBFBF; */
+}
+
+.section-special{
+  height: 275rpx;
+  width: 100%;
+}
+
+
+.head{
+  /* background-color: #81D8CF;  */
+  background-color: #81D8CF;
+  height: 125px;
+  width: 100%;
+}
+
+.bulletin{
+  /* width: 100%; */
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  /* padding-bottom: 20rpx; */
+  text-align: center;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+  height: auto;
+  /* border: 1px solid red; */
+  /* height: 53rpx; */
+}
+
+
+
+/* 通告 */
+.gonggao{
+  border-radius: 6px;
+}
+
+.welcome{
+  font-size: 50rpx;
+  padding-left: 38rpx;
+  padding-top: 46rpx;
+  padding-bottom: 46rpx;
+  color: #3C3C3C;
+}
+
+/* 功能集 */
+.fSize{
+  font-size: 26rpx !important;
+}
+.icon_img{
+  width: 92rpx !important;
+  height: 92rpx !important;
+}
+
+.me_font{
+  font-size: 40rpx;
+  color: #908F8F;
+}
+
+
+/* img自定义，更改默认属性 */
+.van-grid-item__content{
+  padding: var(--grid-item-content-padding,26px 8px) !important;
+}
+.van-grid-item__icon+.van-grid-item__text{
+  margin-top: 20px !important;
+}
+
+.van-cell{
+  line-height: var(--cell-line-height,44px) !important;
+}
+.van-cell__title,.van-cell__value{
+  padding-left: 22rpx;
+}
+.van-cell__left-icon-wrap,.van-cell__right-icon-wrap {
+  height: var(--cell-line-height,44px) !important;
+}
+
+/* WeChat logo */
+.logo{
+  /* padding-top: 3.8%; */
+  width: 172rpx;
+  padding-left: 40rpx;
+}
+.logoDesc{
+  padding-left: 0rpx !important;
+}
+.person_desc{
+  padding-left: 20rpx;
+  margin-top: 10px;
+  width:538rpx;
+  line-height: 40px;
+  font-size: 20px;
+}
+.guanjia{
+  margin-left: 40rpx;
+  width: 670rpx;
+  height: 128rpx;
+  margin-top: 88rpx;
+  background: linear-gradient(180deg,#268cff, #33a1ff);
+  border-radius: 10px 10px 0px 0px;
+  margin-bottom: 40rpx;
+}
+.guan_desc{
+  font-size: 32rpx;
+  line-height: 44rpx;
+  padding-left:38rpx;
+  color: #FFFFFF;
+  padding-top: 42rpx;
+}
+
+.img_com{
+  padding-top: 32rpx;
+}
+.nickName{
+  color: #3C3C3C;
+  font-size: 36rpx;
+}
+.houseInfo{
+  font-size: 28rpx;
+  color: #908F8F;
+}
+
+.xunzhang{
+  /* padding-top: 15rpx; */
+  padding-left: 32rpx;
+  /* padding-top: 24rpx; */
+}
+
+/* eye */
+.eye{
+  padding-left: 10rpx;
+}
+/* tabbar相关的 */
+
+.gg{
+  padding: 0rpx 40rpx;
+  height: 80%;
+  color: #666666;
+  font-size: 28rpx;
+}
+
+.minx{
+  float:right   ;
+  height: 70rpx;
+  width: 70rpx;
+}
+
+.van-dialog__header {
+  padding: 20rpx 0rpx !important;
+}
+
+/* vant dialog弹窗的确定按钮统一改为 */
+.dialog-index--van-dialog__confirm{
+  color: #189AFE !important;
+}
+
+.van-grid-item__content {
+  padding: var(--grid-item-content-padding,14px 0px) !important;
+}
+
+.vcell{
+  /*  */
+  line-height: 60rpx;
+  padding: var(--cell-vertical-padding,1px) var(--cell-horizontal-padding,22px) !important;
+}
+
+.van-icon-arrow:before {
+  color: #999999;
+}
+
+.diag{
+  font-size: 28rpx !important;
+  color: #777777 !important;
+  padding-top: 0rpx !important;
+}
+
+.txt{
+  text-overflow:ellipsis;
+  /* z-index: -1; */
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+ }
+
+
+ /* 联系我UI */
+.wrapper{
+  width: 80% !important;
+  margin-left: 10% !important;
+}
+
+.wechat_img{
+  width: 560rpx !important;
+  height: 100% !important;
+}
+
+/* 问题反馈的下划线去除 */
+.van-hairline--top:after {
+  border-top-width: 0px !important;
+}
+
+/* 反馈记录 */
+.advice_list{
+  text-align: center;
+  margin-top: 136rpx;
+}
+
+.advice_btn{
+  color: #0194D5;
+  font-size: 24rpx;
+  background-color: #E7EFF6;
+}
+
+.userinfo-avatar {  
+  overflow: hidden;
+  display: block;
+  width: 132rpx;
+  height: 132rpx;
+  border-radius: 50%;
+  border: 2px solid #fff;
+} 
+
+.my_btn{
+  background-color: #FFF;border:0;-webkit-tap-highlight-color: transparent;height:auto;
+  border-radius: 0;
+  padding:0rpx;
+  margin:0rpx;
+  line-height: 1;
+  font-size: 14px;
+  color: rgb(59, 56, 56);
+}
+.cust_name{
+  font-size: 16px;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:1;
+  margin-left: 10px;
+}
+
+.touxiang{
+  background-color: #FFF;
+  border:0;
+  -webkit-tap-highlight-color: transparent;
+  height:auto;
+  border-radius: 0;
+  padding:0rpx;
+  margin:0rpx;
+  line-height: 1;
+  font-size: 14px;
+  color: rgb(59, 56, 56);
+  height: 70px; 
+  width: 90px;
+  margin-top: 3px;
+}
+
+.touxiang::after{ 
+  border: none; 
+}  
+ 

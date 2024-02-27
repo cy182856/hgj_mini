@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "账单详情",
+  "usingComponents": {
+    "van-row": "@vant/weapp/row/index",
+    "van-col": "@vant/weapp/col/index"
+  }
+}

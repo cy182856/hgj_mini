@@ -1,0 +1,63 @@
+<import src="../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<van-dialog id="van-dialog" />
+<view class="charge-top-view">
+  <van-row>
+    <van-col span="7" custom-class="top-item-class">
+      <view class="title-name">已充时长(分)</view>
+      <view class="title-value">{{chargeOrdLogDtl.chargeTotalTime}}</view>
+    </van-col>
+    <van-col span="10" custom-class="top-item-class">
+      <view class="title-name" >已充电量(度)</view>
+      <view class="title-value">{{chargeOrdLogDtl.chargeDiscountVo>0 ? chargeOrdLogDtl.chargeDiscountVo + '/': ''}}{{chargeOrdLogDtl.chargeTotalVo}}</view>
+      <block wx:if="{{chargeOrdLogDtl.chargeDiscountVo>0}}">
+        <view style="height:26rpx;margin-top: -8rpx;" class="title-name">优惠时段/总充电量</view>
+      </block>
+    </van-col>
+    <van-col span="7" custom-class="top-item-class">
+      <view class="title-name">已消费金额(元)</view>
+      <view class="title-value">{{chargeOrdLogDtl.chargeTotalAmt}}</view>
+    </van-col>
+  </van-row>
+  <view decode="{{true}}" style="height:20rpx"> </view>
+</view>
+<view class="charge-info-view">
+  <view class="van-cell-item">
+    <van-cell title="区域" custom-class="van-cell-item-line"
+    value="{{chargeOrdLogDtl.chargeAreaName}}" border="{{ false }}" />
+    <van-cell title="充电桩" custom-class="van-cell-item-line"
+    value="{{chargeOrdLogDtl.deviceName}}" border="{{ false }}" />
+    <van-cell title="开始时间" custom-class="van-cell-item-line"
+     value="{{chargeOrdLogDtl.startTimeDesc == '' ? '----' : chargeOrdLogDtl.startTimeDesc}}" border="{{ false }}"/>
+    <van-cell title="结束时间" custom-class="van-cell-item-line"
+     value="{{chargeOrdLogDtl.endTimeDesc == '' ? '----' : chargeOrdLogDtl.endTimeDesc}}" border="{{ false }}"/>
+    <van-cell title="订单状态" custom-class="van-cell-item-line"
+    border="{{ false }}" >
+      <view slot="">
+        <view class="{{chargeOrdLogDtl.ordStat == 'P' ? 'charged-stat' : 'charge-log-stat'}}">
+          {{chargeOrdLogDtl.ordStatDesc}}
+        </view>
+      </view>  
+    </van-cell>
+  </view>
+</view>
+<view class="charge-tips-view">
+  <van-row>
+    <van-col span="2" custom-class="tips-class">
+     <van-icon name="info" color="#FD9A03" size="18" custom-class="tips-icon"/>
+    </van-col>
+    <van-col span="22" custom-class="tips-class">
+      <text class="tips-text"> 充电完成后请尽快拔枪离场</text>
+    </van-col>
+  </van-row>
+</view>
+
+<block wx:if="{{chargeOrdLogDtl.ordStat == 'P' && canClick}}">
+<view class="charge-btn" style="padding-bottom:{{isIphoneX ? '36rpx' : '0rpx'}}">
+  <view class="charge-btn-view-class">
+    <van-button custom-class="charge-btn-class" data-item="{{chargeOrdLogDtl}}" bind:click="endCharge" color="#258bff" block>
+      <text>结束充电</text> 
+    </van-button>
+  </view>
+</view>
+</block>

@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "物业费缴纳",
+  "usingComponents": {
+    "van-loading": "@vant/weapp/loading/index",
+    "van-toast": "@vant/weapp/toast/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-divider": "@vant/weapp/divider/index",
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+    "van-submit-bar": "@vant/weapp/submit-bar/index",
+    "van-panel": "@vant/weapp/panel/index"
+  }
+}

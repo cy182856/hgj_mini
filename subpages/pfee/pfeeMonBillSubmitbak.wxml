@@ -1,0 +1,182 @@
+<!--subpages/pfee/pfeeMonBillSubmit.wxml-->
+<import src="../../template/empty/empty.wxml"></import>
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />
+
+<view>
+  <view  class="img-view">
+    <image class="head-img" src="../../images/pfee/headbackgroung.png"/>
+  </view>
+
+  <view class="head-text-view">
+    <view class="head-text" style="font-size:32rpx"><text>{{shortName}}</text></view>
+    <view class="head-text" style="font-size:28rpx"><text>{{houseName}}</text></view>
+  </view>
+  <view class="head-menu-view">
+    <van-row>
+      <van-col span="12" bindtap="toPfeeMonBill">
+        <view style="display:flex;">
+          <image src="../../images/pfee/bill.png" class="menu-img"/>
+          <view style="margin-top:25rpx;">账单中心</view>
+        </view>
+      </van-col>
+      <van-col span="12" bindtap="toOrdList">
+        <view style="display:flex;">
+          <image src="../../images/pfee/ord.png" class="menu-img"/>
+          <view style="margin-top:25rpx;">付款订单</view>
+        </view>
+      </van-col>
+    </van-row>
+  </view>
+</view>
+
+
+
+<view class="body">
+  <block wx:if="{{pfeeRemark != null && pfeeRemark != ''}}">
+    <van-row>
+      <van-col span="24" >
+        <text style="font-size:28rpx;color:#363F4D;">{{pfeeRemark}}</text>
+      </van-col>
+    </van-row>
+    <van-row>
+      <van-col span="12" >
+        <text style="font-size:26rpx;color:#A0A0A0;">请选择缴费时间</text>
+      </van-col>
+      <van-col span="12" style="text-align:right;">
+        <block wx:if="{{pfeePayMon != ''}}">
+          <text style="font-size:24rpx;color:#A0A0A0;padding-right:20rpx;">缴清月份:{{pfeePayMonDesc}}</text>
+        </block>
+      </van-col>
+    </van-row>
+  </block>
+  <block wx:else>
+    <van-row>
+      <van-col span="12" >
+        <text style="font-size:28rpx;">请选择缴费时间</text>
+      </van-col>
+      <van-col span="12" style="text-align:right;">
+        <block wx:if="{{pfeePayMon != ''}}">
+          <text style="font-size:24rpx;color:#A0A0A0;padding-right:20rpx;">缴清月份:{{pfeePayMonDesc}}</text>
+        </block>
+      </van-col>
+    </van-row>
+  </block>
+
+  <view wx:if="{{pfeeYearBillVos == null || pfeeYearBillVos.length == 0}}">
+    <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无需要缴费的账单'}}"></template>
+  </view>
+  <view wx:else>
+    <scroll-view scroll-y="true" style="height: 1000rpx;padding-top:10rpx;" >
+      <view wx:for="{{pfeeYearBillVos}}" wx:for-item="pfeeYearBillVo" wx:key="key" wx:for-index="iy">
+        <van-row custom-class="bill-title">
+          <van-col span="19" >
+            <text style="font-size:28rpx;">{{pfeeYearBillVo.billYear}}年</text>
+          </van-col>
+          <van-col span="5" style="text-align:right;">
+            <van-checkbox value="{{ checkboxArr[iy] }}" bind:change="selectAll" data-iy="{{iy}}">全选</van-checkbox>
+          </van-col>
+        </van-row>
+
+        <van-row gutter="9" custom-class="row-off-class">
+          <view wx:for="{{pfeeYearBillVo.pfeeMonBillDtos}}" wx:for-item="pfeeMonBillDto" wx:key="key" wx:for-index="im">
+            <van-col span="6" custom-class="bill-cell"	>
+              <view wx:if="{{pfeeMonBillDto.stat == 'I' && pfeeMonBillDto.billMon < currYearMon}}">
+                <view class="bill-head" style="background-color:#F9CDA4">
+                  已逾期
+                </view>
+                <view class="bill-body-unpay {{selectedBillMons[iy][im]==pfeeMonBillDto.billMon?'selected':''}}" 
+                    bindtap="selected" data-billmon="{{pfeeMonBillDto.billMon}}" 
+                    data-iy="{{iy}}" data-im="{{im}}">
+                  <view class="bill-mon bill-mon-re">
+                    <text class="bill-mon-ab">{{pfeeMonBillDto.mon}}月</text>
+
+                    <block wx:if="{{selectedBillMons[iy][im]==pfeeMonBillDto.billMon}}">
+                      <view class="top-right-icon">
+                        <van-icon name="success" custom-style="position: absolute;top:8rpx;right:8rpx;color:#2C8AFF;"/>
+                      </view>
+                    </block>
+                  </view>
+                  <view class="bill-mon">
+                    <block wx:if="{{pfeeMonBillDto.billAmtYuan.length > 5}}">
+                      ¥{{pfeeMonBillDto.billAmtYuan}}.{{pfeeMonBillDto.billAmtCent}}
+                    </block>
+                    <block wx:else>
+                      ¥<text style="font-size:36rpx">{{pfeeMonBillDto.billAmtYuan}}</text>
+                      <text>.{{pfeeMonBillDto.billAmtCent}}</text>
+                    </block>
+                  </view>
+                </view>
+              </view>
+              <view wx:elif="{{pfeeMonBillDto.stat == 'I' && pfeeMonBillDto.billMon >= currYearMon}}">
+                <view class="bill-head" style="background-color:#73B1FF">
+                  未付款
+                </view>
+                <view class="bill-body-unpay {{selectedBillMons[iy][im]==pfeeMonBillDto.billMon?'selected':''}}" 
+                    bindtap="selected" data-billmon="{{pfeeMonBillDto.billMon}}" 
+                    data-iy="{{iy}}" data-im="{{im}}">
+                  <view class="bill-mon bill-mon-re">
+                    <text class="bill-mon-ab">{{pfeeMonBillDto.mon}}月</text>
+
+                    <block wx:if="{{selectedBillMons[iy][im]==pfeeMonBillDto.billMon}}">
+                      <view class="top-right-icon">
+                        <van-icon name="success" custom-style="position: absolute;top:8rpx;right:8rpx;color:#2C8AFF;"/>
+                      </view>
+                    </block>
+                  </view>
+                  <view class="bill-mon">
+                    <block wx:if="{{pfeeMonBillDto.billAmtYuan.length > 5}}">
+                      {{pfeeMonBillDto.billAmtYuan}}.{{pfeeMonBillDto.billAmtCent}}
+                    </block>
+                    <block wx:else>
+                      ¥<text style="font-size:36rpx">{{pfeeMonBillDto.billAmtYuan}}</text>
+                      <text>.{{pfeeMonBillDto.billAmtCent}}</text>
+                    </block>
+                  </view>
+                </view>
+              </view>
+              <view wx:else>
+                <view class="bill-head" style="background-color:#BBBBBB">
+                  已付款
+                </view>
+                <view class="bill-body-pay">
+                  <view class="bill-mon bill-mon-re">
+                    <text class="bill-mon-ab">{{pfeeMonBillDto.mon}}月</text>
+                  </view>
+                  <view class="bill-mon">
+                    <block wx:if="{{pfeeMonBillDto.billAmtYuan.length > 5}}">
+                      ¥{{pfeeMonBillDto.billAmtYuan}}.{{pfeeMonBillDto.billAmtCent}}
+                    </block>
+                    <block wx:else>
+                      ¥<text style="font-size:36rpx">{{pfeeMonBillDto.billAmtYuan}}</text>
+                      <text>.{{pfeeMonBillDto.billAmtCent}}</text>
+                    </block>
+                  </view>
+                </view>
+              </view>
+
+            </van-col>
+          </view>
+        </van-row>
+      </view>
+      <view style="height:50rpx;">
+
+      </view>
+    </scroll-view>
+    
+  </view>
+
+</view>
+
+
+
+
+<!-- 提交按钮 -->
+<van-submit-bar button-class="pfee-buttom"
+    price="{{ ordAmt }}"
+    button-text="立即支付"
+    bind:submit="submitPfee"
+  />

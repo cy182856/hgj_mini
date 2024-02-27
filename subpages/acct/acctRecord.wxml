@@ -1,0 +1,145 @@
+<import src="../../template/empty/empty.wxml"></import>
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<view style="min-height:100%;width:100%;position: absolute;background-color: {{bgColor}};padding-bottom: {{btuBottom}};">
+  <view class="acctOrd_obj">
+    <view class="position-top" >
+      <view>
+        <van-row>
+          <van-col class="ellipsis_view"  span="24">
+            <van-col span="1">
+            </van-col>
+            <view bindtap="showCondition">
+              <van-cell custom-class="ordQueryCondition">
+                <van-col class="ellipsis_view"  span="21">
+                  <view>{{ordQueryDesc}}</view>
+                </van-col>
+                <van-col span="2">
+                  <text class="iconfont {{iconName}}"></text>
+                </van-col>
+                <van-col span="1">
+                </van-col>
+              </van-cell>
+            </view>
+          </van-col>
+        </van-row>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{!isLoading&&ACCTLOGDTOS.length==0}}">
+    <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无账户明细记录'}}"></template>
+  </view>
+  <view wx:else style="padding-top:20rpx;">
+      <view class="acct_ord_content" wx:for="{{ACCTLOGDTOS}}" wx:for-item="value">
+        <block wx:if="{{value.transType=='1302'}}">
+          <view class="iconfont jia-save acct_img" style="width:20%;"></view>
+        </block>
+        <block wx:elif="{{value.transType=='2302'||value.transType=='2801'}}">
+          <view class="iconfont jia-tuikuan acct_refund" style="width:20%;"></view>
+        </block>
+        <block wx:else>
+          <view class="iconfont jia-charge acct_pay" style="width:20%;"></view>
+        </block>
+         <view class="acct_ord_mid">
+           <block wx:if="{{value.transType=='2801'}}">
+            <view class="acct_ord_mid_transType">线下退款</view>
+           </block>
+           <block wx:else>
+            <view class="acct_ord_mid_transType">{{value.transTypeDesc}}</view>
+           </block>
+          
+           <view class="acct_ord_mid_info">日期：{{value.acctDateTime}}</view>
+         </view>
+         <view class="acct_ord_bottom">
+           <block wx:if="{{value.transType=='1302'}}"><text style="color: #1798dc;font-weight: bold;">+￥{{value.transAmt}}</text></block>
+           <block wx:else>-￥{{value.transAmt}}</block> 
+           <view class="acct_ord_mid_info">余额：{{value.acctBal}}</view>
+         </view>
+      </view>
+  </view>
+  <view wx:if="{{!isLoading&&TOTALRECORD!=CURRENTCOUNT}}" class="record_more" bindtap="queryMore">
+            <text>加载更多...</text>
+    </view>
+    <view wx:elif="{{!isLoading&&TOTALRECORD==CURRENTCOUNT&&TOTALRECORD!=0}}" class="record_none">
+        <text>加载完成</text>
+    </view>
+</view>
+
+
+<van-popup show="{{ IS_SHOW_CHOOSE_AREA }}" position="bottom" z-index="666" bind:click-overlay="hideDateOverLay" overlay="{{isShowOverlay}}">
+  <calendar 
+      year="{{curYear}}"
+      month="{{curMonth}}" 
+      day="{{today}}" 
+      
+      header="{{header}}" 
+      next="{{next}}" 
+      prev="{{prev}}"
+      
+      
+      weeks="{{week_title}}"
+      weeks-type="{{title_type}}" 
+      show-more-days="{{more}}" 
+      showOtherDesc = false
+      selectType = "multiple"
+
+      cell-size="{{cellSize}}"    
+      
+      days-color="{{style}}"
+      active-type="{{activeType}}"
+      next-month='hi'
+      bindnextMonth='nextMonth'                
+      bindprevMonth='prevMonth'
+      binddateChange='dateChange'
+      binddayClick='dayClick'
+      bindconfirmDate = "confirmDate"
+      calendar-style="calendar-style" 
+      header-style="header-style" 
+      board-style="board-style" 
+      weeks-style="weeks-style"
+      month-btn-style ="month-btn-style"
+      confirm-btn-style = "confirm-btn-style"
+      calendar-days-style = "calendar-days-style"
+      calendar-day = "calendar-day"
+      showBtn = "{{true}}"
+      selStartDate = "{{selStartDate}}"
+      selEndDate = "{{selEndDate}}"
+  />
+</van-popup>
+<van-popup
+  position="top"
+  show="{{ isShowCondition }}"
+  bind:click-overlay="showCondition"
+  duration="200"
+  custom-style="margin-top:100rpx;height:auto;"
+>
+  <view class="deadline"></view>
+  <view class="chooseTransTypeCondition">
+    <!-- <van-row>
+      <van-col span="8"><view class="condition_left">交易类型</view></van-col>
+      <van-col span="16">  
+        <van-dropdown-menu>
+          <van-dropdown-item value="{{choosed_transType}}" options="{{ transTypes }}"  bind:change="chooseTransType" id="transTypeItem"/>
+        </van-dropdown-menu>
+      </van-col>
+    </van-row> -->
+    
+    <view class="deadline"></view>
+    <view class="condition_left">日期<text style="color:red;">*</text></view>
+    <view>
+      <van-row custom-class="condition_acctLog_col">
+        <!-- <van-col span="6" custom-class="condition_acctLog_display"><view class="condition_stat" data-date='D' bindtap="chooseThisDate" style="{{CHOOSED_DATE=='D'?'background-color:#1798dc;color:white;':''}}">本日</view></van-col> -->
+        <van-col span="6" custom-class="condition_acctLog_display"><view class="condition_stat" data-date='W' bindtap="chooseThisDate" style="{{CHOOSED_DATE=='W'?'background-color:#1798dc;color:white;':''}}">本周</view></van-col>
+        <van-col span="6" custom-class="condition_acctLog_display"><view class="condition_stat" data-date='L' bindtap="chooseThisDate" style="{{CHOOSED_DATE=='L'?'background-color:#1798dc;color:white;':''}}">上周</view></van-col>
+        <van-col span="6" custom-class="condition_acctLog_display"><view class="condition_stat" data-date='M' bindtap="chooseThisDate" style="{{CHOOSED_DATE=='M'?'background-color:#1798dc;color:white;':''}}">本月</view></van-col>
+      </van-row>
+    </view>
+    <view class="condition_date_display">
+          <view class="condition_date_zdy" style="width:{{chooseTimeWidth}}" bindtap="chooseTimeArea">{{ CHOOSED_TIME_AREA }}</view>   
+    </view>
+</view>
+<view class="deadline"></view>
+<view class="cellRow2">
+  <view class="queryButton" bindtap="onQueryAcctLogInfo">查询</view>
+</view>
+</van-popup>

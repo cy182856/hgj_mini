@@ -1,0 +1,130 @@
+<wxs module="tools" >
+  var getCancelCnt = function (cancelCnt, onCancelCnt) {
+    var result = cancelCnt + onCancelCnt;
+    return result ;
+  }
+  module.exports = {
+  getCancelCnt: getCancelCnt,
+  };
+</wxs>
+<import src="../../../template/empty/empty.wxml"></import>
+<import src="../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<van-toast id="van-toast" />
+<view wx:if="{{showErrMsg}}">
+  <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:msg}}"></template>
+</view>
+<view wx:if="{{showPaycontainer}}">
+  <view style="background-color:#ffffff;padding:60rpx 0rpx 30rpx 0rpx;">
+      <view class="orderdetail-head">
+        <view>
+          <van-image round width="3.5rem" height="3.5rem" wx:if="{{ orderDetail.busiId == '01' }}" src="/images/home/icon_yuyue.png"/>
+          <van-image round width="3.5rem" height="3.5rem" wx:elif="{{ orderDetail.busiId == '02' }}" src="/images/home/icon_wuyefei.png"/>
+          <van-image round width="3.5rem" height="3.5rem" wx:elif="{{ orderDetail.busiId == '03' }}" src="/images/home/icon_baoxiu.png"/>
+          <van-image round width="3.5rem" height="3.5rem" wx:elif="{{ orderDetail.busiId == '04' }}" src="/images/home/icon_shoukuan.png"/>
+          <van-image round width="3.5rem" height="3.5rem" wx:elif="{{ orderDetail.busiId == '10' }}" src="/images/home/icon_car.png"/>
+          <van-image round width="3.5rem" height="3.5rem" wx:else src="/images/home/icon_shoukuan.png"/>
+        </view>
+        <view style="margin-top:6rpx;font-size:36rpx">
+          {{orderDetail.busiIdDesc}}
+        </view>
+        <view style="margin-top:24rpx;font-size:48rpx;font-weight:700;">
+          ￥{{orderDetail.ordAmt}}
+        </view>
+      </view>
+  </view>
+  <view class="paycontainer">
+    <view style="padding:0rpx 30rpx" wx:if="{{showMainDot}}">
+      <van-divider dashed />
+    </view>
+    <view class="main">
+      <view class="main-item">
+        <view class="item-lable">
+          交易流水号
+        </view>
+        <view class="item-body">
+          {{orderDetail.txnId}}
+        </view>
+      </view>
+      <view class="main-item">
+        <view class="item-lable">
+          支付时间
+        </view>
+        <view class="item-body">
+          {{orderDetail.payDateDesc}}
+        </view>
+      </view>
+      <view class="main-item" wx:if="{{orderDetail.objName != null && orderDetail.objName != ''}}">
+        <view class="item-lable">
+          预约标的
+        </view>
+        <view class="item-body">
+          {{orderDetail.objName}}
+        </view>
+      </view>
+      <view class="main-item">
+        <view class="item-lable">
+          当前状态
+        </view>
+        <view class="item-body" style="color:#fbbd08">
+          {{orderDetail.payStatDesc}}
+        </view>
+      </view>
+      <view class="main-item" wx:if="{{payStat == 'R'}}">
+        <view class="item-lable">
+          退款总金额
+        </view>
+        <view class="item-body" style="color:red;">
+          ￥{{orderDetail.refAmt}}
+        </view>
+      </view>
+      <view class="main-item" wx:if="{{orderDetail.busiId == '02'}}">
+        <view class="item-lable">
+          缴纳月份
+        </view>
+        <view class="item-body">
+          {{orderDetail.remark}}
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{orderDetail.apptOrdDtlDtos != null && orderDetail.apptOrdDtlDtos.length != 0}}">
+      <view style="padding:0rpx 30rpx">
+        <van-divider dashed />
+      </view>
+      <view class="main" style="font-size:28rpx;">
+        <view class="main-title">预约明细</view>
+        <van-row>
+          <van-col span="12" class="col-left">预约时间段</van-col>
+          <van-col span="6" class="col-center">单价</van-col>
+          <van-col span="6" class="col-center">已退/总量</van-col>
+        </van-row>
+        <van-row wx:for="{{orderDetail.apptOrdDtlDtos}}" wx:for-item="apptOrdDtlDto" wx:key="key">
+          <van-col span="12" class="col-left col-text">{{apptOrdDtlDto.apptDateDesc}} {{apptOrdDtlDto.beginTimeDesc}}~{{apptOrdDtlDto.endTimeDesc}}</van-col>
+          <van-col span="6" class="col-center col-text">￥{{apptOrdDtlDto.apptPriceDesc}}</van-col>
+          <van-col span="6" class="col-center col-text">{{tools.getCancelCnt(apptOrdDtlDto.cancelCnt, apptOrdDtlDto.onCancelCnt)}}/{{apptOrdDtlDto.objCnt}}</van-col>
+        </van-row>
+      </view>
+    </view>
+    <view wx:if="{{orderDetail.refundTransLogDtos != null && orderDetail.refundTransLogDtos.length != 0}}">
+      <view style="padding:0rpx 30rpx">
+        <van-divider dashed />
+      </view>
+      <view class="main">
+        <view class="main-title">退款明细</view>
+        <van-row>
+          <van-col span="12" class="col-left">退款时间</van-col>
+          <van-col span="6" class="col-center">退款金额</van-col>
+          <van-col span="6" class="col-center">退款状态</van-col>
+        </van-row>
+        <van-row wx:for="{{orderDetail.refundTransLogDtos}}" wx:for-item="refundTransLogDto" wx:key="key">
+          <van-col span="12" class="col-left col-text">{{refundTransLogDto.payDateDesc}}</van-col>
+          <van-col span="6" class="col-center col-text">￥{{refundTransLogDto.ordAmt}}</van-col>
+          <van-col span="6" class="col-center col-text">{{refundTransLogDto.payStatDesc}}</van-col>
+        </van-row>
+      </view>
+    </view>
+    <view class="footer">
+      
+    </view>
+  </view>
+</view>

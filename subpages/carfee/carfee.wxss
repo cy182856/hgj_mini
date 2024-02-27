@@ -1,0 +1,221 @@
+.house-info-view{
+  display: flex;
+}
+
+.house-left-view{
+  width: 70%;
+}
+
+.house-right-view{
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top:20rpx;
+}
+
+.house-name-view{
+  font-size: 32rpx;
+  margin: 54rpx 10rpx 0rpx 20rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.house-no-info{
+  font-size: 28rpx;
+  margin: 16rpx 10rpx 20rpx 20rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.check-record-class{
+  height: 66rpx ;
+  border-radius: 0.5em;
+  border: 2rpx solid #FFFFFF;
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: #fff;
+  padding: 0rpx 20rpx;
+}
+
+.car-info-title{
+  padding:28rpx 0rpx 20rpx 24rpx;
+  color: #363F4D;
+  font-weight: 600;
+  font-size: 32rpx;
+}
+
+.car-info-item{
+  background-color: #fff;
+  display: flex;
+  margin: 20rpx;
+  border-radius: .25em;
+}
+
+.car-left-view{
+  width: 70%;
+}
+
+.car-right-view{
+  width: 30%;
+}
+
+.car-info-view{
+  font-size: 32rpx;
+  margin: 20rpx 10rpx 0rpx 20rpx;
+  font-weight:600;
+  color: #363F4D;
+}
+
+.car-payupdata-view{
+  font-size: 28rpx;
+  margin: 20rpx 10rpx 20rpx 20rpx;
+  color: #999999;
+}
+
+.car-right-view{
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  flex-direction: column;
+  margin-right: 40rpx;
+  margin-bottom: 20rpx;
+}
+
+.check-paymonth-view{
+  background-color: #fff;
+  border-radius: .25em;
+}
+
+.monfee-view{
+  font-size: 28rpx;
+  color: #3292FF;
+}
+
+.pay-info-view{
+  position: fixed;
+  bottom: 0px;
+  height: 140rpx;
+  width: 100%;
+  z-index:66;
+  background-color: #f7f7f7;
+}
+
+.pay-flex-view{
+  background-color: #fff;
+  display: flex;
+  height: 100%;
+}
+
+.pay-btn-view{
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pay-btn-class{
+  height: 80rpx !important;
+  width: 300rpx !important;
+  border-radius: 1.5em !important;
+  font-size: 32rpx !important;
+}
+
+.pay-fee-view{
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  margin-left: 30px;
+  font-size: 28rpx;
+}
+
+.payupdate-desc{
+  font-size: 24rpx;
+  margin-left: 30rpx;
+  color: #999999;
+  margin-bottom: 20rpx;
+  padding-bottom:54rpx;
+}
+
+.payfee-desc{
+  color: #E02020;
+  font-size: 36rpx;
+}
+
+.van-field__label{
+  font-size: 28rpx !important;
+  color: #363F4D !important;
+  width: 230rpx !important;
+}
+.van-field__input{
+  font-size: 28rpx !important;
+  color: #363F4D !important;
+}
+
+.choose-car-view{
+  background-color: #fff;
+  margin: 24rpx 30rpx 24rpx 30rpx;
+  border-radius:.5em;
+}
+
+.check-car-radio{
+  margin-bottom: 20rpx;
+}
+
+.jia-xuanzhong{
+  font-size: 32rpx;
+  color: #0378FE;
+}
+
+.jia-weixuanzhong{
+  font-size: 32rpx;
+}
+
+.select-payupdate-view{
+  background-color: #fff;
+  margin: 24rpx 30rpx 24rpx 30rpx;
+  border-radius:.5em;
+}
+
+.img-view{
+  height: 280rpx;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  z-index: -1;
+  background-color: white;
+}
+.head-img{
+  height: 100%;
+  width: 100%;
+}
+.head-text-view{
+  margin-left: 72rpx;
+  color:white;
+  height: 128rpx;  
+}
+.head-text{
+  line-height: 50rpx;
+}
+
+.cfee-pay-desc{
+  color: #999999;
+  font-weight: 500;
+}
+
+.none-car-toast{
+  padding:90rpx;
+}
+
+::-webkit-scrollbar {
+  display:none;
+  width:0;
+  height:0;
+  color:transparent;
+}

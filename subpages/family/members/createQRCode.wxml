@@ -1,0 +1,25 @@
+
+<view class="rootpage">
+  <view class="qr-root">
+  <view class="qr-content-root">
+    
+  <view class="qr_content">
+  <view class="qr-text_title">绑定二维码</view>
+  <view class="qr_tip_title">微信扫码关注</view>
+  <van-image width="280" height="280" src="{{imgUrl}}" />
+  <view class="qr-text">
+    <text class="text-house-name">二维码有效期：</text>
+    <text class="text-house-name">{{qrExpTime}}</text>
+  </view>
+  </view>
+  <view style="width: 100%;height: 40rpx; margin-top:-2rpx; margin-bottom:-2rpx;">
+    <image src="/images/mine/radius_middle.png" mode="aspectFill" style="width:100%;height:100%;"/>
+  </view>
+<view class="area-container">
+  <text class="text-area-name ellipsis_view">{{commanyShortName}}</text>
+  <view class="text-house-name ellipsis_view"> {{areaName}} </view>
+</view>
+
+ </view>
+  </view>
+</view>

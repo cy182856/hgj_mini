@@ -1,0 +1,59 @@
+<import src="../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<view class="wrapper">
+  <view class="handBtn">
+    <view style="height:50%;display: flex; align-items: center;"> 
+      <van-button  custom-class= "delBtn" bind:click="clearDraw" size="small">重签</van-button>
+    </view>
+    <view style="height:50%;display: flex; align-items: center;"> 
+      <van-button  custom-class= "subBtn" bind:click="saveAsImg" size="small">确认</van-button>
+    </view>
+  </view>
+  <view wx:if="{{showCanvas}}"  class="handCenter" style="width:{{windowWidth}}px;">
+      <canvas type="2d" id="draw-canvas" 
+              disable-scroll="false"
+              bindtouchstart="touchStart"
+              bindtouchmove="touchMove"
+              bindtouchend="touchEnd"
+              bindtap="getCanvasColor"
+              style="width:100%;height:{{windowHeight}}px;">
+        </canvas>
+        <image hidden="{{!canvasHidden}}" bindtap="clickImg" class="imgCanvas" src="{{imgCanvas}}"
+        style="width:{{windowWidth}}px;height:{{windowHeight}}px;"></image>
+  </view>
+  <view wx:if="{{!showCanvas}}"  class="handCenter" style="width:{{windowWidth}}px;">
+
+  </view>
+  <view class="handRight">
+    <view class="handTitle">
+      <view class = "transform-view">请</view>
+      <view class = "transform-view">使</view>
+      <view class = "transform-view">用</view>
+      <view class = "transform-view">正</view>
+      <view class = "transform-view">楷</view>
+      <view class = "transform-view">在</view>
+      <view class = "transform-view">以</view>
+      <view class = "transform-view">下</view>
+      <view class = "transform-view">区</view>
+      <view class = "transform-view">域</view>
+      <view class = "transform-view">内</view>
+      <view class = "transform-view">签</view>
+      <view class = "transform-view">字</view>
+      <view class = "transform-view">:</view>
+    </view>
+  </view>
+</view>
+
+<van-popup
+  show="{{ showToast }}"
+>
+<view class="toast-view">
+  <text class = "transform-view">请</text>
+  <text class = "transform-view">签</text>
+  <text class = "transform-view">写</text>
+  <text class = "transform-view">您</text>
+  <text class = "transform-view">的</text>
+  <text class = "transform-view">名</text>
+  <text class = "transform-view">字</text>
+</view>
+</van-popup>

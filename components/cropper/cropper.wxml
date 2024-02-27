@@ -1,0 +1,17 @@
+<import src="./we-cropper.wxml"/>
+
+<view class="cropper-wrapper">
+    <template is="we-cropper" data="{{...cropperOpt}}"/>
+    <view class="cropper-buttons" style = "margin-bottom:{{isFullSucreen ? '42rpx' : '20rpx' }}">
+        <view
+                class="croperCancel"
+                bindtap="croperCancel">
+            取消
+        </view>
+        <view
+                class="getCropperImage"
+                bindtap="getCropperImage">
+            确定
+        </view>
+    </view>
+</view>

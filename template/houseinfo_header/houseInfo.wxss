@@ -1,0 +1,20 @@
+.houseInfo-container {
+  margin-top: 2rpx;
+  margin-left: 60rpx;
+  margin-top: 70rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.text-area{
+  font-size: 36rpx;
+  font-weight: 600;
+  color: white;
+}
+.text-house{
+  margin-top: 25rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  color: white;
+
+}

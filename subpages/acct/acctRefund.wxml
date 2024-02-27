@@ -1,0 +1,64 @@
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<van-dialog id="van-dialog" />
+<view class="refund_Info">
+  <view class="refund_acct_bal">
+    <view class="refund_acct_bal_title">退款金额(元)</view>
+    <view class="refund_acct_bal_content">{{acctBal}}</view>
+  </view>
+  <view class="refund_amt">
+    <view class="refund_amt_left">
+        <view class="refund_amt_title">{{refundOnlineAmt}}</view>
+        <view class="refund_amt_text">退回原支付账户</view>
+    </view>
+    <view class="refund_amt_right">
+        <view class="refund_amt_title">{{refundOfflineAmt}}</view>
+        <view class="refund_amt_text">人工处理退款</view>
+    </view>
+  </view>
+</view>
+
+<view class="refund_info_instru">
+  <view>说明:</view>
+  <view class="save_content_instru_step">
+    <view class="refund_content_instru_idNo">1、</view> 
+    <view class="refund_content_instru_desc">账户余额退款需全额退款，不支持部分金额退款</view>
+  </view>
+  <view class="save_content_instru_step">
+    <view class="refund_content_instru_idNo">2、</view> 
+    <view class="refund_content_instru_desc">退款金额根据实际充值、退款时间，可能会分为两部分</view>
+  </view>
+  <view class="save_content_instru_step">
+    <view class="refund_content_instru_idNo">3、</view> 
+    <view class="refund_content_instru_desc">充值后于160天内(含)页面发起退款，可退回原支付账户。</view>
+  </view>
+  <view class="save_content_instru_step">
+    <view class="refund_content_instru_idNo">4、</view> 
+    <view class="refund_content_instru_desc">充值后超过160天需要联系客服进行人工退款，每笔退款服务费10.00元。由工作人员自受理之日起十个工作日内退款，服务费10.00元/次；</view>
+  </view>
+</view>
+<view class="refund_contact_Img">
+  <image src="../../images/acct/refund_contact.png" style="width:400rpx;height:400rpx;"></image>
+</view>
+<view class="refund_contact_instru">企业微信客服</view>
+<view class="refund_btn_shadow" wx:if="{{refundOnlineAmt>'0.00'}}">
+  <view class="refund_btn" bindtap="doRefund" >
+    确认退款
+  </view>
+</view>
+<van-popup show="{{ isShowDialog }}" bind:click-overlay="closeInstru" custom-style="width: 93%;height: auto; border-radius: 20rpx !important">
+  <view style="padding-top: 30rpx;">
+    <view class="obj_title">操作提示</view>
+    <view class="obj_intru_list">
+      <view class="obj_intru">
+        <text>{{showDialogDesc}}</text>
+      </view>
+    </view>
+    <view class="deadline"></view>
+    <view class="obj_instru_close">
+      <view class="obj_instru_close_btn" bindtap="closeInstru">
+        <text>关闭</text>
+      </view>
+    </view>
+  </view>
+</van-popup>

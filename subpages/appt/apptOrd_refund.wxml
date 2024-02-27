@@ -1,0 +1,101 @@
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<view wx:for="{{APPTORDLOGDTOS}}" wx:for-item="value">
+<view class="appt_ord_detail_Obj">
+  <text>{{value.OBJNAME}}</text>
+</view>
+<view class="apptOrd_success_bgImg">
+    <view class="confirm_ord">
+      <van-row>
+        <van-col span="6">订单编号</van-col>
+        <van-col span="18">
+          <view class="confirm_ord_time">
+            <text>{{value.ORDDATE}}{{value.ORDSEQID}}</text>
+          </view>
+        </van-col>
+      </van-row>
+      <van-row>
+        <van-col span="6">订单时间</van-col>
+        <van-col span="18">
+          <view class="confirm_ord_time">
+            <text>{{value.ORDDATETIME}}</text>
+          </view>
+        </van-col>
+      </van-row>
+      <van-row>
+        <van-col span="6">订单状态</van-col>
+        <van-col span="18">
+          <view class="confirm_ord_stat">
+            <view wx:if="{{value.STAT=='I'}}">未付款</view>
+            <view wx:if="{{value.STAT=='D'||value.ORDSTAT=='H'}}">已取消</view>
+            <view wx:if="{{value.STAT=='S'}}">已付款</view>
+            <view wx:if="{{value.STAT=='O'}}">退款中</view>
+            <view wx:if="{{value.STAT=='R'}}">已退款</view>
+            <view wx:if="{{value.STAT=='P'}}">部分退款</view>
+          </view>
+        </van-col>
+      </van-row>
+      <van-row style="color:#169AFF;">
+        <van-col span="6">订单金额</van-col>
+        <van-col span="18">
+          <view class="confirm_ord_amt">
+            <text>￥{{value.ORDAMTDESC}}</text>
+          </view>
+        </van-col>
+      </van-row>
+    </view>
+    <view style="">
+      <image style="height:50rpx;width:100%;background-color:#F3F5F5;" src="../../images/appt/appt_middle.png" />
+    </view>
+    <view class="confirm_ord_content">
+      <view class="confirm_ord_content_title">
+          请选择退款场次
+      </view>
+      <view class="confirm_ord_content_detail" wx:for="{{value.APPTORDDTLDTOS}}" wx:for-item="content">
+        <van-row>
+            <van-col span="15">
+              {{content.APPTDATEDESC}} {{content.BEGINTIMEDESC}}-{{content.ENDTIMEDESC}}
+            </van-col>
+            <van-col span="9" style="text-align:right;">
+              单价:{{content.APPTPRICEDESC}}
+            </van-col>
+        </van-row>
+        <van-row style="margin-top:20rpx;">
+          <van-col span="7" style="text-align:left;">
+            <text> 总数量:{{content.OBJCNT}}</text>
+          </van-col>
+          <van-col span="7" style="text-align:center;">
+            <text> 已退:{{content.CANCELCNT+content.ONCANCELCNT}}</text>
+          </van-col>
+          <van-col span="10" style="text-align:right;">
+            <view class="appt_ord_refundCnt">
+              <block wx:if="{{(content.CANCELCNT+content.ONCANCELCNT)<content.OBJCNT}}">
+                <van-stepper minus-class="selected_sub" input-class="selected_input" plus-class="selected_plus" min="0" value="0"  max="{{ content.OBJCNT-content.CANCELCNT-content.ONCANCELCNT }}" data-objCnt="{{content.OBJCNT}}" data-apptPrice="{{content.APPTPRICEDESC}}" data-dtlId="{{content.DTLID}}" bind:plus="refundAdd" bind:minus="refundSub"  disable-input="{{true}}"/>
+              </block>
+            </view>
+          </van-col>
+        </van-row>
+          
+      </view>
+      <view class="appt_ord_refund_sumAmt">
+            <text>退款金额￥{{REFUNDAMT}}</text>
+      </view>
+    </view>  
+    <view style="background-color: #F3F5F5;">
+      <image style="height:66rpx;width:100%;" src="../../images/appt/appt_bottom.png" />
+    </view>
+</view>
+  <view class="confirm_ord_cancel">
+    <view span="12" class="appt_ord_detail_tel" wx:if="{{value.CONTTEL}}">服务电话 {{value.CONTTEL}}</view>
+  </view>
+  <view style="margin:60rpx;display: flex;justify-content: center;"  wx:if="{{ISREFUNDALL==false}}">
+    <view class="confirm_ord_btn" bindtap="doOrdRefund" data-ordDate="{{value.ORDDATE}}" data-ordSeqId="{{value.ORDSEQID}}" data-ordAmt="{{value.ORDAMTDESC}}" >
+      <text>确认退款</text>
+    </view>
+  </view>
+  <view style="margin:60rpx;display: flex;justify-content: center;" wx:if="{{ISREFUNDALL==true}}">
+    <view class="confirm_ord_btn" bindtap="doRefundAll" data-ordDate="{{value.ORDDATE}}" data-ordSeqId="{{value.ORDSEQID}}" data-ordAmt="{{value.ORDAMTDESC}}" >
+      <text>全部退款</text>
+    </view>
+  </view>
+</view>

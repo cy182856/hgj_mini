@@ -1,0 +1,124 @@
+.appt_obj_bg{
+  width: 100%;
+}
+.appt_obj_content{
+  display: flex;
+  border-radius: 30rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-top: 10rpx;
+  margin-bottom: 20rpx;
+  padding-bottom: 20rpx;
+  min-height: 214rpx;
+  background-color: #FFFFFF;
+}
+.appt_obj_content_title{
+  padding-left: 20rpx;
+  padding-top: 10rpx;
+  display: flex;
+}
+.appt_obj_content_value{
+  color: #777777;
+  font-size: 24rpx;
+  padding-left: 20rpx;
+  padding-top: 20rpx;
+  float: left;
+}
+.appt_obj_content_title_obj{
+  color: #3C3C3C;
+  font-size: 32rpx;
+  line-height: 90rpx;
+  margin-left: 10rpx;
+  margin-right: 20rpx;
+}
+.appt_obj_content_left{
+  width: 100%;
+}
+.appt_obj_content_right{
+  border-top-right-radius: 30rpx;
+  border-bottom-right-radius: 30rpx;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  margin-right: 20rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+.iconfont{
+  font-size: 48rpx;
+  color: #189AFE;
+}
+.appt_obj_content_doAppt{
+  text-align: center;
+  color: #FFFFFF;
+  background-color: #189AFE;
+  width: 140rpx;
+  border-radius: 30rpx;
+  line-height: 60rpx;
+}
+.mine_appt_obj{
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  height: 120rpx;
+  padding-top:8rpx;
+  padding-bottom: 10rpx;
+  background-color: #F3F5F5;
+}
+.mine_appt_obj_content{
+  height: 104rpx;
+  line-height: 104rpx;
+  text-align: center;
+  color: #189AFE;
+  background-color: #FFFFFF;
+  border-radius: 20rpx;
+  margin-left:30rpx;
+  margin-right:30rpx;
+  border:1px solid #189AFE;
+}
+.dead_line{
+    border-bottom: 1px solid #f2f2f2;
+}
+.obj_intru_list{
+  padding-left: 32rpx;
+  padding-right: 38rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  font-size: 30rpx;
+}
+.apptObjName{
+  font-size: 32rpx;
+  color: #323233;
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+.obj_intru{
+  margin-bottom: 10rpx;
+  line-height: 44rpx
+}
+.obj_title{
+  color: #323233;
+  line-height: 44rpx;
+  margin-left: 10rpx;
+}
+.obj_desc{
+  color: #646566;
+  margin-top: 10rpx;
+  margin-left: 10rpx;
+}
+.obj_instru_close_btn{
+  font-size: 32rpx;
+  padding: 30rpx;
+  color: #189AFE;
+  text-align: center;
+  border-radius: 20rpx;
+}
+.icon_appt_instru{
+  line-height: 44rpx;
+  margin-left: 3rpx;
+  padding-top: 8rpx;
+}
+
+.van-popup{
+  border-radius: 20rpx !important;
+}

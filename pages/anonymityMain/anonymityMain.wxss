@@ -1,0 +1,52 @@
+/* 全局的 */
+.content{
+  background-color: #ffffff;
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 20rpx;
+}
+
+/* section相关的 */
+.section{
+  height: 320rpx;
+  width: 690rpx;
+  margin-left: 30rpx;
+  padding-top: 28rpx;
+  margin-bottom: 30rpx;
+}
+
+.view_bg{
+  background-color:#ffffff;
+  width: 690rpx;
+  padding: 20rpx 0rpx;
+  margin-left: 30rpx;
+  margin-top: 32rpx;
+  border-radius: 10rpx;
+  box-shadow: 0px 0px 8px #ABABAB;
+}
+
+
+.van-grid-item__text {
+  word-wrap: break-word;
+  padding-top: 25rpx !important;
+  width: 170rpx !important;
+  text-align: center !important;
+  color: #363F4D !important;
+}
+
+.login{
+  width:100%;
+  text-align: center;
+}
+
+.login_font{
+  color:#888888;
+  font-size:28rpx;
+  padding: 35rpx 0rpx;
+  background-color: #ffffff;
+}
+
+/* vant dialog弹窗的确定按钮统一改为 */
+.dialog-index--van-dialog__confirm{
+  color: #189AFE !important;
+}

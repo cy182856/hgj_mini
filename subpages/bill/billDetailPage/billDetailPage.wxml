@@ -1,0 +1,193 @@
+<!--subpages/bill/billDetailPage/billDetailPage.wxml-->
+<!-- <text>subpages/bill/billDetailPage/billDetailPage.wxml</text> -->
+
+<import src="../../../template/loading/loading.wxml"></import>
+<!-- 弹窗 -->
+<van-dialog id="van-dialog" />
+
+<!-- 报修详情模块 -->
+<view class="view_detail">
+  <!-- 报修详情 -->
+  <view class="view_title_desc" style="padding-top:13rpx;">
+    <van-cell title-class="txt" title="{{bill.ipItemName}}" border="{{false}}" />
+  </view>
+  <van-divider dashed customStyle="color: #1989fa; border-color: #B5B5B5; font-size: 18px; width:90%;padding-left:5%;margin: 3rpx 0rpx;" />
+
+  <view>
+
+    <van-row>
+      <van-col span="9">
+        <van-cell custom-class="view_time" title="订单编号" border="{{false}}" />
+      </van-col>
+      <van-col span="15">
+        <van-cell custom-class="view_time" title="{{bill.id}}" border="{{false}}" />
+      </van-col>
+    </van-row>
+
+    <van-row>
+      <van-col span="9">
+        <van-cell custom-class="view_time" title="所属账期" border="{{false}}" />
+      </van-col>
+      <van-col span="15">
+        <van-cell custom-class="view_time" title="{{bill.repYears}}" border="{{false}}" />
+      </van-col>
+    </van-row>
+
+    <van-row>
+      <van-col span="9">
+        <van-cell custom-class="view_time" title="房间名称" border="{{false}}" />
+      </van-col>
+      <van-col span="15">
+        <van-cell custom-class="view_time" title="{{bill.resName}}" border="{{false}}" />
+      </van-col>
+    </van-row>
+
+    <van-row>
+      <van-col span="9">
+        <van-cell custom-class="view_time" title="本金应收" border="{{false}}" />
+      </van-col>
+      <van-col span="15">
+        <van-cell custom-class="view_time" title="{{bill.priRev}}" border="{{false}}" />
+      </van-col>
+    </van-row>
+
+    <van-row>
+      <van-col span="9">
+        <van-cell custom-class="view_time" title="本金已收" border="{{false}}" />
+      </van-col>
+      <van-col span="15">
+
+        <van-cell custom-class="view_time" title="{{bill.priPaid}}" border="{{false}}" />
+      </van-col>
+    </van-row>
+
+    <van-row>
+      <van-col span="9">
+        <van-cell custom-class="view_time" title="应收开始日期" border="{{false}}" />
+      </van-col>
+      <van-col span="15">
+        <van-cell custom-class="view_time" title="{{bill.revPSDate}}" border="{{false}}" />
+      </van-col>
+    </van-row>
+
+    <van-row>
+      <van-col span="9">
+        <van-cell custom-class="view_time" title="应收结束日期" border="{{false}}" />
+      </van-col>
+      <van-col span="15">
+        <van-cell custom-class="view_time" title="{{bill.revPEDate}}" border="{{false}}" />
+      </van-col>
+    </van-row>
+
+    <!-- <van-row>
+      <van-col span="8">
+        <van-cell custom-class="view_time" title="仪表编码" border="{{false}}" />
+      </van-col>
+      <van-col span="16">
+        <van-cell custom-class="view_time" title="{{bill.imaCode}}" border="{{false}}" />
+      </van-col>
+    </van-row> -->
+
+    <!-- <van-row>
+      <van-col span="8">
+        <van-cell custom-class="view_time" title="抄表年月" border="{{false}}" />
+      </van-col>
+      <van-col span="16">
+        <van-cell custom-class="view_time" title="{{bill.doMr}}" border="{{false}}" />
+      </van-col>
+    </van-row> -->
+
+    <!-- <van-row>
+      <van-col span="8">
+        <van-cell custom-class="view_time" title="读数所属账期" border="{{false}}" />
+      </van-col>
+      <van-col span="16">
+        <van-cell custom-class="view_time" title="{{bill.dataOfRead}}" border="{{false}}" />
+      </van-col>
+    </van-row> -->
+
+    <!-- <van-row>
+      <van-col span="8">
+        <van-cell custom-class="view_time" title="上次抄表日期" border="{{false}}" />
+      </van-col>
+      <van-col span="16">
+        <van-cell custom-class="view_time" title="{{bill.lMrd}}" border="{{false}}" />
+      </van-col>
+    </van-row> -->
+
+    <!-- <van-row>
+      <van-col span="8">
+        <van-cell custom-class="view_time" title="本次抄表日期" border="{{false}}" />
+      </van-col>
+      <van-col span="16">
+        <van-cell custom-class="view_time" title="{{bill.tMrd}}" border="{{false}}" />
+      </van-col>
+    </van-row> -->
+
+    <!-- <van-row>
+      <van-col span="8">
+        <van-cell custom-class="view_time" title="上次抄表读数" border="{{false}}" />
+      </van-col>
+      <van-col span="16">
+        <van-cell custom-class="view_time" title="{{bill.lMr}}" border="{{false}}" />
+      </van-col>
+    </van-row> -->
+
+    <!-- <van-row>
+      <van-col span="8">
+        <van-cell custom-class="view_time" title="本次抄表读数" border="{{false}}" />
+      </van-col>
+      <van-col span="16">
+        <van-cell custom-class="view_time" title="{{bill.tMr}}" border="{{false}}" />
+      </van-col>
+    </van-row> -->
+
+    <!-- <van-row>
+      <van-col span="8">
+        <van-cell custom-class="view_time" title="上月用量" border="{{false}}" />
+      </van-col>
+      <van-col span="16">
+        <van-cell custom-class="view_time" title="{{bill.lciAmount}}" border="{{false}}" />
+      </van-col>
+    </van-row> -->
+
+    <!-- <van-row>
+      <van-col span="8">
+        <van-cell custom-class="view_time" title="本月用量" border="{{false}}" />
+      </van-col>
+      <van-col span="16">
+        <van-cell custom-class="view_time" title="{{bill.ciAmount}}" border="{{false}}" />
+      </van-col>
+    </van-row> -->
+
+    <van-row>
+      <van-col span="9">
+        <van-cell custom-class="view_time" title="摘要" border="{{false}}" />
+      </van-col>
+      <van-col span="15">
+        <van-cell custom-class="view_time" title="{{bill.revAbstract}}" border="{{false}}" />
+      </van-col>
+    </van-row>
+
+    <van-row>
+      <van-col span="9">
+        <van-cell custom-class="view_time" title="支付状态" border="{{false}}" />
+      </van-col>
+      <van-col span="15" wx:if="{{bill.lockLogo == 9}}">
+        <van-cell custom-class="view_time" title="已支付" border="{{false}}" />
+      </van-col>
+      <van-col span="15" wx:if="{{bill.lockLogo == 0}}">
+        <van-cell custom-class="view_time" title="未支付" border="{{false}}" />
+      </van-col>
+      <van-col span="15" wx:if="{{bill.lockLogo == 1}}">
+        <van-cell custom-class="view_time" title="部分支付" border="{{false}}" />
+      </van-col>
+      <van-col span="15" wx:if="{{bill.lockLogo == 3}}">
+        <van-cell custom-class="view_time" title="支付中" border="{{false}}" />
+      </van-col>
+    </van-row>
+
+  </view>
+
+
+</view>

@@ -1,0 +1,29 @@
+<!-- 引用 -->
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<!-- 弹窗 -->
+<van-dialog id="van-dialog"/>
+<view>
+  <van-radio-group value="{{ radio }}" bind:change="onChange">
+    <van-cell-group>
+      <van-cell wx:for="{{objList}}" wx:key="*this" title="{{item.name}}" 
+                label="{{item.areaName}}{{item.buildingName}}{{item.houseNo}}" 
+                clickable 
+                border="{{(objList.length-1) > index}}"
+                data-name="{{index}}" 
+                data-cust="{{item.custId}}"
+                data-hu="{{item.huSeqId}}"
+                bind:click="onClick">
+        <van-radio slot="right-icon" name="{{index}}" />
+      </van-cell>
+    </van-cell-group>
+  </van-radio-group>
+</view>
+
+
+<view class="height"></view>
+<view class="view_btn height">
+  <view style="padding:30rpx 0rpx;">
+    <van-button type="primary" custom-class="btn" bindtap="toMainPage" color="#189AFE">登录</van-button>
+  </view>
+</view>

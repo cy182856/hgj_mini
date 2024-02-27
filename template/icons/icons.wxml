@@ -1,0 +1,27 @@
+<template name="image">
+    <view class="global-image  {{classValue||''}}" style="width:{{size||width||60}}rpx;height:{{size||height||width||60}}rpx">
+        <image lazyLoad="{{lazy||false}}" mode="{{mode||'scaleToFill'}}" src="{{src?!!cut?imgSize.imgMiniCut(src,cut):src:'../../assets/icons/'+name+'.png'}}" style="width:100%;height:100%;"></image>
+        <view class="global-image-modal" style="width:{{size||width||60}}rpx;height:{{size||height||width||60}}rpx" wx:if="{{showmodal}}"></view>
+    </view>
+</template>
+<template name="icons">
+    <view class="global-icons" style="width:{{size||width||60}}rpx;height:{{size||height||width||60}}rpx;min-width:{{size||width||60}}rpx;min-height:{{size||height||width||60}}rpx;">
+        <image lazyLoad="{{lazy||false}}" src="{{src?src:'../../assets/icons/'+name+'.png'}}" style="width:100%;height:100%;"></image>
+    </view>
+</template>
+<wxs module="imgSize">
+var imgMiniCut = (function(src, cut) {
+    if (!!src) {
+        if (src.indexOf('?') > 0) {
+            return (src.split('?')[(0)] + '?imageMogr2/thumbnail/' + cut)
+        } else if (src.indexOf('!') > 0) {
+            return (src.split('!')[(0)] + '?imageMogr2/thumbnail/' + cut)
+        } else {
+            return (src + '?imageMogr2/thumbnail/' + cut)
+        }
+    } else {
+        return ('')
+    }
+});
+module.exports.imgMiniCut = imgMiniCut;
+</wxs>

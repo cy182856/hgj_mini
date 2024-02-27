@@ -1,0 +1,82 @@
+/* subpages/pfee/pfeeMonBillPay.wxss */
+.margin-top{
+  margin-top: 20rpx;
+}
+
+.head{
+  padding: 20rpx 20rpx 20rpx 20rpx;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+}
+.rq-name{
+  font-size: 50rpx;
+}
+.rq-door{
+  font-size: 32rpx;
+  color: #323233;
+  padding-left: 10rpx;
+}
+
+.log-button{
+  display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    align-items:center;
+  /* padding:  */
+}
+
+.round{
+  border-radius: 100px;
+}
+
+.mon-desc{
+  font-size: 32rpx;
+}
+
+.year-mon{
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+.bill-greoup{
+  background-color: white;
+  padding: 20rpx 40rpx 20rpx 40rpx;
+  font-size: 14px;
+  color: #323233;
+}
+.bill-row{
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20rpx;
+}
+.van-divider{
+  margin: var(--divider-margin,6px 0)!important;
+}
+.bill-col-1{
+  width: 33%;
+  text-align: left;
+}
+.bill-col-2{
+  width: 33%;
+  text-align: center;
+}
+.bill-col-3{
+  width: 33%;
+  text-align: right;
+}
+
+
+
+.van-submit-bar {
+  z-index: var(--submit-bar-z-index,50)!important;
+}
+.pfee-buttom{
+  background-color: #1A8AFA!important;
+  border: var(--button-border-width,1px) solid var(--button-danger-border-color,#1A8AFA)!important;
+}
+
+
+
+

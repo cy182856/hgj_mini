@@ -1,0 +1,187 @@
+.img-view{
+  height: 280rpx;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  z-index: -1;
+  background-color: white;
+}
+.head-img{
+  height: 100%;
+  width: 100%;
+}
+
+.select-class{
+  height: 70rpx !important;
+  line-height: 70rpx !important;
+  font-size: 32rpx !important;
+  border-radius: .5em !important;
+  background-color: #258BFF !important;
+  width: 600rpx !important;
+}
+
+.no-select-class{
+  height: 70rpx !important;
+  line-height: 70rpx !important;
+  font-size: 32rpx !important;
+  border-radius: .5em !important;
+  background-color: #E5E5E5 !important;
+  color: #999999 !important;
+  border: none !important;
+  width: 600rpx !important;
+}
+.cell-gate-item{
+  padding: 20rpx;
+  background-color: #fff;
+  display: flex;
+  border-radius: .5em;
+  margin: 20rpx;
+}
+
+.check-door-radio{
+  flex: 1;
+}
+
+.cell-gate-name{
+  flex: 9;
+  display: flex;
+  align-items: center;
+}
+
+.cell-gate-open{
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
+  display: flex;
+}
+
+.remote-door-view{
+  padding: 40rpx;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: -1;
+}
+
+.remote-door-title{
+  font-size: 32rpx;
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.remote-door-desc{
+  margin-top: 20rpx;
+  font-size: 20rpx;
+  text-underline-position: under;
+  text-decoration: underline;
+  color: #FFFFFF;
+}
+
+.cell-gate-title{
+  padding: 20rpx 40rpx;
+  color: #363F4D;
+  font-weight: 600;
+  font-size: 32rpx;
+}
+
+.gate-title{
+  padding: 30rpx 40rpx 20rpx 40rpx;
+  color: #363F4D;
+  font-weight: 600;
+  font-size: 32rpx;
+}
+
+.scroll-view{
+  margin-top: 200rpx;
+  z-index: 99;
+}
+
+.van-skeleton{
+  background-color:#fff !important;
+  padding:20px !important;
+}
+
+.remote-door-list{
+  background-color: #fff;
+  margin: 20rpx 30rpx;
+  border-radius: .5em;
+}
+
+.bottom-btn-view{
+  position: fixed;
+  bottom: 0;
+  height: 120rpx;
+  background-color:#fff;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jia-xuanzhong{
+  font-size: 36rpx;
+  color: #0378FE;
+}
+
+.jia-weixuanzhong{
+  font-size: 36rpx;
+}
+
+.dead_line{
+  border-bottom: 1px solid #f2f2f2;
+}
+.obj_intru_list{
+padding-left: 32rpx;
+padding-right: 38rpx;
+margin-top: 20rpx;
+margin-bottom: 20rpx;
+font-size: 30rpx;
+}
+.open-door-title{
+  font-size: 32rpx;
+  color: #323233;
+  text-align: center; 
+  margin-bottom: 20rpx;
+}
+.obj_intru{
+  margin-bottom: 10rpx;
+  line-height: 44rpx
+}
+.obj_title{
+  color: #323233;
+  line-height: 44rpx;
+  margin-left: 10rpx;
+  font-weight: bold;
+}
+.obj_desc{
+  color: #646566;
+  margin-top: 10rpx;
+  margin-left: 10rpx;
+  text-indent:62rpx;
+}
+.obj_instru_close_btn{
+  font-size: 32rpx;
+  padding: 30rpx;
+  color: #189AFE;
+  text-align: center;
+  border-radius: 20rpx;
+}
+.icon_appt_instru{
+  line-height: 44rpx;
+  margin-left: 3rpx;
+  padding-top: 8rpx;
+}
+
+.van-popup{
+  border-radius: 20rpx !important;
+}
+
+.cell-gate-name-select{
+  flex: 9;
+  display: flex;
+  align-items: center;
+  color: #298DFF;
+  font-weight: bold;
+}

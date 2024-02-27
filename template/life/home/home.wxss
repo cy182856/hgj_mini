@@ -1,0 +1,241 @@
+.life-content{
+  background-color: #F9F9F9;
+}
+.life-head{
+  min-height:254rpx;
+  background-color: #ffffff;
+}
+.life-head-body-grid{
+  padding-top: 60rpx;
+}
+.life-body{
+  margin: 0% 3%;
+  width: 94%;
+}
+.life-body-title{
+  height:114rpx;
+  line-height: 114rpx;
+  margin-left:3%;
+  display: flex;
+  align-items: center;
+}
+.verticalbar-line{
+  background-color:#258BFF;
+  border-radius:4rpx;
+  width:8rpx;
+  height:32rpx;
+}
+.life-body-title-text{
+  font-size: 36rpx;
+  font-weight: 700;
+  color:#363F4D;
+  margin-left: 16rpx;
+}
+.life-body-item-detail{
+  height:348rpx;
+  background-color: #ffffff;
+  width: 218rpx;
+  border-radius: 12rpx;
+}
+.life-body-detail-item-img{
+  height: 218rpx;
+  width:218rpx;
+  border-top-right-radius: 12rpx;
+  border-top-left-radius: 12rpx;
+}
+.img-class1{
+  border-top-right-radius: 12rpx!important;
+  border-top-left-radius: 12rpx!important;
+}
+.life-body-detail-item-desc{
+  height: 130rpx;
+}
+.life-body-detail-item-desc1{
+  color: #363F4D;
+  font-size: 28rpx;
+  height: 54rpx;
+  padding:14rpx 10rpx 0rpx 12rpx;
+  display: flex;
+  align-items: center;
+}
+.life-item-name{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+.life-body-detail-item-desc2{
+  height: 46rpx;
+  padding: 0rpx 12rpx 22rpx 12rpx;
+  display: flex;
+  align-items: center;
+}
+
+.amount-symbol{
+  font-size:24rpx;
+  color:#E3571C;
+  font-weight: 700;
+}
+.amount-sale-price{
+  font-size:32rpx;
+  color:#E3571C;
+  font-weight: 700;
+}
+.amount-org-price{
+  font-size:24rpx;
+  color:#999999;
+  text-decoration: line-through;
+  margin-left:20rpx;
+}
+.life-body-shop-detail{
+  height:510rpx;
+  background-color: #ffffff;
+  width: 340rpx;
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
+}
+.life-body-detail-shop-img{
+  height: 340rpx;
+  width:340rpx;
+  border-top-right-radius: 12rpx;
+  border-top-left-radius: 12rpx;
+}
+.life-body-detail-shop-desc{
+  height: 170rpx;
+}
+.life-body-detail-shop-desc1{
+  color: #363F4D;
+  font-size: 32rpx;
+  font-weight: 700;
+  height: 98rpx;
+  padding:14rpx 10rpx 0rpx 16rpx;
+}
+.life-body-detail-shop-desc2{
+  height: 72rpx;
+  padding-left:16rpx;
+  padding-top:8rpx;
+}
+.shop-name{
+  color:#363F4D;
+  font-size: 24rpx;
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+.life-shop-name{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+.shop-full-disc{
+  background-color: rgba(247,91,19,0.1);
+  color:#F65B23;
+  font-size:20rpx;
+  width: 120rpx;
+  height:32rpx;
+  line-height: 32rpx;
+  padding:2rpx 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.shop-non-full-disc{
+  font-size: 24rpx;
+  color: #999999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  height: 32rpx;
+  line-height: 32rpx;
+  display: flex;
+}
+.grid-text{
+  margin-top:24rpx!important;
+}
+.item-container{
+  margin: 0% 3%;
+  background-color: #ffffff;
+  height: 230rpx;
+  padding:20rpx 20rpx 20rpx 20rpx;
+  margin-top: 20rpx;
+  border-radius:12rpx;
+  display: flex;
+  align-items: center;
+}
+.item-img{
+  width:190rpx;
+  height: 190rpx;
+}
+.img-item-class{
+  border-radius: 12rpx;
+}
+.item-desc{
+  margin-left:30rpx;
+  width: 444rpx;
+}
+.item-title{
+  color:#363F4D;
+  font-size: 28rpx;
+}
+.item-title-name{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.item-title-desc{
+  color:#999999;
+  font-size:24rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  margin-top:4rpx;
+}
+.amount-top{
+  margin-top:12rpx;
+}
+.item-shop-name{
+  margin-left:18rpx;
+  color:#666666;
+  font-size: 24rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+}
+.shop-img{
+  height:32rpx;line-height:32rpx;
+}
+.item-shop-left{
+  margin-left:22rpx;
+}
+.item-shop-full-disc{
+  background-color: rgba(247,91,19,0.1);
+  color:#F65B23;
+  font-size:20rpx;
+  min-width: 120rpx;
+  height:32rpx;
+  line-height: 32rpx;
+  padding:2rpx 10rpx;
+  border-radius: 4rpx;
+  text-align: center;
+}
+.item-belong-shop{
+  display: flex;
+  align-items: center;
+  margin-top:14rpx;
+}
+.life-pricedesc{
+  font-size: 24rpx;
+    color: #999999;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+.item-amount{
+  height:40rpx;
+  line-height: 40rpx;
+}

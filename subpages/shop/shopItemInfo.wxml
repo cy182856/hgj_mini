@@ -1,0 +1,75 @@
+<import src="../../template/empty/empty.wxml"></import>
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<view style="min-height:100%;padding-bottom: {{btuBottom}};">
+  <view style="display:flex;">
+      <block wx:if="{{SHOPIMGURLS.length>0}}">
+        <block wx:for="{{SHOPIMGURLS}}" wx:for-item="image" wx:for-index="key" wx:if="{{key==0}}">
+          <image src="{{image+'?t='+time}}" mode="aspectFill" style="width:100%;height:310rpx;"></image>
+        </block>
+      </block>
+      <block wx:else>
+        <image src="https://jiaimginfo.huiguan.com/sup/default_shop.png?t={{time}}" mode="aspectFill" style="width:100%;height:310rpx;"></image>
+      </block>
+  </view>
+  <view class="shop_info">
+    <view class="shop_desc">
+      <view class="shop_desc_title">店铺公告：</view>
+      <view class="shop_desc_content">{{SHOPDESC}}</view>
+    </view>
+    <view class="shop_active">
+      <view class="shop_active_left">店铺活动：</view>
+      <view class="shop_active_right" wx:if="{{ISFULLDISC=='Y'}}">满{{FULLPURAMT}}减{{DISCOFFAMT}}</view>
+      <view class="shop_active_right_qd" wx:else>敬请期待</view>
+    </view>
+  </view>
+   <view style="margin-top:110rpx;">
+      <van-search
+        value="{{ LIEKITEMNAME }}"
+        shape="round"
+        placeholder="搜索店内商品"
+        use-action-slot
+        bind:change="onChange"
+      >
+      </van-search>
+    </view>
+    <view wx:if="{{!isLoading&&ITEMINFODTOS.length==0}}">
+      <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'店铺暂无商品信息'}}"></template>
+    </view>
+    <view wx:else style="background-color: #F9F9F9;padding-top: 5rpx;">
+      <view wx:for="{{ITEMINFODTOS}}" wx:for-item="value" class="shop_item_content" bindtap="itemInfoDetail" data-supSeqId="{{value.SUPSEQID}}" data-shopId="{{value.SHOPID}}" data-itemId="{{value.ITEMID}}">
+        <view class="shop_item_content_left">
+          <block wx:if="{{value.IMAGEURLS.length>0}}">
+            <block wx:for="{{value.IMAGEURLS}}" wx:for-item="image" wx:for-index="key">
+              <view  wx:if="{{key==0}}">
+                <image src="{{image+'?t='+time}}" mode="aspectFill" style="width:220rpx;height:220rpx;"></image>
+              </view>
+            </block>
+          </block>
+          <block wx:if="{{value.IMAGEURLS.length==0}}">
+            <image src="https://jiaimginfo.huiguan.com/sup/default_item.png?t={{time}}" mode="aspectFill" style="width:220rpx;height:220rpx;"></image>
+          </block>
+        </view>
+        <view class="shop_item_content_right">
+            <block wx:if="{{value.ADITEMINFODTO}}">
+              <view style="font-size: 32rpx;color: #363F4D;font-weight: bold;">{{value.ITEMNAME}}</view> 
+              <view style="color: #999999;font-size: 24rpx;margin-top: 12rpx;">{{value.ADITEMINFODTO.PRICEDESC}}</view>
+            </block>
+            <block wx:else>
+              <view>{{value.ITEMNAME}}</view> 
+              <view>送货说明:每周三、周五送货</view>
+              <view style="color: red;font-weight: bold;">￥79.00<text style="color: #999999;font-size: 26rpx;margin-left: 20rpx;text-decoration: line-through;">￥128.00</text></view>
+            </block>
+        </view>
+      </view>
+      <view wx:if="{{!isLoading&&TOTALRECORD!=CURRENTRECORD}}" class="record_more" bindtap="queryMore">
+          <text>点击加载更多...</text>
+      </view>
+      <view wx:elif="{{isLoading&&CURRENTRECORD!=0}}" style="text-align:center;padding-bottom: 20rpx;font-size: 30rpx;  color: #999999;">
+            <van-loading type="spinner" size="30rpx" text-size="30rpx" >加载中...</van-loading>
+      </view>
+      <view wx:else class="record_none">
+          <text></text>
+      </view>
+    </view>
+</view>

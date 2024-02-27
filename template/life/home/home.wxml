@@ -1,0 +1,109 @@
+<import src="../../../template/empty/empty.wxml"></import>
+<import src="../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<!--
+<view wx:if="{{showErrMsg}}" class="life-content" style="margin: 0;padding: 0;height: 100%;">
+    <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:msg}}"></template>
+</view>
+-->
+<van-empty class="life-content" wx:if="{{showErrMsg}}" description="{{msg}}" />
+<view wx:else class="life-content" style="min-height:{{contentHeight}}px">
+  <view class="life-head">
+    <van-grid column-num="{{propLifeListDtos.length}}" border="{{ false }}" center="{{ true }}" custom-class="life-head-body-grid">
+      <van-grid-item text="{{propLifeListDto.lifeIdDesc}}" text-class="grid-text" wx:for="{{propLifeListDtos}}" wx:for-item="propLifeListDto" wx:key="key" bind:tap="register" data-fun="lifeicon" data-lifeid="{{propLifeListDto.lifeId}}"  data-lifedesc="{{propLifeListDto.lifeIdDesc}}">
+        <van-icon slot="icon"  name="{{propLifeListDto.imgPath}}" size="44"/>
+      </van-grid-item>
+    </van-grid>
+  </view>
+  <view wx:if="{{hasHotShow == 'Y'}}">
+    <view class="life-body" wx:if="{{hotItemShowDtos != null && hotItemShowDtos.length != 0}}">
+      <view class="life-body-title">
+        <view class="verticalbar-line"></view>
+        <text class="life-body-title-text">热销商品</text>
+      </view>
+      <van-row gutter="6">
+        <van-col span="8" wx:for="{{hotItemShowDtos}}" wx:for-item="hotItemShowDto" wx:key="key" bind:tap="register" data-fun="hotItem" data-itemid="{{hotItemShowDto.itemId}}" data-itemname="{{hotItemShowDto.itemName}}" data-supseqid="{{hotItemShowDto.supSeqId}}" data-shopid="{{hotItemShowDto.shopId}}">
+          <view class="life-body-item-detail">
+            <view class="life-body-detail-item-img">
+              <van-image width="100%" height="100%" fit="cover" image-class="img-class1" src="{{hotItemShowDto.imgUrl}}" />
+            </view>
+            <view class="life-body-detail-item-desc">
+                <view class="life-body-detail-item-desc1">
+                  <view class="life-item-name">
+                    {{hotItemShowDto.itemName}}
+                  </view>
+                </view>
+                <view class="life-body-detail-item-desc2" wx:if="{{ hotItemShowDto.salePrice != null && hotItemShowDto.orgPrice != null}}">
+                    <text class="amount-symbol">￥</text>
+                    <text class="amount-sale-price" >{{hotItemShowDto.salePrice}}</text>
+                    <text class="amount-org-price" >{{hotItemShowDto.orgPrice}}</text>               
+                </view>
+                <view wx:else class="life-body-detail-item-desc2">
+                    <view class="life-pricedesc">{{hotItemShowDto.priceDesc}}</view>
+                </view>   
+            </view>
+          </view>
+        </van-col>
+      </van-row>
+    </view>
+    <view class="life-body" wx:if="{{recShopShowDtos != null && recShopShowDtos.length != 0}}">
+        <view class="life-body-title">
+          <view class="verticalbar-line"></view>
+          <text class="life-body-title-text">优选好店</text>
+        </view>
+        <van-row gutter="11">
+          <van-col span="12" wx:for="{{recShopShowDtos}}" wx:for-item="recShopShowDto" wx:key="key" bind:tap="register" data-fun="recShop" data-supseqid="{{recShopShowDto.supSeqId}}" data-shopid="{{recShopShowDto.shopId}}" data-shopname="{{recShopShowDto.shopName}}" >
+            <view class="life-body-shop-detail">
+              <view class="life-body-detail-shop-img">
+                <van-image width="100%" height="100%" fit="cover" image-class="img-class1" src="{{recShopShowDto.imgUrl}}" />
+              </view>
+              <view class="life-body-detail-shop-desc">
+                  <view class="life-body-detail-shop-desc1">
+                    <view class="life-shop-name">{{recShopShowDto.shopName}}</view>
+                    <view class="shop-name">{{recShopShowDto.shopDesc}}</view>
+                  </view>
+                  <view class="life-body-detail-shop-desc2">
+                    <text class="shop-full-disc" wx:if="{{recShopShowDto.isFullDisc == 'Y' && recShopShowDto.fullPurAmt != null && recShopShowDto.discOffAmt != null}}">满{{recShopShowDto.fullPurAmt}}减{{recShopShowDto.discOffAmt}}</text>
+                    <text class="shop-non-full-disc" wx:else >店铺活动：敬请期待</text>
+                  </view>
+              </view>
+            </view>
+          </van-col>
+        </van-row>
+    </view>
+  </view>
+  <view wx:else>
+    <view wx:if="{{lifeItemShowDtos != null && lifeItemShowDtos.length != 0}}">
+      <view class="item-container" wx:for="{{lifeItemShowDtos}}" wx:for-item="lifeItemShowDto" wx:key="key" bind:tap="register" data-fun="lifeItemshow" data-itemid="{{lifeItemShowDto.itemId}}" data-itemname="{{lifeItemShowDto.itemName}}" data-supseqid="{{lifeItemShowDto.supSeqId}}" data-shopid="{{lifeItemShowDto.shopId}}">
+        <view class="item-img">
+          <van-image width="100%" height="100%" fit="cover" image-class="img-item-class" src="{{lifeItemShowDto.imgUrl}}" />
+        </view>
+        <view class="item-desc">
+          <view class="item-title">
+            <view class="item-title-name">{{lifeItemShowDto.itemName}}</view>
+            <view class="item-title-desc"><text wx:if="{{lifeItemShowDto.shortDesc != null}}">{{lifeItemShowDto.shortDesc}}</text></view>
+          </view>
+          <view class="item-amount amount-top">
+            <view wx:if="{{lifeItemShowDto.salePrice != null && lifeItemShowDto.orgPrice != null}}">
+              <text class="amount-symbol" >￥</text>
+              <text class="amount-sale-price">{{lifeItemShowDto.salePrice}}</text>
+              <text class="amount-org-price">{{lifeItemShowDto.orgPrice}}</text>
+            </view>
+          </view>
+          <!--
+          <view wx:else class="item-amount">
+            <view class="life-pricedesc">价格描述：{{lifeItemShowDto.priceDesc}}</view>
+          </view>
+          -->
+          <view class="item-belong-shop">
+            <view class="shop-img">
+              <van-image width="12" height="11" fit="cover" image-class="img-item-class" src="/images/item/shop_mer.png" />
+            </view>
+            <text class="item-shop-name">{{lifeItemShowDto.shopName}}</text>
+            <text class="item-shop-full-disc item-shop-left" wx:if="{{lifeItemShowDto.isFullDisc == 'Y' && lifeItemShowDto.fullPurAmt != null && lifeItemShowDto.discOffAmt != null}}">满{{lifeItemShowDto.fullPurAmt}}减{{lifeItemShowDto.discOffAmt}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

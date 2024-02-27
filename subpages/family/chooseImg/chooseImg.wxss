@@ -1,0 +1,148 @@
+/* subpages/family/chooseImg/chooseImg.wxss */
+page{
+  width: 100%;
+}
+
+.background-view{
+    width: 100%;
+    height: 200rpx;
+    background: -webkit-linear-gradient(180deg,#6daff9, #268bff); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(180deg,#6daff9, #268bff); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(180deg,#6daff9, #268bff); /* Firefox 3.6 - 15 */
+    background: linear-gradient(180deg,#6daff9, #268bff); /* 标准的语法 */
+}
+
+.check-shdow-view{
+  z-index: 99;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #000000;
+}
+
+.jia-xuanzhong1{
+  color: #fff;
+  font-size: 58rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-weight: bold;
+}
+
+.upload{
+  width: 260rpx;
+  height: 260rpx;
+  border: 1px solid #f2f2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction:column;
+}
+
+.van-uploader{
+  width: 100%;
+}
+
+.van-uploader__upload{
+  width: 100% !important;
+  height: 100px !important;
+  margin: auto !important;
+}
+
+.jia-paishe{
+  color:#cdcdcd;
+  font-size: 38rpx;
+}
+
+.commit-btn-view{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vant-btn-class{
+  width: 400rpx !important;
+  height: 80rpx !important;
+  border-radius: 0.5em !important;
+  background-color: #1798dc;
+  padding: 0 36rpx !important;
+}
+
+.img-flex-view{
+  width: 22%;
+  position: relative;
+  cursor: pointer;
+  margin: 0rpx 1% 10rpx 1%;
+}
+
+.img-list-view{
+  width: 100%;
+  display: flex;
+  padding-top:10rpx;
+  justify-content: center;
+}
+
+.van-tabs__line{
+  background-color: #1798dc !important;
+}
+
+.upd-img-tabs{
+  position: relative;
+  top: -110rpx;
+  margin-top:32rpx;
+  border-radius: .5em;
+}
+
+.tab-class{
+  background-color: #EEEEEE;
+  border-radius:0.5em;
+  color: #1B1B1B;
+  font-size: 32rpx !important;
+  border: none !important;
+}
+.tab-active-class{
+  border: none !important;
+  font-size: 32rpx !important;
+  background-color: #fff !important;
+  color: #189AFE !important;
+}
+.van-tabs--card .van-tabs__wrap{
+  height: 80rpx !important;
+  line-height: 80rpx !important;
+  border:none !important;
+}
+.van-tab {
+  height: 80rpx !important;
+  line-height: 80rpx !important;
+  border:none !important;
+}
+.nav-class{
+  border: none !important;
+  background-color: #fff;
+  height: 80rpx !important;
+  line-height: 80rpx !important;
+  font-size: 32rpx !important;
+  border-radius: 0.5em 0.5em 0em 0em  !important;
+}
+.custom-class{
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  border-radius: 0em 0em 0.5em 0.5em!important;
+  background-color: #fff !important;
+}
+
+.van-tabs__scroll--card{
+  border-radius: 0.5em !important;
+}
+
+.custom-tab-view{
+  background-color: #fff;
+  padding: 40rpx;
+  border-radius: .5em;
+  height: 400rpx;
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,50 @@
+.cropper-wrapper{
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: #000;
+}
+.cropper-buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 68px;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+  line-height: 68px;
+  color:white;
+  font-size: 36rpx;
+}
+
+.cropper-buttons .croperCancel, .cropper-buttons .getCropperImage{
+  text-align: center;
+}
+.getCropperImage{
+  color: white;
+    width: 45%;
+    height: 50px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    background-color: #1798dc;
+    border-radius: 10rpx;
+}
+.croperCancel{
+  color: #8e8787;
+  width: 45%;
+  height: 50px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10rpx;
+}

@@ -1,0 +1,93 @@
+<wxs src="./../../utils/wxs/tools.wxs" module="tools" />
+<template  name="heoInfoItem">
+    <view class="weui-loadmore" wx:if="{{isRefreshing}}">
+        <view class="weui-loading"></view>
+        <view class="weui-loadmore-tips">正在刷新...</view>
+    </view>
+    <view wx:if="{{isTopHeoInfos.length > 0}}" class="heo-istop-view">
+      <block wx:for="{{isTopHeoInfos}}" wx:for-item="isTopItem" wx:key="heoSeqId">
+        <view class="heo-istop-item" bindtap="chekHeoInfoDetail" data-item="{{isTopItem}}">
+          <view class="heo-istop-title-content">
+            <view class="heo-istop-flag">顶</view>
+            <view class="heo-theme-view heo-theme{{isTopItem.needOrGive}}-view">{{tools.convertHeoNorGDesc(isTopItem.needOrGive)}}</view>
+            <view class="heo-istop-title">{{isTopItem.heoTitle}}</view>
+          </view>
+          <view class="heo-type-time">
+             <view class="heo-top-type heo-05-view">  {{isTopItem.heoTypeDesc}}  </view>
+             <view class="heo-top-name">{{isTopItem.huNickName}}</view>
+             <view class="heo-top-time">{{isTopItem.heoDateTime}}</view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <block wx:for="{{heoInfos}}" wx:for-item="item" wx:key="heoSeqId" wx:for-index="index">
+      <view class="heoinfo-item" bindtap="chekHeoInfoDetail" data-item ="{{item}}">
+        <view class="heoinfo-preview">
+          <image class="hu-preview-img" src="{{item.headImgUrl}}" />
+          <view class="hu-content">
+            <view class="hu-name ellipsis_view">{{item.huNickName ? item.huNickName : "未知"}}
+              <text wx:if="{{item.usrType == 'P'}}" class="offical-view">物业发布</text>
+              </view>
+            <view class="hu-info">
+              <view class="heo-time ellipsis_view">{{item.heoDateTime}}</view>
+              <block wx:if="{{item.houseIsPub == 'Y' && item.houseDesc != null}}">
+                <view class="hu-detail-info ellipsis_view">{{item.houseDesc}}</view>
+              </block>
+            </view>
+          </view>
+          <block wx:if="{{showStat}}">
+            <text class="iconfont jia-stat jia-stat-{{tools.statToLowerCase(item.stat)}}"></text>
+          </block>
+        </view>
+        <view class="heoinfo-item-detail">
+          <view class="heoinfo-type-title">
+            <view class="heo-theme-view heo-theme{{item.needOrGive}}-view">{{tools.convertHeoNorGDesc(item.needOrGive)}}</view>
+            <text class="heoinfo-type heo-05-view">{{item.heoTypeDesc}}</text>
+            <view class="heoinfo-title">{{item.heoTitle}}</view>
+          </view>
+          <view class="heoinfo-desc" style="padding-bottom:{{item.imageNames.length > 0 ? 0:20}}rpx;">
+            <text>{{item.heoDesc}}</text>
+          </view>
+        </view>
+        <block wx:if="{{item.imageNames && item.imageNames.length > 0}}">
+          <view class="heoinfo-image">
+            <van-grid column-num="3" border="{{ false }}">
+              <van-grid-item use-slot wx:for="{{ item.imageNames }}"  wx:for-item="imageName" wx:key="$this">
+                <image catchtap='previewImage' data-id="{{imageName}}" data-item="{{item.imageNames}}"
+                  style="width: 100%; height: 110px;" 
+                  src="{{imageName}}"
+                  mode="aspectFill"
+                />
+              </van-grid-item>
+            </van-grid>
+          </view>
+        </block>
+        <block wx:if="{{showClose}}">
+          <block wx:if="{{item.stat == 'N'}}">
+          </block>
+          <block wx:elif = "{{item.stat == 'R'}}">
+            <view class="heo-refruse-info">
+              <view>拒绝原因:<text style="margin-left:20rpx;">{{item.refuseDesc}}</text></view>
+            </view>  
+          </block>
+        </block>
+        <block wx:else>
+          <view class = "heo-praise-view">
+            <text class="iconfont  {{item.takePartInPraise =='Y' ? 'jia-yidianzan' : 'jia-dianzan'}}" catchtap="praiseHeo" data-item="{{item}}"></text>
+            <text class="praise-cnt-text">{{item.praiseCnt}}</text>
+          </view>
+        </block>
+      </view>
+    </block>
+    <view wx:if='{{!isRefreshing}}' class="weui-loadmore">
+      <view wx:if='{{isLoadingMoreData}}'>
+        <view class="weui-loading"></view>
+        <view class="weui-loadmore-tips">正在加载更多...</view>
+      </view>
+    <block wx:elif='{{hasMoreData}}'>
+    </block>
+    <view wx:else>
+      <view class="weui-loadmore-tips">没有更多内容啦</view>
+    </view>
+  </view>
+</template>

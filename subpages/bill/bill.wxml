@@ -1,0 +1,155 @@
+<!-- 引用 -->
+<import src="../../../../template/empty/empty.wxml"></import>
+<import src="../../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<!-- 弹窗 -->
+<van-dialog id="van-dialog"/>
+<!-- 根据UI，距离顶端始终保持14rpx，14+9 -->
+<view style="height:5rpx;"></view>
+
+<!-- <view style="position: fixed; z-index: 99;top: 0;width: 92%; height: auto; margin-left: 3%;">
+  <van-cell  title="{{item.ipItemName}}" is-link value="我的订单" url="../bill/billMerge/billMerge" />
+</view> -->
+<!-- tab切换 -->
+
+<view class="hd">
+  <block wx:for="{{navList}}" wx:key="navList">
+    <view class="hd_flex {{nav_type == index ? 'hd_flex_on' : ''}}" catchtap="changeType" data-index="{{index}}">{{item}}</view>
+  </block>
+</view>
+
+
+<!-- 查询账单列表 -->
+<view wx:if="{{billList == null || billList.length == 0}}" >
+  <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无我的账单记录'}}"></template>
+</view>
+
+<view style="margin-top: 50px;" wx:else>
+  <checkbox-group bindchange="checkboxChange">
+    <view style="height: auto;" class="view_bg" wx:for="{{billList}}" wx:key="index">
+        <van-cell
+              custom-class="vb" 
+              title-class="vcell_title txt" 
+              value-class="daishouli" 
+              title="{{item.ipItemName}}" 
+              is-link value="详情" url="billDetailPage/billDetailPage?id={{item.id}}" />
+        <view class="view_desc">
+        <view class="view_light">
+            <text class="text_right" decode="{{true}}" >订单编号</text>{{item.id}}
+        </view>
+        <view class="view_light">
+            <text class="text_right" decode="{{true}}" >所属账期</text><text>{{item.repYears}}</text>
+        </view>
+        <view class="view_light">
+            <text class="text_right">本金应收</text><text>{{item.priRev}}</text>
+        </view>
+        <view class="view_light">
+          <text class="text_right" decode="{{true}}" >本金已收</text><text>{{item.priPaid}}</text>
+        </view>
+        <view class="view_light">
+          <text class="text_right" decode="{{true}}" >房间名称</text><text>{{item.resName}}</text>
+        </view>
+        <!-- <view class="view_light" wx:if="{{item.lockLogo == 9}}">
+          <text class="text_right" decode="{{true}}" >支付状态</text><text>已缴费</text>
+        </view> -->
+        <view class="view_light" wx:if="{{item.lockLogo == 0}}">
+           <text class="text_right" decode="{{true}}" >收款状态</text><text>未交清</text>
+           <checkbox wx:if="{{nav_type == 0}}" style="padding-left: 50%;" value="{{item.id}}" checked="{{item.checked}}"></checkbox>
+        </view>
+        <view class="view_light" wx:if="{{item.lockLogo == 9}}">
+           <text class="text_right" decode="{{true}}" >收款状态</text><text>已交清</text>
+           <checkbox wx:if="{{nav_type == 0}}" style="padding-left: 50%;" value="{{item.id}}" checked="{{item.checked}}"></checkbox>
+        </view>
+        <!-- <view class="view_light" wx:if="{{item.lockLogo == 1}}">
+          <text class="text_right" decode="{{true}}" >支付状态</text><text>部分缴费</text>
+        </view> -->
+        <!-- <view class="view_light" wx:if="{{item.lockLogo == 3 }}">
+          <text class="text_right" decode="{{true}}" >支付状态</text><text>缴费中</text>
+        </view> -->
+      </view>
+         
+    </view>
+  </checkbox-group>
+
+  <view wx:if="{{nav_type == 0}}" style="position: fixed;bottom: 0;width: 750rpx; height: 80px;background-color: rgb(250, 248, 248);">
+		<van-row>
+      <van-col span="7">
+				<checkbox-group bindchange="checkboxAll">
+           <checkbox checked="{{checkedAll}}" /><text style="color:#ABABAB; margin-left: 5px;">全选</text>
+        </checkbox-group>
+      </van-col>
+        <van-col span="9"><text style="color:#ABABAB;">合计 <text style="color: red;">¥{{totalAmount}}</text></text></van-col>
+        <!-- <van-col span="8">
+          <button  class="bill_button_payment" hover-class="bill_button_payment_class" bindtap="payment" data-datavalue="{{item}}">缴费</button>
+        </van-col> -->
+        <van-col span="8">
+          <button  class="bill_button_payment" hover-class="bill_button_payment_class" bindtap="mergeBill" data-datavalue="{{item}}">去结算</button>
+        </van-col>
+		</van-row>
+	</view>
+
+
+  <!-- <view style="height: auto;" class="view_bg" wx:for="{{billList}}" wx:key="*this">
+      <checkbox-group bindchange="checkboxChange">
+        <van-cell
+              custom-class="vb" 
+              title-class="vcell_title txt" 
+              value-class="daishouli" 
+              title="{{item.ipItemName}}" 
+              is-link value="详情" url="billDetailPage/billDetailPage?id={{item.id}}" />
+        <view class="view_desc">
+            <view class="view_light">
+              <text class="text_right" decode="{{true}}" >订单编号</text>{{item.id}}<checkbox style="padding-left: 50px;" value="{{item.id}}" checked="{{item.checked}}"></checkbox>
+            </view>
+            <view class="view_light">
+              <text class="text_right" decode="{{true}}" >所属账期</text><text>{{item.repYears}}</text>
+            </view>
+            <view class="view_light">
+              <text class="text_right">本金应收</text><text>{{item.priRev}}</text>
+            </view>
+            <view class="view_light">
+              <text class="text_right" decode="{{true}}" >本金已收</text><text>{{item.priPaid}}</text>
+            </view>
+            <view class="view_light">
+              <text class="text_right" decode="{{true}}" >房间名称</text><text>{{item.resName}}</text>
+            </view>
+            <view class="view_light" wx:if="{{item.lockLogo == 9}}">
+              <text class="text_right" decode="{{true}}" >支付状态</text><text>已缴费</text>
+            </view>
+            <view class="view_light" wx:if="{{item.lockLogo == 0}}">
+              <text class="text_right" decode="{{true}}" >支付状态</text><text>未缴费</text>
+            </view>
+            <view class="view_light" wx:if="{{item.lockLogo == 1}}">
+              <text class="text_right" decode="{{true}}" >支付状态</text><text>部分缴费</text>
+            </view>
+            <view class="view_light" wx:if="{{item.lockLogo == 3 }}">
+              <text class="text_right" decode="{{true}}" >支付状态</text><text>缴费中</text>
+            </view>
+            
+            <view style="display: flex;" class="view_light">
+
+              <view style="margin-left:30%;" wx:if="{{item.lockLogo ==9}}"></view>
+
+              <button wx:if="{{item.lockLogo == 9 && item.isInvoice == 1}}"  class="bill_button_invo" hover-class="bill_button_invo_class" bindtap="" data-datavalue="{{item}}">开票</button>
+
+              <view style="margin-left:70%;" wx:if="{{item.lockLogo == 0 || item.lockLogo == 1 || item.lockLogo == 3}}"></view>
+
+              <button wx:if="{{item.lockLogo == 0 && item.isPayment == 1 && payment_button_disabled == false}}" class="bill_button_payment" hover-class="bill_button_payment_class" bindtap="payment" data-datavalue="{{item}}">缴费</button>
+            </view>
+        </view>
+      </checkbox-group>
+  </view> -->
+
+
+  <view wx:if="{{billList.length > 0 && pageNum < pages}}" 
+        class="last_font" bindtap="loadMore" data-pageNum="{{pageNum}}" data-pageSize="{{pageSize}}">点击加载更多</view>
+  <view wx:elif="{{billList.length > 0 && pageNum == pages}}" class="last_font">已经到底了</view> 
+  <view wx:else class="last_font">暂无记录</view>
+  <view style="height:20rpx;"></view>
+
+
+</view>
+
+
+
+

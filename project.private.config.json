@@ -1,0 +1,129 @@
+{
+  "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
+  "projectname": "hgj_mini",
+  "setting": {
+    "compileHotReLoad": true,
+    "useIsolateContext": false,
+    "urlCheck": false
+  },
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "租户入住",
+          "pathName": "pages/hu/hubindTenant/hubindTenant",
+          "query": "cstCode=201708230011&cstName=洪磊&proNum=10001&houseId=24011810444600010065&houseName=住宅公共区域",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "业主入住",
+          "pathName": "pages/hu/hubind/hubind",
+          "query": "cstCode=201708230005&cstName=上海宁波商会&proNum=10000",
+          "launchMode": "default",
+          "scene": 1043,
+          "referrerInfo": {
+            "appId": "wx90d41245b9ac6e23"
+          }
+        },
+        {
+          "name": "subpages/mine/appt/show_apptObjInfo",
+          "pathName": "subpages/mine/appt/show_apptObjInfo",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "subpages/mine/appt/show_apptTimeInfo",
+          "pathName": "subpages/mine/appt/show_apptTimeInfo",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/repairApply/repairApply",
+          "pathName": "pages/repairApply/repairApply",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/repair/repairQuery/repairQuery",
+          "pathName": "pages/repair/repairQuery/repairQuery",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/main/main",
+          "pathName": "pages/main/main",
+          "query": "hgjModuleId=032&custId=3048000060&huSeqId=00000002&heoDate=20201116&heoSeqId=00000600&queryType=R",
+          "scene": null
+        },
+        {
+          "name": "subpages/repair/pages/repairApply/repairApply",
+          "pathName": "subpages/repair/pages/repairApply/repairApply",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "subpages/pfee/pfeeOrdLogList",
+          "pathName": "subpages/pfee/pfeeOrdLogList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "subpages/pfee/pfeeMonBillPay",
+          "pathName": "subpages/pfee/pfeeMonBillPay",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pfeeOrdDtlList",
+          "pathName": "subpages/pfee/pfeeOrdDtlList",
+          "query": "ordDate=20200908&ordSeqId=0000002",
+          "scene": null
+        },
+        {
+          "name": "subpages/repair/pages/repairDetail/repairDetail",
+          "pathName": "subpages/repair/pages/repairDetail/repairDetail",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/family/memberList",
+          "pathName": "pages/family/memberList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "subpages/family/memberList",
+          "pathName": "subpages/family/memberList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "subpages/pfee/pfeeMonBillPay",
+          "pathName": "subpages/pfee/pfeeMonBillPay",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "subpages/pfee/pfeeOrdLogList",
+          "pathName": "subpages/pfee/pfeeOrdLogList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "subpages/appt/apptOrd_success",
+          "pathName": "subpages/appt/apptOrd_success",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "subpages/pfee/test",
+          "pathName": "subpages/pfee/test",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  },
+  "libVersion": "2.25.4"
+}

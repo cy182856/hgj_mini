@@ -1,0 +1,191 @@
+/* subpages/pfee/pfeeMonBillSubmit.wxss */
+.img-view{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  z-index: -1;
+  background-color: white;
+}
+.head-img{
+  height: 246rpx;
+  width: 100%;
+}
+.head-text-view{
+  margin-left: 42rpx;
+  padding-top: 44rpx;
+  color:white;
+  height: 128rpx;  
+}
+.head-text{
+  line-height: 50rpx;
+}
+.head-menu-view{
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  height: 140rpx;
+  font-size: 28rpx;
+  background:rgba(255,255,255,1);
+  border-radius:12rpx;
+  box-shadow:rgba(0,0,0,0.07) 2rpx 2rpx 2rpx 2rpx ;
+}
+
+.menu-img{
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 86rpx;
+  margin-top: 50rpx;
+  position: relative;
+  top: 50%;
+}
+
+/* ---------- */
+.body{
+  padding: 36rpx 30rpx;
+  padding-right: 0;
+}
+.bill-cell{
+  height: 152rpx;
+}
+
+.bill-head{
+  background-color: #F9CDA4;
+  font-size: 24rpx;
+  width: 80rpx;
+  height: 36rpx;
+  color: white;
+  text-align: center;
+  border-top-left-radius:9rpx;
+  border-bottom-right-radius:12rpx;
+  float: left;
+}
+.bill-body{
+  width: 156rpx;
+  height: 140rpx;
+  background-color: white;
+}
+.bill-body-pay{
+  /* background-color: #F0F0F0; */
+  border:2rpx solid #EBEBEB;
+  border-radius: 12rpx;
+  height:152rpx;
+}
+.bill-body-unpay{
+  background-color: #FFFFFF;
+  border:2rpx solid #EBEBEB;
+  border-radius: 12rpx;
+  height:152rpx;
+}
+.selected{
+  /* box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;  */
+  border: 2rpx solid #2C8AFF;
+  box-shadow: #D0D0D0 1rpx 1rpx 1rpx 1rpx ;
+  height:152rpx;
+  border-radius: 12rpx;
+  color: #258BFF;
+}
+
+.top-right-icon{
+  /* position: relative; */
+  /* top:0; */
+  float: right;
+  width: 34rpx;
+  height: 34rpx;
+  border-radius: 100px;
+  /* -webkit-border-radius: 100px; */
+  background-color: #258BFF;
+  margin-top: 12rpx;
+  margin-right: 12rpx;
+}
+
+.bill-mon{
+  height: 70rpx;
+  text-align: center;
+  font-size: 32rpx;
+  line-height: 40rpx;
+  color: #363F4D;
+  margin-top: 12rpx;
+}
+.bill-mon-re{
+  position: relative;
+}
+.bill-mon-ab{
+  position: absolute;
+  line-height: 40rpx;
+  top: 34rpx;
+  left: 80rpx;
+  color: #666666;
+}
+.bill-amt{
+  height: 70rpx;
+  text-align: center;
+  font-size: 24rpx;
+  line-height: 50rpx;
+}
+
+.jidu{
+  height: 250rpx;
+  background-color:white;
+  margin-bottom: 20rpx;
+  margin-right: 30rpx;
+  padding-left:22rpx;
+  padding-right:22rpx;
+  border-radius: 10rpx;
+  
+}
+
+
+
+
+
+
+
+/* --------------------------------- */
+.foot{
+  position: fixed;
+  width: 95%;
+  bottom: 0;
+  display: flex;
+  justify-content: flex-end;
+  background-color: white;
+  height:120rpx;
+  padding: 0 20rpx 20rpx 20rpx;
+}
+.ord-amt{
+  line-height: 100%;
+}
+.btn-view{
+  padding: 30rpx 30rpx 0 30rpx;
+}
+.btn{
+  border-radius:10rpx!important;
+}
+.pfee-buttom{
+  background-color: #1A8AFA!important;
+  border: var(--button-border-width,1px) solid var(--button-danger-border-color,#1A8AFA)!important;
+  /* border-radius:10rpx!important; */
+}
+.bill-title{
+  height: 76rpx;
+  font-size:32rpx;
+  color:#363F4D;
+  /* margin-bottom: rpx; */
+}
+.global-empty {
+  padding-top: 0;
+}
+.row-off-class{
+  padding-right: 20rpx;
+}
+.pay-view{
+  box-shadow:rgba(201, 54, 54, 0.07) -4rpx -4rpx -4rpx -4rpx ;
+}
+.van-submit-bar{
+  box-shadow:rgba(0,0,0,0.09) 20rpx 20rpx 20rpx 20rpx ;
+}
+.checkAll{
+  margin-left: 10rpx;
+}

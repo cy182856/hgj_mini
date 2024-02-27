@@ -1,0 +1,5 @@
+.upload{
+    margin-top: 25rpx;
+    width: 94%;
+    margin-left: 6%;
+}

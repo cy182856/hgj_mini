@@ -1,0 +1,29 @@
+<view class="upload">
+    <van-uploader   file-list="{{ finalImgList }}"
+                    bind:after-read="registerUpload"
+                    bind:delete="registerUpload"
+                    bind:oversize="registerUpload"
+                    bind:click-preview="registerUpload"
+                    image-fit="{{imageFit}}"
+                    sizeType="{{sizeType}}"
+                    capture="{{sourceType}}"
+                    max-size="{{maxSize}}"
+                    upload-text="{{uploadText}}"
+                    preview-image="{{true}}"
+                    preview-full-image="{{previewFullImage}}"
+                    multiple="{{multiple}}"
+                    disabled="{{disabled}}"
+                    deletable="{{deletable}}"
+                    show-upload="{{showUpload}}"
+                    max-count="{{maxCount?maxCount:3}}"
+    />
+</view>
+
+<view>{{test}}</view>
+
+
+<block wx:for="{{drawList}}">
+    <canvas canvas-id="canvas{{index}}"
+            style="width:{{item.width}}px;height:{{item.height}}px;position: absolute;left:-{{(1800+(index*8000))}}px;top:-{{(1800+(index*8000))}}px;">
+    </canvas>
+</block>

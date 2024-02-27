@@ -1,0 +1,6 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "充电订单详情",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
+}

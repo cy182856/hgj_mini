@@ -1,0 +1,50 @@
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<view wx:for="{{APPTORDLOGDTOS}}" wx:for-item="value">
+<view class="apptOrd_success_bgImg">
+    <view class="confirm_ord">
+      <view class="confirm_ord_title">
+        <text>{{value.OBJNAME}}</text>
+      </view>
+    </view>
+    <view>
+      <image style="height:50rpx;width:100%; background-color: #F3F5F5;" src="../../images/appt/appt_middle.png" />
+    </view>
+    <view class="confirm_ord_content">
+      <view class="confirm_ord_content_title">
+          <van-row>
+            <van-col span="15">预约时间</van-col>
+            <van-col span="3" style="text-align:center;">数量</van-col>
+            <van-col span="6" style="text-align:center;">单价</van-col>
+          </van-row>
+      </view>
+      <view class="confirm_ord_content_detail" wx:for="{{value.APPTORDDTLDTOS}}" wx:for-item="content">
+          <van-row>
+            <van-col span="15">{{content.APPTDATEDESC}} {{content.BEGINTIMEDESC}}-{{content.ENDTIMEDESC}}</van-col>
+            <van-col span="3" style="text-align:center;">x{{content.OBJCNT}}</van-col>
+            <van-col span="6" style="text-align:center;">￥{{content.APPTPRICEDESC}}</van-col>
+          </van-row>
+      </view>
+      <view>
+        <image style="height:50rpx;width:100%; background-color: #F3F5F5;" src="../../images/appt/appt_middle.png" />
+      </view>
+      <view class="confirm_ord_pay">
+          <van-row>
+            <van-col span="12">需支付金额:</van-col>
+            <van-col span="12"><text style="font-size:48rpx;font-weight:bold;">￥{{value.ORDAMTDESC}}</text> </van-col>
+          </van-row>
+      </view>
+    </view>  
+    <view style="  background-color: #F3F5F5;">
+      <image style="height:66rpx;width:100%;" src="../../images/appt/appt_bottom.png" />
+    </view>
+</view>
+  <view class="confirm_ord_cancel">
+      <image style="height:38rpx;width:40rpx;" src="../../images/appt/appt_instru.png" /><text style="color: #ABABAB;font-size: 26rpx;">请在30分钟内完成支付</text>
+  </view>
+  <view class="confirm_ord_btn" bindtap="doOrdPay" data-ordDate="{{value.ORDDATE}}" data-ordSeqId="{{value.ORDSEQID}}" data-ordAmt="{{value.ORDAMTDESC}}" >
+      <text>确认支付</text>
+  </view>
+</view>
+
+

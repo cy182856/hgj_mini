@@ -1,0 +1,45 @@
+<!--pages/family/members/addMembers.wxml-->
+<import src="../../../template/houseinfo_header/houseInfo.wxml"></import>
+
+<view class="rootpage">
+  <view class="root">
+  <image class='background-image' src='../../../images/home/houseinfo_bg.png' mode="aspectFill"></image>
+  <view class="content">
+    <template is="houseInfo"   data="{{areaName:commanyShortName,houseNo:areaName}}"></template>
+  </view>
+ <view class="card-body">
+ <view class="fun-card" style="z-index:199">
+
+  <view class="title-view">
+      <text class="text-title">成员</text>
+  </view>
+ 
+  <view class="item-container" style="padding-top:30rpx;padding-bottom:30rpx">
+    <text class="member_name">成员角色</text>
+    <van-radio-group value="{{ huRole }}" bind:change="onChange" class="radiogroup">
+      <van-radio name="M"  checked-color="#169aff">
+        <text class="member_name">{{propType=="R"?'家庭成员':'成员'}}</text>
+      </van-radio>
+      <van-radio wx:if="{{propType=='R'}}" name="T" class="radioButton" checked-color="#169aff">
+        <text class="member_name">租客</text>
+      </van-radio>
+    </van-radio-group>
+  </view> 
+  </view>
+
+  <view class="notice-content">
+    <text class="notice-text">
+      相关说明
+      1. 请将生成的二维码展示或发送给成员{{propType=="R"?'/租客':''}}扫描；
+      2. 成员使用微信扫描该二维码，关注公众号后点击模板消息填写昵称信息即可完成；
+    </text>
+  </view>
+
+  <view class="btn-container">
+      <!-- <view class="btn-two" hover-class="btn-two_hover" disabled="{{isLoading}}"
+        bindtap="onTapCreateQRCode">生产绑定二维码</view> -->
+        <van-button custom-style="border-radius: 20rpx" type="primary" size="large" color="#169aff" bind:click="onTapCreateQRCode">生成绑定二维码</van-button>
+ </view>
+    </view> 
+</view>
+</view>

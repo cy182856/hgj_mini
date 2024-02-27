@@ -1,0 +1,140 @@
+<import src="../../template/empty/empty.wxml"></import>
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<view style="min-height:100%;background-color: #FFFFFF;padding-bottom: {{btuBottom}};">
+  <view class="deadline"></view>
+  <view class="appt_obj">
+      <van-row>
+        <van-col span="3"><view class="obj_info">预约</view></van-col>
+        <van-col span="21">
+        <van-dropdown-menu style="font-weight: 700;">
+          <van-dropdown-item value="{{ DEFAULT_OBJID }}" options="{{ OBJINFOS }}"  bind:change="chooseObj"/>
+        </van-dropdown-menu>
+        </van-col>
+      </van-row>
+  </view>
+  <view class="deadline"></view>
+  <view wx:if="{{APPTTIMEDTLDTOS.length==0&&!isLoading}}">
+    <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无预约标的明细记录'}}"></template>
+  </view>
+  <view wx:else>
+    <view class="appt_timeDtl">
+        <view class="appt_timeDtl_content">
+            <view class="appt_time_point">
+              <view  wx:for="{{APPTOBJDTLDTOS}}" wx:for-item="value"  wx:for-index="dtlIndex" class="appt_timeDtl_content_left" style="{{dtlIndex==0?'margin-top:150rpx;border-top: 1px solid #E5E5E5;':''}}">
+                <view>{{value.BEGINTIMEDESC}}</view>
+                <view>~</view>
+                <view>{{value.ENDTIMEDESC}}</view>
+              </view>
+            </view>
+
+            <view class="col_appt">
+              <view wx:for="{{APPTDATES}}" wx:for-item="apptDates" wx:for-index="dateIndex">
+                  <view class="appt_time_date_instu">
+                    <view class="appt_time_date_instu_weekDesc">{{apptDates.WEEKDESC}}
+                      <van-icon name="warning" color="red" wx:if="{{apptDates.ISDIFF=='Y'}}" custom-style="margin-left: 10rpx;margin-top: -30rpx;margin-left: -2rpx;"/>
+                    </view>
+                    <view class="appt_time_date_instu_monthDay" style="">{{apptDates.APPTMONTHDAY}}</view>
+                  </view>  
+                    <block wx:for="{{APPTTIMEDTLDTOS}}" wx:for-item="value1">
+                      <view  wx:if="{{value1.APPTDATE==apptDates.APPTDATE}}" class="appt_timeDtl_detail" style="{{value1.ISGREATERTHANLAST=='Y'?'  border-left: 1px solid #E5E5E5;margin-left: -1px;':''}}">
+                          <view wx:if="{{value1.STAT=='C'}}">
+                              <view class="appt_timeDtl_detail_content_over">
+                                <view style="line-height:150rpx;">关闭</view>
+                              </view>
+                          </view>
+                          <view wx:elif="{{value1.BEGINTIME<currentTime&&apptDates.APPTDATE<=currentDate}}">
+                            <view class="appt_timeDtl_detail_content_over">
+                                <view style="line-height:150rpx;">--</view>
+                            </view>
+                          </view>
+                          <view wx:elif="{{value1.EARLYAPPTTIME>currentDateTime}}"> 
+                            <view class="appt_timeDtl_detail_content_over">
+                                <view style="line-height:150rpx;">--</view>
+                            </view>
+                          </view>
+                          <view wx:elif="{{value1.AVLCNT<1}}">
+                              <view class="appt_timeDtl_detail_content_over">
+                                <view style="line-height:150rpx;">已约满</view>
+                              </view>
+                          </view>
+                          <view wx:else>        
+                            <view class="appt_timeDtl_detail_content" data-apptDate="{{value1.APPTDATE}}"  data-apptTimeId="{{value1.APPTTIMEID}}" data-beginTimeDesc="{{value1.BEGINTIMEDESC}}" data-endTimeDesc="{{value1.ENDTIMEDESC}}"  data-isTip="{{value1.ISDIFF}}" data-avlCnt="{{value1.AVLCNT}}" bindtap="chooseApptTime" style="{{value1.SELECTEDCNT?'background-color: #169AFF;color: white;':''}}">
+                                <view style="line-height:70rpx;">￥{{value1.APPTPRICE}}<van-icon info="{{value1.SELECTEDCNT}}" custom-style="padding-top: 35rpx;margin-left: 10rpx;"/></view>
+                                <view style="line-height:70rpx;">余{{value1.AVLCNT}}</view>
+                            </view>
+                            </view>
+                          </view>
+                    </block>
+                </view>
+            </view>
+        </view>
+      </view>
+      <van-popup
+        show="{{ isShowDtl }}"
+        position="bottom"
+        custom-style="margin-bottom: 120rpx;"
+        bind:close="onClose"
+        bind:click-overlay="closeOverlay"
+      >
+      <view class="selected_Dtl" wx:if="{{CHOOSETIMEDTL.length>0}}">
+          <view class="selected_title" >
+            <view>已选时段</view>
+            <view class="selected_title_empty">
+             <view style="text-align:right;" bindtap="selectedEmpty">
+              <image style="height:44rpx;width:34rpx;" src="../../images/appt/appt_gwc_empty.png" />
+              <view style="float:right;margin-left: 10rpx;">清空</view>
+             </view>
+            </view>
+          </view>
+          <view class="selected_content" wx:for="{{CHOOSETIMEDTL}}" wx:for-item="value" wx:if="{{value.OBJCNT>0}}">
+            <van-row>
+              <van-col span="12"><view style="margin-left: 20rpx;line-height: 56rpx;">{{value.APPTLONGDATE}} {{value.BEGINTIMEDESC}}-{{value.ENDTIMEDESC}}</view></van-col>
+              <van-col span="6">
+                <view style="line-height: 56rpx;">￥{{value.APPTPRICE}}</view>
+              </van-col>
+              <van-col span="6" style="text-align:center;">
+                <!-- <view>
+                  <van-stepper minus-class="selected_sub" input-class="selected_input" plus-class="selected_plus" min="0" value="{{ value.OBJCNT }}"  max="{{value.AVLCNT}}" data-apptDate="{{value.APPTDATE}}" data-apptTimeId="{{value.APPTTIMEID}}" integer="{{true}}" disable-input="{{true}}" bind:plus="selectedDtlAdd" bind:minus="selectedDtlSub" async-change disabled="{{isStepAble}}"/><van-toast id="van-toast" />
+                </view> -->
+              <view style="display: flex;justify-content: center;line-height: 56rpx;">
+                <view class="selected_sub" bindtap="selectedDtlSub" data-apptDate="{{value.APPTDATE}}" data-apptTimeId="{{value.APPTTIMEID}}" data-maxAvlCnt="{{value.AVLCNT}}"><image style="height:24rpx;width:30rpx;" src="../../images/appt/sub.png" /></view>
+                <view class="selected_input">{{ value.OBJCNT }}</view>
+                <view class="selected_plus" bindtap="selectedDtlAdd" data-maxAvlCnt="{{value.AVLCNT}}" data-apptDate="{{value.APPTDATE}}" data-apptTimeId="{{value.APPTTIMEID}}"><image style="height:24rpx;width:30rpx;" src="../../images/appt/add.png" /></view> 
+              </view>
+              </van-col>
+            </van-row>
+          </view>
+      </view>
+      </van-popup>
+      <view class="appt_timeDtl_foot">
+          <view bindtap="showApptTimeDtl" style="width:50%;float:left;">
+            <view style="float:left;margin-right:20rpx;">
+              <van-icon name="/images/appt/appt_gwc.png" info="{{CHOOSECNT}}" size="120rpx" custom-style="margin-top:-40rpx;margin-left: 20rpx;"/>
+            </view>
+            <view style="float:left;line-height: 120rpx;">
+              <text>￥{{TRANS_AMT}}</text>
+            </view>
+          </view>
+          <view style="float:right" bindtap="doliqTrans">
+            <van-button type="info" custom-style="width: 220rpx;line-height: 120rpx;background-color: #169AFF;height:120rpx;">提交订单</van-button>
+          </view>
+      </view>
+  </view>
+</view>
+<van-popup show="{{ isShowDialog }}" bind:click-overlay="closeInstru" custom-style="width: 93%;height: auto; border-radius: 20rpx !important">
+  <view style="padding-top: 30rpx;">
+    <view class="obj_title">操作提示</view>
+    <view class="obj_intru_list">
+      <view class="obj_intru">
+        <text>{{showDialogDesc}}</text>
+      </view>
+    </view>
+    <view class="deadline"></view>
+    <view class="obj_instru_close">
+      <view class="obj_instru_close_btn" bindtap="closeInstru">
+        <text>关闭</text>
+      </view>
+    </view>
+  </view>
+</van-popup>

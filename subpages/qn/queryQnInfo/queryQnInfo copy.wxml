@@ -1,0 +1,108 @@
+<import src="../../../template/empty/empty.wxml"></import>
+<import src="../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+
+<view class="page-container">
+<view class="page-container2" style="min-height:40%;">
+  <view class="qnTitle-view">
+    <van-row>
+      <van-col span="12">
+        <van-row>
+          <van-col span="16" >
+            <text class="qnTitle-text">进行中的问卷</text>
+          </van-col>
+          <van-col span="8" style="text-align:left;" >
+            <view class="modify-container" slot="">
+              <view class="button" bindtap="onNavigateToOngoingListPage">更多</view>
+            </view>
+          </van-col>
+        </van-row>
+      </van-col>
+      <van-col span="12" style="text-align:right;" bindtap="onTapGotoExpQnInfos">
+        <van-row>
+          <van-col span="20" >
+            <text class="exp_qnTitle-text">已结束的问卷</text>
+          </van-col>
+          <van-col span="4">
+            <van-icon name="arrow" size="32rpx" color="#ABABAB" custom-style="line-height:48rpx;" ></van-icon>
+          </van-col>
+        </van-row>
+      </van-col>
+    </van-row>
+  </view>
+  <view wx:if="{{ongoingQnInfoDtos && ongoingQnInfoDtos.length > 0}}" >
+    <view wx:for="{{ongoingQnInfoDtos}}" wx:for-index="index" wx:for-item="item" wx:key="qnSeqId" class="qnInfoC">
+      <van-row data-qnDate="{{item.qnDate}}" data-qnSeqId="{{item.qnSeqId}}" bindtap="onTapWatchDetail" class="qnNameC">
+        <van-col span="6">
+          问卷标题
+        </van-col>
+        <van-col span="16">
+          <text class="qnNameText">{{item.qnName}}</text>
+        </van-col>
+        <van-col span="2" style="text-align:right;" >
+          <van-icon name="arrow" color="#ABABAB" custom-style="line-height:88rpx;" ></van-icon>
+        </van-col>
+      </van-row>
+      <van-divider dashed custom-style="margin:2rpx 0;" />
+      <van-row class="dateTimeC">
+        <van-col span="6">
+          结束时间
+        </van-col>
+        <van-col span="18">
+          {{item.expDateTime}}
+        </van-col>
+      </van-row>
+    </view>
+  </view>
+  <view wx:else class="no-data-container" style="min-height:30%;">
+    <text>暂无进行中的问卷</text>
+  </view>
+</view>
+  
+  <view style="margin-top:32rpx;">
+    <image src="/images/qn/queryQnInfo_divider.png" style="height:32rpx; width:100%;" />
+  </view>
+
+<view class="page-container2">
+  <view class="qnTitle-view" style="margin-top:0;">
+    <text class="qnTitle-text">我答过的问卷</text>
+  </view>
+  <view wx:if="{{submittedQnInfoDtos && submittedQnInfoDtos.length > 0}}">
+    <view wx:for="{{submittedQnInfoDtos}}" wx:for-index="index" wx:for-item="item" wx:key="qnSeqId" class="qnInfoC">
+      <van-row data-qndate="{{item.qnDate}}" data-qnseqid="{{item.qnSeqId}}" bindtap="onTapWatchDetail2" class="qnNameC">
+        <van-col span="6">
+          问卷标题
+        </van-col>
+        <van-col span="16">
+          <text class="qnNameText">{{item.qnName}}</text>
+        </van-col>
+        <van-col span="2" style="text-align:right;" >
+          <van-icon name="arrow" color="#ABABAB" custom-style="line-height:88rpx;" ></van-icon>
+        </van-col>
+      </van-row>
+      <van-divider dashed custom-style="margin:2rpx 0;" />
+      <van-row class="dateTimeC">
+        <van-col span="6">
+          填写时间
+        </van-col>
+        <van-col span="18">
+          {{item.submitTime}}
+        </van-col>
+      </van-row>
+    </view>
+    <!-- 点击加载更多 -->
+    <block wx:if="{{more}}">
+      <view wx:if="{{loading}}" class="loading-container">
+        <van-loading type="spinner" size="32rpx" text-size="28rpx">加载中...</van-loading>
+      </view>
+      <view wx:else class="loading-container" bindtap="onLoadMore" >点击加载更多...</view>
+    </block>
+    <block wx:else>
+      <view class="loading-container" style="color:#ABABAB;" >暂无更多记录</view>
+    </block>
+  </view>
+  <view wx:else class="no-data-container">
+    <text>暂无我答过的问卷</text>
+  </view>
+</view>
+</view>

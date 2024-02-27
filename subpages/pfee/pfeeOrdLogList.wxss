@@ -1,0 +1,54 @@
+/* pages/pfee/pfeeOrdLogList.wxss */
+.ord{
+  border-radius: 30rpx 30rpx 30rpx 30rpx;
+  margin: 30rpx 32rpx 30rpx 32rpx;
+  /* height: 320rpx; */
+  position: relative;
+}
+.ord-title{
+  background-color: white;
+  padding: 30rpx 0 30rpx 40rpx;
+  border-radius: 30rpx 30rpx 0 0;
+  font-size: 24rpx;
+  color: #A0A0A0;
+  line-height: 40rpx;
+  box-shadow: #EBEFF8 3rpx 3rpx 3rpx 3rpx;
+}
+.ord-body{
+  margin-top: 2rpx;
+  background-color: white;
+  padding: 30rpx 40rpx 30rpx 40rpx;
+  border-radius: 0 0 30rpx 30rpx;
+  height: 160rpx;
+  box-shadow: #EBEFF8 3rpx 3rpx 3rpx 3rpx;
+}
+.back-img{
+  width: 112rpx;
+  height: 100rpx;
+  position: absolute;
+  right: 40rpx;
+  top: 30rpx;
+}
+.row-desc{
+  text-align: right;
+}
+.row-view{
+  line-height: 70rpx;
+  font-size: 28rpx;
+  line-height: 56rpx;
+}
+.foot{
+  margin-top: 2rpx;
+  background-color: white;
+  text-align: right;
+  border-radius: 0 0 30rpx 30rpx;
+  box-shadow: #EBEFF8 3rpx 3rpx 3rpx 3rpx;
+  line-height: 90rpx;
+}
+.page{
+  text-align: center;
+  padding: 20rpx 0 60rpx 0;
+}
+
+
+

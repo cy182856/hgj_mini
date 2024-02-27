@@ -1,0 +1,39 @@
+/* pages/family/members/addMembers.wxss */
+@import '../memberList.wxss';
+@import '../../../template/houseinfo_header/houseInfo.wxss';
+.text-label {
+
+  width: 130px;
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+  margin-bottom: 10rpx;
+  text-align: left;
+  font-weight: 500;
+}
+
+.radiogroup {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  margin-right: 20rpx;
+}
+
+.radioButton {
+  margin-left: 50rpx;
+}
+
+.notice-content {
+  padding: 10rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+ margin-top: 60rpx;
+}
+
+
+
+.btn-container {
+ 
+  margin-top: 60rpx;
+  margin-left: 36rpx;
+  margin-right: 36rpx;
+}

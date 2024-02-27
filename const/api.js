@@ -1,0 +1,211 @@
+
+//const ApiRootUrl = 'https://jia-tech.huiguan.com/jiasv/';//tech
+
+//const ApiRootUrl = 'https://zhgj.shofw.com/wx/';//tech
+//const ApiRootUrl = 'http://192.168.79.5:85/wx/';
+const ApiRootUrl = 'http://192.168.23.108:85/wx/';//tech
+//const ApiRootUrl = 'http://zhgjtest.shofw.com:85/wx/';
+
+// const ApiRootUrl = 'https://jia.huiguan.com/jiasv/';//prod
+// const ApiRootUrl = 'http://dev.huiguan.com:60103/jiasv/';//local
+module.exports = {
+  /********************主页*************************/
+  LOGIN:ApiRootUrl+'doLogin',//登录
+  // TEST:ApiRootUrl+'test.do',
+ 
+  huAuth : ApiRootUrl + "/hu/auth.do" ,//查询用户权限位图
+
+  queryMutipUsr : ApiRootUrl + 'queryMutipUsr', //查询多账户
+  queryManyCust : ApiRootUrl + 'queryManyCust', //查询公众号下的多账户信息
+  queryCurrNotice : ApiRootUrl + 'notice/queryCurrNotice.do',//公告
+  queryCurrNoticeNew : ApiRootUrl + 'notice/queryAllNotice.do',//公告
+
+  /********************智能开门*************************/
+  querySmartCodeInfo : ApiRootUrl + "/hu/querySmartCodeInfo.do" ,//查询条形码及二维码信息
+
+  /********************报事报修*************************/
+  repairApply:ApiRootUrl + 'repair.do',//报修申请
+  repairQuery:ApiRootUrl + 'queryRepairLog.do',//报修查询
+  repairCostDetailQuery:ApiRootUrl + 'queryRepairCostDetail.do',//报修费用明细查询
+  repairDetailPage: ApiRootUrl + 'queryRepairMsg.do'//留言明细
+  ,repairAward:ApiRootUrl + 'evaluateRepairOrder.do' //评价奖励
+  ,cancelRepair: ApiRootUrl + 'cancelRepair.do'//取消报修
+  ,updTime: ApiRootUrl + 'updTime.do' //修改预期到场时间
+  ,sureTime: ApiRootUrl + 'sureTime.do' //确认预期到场时间
+  ,evaluateRepairOrder: ApiRootUrl + 'evaluateRepairOrder.do'//立即评价
+  ,queryDetail: ApiRootUrl + 'queryDetail.do' //报修处理中数据，最新一条
+  ,surePay:ApiRootUrl + 'surePay.do'//确认维修完成
+  ,sendMsg:ApiRootUrl + 'sendMsg.do'//消息推送（小程序的消息推送）
+  ,anonymousRepair:ApiRootUrl + 'anonymousRepair' //匿名报修
+  ,annonyQuery:ApiRootUrl+'queryRepairLog' //匿名保修查询/详情查询
+  ,annonyEvaluateRepairOrder:ApiRootUrl+'evaluateRepairOrder' //匿名报修评价
+  ,annonyCancelRepair: ApiRootUrl + 'cancelRepair'//匿名取消报修
+  ,annonyQueryRepairMsg: ApiRootUrl + 'queryRepairMsg'//匿名留言明细
+  ,queryPropObj:ApiRootUrl + 'queryPropObj' //查询标地
+  ,repairCommonList:ApiRootUrl + 'repairCommonList' //查询报修快捷描述语
+  ,updRepairCommon:ApiRootUrl + 'updRepairCommon' //快捷描述语使用频次
+  ,repairAddMsgBody:ApiRootUrl + 'repair/addRepairMsg.do' //报修留言
+
+  ,repairHouseList:ApiRootUrl + 'repairHouseList' //查询客户房屋列表
+
+  ,cohabitOperate:ApiRootUrl + 'cohabitOperate.do'//房主对租户操作
+
+  /**********************查询管家信息***************** */
+  ,queryHouseKeepInfo:ApiRootUrl + 'houseKeepInfo.do'//查询管家信息
+
+
+  /**********************我的账单********************* */
+  ,queryPriRev:ApiRootUrl + 'queryPriRev.do'//查询客户欠费总金额
+  ,queryBill:ApiRootUrl + 'queryBill.do'//账单查询
+  ,queryBillMerge:ApiRootUrl + 'queryBillMerge.do'//合并账单查询
+  ,placeOrder:ApiRootUrl + 'placeOrder.do'//下单
+  ,mergeBill:ApiRootUrl + 'mergeBill.do'//合并账单
+  ,cancelBill:ApiRootUrl + 'cancelBill.do'//取消订单
+  ,queryBillDetail:ApiRootUrl + 'queryBillDetail.do'//查询订单详细
+  ,queryBillMonthDetail:ApiRootUrl + 'queryBillMonthDetail.do'//查询月账单详细
+
+  ,paymentCompleted:ApiRootUrl + 'paymentCompleted.do'//支付完成，修改支付状态为支付中
+
+
+  /********************问卷调查*************************/
+  ,QueryQnQueList: ApiRootUrl + 'queryQnQueList.do',//查询问卷问题（及答案）列表
+  QueryQnInfos: ApiRootUrl + 'queryQnInfos.do',//查询问卷记录列表
+  AddQnHuAns: ApiRootUrl + 'addQnHuAns.do',//新增问卷答案
+  queryExpQnInfos: ApiRootUrl + 'queryExpQnInfos.do',//查询已结束问卷记录列表
+  queryOngoingQnInfos: ApiRootUrl + 'queryOngoingQnInfos.do',//查询进行中的问卷记录列表
+  queryQnHouseSubmits: ApiRootUrl + 'queryQnHouseSubmits.do',//查询是否有其他人已提交问卷（问卷唯一类型为按房唯一时，若已有人提交，则不可进入问卷答题页面）
+
+  /********************预约****************************/
+  queryApptObjInfo: ApiRootUrl +'appt/queryApptObjInfo.do',//预约标的查询
+  queryApptTimeDtl: ApiRootUrl +'appt/queryApptTimeDtl.do',
+  addApptOrdLog: ApiRootUrl +'appt/addApptOrdLog.do',
+  queryApptOrdLog: ApiRootUrl +'appt/queryApptOrdLog.do',
+  updApptOrdLog: ApiRootUrl + 'appt/updApptOrdLog.do',
+  preApptOrdProcess: ApiRootUrl +'appt/prePayValid.do',
+
+  /********************公告****************************/
+
+
+  /********************邻里圈*************************/
+  queryHeoTypeList: ApiRootUrl + "/heo/queryHeoTypeList.do", //查询邻里圈类型列表
+  addHeoInfo:ApiRootUrl +"/heo/addHeoInfo.do", //新增邻里圈信息
+  addHeoDtl:ApiRootUrl + "/heo/addHeoDtl.do", //新增邻里圈明细信息
+  queryHeoInfos:ApiRootUrl +"/heo/queryHeoInfos.do", //查询邻里圈信息
+  queryHeoDtlInfo: ApiRootUrl + "/heo/queryHeoDtls.do", //查询邻里圈评论信息
+  updHeoInfo: ApiRootUrl + "/heo/updHeoInfo.do", //更新邻里圈信息
+  updHeoDtlInfo : ApiRootUrl + "/heo/updHeoDtl.do",//更新邻里圈明细信息
+  doHeoPraise: ApiRootUrl + "/heo/heoPraise.do"
+  ,queryHeoPraiseList: ApiRootUrl + "/heo/queryHeoPraiseList.do",
+  /********************便民服务*************************/
+
+
+  /********************消息****************************/
+
+
+  /********************我的发布*************************/
+
+
+  /********************房屋管理*************************/
+  houseBind: ApiRootUrl + "hu/houseBind/owner", // 房主绑定
+  houseBindTenant: ApiRootUrl + "hu/houseBind/tenant", // 租户绑定
+  queryHouseInfo: ApiRootUrl + "hu/getHouseInfo", // 获取房屋信息(区域、楼号、室号)
+  queryAreaInfo: ApiRootUrl + 'hu/getAreaInfo',//查询区域信息
+  getBuildingInfo: ApiRootUrl + '/hu/getBuildingInfo',//查询楼号信息
+  queryHouseNoList: ApiRootUrl + '/hu/getHouseNoList', // 模糊查询室号集合
+  getHouseInfo: ApiRootUrl + 'prop/getHouseInfo.do',//查询房号信息
+  getHouseUsrInfo: ApiRootUrl + 'hu/getHouseUsrInfo.do',
+  getHouseUsrInfoQrcode: ApiRootUrl + 'hu/getHouseUsrInfoQrcode.do',//生成绑定二维码
+  updateHouseUsrInfo: ApiRootUrl + 'hu/updateHouseUsrInfo.do',//更新住户信息  昵称 权限 状态
+  cancelHouseUsrInfo: ApiRootUrl + 'hu/cancelHouseUsrInfo.do',//注销账号
+  getConvenientInfo: ApiRootUrl + 'prop/getPropPubRes.do',//便民信息
+  transferHouseUsrInfo: ApiRootUrl + 'hu/transferHouseUsrInfo.do',//户主转让
+
+  /********************物业缴费*************************/
+  queryPfeeMonBill : ApiRootUrl + 'pfee/queryPfeeMonBill.do',//查询物业费缴费订单列表
+  queryPfeeOrdLog : ApiRootUrl + 'pfee/queryPfeeOrdLog.do',//查询物业费缴费订单列表
+  submitPfee : ApiRootUrl + 'pfee/submitPfee.do',//查询物业费缴费订单列表
+  queryPfeeOrdDtl : ApiRootUrl + 'pfee/queryPfeeOrdDtl.do',//查询物业费缴费订单明细
+  closePfeeOrdLog : ApiRootUrl + 'pfee/closePfeeOrdLog.do',//关闭物业费缴费订单明细
+  closeInitPayPfeeOrdLog : ApiRootUrl + 'pfee/closeInitPayPfeeOrdLog.do',//关闭物业费缴费订单明细
+  queryRanking : ApiRootUrl + 'queryRanking.do',//查询共建家园排名
+  queryPfeeInfo : ApiRootUrl + 'pfeeBill/queryPfeeInfo.do',//查询物业费缴费信息(新)
+  queryPfeeMonBillNew : ApiRootUrl + 'pfeeBill/queryPfeeMonBill.do',//查询物业费缴费订单列表(新)
+  queryPfeeMonBillGBYear : ApiRootUrl + 'pfeeBill/queryPfeeMonBillGBYear.do',//查询物业费缴费订单列表
+
+
+  /********************公共功能—文件上传,查阅*************************/
+  // uploadImages : ApiRootUrl + "upload/image", //上传图片
+  uploadImages : ApiRootUrl + "uploadFile",
+  //图片文件查看：fileName：文件名，packName：文件路径名，customize：自定义的默认路径名，自定义需要后台开发
+  // queryImageUrl:ApiRootUrl + 'image/query?fileName=FILENAME&packName=PACKNAME&customize=OTHER',
+  queryImageUrl:ApiRootUrl + 'queryImgUrl?fileName=FILENAME&packName=PACKNAME&customize=OTHER',
+  
+  /**小程序支付下单接口 */
+  minProgramPayUrl: ApiRootUrl +'pay/miniProgramPay.do',
+  minProgramRefundUrl: ApiRootUrl +'/refund/refund.do',
+  orderQueryUrl: ApiRootUrl + "pay/orderQuery.do",
+  orderQueryDetailUrl:ApiRootUrl + "pay/orderDetailQuery.do",
+  /********************访客管理*************************/
+  addVisitQrCode : ApiRootUrl + "visitinfo/addVisitQrCode.do", //新增访客通行证-生成二维码
+  addVisitRandomNum : ApiRootUrl + "visitinfo/addVisitRandomNum.do" //新增访客通行证-生成6位随机数
+
+  ,checkVisitLogDetail : ApiRootUrl + "/visitinfo/showVisitInfoDetail.do" //查看单个访客通行证信息
+  ,queryVisitLogs: ApiRootUrl + "visitinfo/queryVisitInfos.do" //查询访客记录
+  ,updateVisitLog: ApiRootUrl + "/visitinfo/updVisitLog.do" //更新访客通行码
+
+  /********************问题反馈*************************/
+  ,addAdvice: ApiRootUrl + 'advice/addAddvice' //新增投诉建议
+  ,queryAdviceLog:ApiRootUrl + 'advice/queryAdviceLog' //查询投诉建议列表
+  ,queryAdviceDetail: ApiRootUrl + 'advice/queryAdviceDetail' //查询投诉建议详情
+  ,cancelAdvice:ApiRootUrl+'advice/cancelAdvice' //取消投诉建议
+  ,finishAdvice:ApiRootUrl+'advice/finishAdvice' //确认反馈完成
+  ,evaluateAdvice:ApiRootUrl+'advice/evaluateAdvice' //反馈评价
+  ,addMsgBody:ApiRootUrl + 'advice/addMsgBody' //反馈留言
+  /********************匿名登录*************************/
+  ,noName:ApiRootUrl+'noName/noNameMain' //匿名登录
+  ,isBind:ApiRootUrl +'noName/isBind' //判断用户是否已经认证绑定
+  ,getWechatUrl:ApiRootUrl+'getWechatUrl' //获取微信网页授权URL
+
+  /********************供应商*************************/
+  ,queryShopItemInfo:ApiRootUrl+'shop/queryShopItemInfo.do'//店铺下商品信息查询
+  ,updItemInfo:ApiRootUrl+'item/updItemInfo.do'//商品信息修改
+  ,queryItemInfo:ApiRootUrl+'item/queryItemInfo.do'//商品信息查询
+  ,queryPropSupLifeUrl:ApiRootUrl+'life/lifeShow.do' // 生活服务首页数据查询
+  ,lifeItemShowUrl:ApiRootUrl+'life/lifeItemShow.do'// 根据类目查询商品列表
+
+  /********************菜单地址*************************/
+  , queryMenuList: ApiRootUrl + 'menu/queryMenuList.do' //查询菜单列表
+
+  /******************** 文件公示 ***********************/
+  ,queryFmFileList : ApiRootUrl + 'fmfile/queryFmFileList.do'
+
+
+  /******************** 车辆缴费 ***********************/
+  ,cfeePay : ApiRootUrl +  '/pay/cfee.do'
+  ,queryCarInfos : ApiRootUrl + '/car/queryCarInfos.do'
+  ,queryCarFeeLogs : ApiRootUrl + "/car/queryCarFeeLogs.do"
+  
+  /******************** 充电桩 ***********************/
+  ,queryChargeList : ApiRootUrl + '/charge/queryChargeList.do'//充电桩列表查询接口
+  ,queryChargeDatail : ApiRootUrl + '/charge/queryChargeDetail.do'//充电桩详情查询接口
+  ,queryChargeDatailUnLogin : ApiRootUrl + 'noLogin/queryChargeDetail'//充电桩详情查询接口
+  ,addChargeSubLog : ApiRootUrl + '/charge/addChargeSubLog.do'//充电桩空闲通知接口
+  ,queryChargeSubLog : ApiRootUrl + '/charge/queryChargeSubLog.do'//查询充电桩空闲通知接口
+  ,updateChargeSubLog: ApiRootUrl + '/charge/updateChargeSubLog.do'//取消充电桩空闲通知接口
+  ,startCharge : ApiRootUrl + '/charge/chargeStart.do'//发起充电接口
+  ,endCharge : ApiRootUrl + '/charge/chargeEnd.do'//结束充电接口
+  ,queryChargeOrdLogs : ApiRootUrl + '/charge/queryChargeOrdLog.do'//充电记录列表查询接口
+  ,queryChargeOrdDtl : ApiRootUrl + '/charge/queryChargeOrdDetail.do'//充电记录详情查询接口
+
+   /******************** 账户 ***********************/
+   ,queryAcctInfo : ApiRootUrl +  'acct/queryAcctInfo.do'
+   ,recharge:ApiRootUrl+'pay/recharge.do'
+   ,queryAcctLog: ApiRootUrl +  'acct/queryAcctLog.do'
+   ,queryRefundDivAmt: ApiRootUrl +  'acct/queryRefundDivAmt.do'
+   ,refund: ApiRootUrl +  'charge/refund.do'
+   ,queryUsrOweFee: ApiRootUrl+ 'charge/queryUsrOweFee.do'
+
+   /******************** 门禁 **********************/
+   ,queryAcDevList:ApiRootUrl + '/door/queryAcDevList.do'
+   ,remoteOpenDoor : ApiRootUrl + "/door/openDoor.do"
+}

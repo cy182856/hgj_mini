@@ -1,0 +1,147 @@
+<!--pages/pfee/pfeeOrdLogList.wxml-->
+<import src="../../template/empty/empty.wxml"></import>
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<van-toast id="van-toast" />
+
+<view wx:if="{{pfeeOrdLogVos == null || pfeeOrdLogVos.length==0}}">
+    <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无我的缴费记录'}}"></template>
+</view>
+<view wx:else>
+  <!-- ---------------------------------------------------------------------------------------- -->
+  <view wx:for="{{pfeeOrdLogVos}}" wx:for-item="pfeeOrdLogVo" wx:key="key" >
+    <view class="ord">
+      <view wx:if="{{pfeeOrdLogVo.stat=='S'}}">
+        <image class="back-img" src="../../images/pfee/pay.png"/>
+      </view>
+      <view wx:else>
+        <image class="back-img" src="../../images/pfee/unpay.png"/>
+      </view>
+      <view class="ord-title" bindtap="toDtl" 
+            data-orddate="{{pfeeOrdLogVo.ordDate}}" data-ordseqid="{{pfeeOrdLogVo.ordSeqId}}">
+        <text>订单时间: {{pfeeOrdLogVo.ordDateDesc}}  {{pfeeOrdLogVo.payTimeDesc}}</text>
+      </view>
+      <view class="ord-body" bindtap="toDtl" style="border-radius: {{pfeeOrdLogVo.stat=='I'?0:''}};"
+            data-orddate="{{pfeeOrdLogVo.ordDate}}" data-ordseqid="{{pfeeOrdLogVo.ordSeqId}}">
+        <van-row custom-class="row-view">
+          <van-col span="6">地址</van-col>
+          <van-col span="18" custom-class="row-desc">{{pfeeOrdLogVo.houseDesc}}</van-col>
+        </van-row>
+        <van-row custom-class="row-view">
+          <van-col span="6">订单总金额</van-col>
+          <van-col span="18" custom-class="row-desc">¥{{pfeeOrdLogVo.ordAmt}}</van-col>
+        </van-row>
+        <van-row custom-class="row-view">
+          <van-col span="6">账单月份</van-col>
+          <van-col span="18" custom-class="row-desc">{{pfeeOrdLogVo.billRemarkMon}}</van-col>
+        </van-row>
+      </view>
+      <view  wx:if="{{pfeeOrdLogVo.stat=='I'}}">
+        <view class="foot" id="{{pfeeOrdLogVo.ordDate+pfeeOrdLogVo.ordSeqId}}">
+          <van-button type="info" bind:click="cancel" 
+            data-orddate="{{pfeeOrdLogVo.ordDate}}" 
+            data-ordseqid="{{pfeeOrdLogVo.ordSeqId}}"
+            data-index = '{{index}}'
+            custom-style="background-color: #2C8AFF;height:56rpx;margin-right:40rpx;border-radius:10rpx;" >
+              取消订单
+          </van-button>
+
+          <van-button type="info" bind:click="pay" 
+            data-orddate="{{pfeeOrdLogVo.ordDate}}" 
+            data-ordseqid="{{pfeeOrdLogVo.ordSeqId}}"
+            custom-style="background-color: #2C8AFF;height:56rpx;margin-right:40rpx;border-radius:10rpx;" >
+            请23:59:59前支付
+          </van-button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+
+  <!-- ---------------------------------------------------------------------------------------- 
+  <view wx:for="{{pfeeOrdLogVos}}" wx:for-item="pfeeOrdLogVo" wx:key="key" >
+    <view class="log" >
+      <view class="head" bindtap="toDtl" 
+                data-orddate="{{pfeeOrdLogVo.ordDate}}" data-ordseqid="{{pfeeOrdLogVo.ordSeqId}}">
+        <view class="head-left">
+          {{pfeeOrdLogVo.ordDateDesc}}  {{pfeeOrdLogVo.payTimeDesc}}  
+        </view>
+        <view class="head-right">
+          {{pfeeOrdLogVo.statDesc}}
+        </view>
+      </view>
+      <view class="divider" ><view class="divider-inner" ><view class="line" ></view></view></view>
+      <view class="body" bindtap="toDtl" 
+                data-orddate="{{pfeeOrdLogVo.ordDate}}" data-ordseqid="{{pfeeOrdLogVo.ordSeqId}}">
+        <view class="body-cell"> 
+          <view class="body-left">
+            缴费户室
+          </view>
+          <view class="body-right">
+            {{pfeeOrdLogVo.houseDesc}}
+          </view>
+        </view>
+        <view class="body-cell"> 
+          <view class="body-left">
+            缴费金额
+          </view>
+          <view class="body-right">
+            {{pfeeOrdLogVo.ordAmt}}元
+          </view>
+        </view>
+        <view class="body-cell"> 
+          <view class="body-left">
+            缴费月份
+          </view>
+          <view class="body-right">
+            {{pfeeOrdLogVo.billRemark}}
+          </view>
+        </view>
+      </view>
+      <view class="divider" ><view class="divider-inner" ><view class="line" ></view></view></view>
+      <view class="foot">
+        <view wx:if="{{pfeeOrdLogVo.stat == 'I'}}">
+          <view class="foot-button" id="{{pfeeOrdLogVo.ordDate+pfeeOrdLogVo.ordSeqId}}">
+            <van-button type="info" bind:click="cancel" 
+              data-orddate="{{pfeeOrdLogVo.ordDate}}" 
+              data-ordseqid="{{pfeeOrdLogVo.ordSeqId}}"
+              data-index = '{{index}}'
+              custom-style="background-color: #189AFE;height:56rpx;margin:20rpx 40rpx 20rpx 0;" >
+                取消订单
+            </van-button>
+
+            <van-button type="info" bind:click="pay" 
+              data-orddate="{{pfeeOrdLogVo.ordDate}}" 
+              data-ordseqid="{{pfeeOrdLogVo.ordSeqId}}"
+              custom-style="background-color: #189AFE;height:56rpx;margin:20rpx 40rpx 20rpx 0;" >
+              请23:59:59前支付
+            </van-button>
+          </view>
+        </view>
+      </view>
+      <view class="foot-bottom-radial">
+        <image style="height:66rpx;width:100%;background-color: #F7F7F7;" src="../../images/pfee/bottom.png" />
+      </view>
+    </view>
+  </view>
+  -->
+  <!--翻页-->
+  <view class="page" bindtap="scrolltolower" >
+    {{bottomText}}
+  </view>
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,72 @@
+<import src="../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<import src="../../../template/empty/empty.wxml"></import>
+<view class="weui-loadmore" wx:if="{{isRefreshing}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore-tips">正在刷新...</view>
+</view>
+<block wx:if="{{chargeOrdLogs && chargeOrdLogs.length > 0}}">
+  <view style=" padding-bottom:{{padding_bottom}}rpx;">
+    <block wx:for="{{chargeOrdLogs}}" wx:for-item="chargeOrdLog" wx:key="key">
+      <view class="charge-log-item">
+        <van-cell-group custom-class="vant-cell-custom-class" border="{{false}}">
+          <van-cell 
+            data-item="{{chargeOrdLog}}" 
+            bind:click="checkDetail" 
+            border="{{ true }}"  
+            is-link
+            >
+            <view slot="title">
+              <view class="charge-log-title">{{chargeOrdLog.ordDateTime}}</view>
+            </view>
+            <view slot="">
+              <view class="{{chargeOrdLog.ordStat == 'P' ? 'charged-stat' : 'charge-log-stat'}}">
+                {{chargeOrdLog.ordStatDesc}}
+              </view>
+            </view>  
+          </van-cell>
+          <view class="van-cell-item">
+          <van-cell title="区域" custom-class="van-cell-item-line"
+          value="{{chargeOrdLog.chargeAreaName}}" border="{{ false }}" />
+          <van-cell title="充电桩" custom-class="van-cell-item-line"
+          value="{{chargeOrdLog.deviceName}}" border="{{ false }}" />
+          <van-cell title="充电量" custom-class="van-cell-item-line"
+          value="{{chargeOrdLog.ordStat == 'P' ? '--' : chargeOrdLog.chargeTotalVo}} 度" border="{{ false }}" />
+          <van-cell title="充电时长" custom-class="van-cell-item-line"
+          value="{{chargeOrdLog.ordStat == 'P' ? '------' : chargeOrdLog.chargeTotalTimeDesc}}" border="{{ false }}"/>
+          <van-cell border="{{ false }}" custom-class="van-cell-item-line">
+            <view slot="title">
+              <view >订单金额</view>
+            </view>  
+            <view slot="">
+              <view>
+                <font class="vant-cell-value-class">
+                  {{chargeOrdLog.ordStat == 'P' ? '--' : chargeOrdLog.chargeTotalAmt}}
+                </font> 
+                元
+              </view>
+            </view>  
+          </van-cell>
+          </view>
+        </van-cell-group>
+      </view>
+    </block>
+    <!-- 点击加载更多 -->
+    <block wx:if="{{more}}">
+      <view wx:if="{{loading}}" class="loading-container">
+        <van-loading type="spinner" size="26rpx" text-size="22rpx">正在加载更多...</van-loading>
+      </view>
+      <view wx:else class="loading-container" bindtap="onLoadMore" >点击加载更多...</view>
+    </block>
+    <block wx:else>
+      <view class="loading-container" bindtap="" >没有更多内容啦(仅展示最近一年记录)</view>
+    </block>
+  </view>
+</block>
+<block wx:else>
+  <view class="empty-view">
+    <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无充电订单信息'}}"></template>
+  </view>
+</block>
+
+<van-dialog id="van-dialog" overlay-style ="z-index:6666 !important;"  confirm-button-color ="#189AFE" />

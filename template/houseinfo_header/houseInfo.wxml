@@ -1,0 +1,12 @@
+<template name="houseInfo">
+<!-- <view class="root">
+  <image class='background-image' src='../../images/home/houseinfo_bg.png' mode="aspectFill"></image>
+  <view class="content"> -->
+  <view class="houseInfo-container">
+        <text class="text-area">{{areaName}}</text>
+        <text class="text-house">{{houseNo}}</text>
+    </view>
+  <!-- </view>
+</view> -->
+    
+</template>

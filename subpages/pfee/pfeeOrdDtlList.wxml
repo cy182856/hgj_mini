@@ -1,0 +1,102 @@
+<!--subpages/pfee/pfeeOrdDtlList.wxml-->
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<van-toast id="van-toast" />
+
+<scroll-view class="main_container" scroll-y>
+<view>
+  <view  class="img-view">
+    <image class="head-img" src="../../images/pfee/headbackgroung.png"/>
+  </view>
+
+  <view class="head-text-view">
+    <view class="head-text" style="font-size:32rpx"><text>{{shortName}}</text></view>
+    <view class="head-text" style="font-size:28rpx"><text>{{houseName}}</text></view>
+  </view>
+</view>
+
+<view class="ord-view">
+  <van-row custom-class="row-view">
+    <van-col span="6" >订单金额</van-col>
+    <van-col span="18" custom-class="row-desc">¥{{pfeeOrdLog.ordAmt}}</van-col>
+  </van-row>
+  <van-row custom-class="row-view">
+    <van-col span="6" >状态</van-col>
+    <van-col span="18" custom-class="row-desc">{{pfeeOrdLog.statDesc}}</van-col>
+  </van-row>
+  <van-row custom-class="row-view">
+    <van-col span="6" >付费方式</van-col>
+    <van-col span="18" custom-class="row-desc">
+      <!-- {{pfeeOrdLog.payChnlDesc}} -->
+      小程序支付
+    </van-col>
+  </van-row>
+  <van-row custom-class="row-view">
+    <van-col span="6" >订单日期</van-col>
+    <van-col span="18" custom-class="row-desc">{{pfeeOrdLog.ordDateDesc}}</van-col>
+  </van-row>
+  <van-row custom-class="row-view">
+    <van-col span="6" >订单流水号</van-col>
+    <van-col span="18" custom-class="row-desc">{{pfeeOrdLog.ordSeqId}}</van-col>
+  </van-row>
+  <van-row custom-class="row-view">
+    <van-col span="6" >账单月份</van-col>
+    <van-col span="18" custom-class="row-desc">{{pfeeOrdLog.billRemarkMon==null?'':pfeeOrdLog.billRemarkMon}}</van-col>
+  </van-row>
+  <van-row custom-class="row-view">
+    <van-col span="6" >备注</van-col>
+    <van-col span="18" custom-class="row-desc">{{pfeeOrdLog.billRemarkRem==null?'':pfeeOrdLog.billRemarkRem}}</van-col>
+  </van-row>
+</view>
+
+<view class="dtl-view">
+  <van-row custom-class="row-view">
+    <van-col span="12" custom-class="dtl-row-desc1">物业缴费明细信息</van-col>
+    <van-col span="12" custom-class="dtl-row-desc2">¥{{pfeeOrdLog.ordAmt}}</van-col>
+  </van-row>
+
+  <view class="dtl-view-s">
+    <van-collapse accordion value="{{ activeNames }}" bind:change="onChange">
+      <view wx:for="{{pfeeOrdLog.pfeeOrdDtlYearVos}}" wx:for-item="pfeeOrdDtlYearVo" wx:for-index="idx" wx:key="key">
+        <van-collapse-item name="{{idx}}">
+          <view slot="title">
+            <van-row>
+              <van-col span="9">{{pfeeOrdDtlYearVo.year}}年物业费</van-col>
+              <van-col span="15" custom-class="row-desc">
+                ¥{{pfeeOrdDtlYearVo.sumAmt}}({{pfeeOrdDtlYearVo.pfeeOrdDtlDtos.length}}个月)
+              </van-col>
+            </van-row>
+          </view>
+
+          <view wx:for="{{pfeeOrdDtlYearVo.pfeeOrdDtlDtos}}" wx:for-item="pfeeOrdDtlDto" wx:key="key">
+            <van-row custom-class="year-dtl">
+              <van-col offset="2" span="10" >{{pfeeOrdDtlDto.billMonDesc}}</van-col>
+              <van-col span="12" custom-class="row-desc">¥{{pfeeOrdDtlDto.billAmtDesc}}</van-col>
+            </van-row>
+          </view>
+        </van-collapse-item>
+      </view>
+    </van-collapse>
+  </view>
+</view>
+
+
+
+
+
+
+<view style="height:180rpx"></view>
+<!--支付按钮-->
+<block wx:if="{{pfeeOrdLog.stat == 'I'}}">
+  <view class="btn-v">
+    <van-button type="info" custom-class="btn" 
+      bind:click="pay" 
+      data-orddate="{{pfeeOrdLog.ordDate}}" 
+      data-ordseqid="{{pfeeOrdLog.ordSeqId}}">
+      支付
+    </van-button>
+  </view>
+</block>
+
+</scroll-view>
+

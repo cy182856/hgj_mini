@@ -1,0 +1,52 @@
+<!--pages/wuyeInfo/wuyeInfo.wxml-->
+<import src="../../template/empty/empty.wxml"></import>
+
+<view wx:if="{{infoList == '' || infoList.length == 0}}" >
+  <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无便民信息'}}"></template>
+</view>
+<view wx:else>
+  <block wx:for="{{ infoList }}" wx:key="resId">
+     
+
+    <view class="fun-card">
+      <view class="card-title">{{item.resName}}</view>
+      <view class="splite-line-dashed"></view>
+   
+      <van-row>
+          <van-col span="4" offset="1"> <view class="text-label">{{item.item1Name}}</view></van-col>
+          <van-col span="18"> 
+            <view class="content-row" bindtap="{{item.item1Type=='01'?'onTapCall':''}}" data-item="{{item.item1Desc}}">
+             <view class="text-content">{{item.item1Desc}}</view>
+             <view style="width:40rpx;height:20rpx"> </view>
+             <van-icon wx:if="{{item.item1Type=='01'}}" name="phone" color="#1296db" size="40rpx"  />
+            </view>
+          </van-col>  
+      </van-row>
+         <view  wx:if="{{item.item2Name}}" style="width:100%;height:20rpx"></view>
+        <van-row>
+          <van-col span="4" offset="1"> <view class="text-label">{{item.item2Name}}</view></van-col>
+          <van-col span="18">  
+           <view class="content-row" bindtap="{{item.item2Type=='01'?'onTapCall':''}}" data-item="{{item.item2Desc}}">
+             <view class="text-content">{{item.item2Desc}}</view>
+             <view style="width:40rpx;height:20rpx"> </view>
+             <van-icon wx:if="{{item.item2Type=='01'}}" name="phone" color="#1296db" size="40rpx" />
+            </view>
+          </van-col>
+        </van-row>
+        <view wx:if="{{item.item2Name}}" style="width:100%;height:20rpx"> </view>
+      <van-row>
+          <van-col span="4" offset="1"> <view class="text-label">{{item.item3Name}}</view></van-col>
+          <van-col span="18">  
+            <view class="content-row" bindtap="{{item.item3Type=='01'?'onTapCall':''}}" data-item="{{item.item3Desc}}">
+            <view class="text-content">{{item.item3Desc}}</view>
+            <view style="width:30rpx;height:20rpx"> </view>
+         
+           <van-icon wx:if="{{item.item3Type=='01'}}" name="phone" color="#1296db" size="40rpx" />
+          </view>
+          </van-col>
+        </van-row>
+      <view wx:if="{{item.item3Name}}" style="width:100%;height:30rpx"> </view>
+    </view>
+  </block>
+  <view   style="width:100%;height:80rpx"></view>
+</view>

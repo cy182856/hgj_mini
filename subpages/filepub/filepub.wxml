@@ -1,0 +1,96 @@
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<import src="../../template/empty/empty.wxml"></import>
+<van-sticky>
+  <view class="fload-title-view">
+    <block wx:if="{{floadTitles.length >0}}">
+      <view class="home-icon" bindtap="backToHome">
+        <text class="font-size28 color-blue">我的公示</text>
+        <text class="iconfont jia-arrow-right font-size26"></text>
+      </view>
+      <view style="overflow: hidden;width:80%;">
+        <scroll-view class="scroll-view" 
+                      scroll-x
+                      scroll-left="{{navScrollLeft}}" 
+                      scroll-with-animation="{{true}}"
+                      show-scrollbar = "{{false}}">
+          <block wx:for="{{floadTitles}}" wx:for-item="item" wx:for-index="index">
+            <block wx:if="{{index < floadTitles.length - 1}}">
+              <view class="fload-title-item" bindtap="bindClickFload" data-item="{{item}}">
+                <view class="fload-title-flex-view">
+                  <view class="fload-title color-blue">{{item.cataName}}</view>
+                  <text class="iconfont jia-arrow-right font-size26"></text>
+                </view>
+              </view>
+            </block>
+            <block wx:else>
+              <view class="fload-title-item">
+                <view class="fload-title-flex-view">
+                  <text class="fload-title">{{item.cataName}}</text>
+                </view>
+              </view>
+            </block>
+          </block>
+        </scroll-view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="home-icon">
+        <text class="font-size28 color-blue">我的公示</text>
+      </view>
+    </block>
+  </view>
+  <view class="tool-bar-view">
+      <text class="iconfont {{iconClass}} font-size50" bindtap="switchShowStyle"></text>
+  </view>
+</van-sticky>
+<block wx:if="{{fileList && fileList.length > 0}}">
+  <block wx:if="{{iconClass == 'jia-kapian2'}}">
+    <block wx:for="{{fileList}}" wx:for-item="item">
+      <block wx:if="{{item.fileType == 'C'}}">
+        <view class="file-cata-list">
+          <view class="file-cata-list-item" bindtap="bindOpenCata" data-item="{{item}}">
+            <view class="file-catalist-view">
+              <image class="file-catalist-img" src="/images/file/{{item.fileType == 'C' ? 'fload' : 'pdf'}}.png"></image>
+              <view class="file-list-view">
+                <view class="file-catalist-name">{{item.cataName}}</view>
+                <view class="file-catalist-date">{{item.updDtimeDesc}}</view>
+              </view>
+            </view>
+            <view class="file-catalist-arrow">
+              <text class="iconfont jia-arrow-right font-size36"></text>
+            </view>
+          </view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="file-list">
+          <view class="file-list-item" bindtap="bindOpenFile" data-item="{{item}}">
+            <image class="file-list-img" src="/images/file/{{item.fileType == 'C' ? 'fload' : 'pdf'}}.png"></image>
+            <view class="file-list-view">
+              <view class="file-list-name">{{item.fileName}}</view>
+              <view class="file-catalist-date">{{item.updDtimeDesc}}</view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </block>
+  </block>
+  <block wx:else>
+    <van-grid column-num="3" border="{{false}}" clickable custom-class="margin-top:20rpx !important">
+      <block wx:for="{{fileList}}" wx:for-item="item" wx:for-index="index">
+          <van-grid-item  text="{{item.fileType == 'C' ? item.cataName : item.fileName}}" 
+            text-class="van-grid-item-text" link-type="navigateTo" bindtap="{{item.fileType == 'C' ? 'bindOpenCata' : 'bindOpenFile'}}" data-item="{{item}}" >
+                  <van-icon
+                      slot="icon"
+                      name="/images/file/{{item.fileType == 'C' ? 'fload' : 'pdf'}}.png" 
+                      size="50"
+                  />
+          </van-grid-item>
+      </block>
+    </van-grid>
+  </block>
+</block>
+<block wx:else>
+  <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无文件'}}"></template>
+</block>
