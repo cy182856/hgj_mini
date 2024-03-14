@@ -287,4 +287,26 @@
 .touxiang::after{ 
   border: none; 
 }  
+
+.swiper_container {
+  height: 65px;
+  width: 92vw; 
+  margin-left: 0px;  
+  background-color: white;
+  border-radius: 6px;
+ }
  
+ .swiper_item {
+  font-size: 26rpx;
+  color: rgb(80, 79, 78);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: 3px;
+  margin-left: 40px;
+  margin-top: 12px;
+  height: 15px;
+  align-items: center;
+  width: 260px;
+  
+ }

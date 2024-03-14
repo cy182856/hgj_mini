@@ -43,6 +43,7 @@ Page({
     obj: null //用户
 
     , gobj: null //公告对象
+    , gonggaoList: null
     , showPost: false //控制公告是否展示
     , canShowMineRelease: false //是否显示我的发布
 
@@ -213,6 +214,32 @@ Page({
         flag = true;
       }
     } catch (e) { }
+    app.req.postRequest(api.queryCurrNotice,{}).then(res=>{
+      console.log('公告查询结果',res);
+      var data = res.data;
+      if(data.respCode == '000'){
+        if(data.list != null && data.list.length > 0){
+          // var gobj = data.gonggaoLIst[0];
+          // var noticeDate = gobj.noticeDate.substring(0,4)+ '-' + gobj.noticeDate.substring(4,6)+'-'+gobj.noticeDate.substring(6,8);
+          // gobj.noticeDate = noticeDate;
+          // if(type == '1'){//初始化加载的时候，需要判断模式
+          //   flag = (gobj.noticeType == 'P');
+          // }
+          that.setData({
+            gonggaoList:data.list
+            // gobj:gobj,
+            // showPost: flag,
+            // ggBtn:gobj.noticeUrl != '' ?'查看原文':'确定'
+          })
+        }else{
+          console.log('没有公告');
+          that.setData({
+           // gobj:null
+            gonggaoList:null
+          })
+        }
+      }
+    });
   },
   // 公告原文
   ggDetail(event) {

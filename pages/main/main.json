@@ -13,5 +13,6 @@
    },
   "navigationBarTitleText":"智慧管家",
   "navigationBarBackgroundColor":"#81D8CF",
+  "navigationBarTextStyle":"white",
   "enablePullDownRefresh": true
 }
