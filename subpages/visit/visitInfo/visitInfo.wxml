@@ -14,7 +14,7 @@
     tab-active-class="tab-active-class"
     color = "#1B1B1B"
     type="card">
-    <van-tab title="访客通行证" 
+    <van-tab title="访客通行码" 
     custom-class = "custom-class"
     >
     <view class="visit-passcode-view">
@@ -86,8 +86,10 @@
             <van-cell title-class="van-cell-title-class" value-class="vant-cell-value-class" title="有效期" value="当天有效" border="{{ false }}"/>
           </view>
           <view class="create-passcode-btn">
-            <van-button bindtap="createPassCode" custom-class="vant-btn-class" type="info">生成通行证</van-button>
+            <van-button bindtap="createPassCode" custom-class="vant-btn-class" type="info">生成通行码</van-button>
           </view>
+          <van-panel title="说明" desc="{{visitorCode}}" >
+          </van-panel>
         </van-cell-group>
       </view>
     </van-tab>
@@ -105,7 +107,7 @@
           <van-button bindtap="createQuickCode" custom-class="vant-btn-class" type="info">生成快速通行码</van-button>
         </view>
       </view>
-      <van-panel title="说明" desc="快速通行码主要针对外卖员、快递员等来访人员，当天最多可生成50个快速通行码，当天有效。" >
+      <van-panel title="说明" desc="{{quickAccessCode}}" >
       </van-panel>
     </van-tab>
   </van-tabs>

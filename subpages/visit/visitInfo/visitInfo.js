@@ -27,6 +27,8 @@ Page({
     ,value:''  //选中的值
     ,valueid:'' //选中的id
     ,houseId:''
+    ,visitorCode:''
+    ,quickAccessCode:''
   },
 
   /**
@@ -40,6 +42,8 @@ Page({
 
      //获取客户房屋列表
      this.getHouseList();
+     //获取访客通行码，快速通行码说明文字
+     this.getVisitExplain();
   },
 
   //获取客户房屋列表
@@ -56,6 +60,22 @@ Page({
           selectcontent:data.data.list
         })
        console.log('selectcontent===>',this.data.selectcontent);
+      }
+    })
+  },
+
+  //获取访客通行码，快速通行码说明文字
+  getVisitExplain(){
+    var data = {
+      cstCode:app.storage.getCstCode(),
+      wxOpenId:app.storage.getWxOpenId()
+    }
+    app.req.postRequest(api.queryVisitExplain,data).then(res=>{
+      if(res.data.respCode == '000'){
+        this.setData({
+          visitorCode:res.data.visitorCode,
+          quickAccessCode:res.data.quickAccessCode
+        })
       }
     })
   },

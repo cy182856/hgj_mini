@@ -10,7 +10,7 @@
   <view style=" padding-bottom:{{padding_bottom}}rpx;">
     <block wx:for="{{gonggaoTypes}}" wx:for-item="gonggaoType">
 		<van-row >
-            <view class="" style="border-bottom: 1px dashed #D5D5D5; margin-top: 15px;" bindtap="typeDetail" data-datavalue="{{gonggaoType}}">	
+            <view wx:if="{{gonggaoType.gonggao.title != null}}" class="" style="border-bottom: 1px dashed #D5D5D5; margin-top: 15px;" bindtap="typeDetail" data-datavalue="{{gonggaoType}}">	
                 <van-col span="4"> 
                     <view style="margin-left: 10px;"><image src="{{gonggaoType.imgUrl}}" style="width: 50px;height: 50px;margin-top: 15px;"></image></view>
 					<!-- <van-grid-item>

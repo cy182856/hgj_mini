@@ -20,10 +20,10 @@
             <van-row >
                 <view>	
                     <van-col span="16" > 
-                        <view style="color: white; text-align: left;font-size: 14px;margin-left: 6%;">{{proName}}</view>
+                        <view style="color: white; text-align: left;font-size: 14px;margin-left: 6%;margin-top: 15px;">{{proName}}</view>
                     </van-col>
                     <van-col span="8">      
-                        <view style="color: white; text-align: left;font-size: 14px;">您好，{{intoUserName}}</view>
+                        <view style="color: white; text-align: left;font-size: 14px;margin-top: 15px;">您好，{{intoUserName}}</view>
                     </van-col>
                 </view>
             </van-row>
@@ -36,8 +36,7 @@
                         autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="height:320rpx;">
                         <block wx:for="{{background}}" wx:key="*this">
                         <swiper-item>
-                            <!-- <view class="swiper-item {{item}}"></view> -->
-                            <image style="height: 320rpx;width:100%;" mode="scaleToFill" src="{{item}}" />
+                            <image style="height: 320rpx;width:100%;margin-top: 15px;" mode="scaleToFill" src="{{item}}" />
                         </swiper-item>
                         </block>
                     </swiper>
@@ -73,7 +72,7 @@
                 />
             </view>     -->          
 
-            <van-row>
+            <van-row wx:if="{{gonggaoList != null}}">
                  <view>	
                     <van-col span="1">
                         <image style="width: 15px; height: 20px; margin-left: 30px; margin-bottom: 10px; margin-top: 25px;" src="/images/home/bulletin.png"></image>
@@ -82,7 +81,7 @@
                         <swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="2000">
                             <block wx:for="{{gonggaoList}}" wx:for-index="index"  wx:for-item="item" wx:key="id">
                                 <navigator url="/subpages/gonggao/type/type" open-type="navigate">
-                                    <swiper-item>                      
+                                    <swiper-item wx:if="{{item.gonggao.title != null}}">                      
                                         <view class="swiper_item">
                                             <text>{{item.name}}</text>
                                         </view>
@@ -99,8 +98,29 @@
                             <image style="width: 10px; height: 12px; margin-left: 150px; margin-bottom: 10px; margin-top: 30px;" src="../../images/bill/right.jpg"></image>
                         </navigator>
                     </van-col>                   
-                </view>
+                </view>        
             </van-row>
+
+            <van-row wx:if="{{gonggaoList == null}}">
+                <view>	
+                    <van-col span="1">
+                        <image style="width: 15px; height: 20px; margin-left: 30px; margin-bottom: 10px; margin-top: 25px;" src="/images/home/bulletin.png"></image>
+                    </van-col>
+                    <van-col span="11">
+                        <swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="2000">
+                            <block >
+                                <swiper-item >                      
+                                    <view style="margin-top: 25px; margin-left: 12%; font-size: 26rpx; color: rgb(80, 79, 78);">
+                                        <text>暂无公告</text>
+                                    </view>
+                                 </swiper-item>
+                            </block>
+                        </swiper>
+                    </van-col>  
+                            
+                </view>     
+            </van-row>
+
             <view style="margin-top: 8px;"></view>
 
         <!-- 功能集 -->
@@ -156,14 +176,15 @@
         <view style="width:100%;padding-top:0rpx;height:30px;">
             <van-row>
                 <!-- WeChat logo -->
-                <van-col custom-class="logo">
+                <van-col custom-class="logo" span="3">
                     <!-- <van-image round width="66" height="66" src="{{headImgUrl}}"/> -->
                     <!-- <view class="userinfo-avatar">
                         <open-data type="userAvatarUrl"></open-data>
                     </view> -->
-                    <button class="touxiang" open-type="chooseAvatar" bindchooseavatar="bindchooseavatar">
+                    <!-- <button class="touxiang" open-type="chooseAvatar" bindchooseavatar="bindchooseavatar">
                         <van-image round width="75" height="70" src="{{userAvatarUrl}}"/> 
-                   </button>
+                   </button> -->
+                 <image class="touxiang" src="/images/home/my_home.png"></image>
                 </van-col>
                 <!-- 个人描述 -->
                 <van-col custom-class="person_desc">
@@ -327,8 +348,8 @@
         <view style="text-align:center;font-size:20rpx;color:#ABABAB;background-color:#ffffff;padding:70rpx 0rpx 50rpx 0rpx;height:64rpx;">
             <view>{{version}}</view>
             <text>©2023-由</text>
-                <text>凡享资产</text>
-            <text>提供技术支持</text>
+                <text>凡享</text>
+            <text>提供支持</text>
         </view>
     </view>
     </block>

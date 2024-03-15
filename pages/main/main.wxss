@@ -279,9 +279,9 @@
   line-height: 1;
   font-size: 14px;
   color: rgb(59, 56, 56);
-  height: 70px; 
-  width: 90px;
-  margin-top: 3px;
+  height: 40px; 
+  width: 40px;
+  margin-top: 18px;
 }
 
 .touxiang::after{ 

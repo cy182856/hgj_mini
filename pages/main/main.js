@@ -214,7 +214,11 @@ Page({
         flag = true;
       }
     } catch (e) { }
-    app.req.postRequest(api.queryCurrNotice,{}).then(res=>{
+    var data = {};
+    data['cstCode'] = app.storage.getCstCode();
+    data['wxOpenId'] = app.storage.getWxOpenId();
+    data['proNum'] = app.storage.getProNum();   
+    app.req.postRequest(api.queryCurrNotice,data).then(res=>{
       console.log('公告查询结果',res);
       var data = res.data;
       if(data.respCode == '000'){
