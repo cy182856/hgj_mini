@@ -13,6 +13,8 @@ Page({
   data: {
     'isCHeck':'',
     'cstCode':'',
+    'cstIntoId':'',
+     houseList: [],
     'cstName':'',
     'proNum':'',
     'proName':'',
@@ -69,11 +71,12 @@ Page({
      let cstCode = options.cstCode;
      let cstName = options.cstName;
      let proNum = options.proNum;
+     let cstIntoId = options.cstIntoId;
      //let isCHeck = options.isCHeck;
      let sign = options.sign;
      var data = {};
      app.loading(),this.showLoading(1);
-    if (this.dataIsIllegal(cstCode) || this.dataIsIllegal(cstName) || this.dataIsIllegal(proNum)) {
+    if (this.dataIsIllegal(cstCode) || this.dataIsIllegal(cstName) || this.dataIsIllegal(proNum) || this.dataIsIllegal(cstIntoId)) {
       this.setData({
         'skeletonShow':false,
         'showConfirmHousePage':false,
@@ -90,6 +93,7 @@ Page({
           data['code'] = res.code;
           data['cstCode'] = cstCode;
           data['cstName'] = cstName;
+          data['cstIntoId'] = cstIntoId;
           console.log('成功获取了code');
           app.req.postRequest(api.queryMutipUsr,data).then(res=>{
             if(res.data.respCode == '000'){
@@ -98,6 +102,7 @@ Page({
               let isCHeck = res.data.isCHeck;
               let proName = res.data.proName;
               let intoUserName = res.data.userName;
+              let houseList = res.data.houseList;
               console.log("wxOpenId:" + wxOpenId);    
               app.storage.setWxOpenId(wxOpenId);
               app.storage.setCstCode(cstCode);
@@ -111,7 +116,9 @@ Page({
                 proNum:proNum,
                 isCHeck:isCHeck,
                 proName:proName,
-                intoUserName:intoUserName
+                intoUserName:intoUserName,
+                cstIntoId:cstIntoId,
+                houseList:houseList
               })    
               if(this.data.isCHeck == 'Y'){
                 this.setData({
@@ -354,6 +361,7 @@ Page({
     let cstCode = this.data.cstCode;
     let wxOpenId = this.data.wxOpenId;
     let userName = this.data.userName;
+    let cstIntoId = this.data.cstIntoId;
     console.log("-------userName------" + userName);
 
     if(userName == '' || userName == null){
@@ -378,6 +386,7 @@ Page({
       data['cstCode'] = cstCode;
       data['wxOpenId'] = wxOpenId;
       data['userName'] = userName;
+      data['cstIntoId'] = cstIntoId;
       this.houseConfirmBind(data);
       return;
     //}
@@ -420,7 +429,7 @@ Page({
   },
 
   houseConfirmBind:function(data) {
-    console.log("houseConfirmBind----"+data.cstCode+"--------------"+"----wxOpenId"+data.wxOpenId+"--------userName"+data.userName)
+    console.log("houseConfirmBind----"+data.cstCode+"--------------"+"----wxOpenId"+data.wxOpenId+"--------userName"+data.userName+"-----------------" + data.cstIntoId)
     var that = this;
     var header = {
       'content-type': 'application/json'

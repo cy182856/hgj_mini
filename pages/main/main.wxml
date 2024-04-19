@@ -75,17 +75,17 @@
             <van-row wx:if="{{gonggaoList != null}}">
                  <view>	
                     <van-col span="1">
-                        <image style="width: 15px; height: 20px; margin-left: 30px; margin-bottom: 10px; margin-top: 25px;" src="/images/home/bulletin.png"></image>
+                        <image style="width: 15px; height: 20px; margin-left: 30px; margin-bottom: 10px; margin-top: 27px;" src="/images/home/bulletin.png"></image>
                     </van-col>
-                    <van-col span="11">
+                    <van-col span="21">
                         <swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="2000">
                             <block wx:for="{{gonggaoList}}" wx:for-index="index"  wx:for-item="item" wx:key="id">
                                 <navigator url="/subpages/gonggao/type/type" open-type="navigate">
                                     <swiper-item wx:if="{{item.gonggao.title != null}}">                      
-                                        <view class="swiper_item">
+                                        <view class="swiper_item_type">
                                             <text>{{item.name}}</text>
                                         </view>
-                                        <view class="swiper_item">
+                                        <view class="swiper_item_title">
                                             <text>{{item.gonggao.title}}</text>
                                         </view>
                                     </swiper-item>
@@ -95,7 +95,7 @@
                     </van-col>  
                     <van-col span="1">
                         <navigator url="/subpages/gonggao/type/type" open-type="navigate">
-                            <image style="width: 10px; height: 12px; margin-left: 150px; margin-bottom: 10px; margin-top: 30px;" src="../../images/bill/right.jpg"></image>
+                            <image style="width: 10px; height: 12px; margin-bottom: 10px; margin-top: 30px;" src="../../images/bill/right.jpg"></image>
                         </navigator>
                     </van-col>                   
                 </view>        

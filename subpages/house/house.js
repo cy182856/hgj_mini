@@ -38,6 +38,7 @@ Page({
           var ownerFlag = res.data.data.ownerFlag;
           that.setData({
             list:list,
+            isRefreshing:false,
             ownerFlag:ownerFlag
           });
         }else{
@@ -52,11 +53,13 @@ Page({
 
   agree(e){
     var id = e.currentTarget.dataset.datavalue.id;
+    var cstIntoHouseId = e.currentTarget.dataset.datavalue.cstIntoHouseId;
     var data = {};
     data['cstCode'] = app.storage.getCstCode();
     data['wxOpenId'] = app.storage.getWxOpenId();
     data['proNum'] = app.storage.getProNum();   
     data['id'] = id;
+    data['cstIntoHouseId'] = cstIntoHouseId;
     data['buttonType'] = 'agree';
     var that = this;
     wx.showModal({
@@ -84,11 +87,13 @@ Page({
 
   refuse(e){
     var id = e.currentTarget.dataset.datavalue.id;
+    var cstIntoHouseId = e.currentTarget.dataset.datavalue.cstIntoHouseId;
     var data = {};
     data['cstCode'] = app.storage.getCstCode();
     data['wxOpenId'] = app.storage.getWxOpenId();
     data['proNum'] = app.storage.getProNum();   
     data['id'] = id;
+    data['cstIntoHouseId'] = cstIntoHouseId;
     data['buttonType'] = 'refuse';
     var that = this;
     wx.showModal({
@@ -116,11 +121,13 @@ Page({
 
   remove(e){
     var id = e.currentTarget.dataset.datavalue.id;
+    var cstIntoHouseId = e.currentTarget.dataset.datavalue.cstIntoHouseId;
     var data = {};
     data['cstCode'] = app.storage.getCstCode();
     data['wxOpenId'] = app.storage.getWxOpenId();
     data['proNum'] = app.storage.getProNum();   
     data['id'] = id;
+    data['cstIntoHouseId'] = cstIntoHouseId;
     data['buttonType'] = 'remove';
     var that = this;
     wx.showModal({
@@ -189,7 +196,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.setData({
+      loading:false,
+      isRefreshing:true,
+      list:new Array()
+    })
+    this.queryForPage()
+    wx.stopPullDownRefresh({
+    })
   },
 
   /**

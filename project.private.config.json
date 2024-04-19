@@ -10,21 +10,11 @@
     "miniprogram": {
       "list": [
         {
-          "name": "租户入住",
-          "pathName": "pages/hu/hubindTenant/hubindTenant",
-          "query": "cstCode=201708230011&cstName=洪磊&proNum=10001&houseId=24011810444600010065&houseName=住宅公共区域",
+          "name": "客户入住",
+          "pathName": "pages/hu/hubind/hubind",
+          "query": "cstCode=202401180001&cstName=洪磊&cstIntoId=202404191444332fevbb&proNum=10001",
           "launchMode": "default",
           "scene": null
-        },
-        {
-          "name": "业主入住",
-          "pathName": "pages/hu/hubind/hubind",
-          "query": "cstCode=201708230005&cstName=上海宁波商会&proNum=10000",
-          "launchMode": "default",
-          "scene": 1043,
-          "referrerInfo": {
-            "appId": "wx90d41245b9ac6e23"
-          }
         },
         {
           "name": "subpages/mine/appt/show_apptObjInfo",

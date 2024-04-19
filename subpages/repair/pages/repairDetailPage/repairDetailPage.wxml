@@ -228,7 +228,7 @@
   <!-- <van-collapse-item title="请您对这次服务进行评价" name="1">  -->
 
 <!--满意度-->
-<view wx:if="{{obj.repairStatus=='WOSta_Finish' || obj.repairStatus=='WOSta_Visit'}}" class="card_start flex">
+<view wx:if="{{obj.repairStatus=='WOSta_Finish' || obj.repairStatus=='WOSta_Visit'|| obj.repairStatus=='WOSta_Close'}}" class="card_start flex">
     <span class="satisFaction">满意度</span>
     <radio-group class="satisFaction" bindchange="handleChange" >
         <label class="page-section" wx:for="{{items}}" wx:key="key">
@@ -241,7 +241,7 @@
 
  
 <!-- 评价管理 -->
-<view wx:if="{{obj.repairStatus=='WOSta_Finish' || obj.repairStatus=='WOSta_Visit'}}" class="card_start flex">
+<view wx:if="{{obj.repairStatus=='WOSta_Finish' || obj.repairStatus=='WOSta_Visit'|| obj.repairStatus=='WOSta_Close'}}" class="card_start flex">
     <span class="satisFaction">服务评分</span>
        <image class="imagecls" wx:for="{{5}}" wx:key="index" data-name="technicianAssessStar" data-item="{{item}}"
     src="{{item-technicianAssessStar+1>0?'/images/selfimg/startcolor.png':'/images/selfimg/startnocolor.png'}}"
@@ -252,7 +252,7 @@
 
 <view style="margin-top: 15px;" class="clear"></view>
     <!--备注-->
-    <block wx:if="{{obj.repairStatus=='WOSta_Finish' || obj.repairStatus=='WOSta_Visit'}}">
+    <block wx:if="{{obj.repairStatus=='WOSta_Finish' || obj.repairStatus=='WOSta_Visit'|| obj.repairStatus=='WOSta_Close'}}">
       <van-row>
         <van-col span="2">
           <van-icon name="/subpages/repair/images/yezhu.png" size="2em" custom-style="padding-top:15rpx;" />

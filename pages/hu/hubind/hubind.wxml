@@ -74,7 +74,20 @@
       </van-col>
     </view>
   </van-row>
-  
+
+  <van-row >
+    <view wx:if="{{houseList.length > 0}}" style="margin-top: 20px;">
+      <van-col span = "7">
+        <view>
+          <text style="font-size: 18px; margin-left: 10%; color: rgb(65, 62, 62);"  >入住房间:</text>
+        </view>       
+      </van-col>
+      <van-col span = "14">
+        <text style="font-size: 18px; color: rgb(65, 62, 62); word-wrap: break-word; white-space: pre-wrap;" >{{houseList}}</text>
+      </van-col>
+    </view>
+  </van-row>
+
   <van-row >
     <view style="margin-top: 20px;">
       <van-col span = "7">

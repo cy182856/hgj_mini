@@ -117,7 +117,7 @@
         <view wx:if="{{item.repairStatus=='WOSta_Visit'}}"class="view_light">
           <text style="margin-left: 85%;">已评价</text>
         </view>
-        <view wx:if="{{item.repairStatus=='WOSta_Finish'}}"class="view_light">
+        <view wx:if="{{item.repairStatus=='WOSta_Finish'||item.repairStatus=='WOSta_Close'}}"class="view_light">
           <text style="margin-left: 85%;">未评价</text>
         </view>
 

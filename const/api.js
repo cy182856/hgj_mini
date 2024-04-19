@@ -5,6 +5,7 @@
 //const ApiRootUrl = 'http://192.168.79.5:85/wx/';
 const ApiRootUrl = 'http://192.168.23.108:85/wx/';//tech
 //const ApiRootUrl = 'http://zhgjtest.shofw.com:85/wx/';
+//const ApiRootUrl = 'https://zhgj.xhguanjia.cn/wx/';
 
 // const ApiRootUrl = 'https://jia.huiguan.com/jiasv/';//prod
 // const ApiRootUrl = 'http://dev.huiguan.com:60103/jiasv/';//local
@@ -84,7 +85,8 @@ module.exports = {
   preApptOrdProcess: ApiRootUrl +'appt/prePayValid.do',
 
   /********************公告****************************/
-
+  queryTypes: ApiRootUrl +'gonggao/queryType.do',
+  queryTypeGonggaos: ApiRootUrl +'gonggao/queryTypeGonggao.do',
 
   /********************邻里圈*************************/
   queryHeoTypeList: ApiRootUrl + "/heo/queryHeoTypeList.do", //查询邻里圈类型列表
@@ -106,7 +108,8 @@ module.exports = {
 
 
   /********************房屋管理*************************/
-  houseBind: ApiRootUrl + "hu/houseBind/owner", // 房主绑定
+  // houseBind: ApiRootUrl + "hu/houseBind/owner", // 房主绑定
+  houseBind: ApiRootUrl + "hu/houseBind", // 客户入住
   houseBindTenant: ApiRootUrl + "hu/houseBind/tenant", // 租户绑定
   queryHouseInfo: ApiRootUrl + "hu/getHouseInfo", // 获取房屋信息(区域、楼号、室号)
   queryAreaInfo: ApiRootUrl + 'hu/getAreaInfo',//查询区域信息
@@ -147,7 +150,8 @@ module.exports = {
   orderQueryDetailUrl:ApiRootUrl + "pay/orderDetailQuery.do",
   /********************访客管理*************************/
   addVisitQrCode : ApiRootUrl + "visitinfo/addVisitQrCode.do", //新增访客通行证-生成二维码
-  addVisitRandomNum : ApiRootUrl + "visitinfo/addVisitRandomNum.do" //新增访客通行证-生成6位随机数
+  addVisitRandomNum : ApiRootUrl + "visitinfo/addVisitRandomNum.do", //新增访客通行证-生成6位随机数
+  queryVisitExplain:ApiRootUrl + 'visitinfo/queryVisitExplain.do' //查询访客通行码说明文字
 
   ,checkVisitLogDetail : ApiRootUrl + "/visitinfo/showVisitInfoDetail.do" //查看单个访客通行证信息
   ,queryVisitLogs: ApiRootUrl + "visitinfo/queryVisitInfos.do" //查询访客记录

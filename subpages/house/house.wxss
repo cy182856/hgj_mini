@@ -18,7 +18,7 @@
 	line-height: 40rpx;
   }
   .text_right{
-	padding-right: 150rpx;
+	padding-right: 180rpx;
   }
   .view_desc{
 	color:#ABABAB;
