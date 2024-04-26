@@ -133,4 +133,11 @@
   color: rgb(137, 146, 160);
 }
 
+.repair_desc{
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:1;
+}
+
 

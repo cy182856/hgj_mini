@@ -93,7 +93,16 @@
     </van-row>
   </view>
 
-  <view style="margin-left: 20px;">
+  <view style="margin-left: 6%; margin-top: 20px;">
+    <van-row>
+      <van-col span="4">手机号：</van-col>
+      <van-col span="16">
+        <input style="border-color: rgb(228, 227, 227); border-style: solid; border-width: 1px; height: 30px; width: 100%; padding-left: 5px;margin-left: 10px; border-radius: 10rpx;" placeholder="请输入您的手机号以便维修师傅联系" placeholder-class="b-palceholder" bindinput="inputChange" value="{{cstPhone}}" maxlength="11"/>
+      </van-col>
+    </van-row>
+  </view>
+
+  <view style="margin-left: 20px; margin-top: 20px;">
     <picupload style="margin-top:50rpx" bind:getUploaderList="getUploaderList"></picupload>
   </view>
   <!-- <view class="upload">

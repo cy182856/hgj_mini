@@ -60,6 +60,10 @@
 
     <view class="view_desc">
         <van-row>
+          <van-col span="8"><text class="text_right" decode="{{true}}" >报修描述</text></van-col>
+          <van-col span="13"><text class="repair_desc">{{item.repairDesc}}</text></van-col>
+        </van-row>
+        <van-row>
           <van-col span="8"><text class="text_right" decode="{{true}}" >报修人</text></van-col>
           <van-col span="16"> {{item.cstName}} </van-col>
         </van-row>

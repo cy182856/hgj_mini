@@ -74,6 +74,7 @@ Page({
     ,cstCode:''
     ,wxOpenId:''
     ,proNum:''
+    ,cstPhone:''
 
     ,isjiantou:true  //箭头切换
     // ,selectcontent:[
@@ -115,6 +116,12 @@ repairDesc(event){
     }
   this.setData({
     repairDesc:event.detail,
+  })
+},
+
+inputChange(event) {
+  this.setData({
+    cstPhone: event.detail.value // 将input的值存入data中的inputVal
   })
 },
 
@@ -448,17 +455,33 @@ submitInfo(){
   d['cstCode'] = app.storage.getCstCode();
   d['wxOpenId'] = app.storage.getWxOpenId();
   d['proNum'] = app.storage.getProNum();
-
-
+  d['cstPhone'] = datas.cstPhone;
+  
   // if(!datas.objId || datas.objId == ''){
   //   console.log('没有值',datas);
   //   return;
   // }
+
+  if(this.data.repairType == 'S' && (this.data.valueid == '' || this.data.valueid == null || this.data.valueid == undefined) ){
+    this.showLoading(0);
+    app.alert.alert('请选择房屋!');
+    return;
+  }
+
   if(!datas.repairDesc || datas.repairDesc == ''){
     this.showLoading(0);
     app.alert.alert('请简要描述您的问题，以便我们为您提供更好的服务！');
     return;
   }
+
+  if(datas.cstPhone != null && datas.cstPhone != ''){
+    this.showLoading(0);  
+    if (!/^1[3456789]\d{9}$/.test(datas.cstPhone)) {
+      app.alert.alert('请输入正确的手机号！');
+      return;
+    }
+  }
+
   // var imgCnt = datas.imgCnt;
   // if(datas.imgCnt < 1){
   //   this.showLoading(0);
@@ -472,12 +495,7 @@ submitInfo(){
       return;
     }
 
-   if(this.data.repairType == 'S' && (this.data.valueid == '' || this.data.valueid == null || this.data.valueid == undefined) ){
-    this.showLoading(0);
-    app.alert.alert('请选择房屋');
-    return;
-  }
-
+ 
   var that = this;
   if(!that.data.repair_button_disabled){
     that.setData({ repair_button_disabled: true });
@@ -613,8 +631,6 @@ submitInfo(){
     // })
     this.showLoading(0);
   },
-
-
 
   //获取客户房屋列表
   getHouseList(){
@@ -771,7 +787,6 @@ submitInfo(){
       });
     }
   },
-
 
  // 下拉框收起和下拉
  changejiantou(){

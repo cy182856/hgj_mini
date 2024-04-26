@@ -176,7 +176,7 @@
 }
 
 .inputPlaceholder{
-  width: 250px;
+  width: 75%;
   height: 45rpx;
   border: 1px solid #DEDEDE;
   padding: 8rpx 40rpx 8rpx 20rpx;
@@ -194,7 +194,7 @@
   top: 8rpx;
 }
 .content{
-  width: 258px;
+  width: 75%;
   max-height: 600rpx;
   position: relative;
   top: 2rpx;
@@ -213,5 +213,12 @@
 .active{
   color: #56D88A;
 }
+
+
+.b-palceholder{
+	color: rgb(218, 212, 212);
+}
+
+
 
   
