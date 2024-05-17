@@ -1,0 +1,53 @@
+<!-- 引用 -->
+<import src="../../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<!-- 弹窗 -->
+<van-dialog id="van-dialog" />
+
+<view class="contant">
+  <view class="view_jilu view_jilu_height">
+    <van-row>
+      <van-col span="18"><text class="leixing">投诉建议</text></van-col>    
+      <van-col span="6">
+        <view style="padding-left:5rpx;" bindtap="toListPage">
+          <text class="jilu">投诉记录</text>
+        </view>
+      </van-col>
+    </van-row>
+  </view>
+ 
+  <!-- text -->
+  <view class="text_area" style="margin-top: 30px;">
+    <van-row>
+      <van-col span="21">
+        <view class="text_area1">
+          <van-cell-group>
+            <van-field value="{{ feedbackDesc }}" type="textarea" placeholder="请描述您的投诉内容，以便我们为您提供更好的服务" autosize="{{textArea}}" border="{{ false }}" custom-style="padding: var(--cell-vertical-padding,5px) var(--cell-horizontal-padding,2px);" bind:input="feedbackDesc" maxlength="200" show-word-limit="{{true}}" />
+          </van-cell-group>
+        </view>
+      </van-col>  
+    </van-row>
+  </view>
+
+  <view style="margin-left: 6%; margin-top: 20px;">
+    <van-row>
+      <van-col span="4">手机号：</van-col>
+      <van-col span="18">
+        <input style="border-color: rgb(228, 227, 227); border-style: solid; border-width: 1px; height: 30px; width: 100%; padding-left: 5px;margin-left: 10px; border-radius: 10rpx;" placeholder="请输入您的手机号方便联系(选填)" placeholder-class="b-palceholder" bindinput="inputChange" value="{{cstPhone}}" maxlength="11"/>
+      </van-col>
+    </van-row>
+  </view>
+
+  <view style="margin-left: 20px; margin-top: 20px;">
+    <picupload style="margin-top:50rpx" bind:getUploaderList="getUploaderList"></picupload>
+  </view>
+ 
+  <!-- picker -->
+  <van-popup show="{{ show }}" bind:close="onClose" position="bottom">
+    <van-picker columns="{{ columns }}" bind:cancel="onClose" bind:confirm="changeTime" show-toolbar="{{true}}" />
+  </van-popup>
+  <!-- submit -->
+  <view class="sub">
+    <van-button wx:if="{{feedback_button_disabled == false}}" type="info" custom-class="btn" bindtap="submitInfo">提交</van-button>
+  </view>
+</view>
