@@ -33,7 +33,7 @@
 							<van-col span="9"> 
 								<text decode="{{true}}" >{{item.userName}}</text>
 								<text wx:if="{{item.intoRole == 0}}">(客户)</text>
-								<text wx:if="{{item.intoRole == 1}}">(子客户)</text>
+								<text wx:if="{{item.intoRole == 1}}">(员工)</text>
 								<text wx:if="{{item.intoRole == 2}}">(业主)</text>
 								<text wx:if="{{item.intoRole == 3}}">(住户)</text>
 							</van-col>
@@ -70,7 +70,7 @@
 							<van-col span="9"> 
 								<text decode="{{true}}" >{{item.userName}}</text>
 								<text wx:if="{{item.intoRole == 0}}">(客户)</text>
-								<text wx:if="{{item.intoRole == 1}}">(子客户)</text>
+								<text wx:if="{{item.intoRole == 1}}">(员工)</text>
 								<text wx:if="{{item.intoRole == 2}}">(业主)</text>
 								<text wx:if="{{item.intoRole == 3}}">(住户)</text>
 							</van-col>

@@ -1,0 +1,51 @@
+<!-- 引用 -->
+<import src="../../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<!-- 弹窗 -->
+<van-dialog id="van-dialog" />
+
+<view class="weui-loadmore" wx:if="{{isRefreshing}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore-tips">正在刷新...</view>
+</view>
+
+<van-dialog use-slot title="修改姓名" show="{{ userNameShow }}" show-cancel-button bind:cancel="onTapCancleModifyUserName"
+  bind:confirm="onConfirm" confirm-button-color="#189afe">
+  <van-field value="{{ newUserName }}"   input-align="right" maxlength="4" show-word-limit placeholder="请输入您的姓名" border="{{ false }}" bind:input="onUserNameChange" />
+</van-dialog>
+
+<van-dialog use-slot title="修改手机号" show="{{ phoneShow }}" show-cancel-button bind:cancel="onTapCancleModifyPhone"
+  bind:confirm="onConfirmPhone" confirm-button-color="#189afe">
+  <van-field value="{{ newPhone }}"   input-align="right" maxlength="11" show-word-limit placeholder="请输入您的手机号" border="{{ false }}" bind:input="onPhoneChange" />
+</van-dialog>
+
+<view class="title-view" style="margin-bottom: 10px; margin-top: 10px;"> 
+    <text class="text-title" style="margin-left: 15px;font-size: 20px;">基本信息</text>
+</view>
+  <van-cell-group>
+    <van-field
+      value="{{userName}}>"
+      label="姓名"
+      title-width="140rpx"
+      readonly
+      input-align= "right"
+      bindtap="tapModifyUserName"
+      custom-style="line-height:35px;min-height:35px;display: flex;align-items: center;"
+      right-icon-class="right_img_style"
+      is-link = ""
+      input-class = "input-class-style"
+    />
+	<van-field
+      value="{{phone}}>"
+      label="手机号"
+      title-width="140rpx"
+      readonly
+      input-align= "right"
+      bindtap="tapModifyPhone"
+      custom-style="line-height:35px;min-height:35px;display: flex;align-items: center;"
+      right-icon-class="right_img_style"
+      is-link = ""
+      input-class = "input-class-style"
+    />
+   
+  </van-cell-group>

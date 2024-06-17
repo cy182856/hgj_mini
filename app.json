@@ -61,6 +61,13 @@
       ]
     },
     {
+      "root": "subpages/person",
+      "name": "person",
+      "pages": [
+        "person"     
+      ]
+    },
+    {
       "root": "subpages/qn",
       "name": "qn",
       "pages": [

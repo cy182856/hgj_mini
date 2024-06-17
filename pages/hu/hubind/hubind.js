@@ -22,6 +22,7 @@ Page({
     'huSeqId':'',
     'wxOpenId':'',
     'userName':'',
+    'phone':'',
     'sign':'',
     'houseinfo':'',
     'isCHeckShow':true,
@@ -361,6 +362,7 @@ Page({
     let cstCode = this.data.cstCode;
     let wxOpenId = this.data.wxOpenId;
     let userName = this.data.userName;
+    let phone = this.data.phone;
     let cstIntoId = this.data.cstIntoId;
     console.log("-------userName------" + userName);
 
@@ -374,7 +376,18 @@ Page({
       app.alert.alert('姓名必须大于两个字！');
       return;
     }
-
+    if(phone == '' || phone == null){
+      this.showLoading(0);
+      app.alert.alert('请填写您的手机号！');
+      return;
+    }
+    if(phone != null && phone != ''){
+      if (!/^1[3456789]\d{9}$/.test(phone)) {
+        app.alert.alert('请输入正确的手机号！');
+        return;
+      }
+    }
+  
     //let sign = this.data.sign;
     //let houseinfo = this.data.houseinfo;
     //let hgjOpenid = this.data.hgjOpenid;
@@ -386,6 +399,7 @@ Page({
       data['cstCode'] = cstCode;
       data['wxOpenId'] = wxOpenId;
       data['userName'] = userName;
+      data['phone'] = phone;
       data['cstIntoId'] = cstIntoId;
       this.houseConfirmBind(data);
       return;
@@ -511,6 +525,11 @@ Page({
   inputChange(event) {
     this.setData({
       userName: event.detail.value // 将input的值存入data中的inputVal
+    })
+  },
+  inputChangePhone(event) {
+    this.setData({
+      phone: event.detail.value // 将input的值存入data中的inputVal
     })
   },
   bindKeyInputHouseNo:function(e) {

@@ -1,0 +1,5 @@
+
+
+.input-class-style{
+  color: var(--cell-value-color,#969799) !important;
+}

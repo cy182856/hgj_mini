@@ -275,7 +275,7 @@
         <van-col  span="21" style="margin-top: 18px;">
           <!-- 留言输入 -->
           <!--<van-cell-group>-->
-          <van-field value="{{ repairMsgBody }}" type="textarea" placeholder="请对我们的服务做出评价"   bind:change="repairMsgBody" maxlength="200" autosize
+          <van-field value="{{ repairMsgBody }}" type="textarea" placeholder="请对我们的服务做出评价，7天后系统将会自动好评。"   bind:change="repairMsgBody" maxlength="200" autosize
           custom-style="height:200rpx"
            />
           <!--</van-cell-group>-->

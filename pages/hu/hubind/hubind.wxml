@@ -103,6 +103,22 @@
       </van-col>
     </view>
   </van-row>
+
+  <van-row >
+    <view style="margin-top: 20px;">
+      <van-col span = "7">
+        <view>
+          <text style="font-size: 18px; margin-left: 10%; color: rgb(65, 62, 62);">手机号:<text style="color: red;">*</text></text>
+        </view>
+      </van-col>
+      <van-col span = "15">
+        <view>
+          <input style="text-align: left; border-style: solid;border-width: 1px;width: 100%; height: 40px; color: rgb(65, 62, 62); padding-left: 5px;" placeholder="" bindinput="inputChangePhone"
+          value="{{phone}}" maxlength="11"/>
+        </view>
+      </van-col>
+    </view>
+  </van-row>
   
   <view style="margin-top: 40px;">
     <button type="primary" size="default" bindtap="confirmCheckIn">确认入住</button>
