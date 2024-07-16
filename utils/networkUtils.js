@@ -17,6 +17,7 @@ class req {
     this._header = {
       'content-type': 'application/json',
       'Cookie': new storage().getCookies().toString(),
+      'token':new storage().getToken().toString(),
     }
   }
 
@@ -54,7 +55,8 @@ class req {
         this.doLogin(0).then(value => {
           var header = {
             'Cookie': new storage().getCookies().toString(),
-            'content-type': 'application/json'
+            'content-type': 'application/json',
+            'token': new storage().getToken().toString()
           }
           that.requestAll(url, data, header, _.GET).then(res => {
             result = res;
@@ -67,7 +69,8 @@ class req {
     } else {
       var header = {
         'Cookie': new storage().getCookies().toString(),
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'token': new storage().getToken().toString()
       }
       return this.requestAll(url, data, header, _.GET)
     }
@@ -92,6 +95,7 @@ class req {
    * POST类型的网络请求
    */
   postRequest(url, data, header = this._header) {
+    var token = new storage().getToken().toString();
     var cstCode = new storage().getCstCode().toString();
     if((cstCode == null || cstCode == "") && url.indexOf("queryMutipUsr") < 0){
       wx.redirectTo ({
@@ -117,7 +121,8 @@ class req {
     } else {
       var header = {
         'Cookie': new storage().getCookies().toString(),
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'token': new storage().getToken().toString()
       }
       return this.requestAll(url, data, header, _.POST);
     }
@@ -412,7 +417,8 @@ class req {
     let that = this;
     var header = {
       //'Cookie': new storage().getCookies().toString(),
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'token': new storage().getToken().toString()
     }
     console.log('当前访问的header', url, header)
     return new Promise((resolve, reject) => {
@@ -473,7 +479,8 @@ class req {
     let that = this;
     var header = {
       'Cookie': new storage().getCookies().toString(),
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'token': new storage().getToken().toString()
     }
     console.log('send data is :', data);
     console.log('当前访问的header', url, header)

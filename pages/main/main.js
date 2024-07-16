@@ -16,7 +16,9 @@ Page({
     autoplay: false,
     interval: 2000,
     duration: 500,
-
+    advertsShow:0,
+    advertsImg:'',
+    advertsUrl:'',
     active: 0,
     functionList: [],
     headImgUrl: '',
@@ -360,8 +362,11 @@ Page({
     // 获取管家电话，企业微信二维码
     this.getUserMobile();
 
-    //渲染页面的同时判断生活服务
+    // 渲染页面的同时判断生活服务
     this.hasLife();
+
+    // 获取广告
+    this.getAdverts();
 
     this.setData({
       functionList: loginInfo.funList,
@@ -379,6 +384,32 @@ Page({
 
     return true;
   },
+
+
+  // 获取广告
+  getAdverts(){
+    var data = {};
+    data['cstCode'] = app.storage.getCstCode();
+    data['wxOpenId'] = app.storage.getWxOpenId();
+    data['proNum'] = app.storage.getProNum();   
+    var that = this;
+    app.req.postRequest(api.queryAdverts,data).then(res=>{
+        console.log("回调用",res);
+        if(res.data.respCode == '000'){
+          var adverts = res.data.adverts;              
+          that.setData({
+            advertsImg:adverts.imgPath,
+            advertsUrl: adverts.url
+          });                  
+        }else{
+          var desc = res.data.errDesc;
+          if(!desc){
+            desc = '网络异常，请稍后再试';
+          }
+          app.alert.alert(desc);
+        }
+    });
+ },
 
   // 获取管家电话，企业微信二维码
   getUserMobile(){
@@ -555,6 +586,7 @@ Page({
             let intoUserName = res.data.userName;
             let houseId = res.data.houseId;
             let houseName = res.data.houseName;
+            let token = res.data.token;
             if(wxOpenId == null || wxOpenId == ""){
               app.alert.alert("wxOpenId为空!");
               return;
@@ -575,6 +607,7 @@ Page({
             app.storage.setIntoUserName(intoUserName);
             app.storage.setHouseId(houseId);
             app.storage.setHouseName(houseName);
+            app.storage.setToken(token);
             that.setData({
               wxOpenId: wxOpenId,
               cstCode: cstCode,
@@ -1005,6 +1038,19 @@ Page({
     life.center(event);
   },
 
+  //点击隐藏弹窗
+  cancelAd(){
+    this.setData({
+      advertsShow:'1'
+    })
+  },
+   //点击跳转广告地址
+  advertsUrl(){
+    let advertsUrl = this.data.advertsUrl;
+    wx.navigateTo({
+      url: advertsUrl
+    })
+  }, 
   toWebPage: function (event) {
     //let {url} = event.data.detail;
     let url = event.currentTarget.dataset.url;

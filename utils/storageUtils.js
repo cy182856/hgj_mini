@@ -20,6 +20,7 @@ const _ = {
     INTO_USER_NAME:'INTO_USER_NAME',
     HOUSE_ID:'HOUSE_ID',
     HOUSE_NAME:'HOUSE_NAME',
+    TOKEN_KEY:'TOKEN_KEY',
 
 }
 /**
@@ -145,6 +146,13 @@ class storage {
         return wx.getStorageSync(_.CST_CODE);
     }
 
+    setToken(value){
+        wx.setStorageSync(_.TOKEN_KEY, value);
+    }
+    getToken(){
+        return wx.getStorageSync(_.TOKEN_KEY);
+    }
+
     setHouseId(value){
         wx.setStorageSync(_.HOUSE_ID, value);
     }
@@ -220,6 +228,8 @@ class storage {
             wx.removeStorageSync(_.INTO_USER_NAME);
             wx.removeStorageSync(_.HOUSE_ID);
             wx.removeStorageSync(_.HOUSE_NAME);
+            wx.removeStorageSync(_.TOKEN_KEY);
+
 
             wx.clearStorageSync();
         } catch (error) {

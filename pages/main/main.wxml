@@ -13,6 +13,16 @@
 </view>
 
 <view class="content">
+
+    <!-- 广告弹出层 -->
+    <view wx:if="{{advertsShow == 0 && advertsImg != null && advertsImg != ''}}">
+        <modal no-cancel = "false" confirm-text = "" bindcancel="hideModal" bindconfirm="takePhoto">
+            <view> 
+                <view style="margin-left: 99%; margin-top: -25px; font-size: 20PX;" bindtap="cancelAd">X</view>
+                <image style="height: 400px; width: 100%;" src="data:image/png;base64,{{advertsImg}}" bindtap="advertsUrl"></image>
+            </view>
+        </modal>
+    </view>
     <!-- 首页 -->
     <block wx:if="{{active == 0}}">
         
@@ -35,7 +45,7 @@
                     <swiper indicator-dots="{{indicatorDots}}"
                         autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="height:320rpx;">
                         <block wx:for="{{background}}" wx:key="*this">
-                        <swiper-item>
+                        <swiper-item catchtouchmove='onTouchMove'>
                             <image style="height: 320rpx;width:100%;margin-top: 15px;" mode="scaleToFill" src="{{item}}" />
                         </swiper-item>
                         </block>

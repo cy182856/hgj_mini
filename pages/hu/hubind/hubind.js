@@ -103,10 +103,12 @@ Page({
               let isCHeck = res.data.isCHeck;
               let proName = res.data.proName;
               let intoUserName = res.data.userName;
+              let token = res.data.token;
               let houseList = res.data.houseList;
               console.log("wxOpenId:" + wxOpenId);    
               app.storage.setWxOpenId(wxOpenId);
               app.storage.setCstCode(cstCode);
+              app.storage.setToken(token);
               app.storage.setProNum(proNum);
               app.storage.setProName(proName);
               app.storage.setIntoUserName(intoUserName);
