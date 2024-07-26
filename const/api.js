@@ -20,6 +20,11 @@ module.exports = {
   queryManyCust : ApiRootUrl + 'queryManyCust', //查询公众号下的多账户信息
   queryCurrNotice : ApiRootUrl + 'notice/queryCurrNotice.do',//公告
   queryCurrNoticeNew : ApiRootUrl + 'notice/queryAllNotice.do',//公告
+  queryPersonData : ApiRootUrl + 'queryPersonData', //查询个人资料
+  updatePersonData: ApiRootUrl + 'updatePersonData',// 修改个人资料
+
+   /**********************广告***************** */
+   queryAdverts:ApiRootUrl + 'queryAdverts.do',//查询广告信息
 
   /********************智能开门*************************/
   querySmartCodeInfo : ApiRootUrl + "/hu/querySmartCodeInfo.do" ,//查询条形码及二维码信息
@@ -87,6 +92,7 @@ module.exports = {
   /********************公告****************************/
   queryTypes: ApiRootUrl +'gonggao/queryType.do',
   queryTypeGonggaos: ApiRootUrl +'gonggao/queryTypeGonggao.do',
+  queryGonggaoContent: ApiRootUrl +'gonggao/queryGonggaoContent.do',
 
   /********************邻里圈*************************/
   queryHeoTypeList: ApiRootUrl + "/heo/queryHeoTypeList.do", //查询邻里圈类型列表
@@ -165,6 +171,11 @@ module.exports = {
   ,finishAdvice:ApiRootUrl+'advice/finishAdvice' //确认反馈完成
   ,evaluateAdvice:ApiRootUrl+'advice/evaluateAdvice' //反馈评价
   ,addMsgBody:ApiRootUrl + 'advice/addMsgBody' //反馈留言
+
+  ,feedback:ApiRootUrl + 'feedback.do' //问题反馈
+  ,feedbackQuery:ApiRootUrl + 'feedbackQuery.do'//反馈查询
+
+
   /********************匿名登录*************************/
   ,noName:ApiRootUrl+'noName/noNameMain' //匿名登录
   ,isBind:ApiRootUrl +'noName/isBind' //判断用户是否已经认证绑定

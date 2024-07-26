@@ -126,7 +126,7 @@ Page({
           pages:pages,
           typeGonggaos:type == 'loadMore'?that.data.typeGonggaos:typeGonggaoList,
           totalNum:totalNum,
-           isRefreshing:false
+          isRefreshing:false
         })
       }
       that.showLoading(!1)
@@ -142,16 +142,20 @@ Page({
 
   gonggaoDetail(e) {
     var url = e.currentTarget.dataset.datavalue.url;
+    var gongGaoId = e.currentTarget.dataset.datavalue.id;
+    //url = 'https://zhgj.xhguanjia.cn/home.html';
     var title = e.currentTarget.dataset.datavalue.title;
     url = encodeURIComponent(url);
     if (url != '' && url != undefined) {
       wx.navigateTo({
-        url: '/subpages/gonggao/web/ggDetail?url=' + url + '&titleName=' + title
+        url: '/subpages/gonggao/web/ggDetail?url=' + url + '&titleName=' + title+ '&gongGaoId=' + gongGaoId
       })
     } else {
       this.onClickHide();
     }
   },
+
+
   checkVisitLog:function(e){
     var visitLog = e.currentTarget.dataset.visitlog
     wx.navigateTo({

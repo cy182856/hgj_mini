@@ -409,7 +409,8 @@
 >
     <van-cell-group>
         <!-- <cell wx:if="{{obj.poWxId != ''}}" bind:startmessage='startmessage' bind:completemessage="completemessage" plugid='{{obj.poWxId}}' styleType='1' paddingStyle="30"/> -->
-        <image src="{{qrCode}}" show-menu-by-longpress="{{true}}" mode="widthFix"></image>
+        <!-- <image src="{{qrCode}}" show-menu-by-longpress="{{true}}" mode="widthFix"></image> -->
+        <image style="height: 100%; width: 100%;" src="data:image/png;base64,{{qrCode}}" show-menu-by-longpress="{{true}}" mode="widthFix"></image>
     </van-cell-group>
 </van-dialog>
 

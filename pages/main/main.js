@@ -399,7 +399,7 @@ Page({
           var adverts = res.data.adverts;              
           that.setData({
             advertsImg:adverts.imgPath,
-            advertsUrl: adverts.url
+            advertsUrl: adverts.advertsPath
           });                  
         }else{
           var desc = res.data.errDesc;
