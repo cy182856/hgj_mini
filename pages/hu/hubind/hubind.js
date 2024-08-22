@@ -247,7 +247,7 @@ Page({
     var that = this;
     Dialog.confirm({
       title: '提示',
-      message: '信息是否无误，确认入住？',
+      message: '信息是否无误?',
       confirmButtonColor: '#189AFE',
     }).then(() => {
       //that.showLoading(1);
@@ -373,9 +373,9 @@ Page({
       app.alert.alert('请填写您的姓名！');
       return;
     }
-    if(userName.length == 1){
+    if(userName.length < 2 || userName.length > 4){
       this.showLoading(0);
-      app.alert.alert('姓名必须大于两个字！');
+      app.alert.alert('姓名请填写2~4个字！');
       return;
     }
     if(phone == '' || phone == null){

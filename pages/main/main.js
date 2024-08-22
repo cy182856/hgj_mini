@@ -381,7 +381,6 @@ Page({
       userList: app.storage.getUsrList(),
       isRefreshing:false
     });
-
     return true;
   },
 
@@ -567,6 +566,7 @@ Page({
 
   //默认进入小程序的业务-正在使用的
   loginBusiByDefault(custId) {
+    that.showLoading(1);
     var data = {};
     wx.login({
       success: res => {
@@ -577,6 +577,7 @@ Page({
         app.req.postRequest(api.queryMutipUsr, data).then(res => {
           console.log('无缓存的多账户请求结果', res);
           if (res.data.respCode == '000') {
+            that.showLoading(0);
             let wxOpenId = res.data.wxOpenId;
             console.log("wxOpenId:" + wxOpenId);
             let proNum = res.data.proNum;
@@ -631,6 +632,7 @@ Page({
               }
             })
           } else {
+            that.showLoading(0);
             that.showErrDesc(res);
           }
         });

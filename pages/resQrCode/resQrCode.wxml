@@ -1,0 +1,28 @@
+<page>
+		
+	<view style="display: flex;justify-content: center;align-items: center;height: 35%; margin-top: 40px;">
+		<image src="data:image/png;base64,{{resQrCode}}"></image>
+	</view>   
+	<view class="visit-house-info">
+
+		<view class="houseinfo-flex-display">
+          <view style="flex:2;">
+            <text>生成时间</text>
+          </view>		  
+          <view class="ellipsis_view text-align-right" style="flex:3;">
+            <text>{{createTime}}</text>
+          </view>
+        </view>
+
+		<view class="houseinfo-flex-display">
+          <view style="flex:2;">
+            <text>有效截止时间</text>
+          </view>		  
+          <view class="ellipsis_view text-align-right" style="flex:3;">
+            <text>{{endTime}}</text>
+          </view>
+        </view>
+      
+      </view>
+	<image class='visit-detail-bg'  src='/images/home/back-img.png'></image>  
+</page>

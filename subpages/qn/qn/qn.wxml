@@ -2,7 +2,7 @@
 <import src="../../../template/loading/loading.wxml"></import>
 <template is="loading" data="{{..._loading_}}"></template>
 
-<view style="height: 280rpx;width: 100%;">
+<!-- <view style="height: 280rpx;width: 100%;">
   <image src="../../../images/qn/qbbg.png" mode="aspectFit" class="qn-bg"/>
   <view style="color: #FFFFFF;padding-top: 66rpx; padding-left: 46rpx;font-family: PingFangSC, PingFangSC-Medium;position: relative;">
     <text style="font-size: 48rpx;font-weight: 500;line-height: 66rpx;">用户问卷调查\n</text>
@@ -12,17 +12,17 @@
       </text>
     </view>
   </view>
-</view>
+</view> -->
 
 <view style="margin-top: 10px;">
 
 	<!-- <button bindtap="fillInQn">填写问卷</button> -->
 
-  <button bindtap="toWebViewUrl">填写问卷</button>
+  <!-- <button bindtap="toWebViewUrl">填写问卷</button> -->
   
-  <view wx:if="{{webviewSrc != ''}}">
+  <!-- <view wx:if="{{webviewSrc != ''}}"> -->
     <web-view  src="{{webviewSrc}}"></web-view>
-  </view>
+  <!-- </view> -->
 
 </view>
 

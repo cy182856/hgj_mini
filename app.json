@@ -6,6 +6,7 @@
     "pages/noauth/noauth",
     "pages/await/await",
     "pages/smartDoor/smartDoor",
+    "pages/resQrCode/resQrCode",
     "pages/wuyeInfo/wuyeInfo",
     "pages/wuyeInfo/mapPage",
     "pages/hu/protocol/protocol",

@@ -1,6 +1,5 @@
-//queryQnInfo.js
-var app = getApp();
-const apiConstant = require('../../../const/api.js');
+const app = getApp();
+const api = require("../../../const/api");
 
 Page({
   data:{
@@ -11,6 +10,21 @@ Page({
   onLoad: function (options) {
 	  app.loading();
     this.showLoading(false);
+    this.getQnGatewayUrl();   
+  },
+
+  getQnGatewayUrl(){
+    var data = {};
+    data['proNum'] = app.storage.getProNum();;
+    app.req.postRequest(api.queryQnGatewayUrl, data).then(res => {
+      if (res.data.respCode == '000') {
+        let gatewayUrl = res.data.data.gatewayUrl;
+        this.setData({
+          webviewSrc: gatewayUrl
+         })
+      }
+    
+  })
   },
 
   fillInQn() {
@@ -25,11 +39,11 @@ Page({
      })
    },
 
-   toWebViewUrl() {
-     this.setData({
-      webviewSrc:'https://mp.weixin.qq.com/s?__biz=MzI0MTAzNTAwOQ==&mid=2247484106&idx=1&sn=01f31ce0cd058fca633a4a648a7d873a&chksm=e910f0a4de6779b2e5420c0fe3f9511924b0c210b8e25dbadf34d512e71852fe7ff17e3a36c6#rd'
-     })
-   },
+  //  toWebViewUrl() {
+  //    this.setData({
+  //     webviewSrc:'https://mp.weixin.qq.com/s?__biz=MzI0MTAzNTAwOQ==&mid=2247484106&idx=1&sn=01f31ce0cd058fca633a4a648a7d873a&chksm=e910f0a4de6779b2e5420c0fe3f9511924b0c210b8e25dbadf34d512e71852fe7ff17e3a36c6#rd'
+  //    })
+  //  },
  
 
 })

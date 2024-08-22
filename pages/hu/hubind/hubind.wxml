@@ -98,7 +98,7 @@
       <van-col span = "15">
         <view>
           <input style="text-align: left; border-style: solid;border-width: 1px;width: 100%; height: 40px; color: rgb(65, 62, 62); padding-left: 5px;" placeholder="" bindinput="inputChange"
-          value="{{userName}}" maxlength="4"/>
+          value="{{userName}}" maxlength="50"/>
         </view>
       </van-col>
     </view>
@@ -121,7 +121,7 @@
   </van-row>
   
   <view style="margin-top: 40px;">
-    <button type="primary" size="default" bindtap="confirmCheckIn">确认入住</button>
+    <button type="primary" size="default" bindtap="confirmCheckIn">提交</button>
   </view>
 </view>
 
