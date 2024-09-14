@@ -1,41 +1,62 @@
 <import src="../../../template/loading/loading.wxml"></import>
 <template is="loading" data="{{..._loading_}}"></template>
 <import src="../../../template/empty/empty.wxml"></import>
+
 <view class="weui-loadmore" wx:if="{{isRefreshing}}">
     <view class="weui-loading"></view>
     <view class="weui-loadmore-tips">正在刷新...</view>
 </view>
-<view style="margin-left: 15px;margin-top: 5%;font-size: 20px;">{{typeName}}</view>
-<block wx:if="{{typeGonggaos && typeGonggaos.length > 0}}">
-  <view style=" padding-bottom:{{padding_bottom}}rpx;">
-    <block wx:for="{{typeGonggaos}}" wx:for-item="typeGonggao">
-      <view class="visit-log-item">    
-        <view>
-          <van-cell-group custom-class="vant-cell-custom-class">         
-            <block>
-				<van-cell title-class="vant-cell-title-class" title="{{typeGonggao.title}}" value="" border="{{ false }}" bindtap="gonggaoDetail" data-datavalue="{{typeGonggao}}" />
-				<view style="margin-left: 4.5%; font-size: 24rpx;color:rgb(165, 163, 163)" bindtap="gonggaoDetail" data-datavalue="{{typeGonggao}}">{{typeGonggao.updateTime}}</view>
-            </block>          
-            <view style="height:20rpx;"></view>
-          </van-cell-group>
-        </view>
-      </view>
-    </block>
-    <!-- 点击加载更多 -->
-    <block wx:if="{{more}}">
-      <view wx:if="{{loading}}" class="loading-container">
-        <van-loading type="spinner" size="26rpx" text-size="22rpx">正在加载更多...</van-loading>
+
+<view style="position: relative;height: 100%;">
+  <view style="position: absolute; height:10%; width:100%; background-color: #f0dcc8;z-index: 1;"></view>
+  <view style="background-color: #ffffff; height:100%; width:100%; border-radius: 36px;position: absolute; z-index: 2;margin-top: 80rpx;">
+    <view style="margin-left: 15px;margin-top: 5%;font-size: 20px;">{{typeName}}</view>
+    <block wx:if="{{typeGonggaos && typeGonggaos.length > 0}}">
+      <view style=" padding-bottom:{{padding_bottom}}rpx;">
+        <block wx:for="{{typeGonggaos}}" wx:for-item="typeGonggao">
+          <view class="visit-log-item">    
+            <view>
+              <van-cell-group custom-class="vant-cell-custom-class">         
+                <block>
+
+                  <van-row>
+                    <view>	
+                        <van-col span="1">
+                            <view wx:if="{{typeGonggao.readStatus == 0}}" class="view_hongdian"></view>
+                            <view wx:if="{{typeGonggao.readStatus == 1}}" class="view_hongdian_not"></view>
+                        </van-col>
+                        <van-col span="22">
+                          <van-cell title-class="vant-cell-title-class" title="{{typeGonggao.title}}" value="" border="{{ false }}" bindtap="gonggaoDetail" data-datavalue="{{typeGonggao}}">
+                          </van-cell>
+                          <view style="margin-left: 3%; font-size: 24rpx;color:rgb(165, 163, 163)" bindtap="gonggaoDetail" data-datavalue="{{typeGonggao}}">{{typeGonggao.updateTime}}</view>
+                        </van-col>                             
+                    </view>     
+                  </van-row>
+                </block>   
+
+                <view style="height:20rpx;"></view>
+              </van-cell-group>
+            </view>
+          </view>
+        </block>
+        <!-- 点击加载更多 -->
+        <block wx:if="{{more}}">
+          <view wx:if="{{loading}}" class="loading-container">
+            <van-loading type="spinner" size="26rpx" text-size="22rpx">正在加载更多...</van-loading>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="loading-container" bindtap="" >没有更多内容啦</view>
+        </block>
       </view>
     </block>
     <block wx:else>
-      <view class="loading-container" bindtap="" >没有更多内容啦</view>
+      <view class="empty-view">
+        <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无消息'}}"></template>
+      </view>
     </block>
   </view>
-</block>
-<block wx:else>
-  <view class="empty-view">
-    <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无消息'}}"></template>
-  </view>
-</block>
+</view>
 
-<van-dialog id="van-dialog" overlay-style ="z-index:6666 !important;"  confirm-button-color ="#189AFE" />
+
+

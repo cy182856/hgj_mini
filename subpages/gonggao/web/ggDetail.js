@@ -37,7 +37,9 @@ Page({
   queryGongGaoContent:function(id){
     var that = this;
     var queryParams = {   
-      id:id
+      id:id,
+      wxOpenId:app.storage.getWxOpenId(),
+      proNum:app.storage.getProNum()
     };
     that.showLoading(!0)
     app.req.postRequest(api.queryGonggaoContent, queryParams).then(function (value) {

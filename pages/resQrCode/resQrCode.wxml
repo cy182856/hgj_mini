@@ -12,7 +12,7 @@
           <view class="ellipsis_view text-align-right" style="flex:3;">
             <text>{{createTime}}</text>
           </view>
-        </view>
+    </view>
 
 		<view class="houseinfo-flex-display">
           <view style="flex:2;">
@@ -21,8 +21,8 @@
           <view class="ellipsis_view text-align-right" style="flex:3;">
             <text>{{endTime}}</text>
           </view>
-        </view>
+    </view>
       
-      </view>
+  </view>
 	<image class='visit-detail-bg'  src='/images/home/back-img.png'></image>  
 </page>

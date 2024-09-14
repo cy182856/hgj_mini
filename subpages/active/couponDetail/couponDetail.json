@@ -1,0 +1,6 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText":"券明细",
+  "enablePullDownRefresh": true
+
+}

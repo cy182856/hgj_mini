@@ -64,6 +64,13 @@ Page({
       app.alert.alert('请填写您要修改的姓名！');
       return;
     }
+    if(userName.length < 2 || userName.length > 4){
+      app.alert.alert('姓名请填写2~4个字！');
+      that.setData({
+        newUserName: ""
+      })
+      return;
+    }
     var data = {}
     data['cstCode'] = app.storage.getCstCode();
     data['wxOpenId'] = app.storage.getWxOpenId();

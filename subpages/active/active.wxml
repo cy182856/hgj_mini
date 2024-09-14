@@ -1,5 +1,6 @@
-<import src="../../../template/empty/empty.wxml"></import>
-<import src="../../../template/loading/loading.wxml"></import>
+<!-- 引用 -->
+<import src="../../../../template/empty/empty.wxml"></import>
+<import src="../../../../template/loading/loading.wxml"></import>
 <template is="loading" data="{{..._loading_}}"></template>
 
 <view class="weui-loadmore" wx:if="{{isRefreshing}}">
@@ -7,15 +8,31 @@
     <view class="weui-loadmore-tips">正在刷新...</view>
 </view>
 
-<view style="height: 280rpx;width: 100%;">
-  <image src="../../../images/qn/qbbg.png" mode="aspectFit" class="qn-bg"/>
-  <view style="color: #FFFFFF;padding-top: 66rpx; padding-left: 46rpx;font-family: PingFangSC, PingFangSC-Medium;position: relative;">
-    <text style="font-size: 48rpx;font-weight: 500;line-height: 66rpx;">用户问卷调查\n</text>
-    <view style="margin-top: 40rpx;">
-      <text style="font-size: 28rpx;font-weight: 500;line-height: 40rpx;">快来告诉我们您最真实的感受吧～
-      </text>
-    </view>
-  </view>
+<!-- 弹窗 -->
+<van-dialog id="van-dialog"/>
+<!-- 根据UI，距离顶端始终保持14rpx，14+9 -->
+
+<view style="margin: 5%;">{{cstName}}</view>
+
+<view style="background-color:rgb(189, 154, 140);height: 180px;margin-right:3%;margin-left: 3%; margin-top: 3%; width: auto;border-radius:10px;">
+	<van-row >
+        <view>	
+            <van-col span="18"> 
+				<text style="margin-left: 4%; font-size: 22px;color: azure;">总次数：{{couponTotalNum}}次</text>
+            </van-col>
+            <van-col span="5">    
+				<text bindtap="couponDetail"  style="margin-left: 4%; font-size: 22px;color: azure;">详情 ></text>            
+			</van-col>
+        </view>
+    </van-row>
+
+	<van-row >
+        <view>	
+            <van-col span="24"> 
+                <view style="margin-left:0%;font-size: 24px; margin-top: 30px;color: azure;"><button style="width: 50%;">开门二维码</button></view>
+            </van-col>       
+        </view>
+    </van-row>
 </view>
 
 <block wx:if="{{qns && qns.length > 0}}">
@@ -24,11 +41,11 @@
       <view class="qn-title">
         <van-row>
             <van-col span="12">
-              <view class="qn-title-len" bindtap="fillInQn" data-qn="{{qn}}">{{qn.title}} </view>
+              <view class="qn-title-len" bindtap="fillInQn" data-qn="{{qn}}">进入时间 </view>
             </van-col>
             <van-col span="12">
               <view style="margin-left: 30rpx; font-size: 16px;">
-                <text class="date_font">创建时间</text>
+                <!-- <text class="date_font">进入时间</text> -->
                 <text style="margin-left: 20rpx;">{{qn.createTime}}</text>
               </view>
               
@@ -52,24 +69,6 @@
 <view wx:elif="{{qns.length > 0 && pageNum == pages}}" class="last_font">已经到底了</view> 
 <view wx:else class="last_font">暂无记录</view>
 <view style="height:50rpx;"></view>
-
-
-<!-- <view wx:if="{{webViewUrl != ''}}">
-    <web-view  src="{{webViewUrl}}"></web-view>
-</view>  -->
-
-<!-- <view style="margin-top: 10px;">
-
-	<button bindtap="fillInQn">填写问卷</button>
-
-  <button bindtap="toWebViewUrl">填写问卷</button>
-  
-</view>
--->
-
-
-
-
 
 
 

@@ -21,6 +21,7 @@ const _ = {
     HOUSE_ID:'HOUSE_ID',
     HOUSE_NAME:'HOUSE_NAME',
     TOKEN_KEY:'TOKEN_KEY',
+    QUICK_CODE_CLICK_TIME:'QUICK_CODE_CLICK_TIME',
 
 }
 /**
@@ -205,6 +206,12 @@ class storage {
     getUserNickName(){
         return wx.getStorageSync(_.USER_NICK_NAME);
     }
+    setQuickCodeClickTime(value){
+        wx.setStorageSync(_.QUICK_CODE_CLICK_TIME, value);
+    }
+    getQuickCodeClickTime(){
+        return wx.getStorageSync(_.QUICK_CODE_CLICK_TIME);
+    }
 
     /**清除所有的缓存 */
     clearAll(){
@@ -229,7 +236,7 @@ class storage {
             wx.removeStorageSync(_.HOUSE_ID);
             wx.removeStorageSync(_.HOUSE_NAME);
             wx.removeStorageSync(_.TOKEN_KEY);
-
+            wx.removeStorageSync(_.QUICK_CODE_CLICK_TIME);
 
             wx.clearStorageSync();
         } catch (error) {

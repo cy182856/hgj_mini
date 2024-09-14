@@ -1,0 +1,30 @@
+<page>
+  <view class="visit-log-view">
+    <view class="visit-header-view">
+    </view>
+      <view style=" background-color:#fff; ">
+        <image style="margin: 5%; padding-bottom: 3%;" src="data:image/png;base64,{{visitQrCode}}"></image>
+      </view>
+    <view class="visit-code-view" style="display:{{showCode}};">
+      <view class="barcode">
+        <canvas canvas-id="barcode"/>
+      </view>
+ 
+      <view class="qrcode" style="margin-top:20rpx;">
+        <canvas canvas-id="qrcode"/>
+      </view>
+      
+      </view>
+      <view class="visit-house-info"> 
+        <view class="houseinfo-flex-display">
+          <view style="flex:2;">
+            <text>有效日期</text>
+          </view>
+          <view class="ellipsis_view text-align-right" style="flex:3;">
+            <text>{{expDate}}</text>
+          </view>
+        </view>
+      </view>
+    <image class='visit-detail-bg'  src='/images/home/back-img.png'></image>
+</view>
+</page>

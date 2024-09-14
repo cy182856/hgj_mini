@@ -1,62 +1,72 @@
 <import src="../../../template/loading/loading.wxml"></import>
 <template is="loading" data="{{..._loading_}}"></template>
 <import src="../../../template/empty/empty.wxml"></import>
+
 <view class="weui-loadmore" wx:if="{{isRefreshing}}">
-    <view class="weui-loading"></view>
-    <view class="weui-loadmore-tips">正在刷新...</view>
+      <view class="weui-loading"></view>
+      <view class="weui-loadmore-tips">正在刷新...</view>
 </view>
-<view style="margin-left: 15px; margin-top: 5%;font-size: 20px;">消息中心</view>
-<block wx:if="{{gonggaoTypes && gonggaoTypes.length > 0}}">
-  <view style=" padding-bottom:{{padding_bottom}}rpx;">
-    <block wx:for="{{gonggaoTypes}}" wx:for-item="gonggaoType">
-		<van-row >
-            <view wx:if="{{gonggaoType.gonggao.title != null}}" class="" style="border-bottom: 1px dashed #D5D5D5; margin-top: 15px;" bindtap="typeDetail" data-datavalue="{{gonggaoType}}">	
-                <van-col span="4"> 
-                    <view style="margin-left: 10px;"><image src="{{gonggaoType.imgUrl}}" style="width: 50px;height: 50px;margin-top: 15px;"></image></view>
-					<!-- <van-grid-item>
-                        <van-icon slot="icon" name="{{gonggaoType.imgUrl}}" size="55"/>
-                    </van-grid-item> -->
-                </van-col>
-                <van-col span="18" >      
-                    <view style="margin-left: 5px;margin-top: 17px;">{{gonggaoType.name}}<span style="margin-left: 50%;color: rgb(146, 147, 148);font-size: 12px;">{{gonggaoType.gonggao.updateTime}}</span></view>
-					<view class="gonggao-title-class">{{gonggaoType.gonggao.title}}</view>
-                </van-col>				
+
+<view style="position: relative;height: 100%;">
+  <view style="position: absolute; height:10%; width:100%; background-color: #f0dcc8;z-index: 1;"></view>
+  <view style="background-color: #ffffff; height:100%; width:100%; border-radius: 36px;position: absolute; z-index: 2;margin-top: 80rpx;">
+    <view style="margin-left: 15px; margin-top: 5%;font-size: 20px;">消息中心</view>
+    <block wx:if="{{gonggaoTypes && gonggaoTypes.length > 0}}">
+      <view style=" padding-bottom:{{padding_bottom}}rpx;">
+        <block wx:for="{{gonggaoTypes}}" wx:for-item="gonggaoType">
+        <van-row >
+                <view wx:if="{{gonggaoType.gonggao.title != null}}" class="" style="border-bottom: 1px dashed #D5D5D5; margin-top: 15px;" bindtap="typeDetail" data-datavalue="{{gonggaoType}}">	
+                    <van-col span="4"> 
+                        <view style="margin-left: 10px; position: relative;"><image src="{{gonggaoType.imgUrl}}" style="width: 50px;height: 50px;margin-top: 15px;"></image>
+                          <view wx:if="{{gonggaoType.notReadNum > 0}}" class="dot">
+                            <text wx:if="{{gonggaoType.notReadNum > 99}}" class="text_qipao">99+</text>
+                            <text wx:else class="text_qipao">{{gonggaoType.notReadNum}}</text>
+                          </view>
+                        </view>
+              <!-- <van-grid-item>
+                            <van-icon slot="icon" name="{{gonggaoType.imgUrl}}" size="55"/>
+                        </van-grid-item> -->
+                    </van-col>
+                    <van-col span="18" >      
+                        <view style="margin-left: 15px;margin-top: 17px;">{{gonggaoType.name}}<span style="margin-left: 45%;color: rgb(146, 147, 148);font-size: 12px;">{{gonggaoType.gonggao.updateTime}}</span></view>
+              <view class="gonggao-title-class" style="margin-left: 15px;">{{gonggaoType.gonggao.title}}</view>
+                    </van-col>				
+                </view>
+            </van-row>
+          <!-- <view class="visit-log-item">
+            <view class="visit-log-title">
+        <image src="{{gonggaoType.imgUrl}}" style="width: 50px;height: 50px;"></image>
+              <view class="visit-log-name">
+          <navigator url="/subpages/gonggao/typeDetail/typeDetail?typeId={{gonggaoType.id}}&typeName={{gonggaoType.name}}" open-type="navigate">{{gonggaoType.name}}</navigator>    
+              </view>       
             </view>
-        </van-row>
-      <!-- <view class="visit-log-item">
-        <view class="visit-log-title">
-		<image src="{{gonggaoType.imgUrl}}" style="width: 50px;height: 50px;"></image>
-          <view class="visit-log-name">
-			<navigator url="/subpages/gonggao/typeDetail/typeDetail?typeId={{gonggaoType.id}}&typeName={{gonggaoType.name}}" open-type="navigate">{{gonggaoType.name}}</navigator>    
-          </view>       
-        </view>
-        <view>
-          <van-cell-group custom-class="vant-cell-custom-class">         
-            <block>
-				<navigator url="/subpages/gonggao/typeDetail/typeDetail?typeId={{gonggaoType.id}}&typeName={{gonggaoType.name}}" open-type="navigate">
-              		 <van-cell title-class="vant-cell-title-class" title="{{gonggaoType.gonggao.title}}" value="{{gonggaoType.gonggao.updateTime}}" border="{{ false }}" />
-			  	</navigator>				 
-            </block>          
-            <view style="height:20rpx;"></view>
-          </van-cell-group>
-        </view>
-      </view> -->
-    </block>
-    <!-- 点击加载更多 -->
-    <block wx:if="{{more}}">
-      <view wx:if="{{loading}}" class="loading-container">
-        <van-loading type="spinner" size="26rpx" text-size="22rpx">正在加载更多...</van-loading>
+            <view>
+              <van-cell-group custom-class="vant-cell-custom-class">         
+                <block>
+            <navigator url="/subpages/gonggao/typeDetail/typeDetail?typeId={{gonggaoType.id}}&typeName={{gonggaoType.name}}" open-type="navigate">
+                      <van-cell title-class="vant-cell-title-class" title="{{gonggaoType.gonggao.title}}" value="{{gonggaoType.gonggao.updateTime}}" border="{{ false }}" />
+              </navigator>				 
+                </block>          
+                <view style="height:20rpx;"></view>
+              </van-cell-group>
+            </view>
+          </view> -->
+        </block>
+        <!-- 点击加载更多 -->
+        <block wx:if="{{more}}">
+          <view wx:if="{{loading}}" class="loading-container">
+            <van-loading type="spinner" size="26rpx" text-size="22rpx">正在加载更多...</van-loading>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="loading-container" style="margin-top: 20px;" bindtap="" >没有更多内容啦</view>
+        </block>
       </view>
     </block>
     <block wx:else>
-      <view class="loading-container" bindtap="" >没有更多内容啦</view>
+      <view class="empty-view">
+        <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无消息'}}"></template>
+      </view>
     </block>
   </view>
-</block>
-<block wx:else>
-  <view class="empty-view">
-    <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无消息'}}"></template>
-  </view>
-</block>
-
-<van-dialog id="van-dialog" overlay-style ="z-index:6666 !important;"  confirm-button-color ="#189AFE" />
+</view>

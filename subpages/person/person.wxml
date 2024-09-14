@@ -11,7 +11,7 @@
 
 <van-dialog use-slot title="修改姓名" show="{{ userNameShow }}" show-cancel-button bind:cancel="onTapCancleModifyUserName"
   bind:confirm="onConfirm" confirm-button-color="#189afe">
-  <van-field value="{{ newUserName }}"   input-align="right" maxlength="4" show-word-limit placeholder="请输入您的姓名" border="{{ false }}" bind:input="onUserNameChange" />
+  <van-field value="{{ newUserName }}"   input-align="right" maxlength="30" show-word-limit placeholder="请输入您的姓名" border="{{ false }}" bind:input="onUserNameChange" />
 </van-dialog>
 
 <van-dialog use-slot title="修改手机号" show="{{ phoneShow }}" show-cancel-button bind:cancel="onTapCancleModifyPhone"

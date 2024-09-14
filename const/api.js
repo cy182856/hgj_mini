@@ -18,13 +18,17 @@ module.exports = {
 
   queryMutipUsr : ApiRootUrl + 'queryMutipUsr', //查询多账户
   queryManyCust : ApiRootUrl + 'queryManyCust', //查询公众号下的多账户信息
-  queryCurrNotice : ApiRootUrl + 'notice/queryCurrNotice.do',//公告
+  queryGongGao : ApiRootUrl + 'gonggao/query.do',//公告查询-首页
   queryCurrNoticeNew : ApiRootUrl + 'notice/queryAllNotice.do',//公告
   queryPersonData : ApiRootUrl + 'queryPersonData', //查询个人资料
   updatePersonData: ApiRootUrl + 'updatePersonData',// 修改个人资料
 
    /**********************广告***************** */
    queryAdverts:ApiRootUrl + 'queryAdverts.do',//查询广告信息
+
+   /**********************住户码***************** */
+   addResQrCode : ApiRootUrl + "resQrCode/addResQrCode.do", //生成住户码
+
 
   /********************智能开门*************************/
   querySmartCodeInfo : ApiRootUrl + "/hu/querySmartCodeInfo.do" ,//查询条形码及二维码信息
@@ -80,6 +84,9 @@ module.exports = {
   queryExpQnInfos: ApiRootUrl + 'queryExpQnInfos.do',//查询已结束问卷记录列表
   queryOngoingQnInfos: ApiRootUrl + 'queryOngoingQnInfos.do',//查询进行中的问卷记录列表
   queryQnHouseSubmits: ApiRootUrl + 'queryQnHouseSubmits.do',//查询是否有其他人已提交问卷（问卷唯一类型为按房唯一时，若已有人提交，则不可进入问卷答题页面）
+
+  queryQnGatewayUrl: ApiRootUrl + 'queryQnGatewayUrl.do', //查询金数据门户地址
+  queryQns: ApiRootUrl + "qn/query.do", //问卷列表
 
   /********************预约****************************/
   queryApptObjInfo: ApiRootUrl +'appt/queryApptObjInfo.do',//预约标的查询
@@ -157,9 +164,18 @@ module.exports = {
   /********************访客管理*************************/
   addVisitQrCode : ApiRootUrl + "visitinfo/addVisitQrCode.do", //新增访客通行证-生成二维码
   addVisitRandomNum : ApiRootUrl + "visitinfo/addVisitRandomNum.do", //新增访客通行证-生成6位随机数
-  queryVisitExplain:ApiRootUrl + 'visitinfo/queryVisitExplain.do' //查询访客通行码说明文字
+  queryVisitExplain:ApiRootUrl + 'visitinfo/queryVisitExplain.do', //查询访客通行码说明文字
 
-  ,checkVisitLogDetail : ApiRootUrl + "/visitinfo/showVisitInfoDetail.do" //查看单个访客通行证信息
+ /********************扫码开门*************************/
+  addOpenDoorQrCode : ApiRootUrl + "opendoor/addOpenDoorQrCode.do", //扫码开门-生成二维码
+  queryOpenDoorLog: ApiRootUrl + "opendoor/queryOpenDoorLog.do", //查询开门记录
+  createQuickCode : ApiRootUrl + "opendoor/createQuickCode.do", //创建快速通行码
+  queryWeekDate:ApiRootUrl + 'opendoor/queryWeekDate.do', //获取当前及一周后日期
+
+  openLogQuery: ApiRootUrl + "active/openLog/query.do", //开门记录查询
+  couponQuery: ApiRootUrl + "active/coupon/query.do", //券查询
+
+  checkVisitLogDetail : ApiRootUrl + "/visitinfo/showVisitInfoDetail.do" //查看单个访客通行证信息
   ,queryVisitLogs: ApiRootUrl + "visitinfo/queryVisitInfos.do" //查询访客记录
   ,updateVisitLog: ApiRootUrl + "/visitinfo/updVisitLog.do" //更新访客通行码
 

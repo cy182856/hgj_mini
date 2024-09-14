@@ -8,5 +8,6 @@
 </view>
 
 <!-- <web-view src="{{url}}"></web-view> -->
-
-<rich-text nodes="{{content}}"></rich-text>
+<view style="padding:5%;">
+    <rich-text space="nbsp" decode="{{true}}" nodes="{{content}}"></rich-text>
+</view>

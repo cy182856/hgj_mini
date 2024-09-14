@@ -88,34 +88,3 @@ page{
 	background-color: #fff;
   }
   
-  .gonggao-title-class{
-	color: rgb(146, 147, 148);
-	font-size: 14px;
-	margin-left: 5px; 
-	display: -webkit-box;
-	overflow: hidden; 
-	-webkit-box-orient: vertical; 
-	-webkit-line-clamp:5;
-  }
-
-
-  .dot {
-	position: absolute;
-	top: 12%;
-	left:55%;
-	width: 50rpx; 
-	height: 35rpx; 
-	background-color: rgba(255, 5, 5, 0.616); 
-	border-radius: 50%; 
-	margin-right: 10rpx;
-	border-radius: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-left: 0rpx;
-  }
-
-  .text_qipao {
-	color: white;
-	font-size: 22rpx;
-  }

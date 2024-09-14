@@ -38,8 +38,8 @@ page{
   
   .visit-house-info{
 	color:#fff;
-	margin:8%;
-	margin-top:20rpx;
+	margin:40rpx;
+	margin-top:30rpx;
   }
   
   .houseinfo-flex-display{
@@ -47,7 +47,7 @@ page{
 	display:flex;
 	width:100%;
 	text-align:left;
-	margin-bottom: 20rpx;
+	margin-bottom: 10rpx;
   }
   
   .visit-log-view{

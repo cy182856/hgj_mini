@@ -46,6 +46,14 @@
       ]
     },
     {
+      "root": "subpages/active",
+      "name": "active",
+      "pages": [
+        "active",
+        "couponDetail/couponDetail"
+      ]
+    },
+    {
       "root": "subpages/house",
       "name": "house",
       "pages": [
@@ -74,6 +82,7 @@
       "pages": [
         "queryQnInfo/queryQnInfo",
         "qn/qn",
+        "qnWeb/qnWeb",
         "queryQnQueList/queryQnQueList",
         "queryQnQueAns/queryQnQueAns",
         "queryExpQnInfos/queryExpQnInfos",
@@ -124,6 +133,15 @@
         "visitInfo/visitInfo",
         "checkVisit/checkVisit",
         "visitDetail/visitDetail"
+      ]
+    },
+    {
+      "root": "subpages/opendoor",
+      "name": "opendoor",
+      "pages": [
+        "opendoor",
+        "openDoorDetail/openDoorDetail",
+        "openDoorLog/openDoorLog" 
       ]
     },
     {
@@ -241,7 +259,7 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "智慧管家",
     "navigationBarTextStyle": "black",
-    "enablePullDownRefresh": false
+    "enablePullDownRefresh": false 
   },
   "usingComponents": {
     "van-nav-bar": "@vant/weapp/nav-bar/index",
@@ -288,3 +306,4 @@
   },
   "sitemapLocation": "sitemap.json"
 }
+

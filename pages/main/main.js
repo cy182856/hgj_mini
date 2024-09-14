@@ -46,6 +46,7 @@ Page({
 
     , gobj: null //公告对象
     , gonggaoList: null
+    , notReadNum:''
     , showPost: false //控制公告是否展示
     , canShowMineRelease: false //是否显示我的发布
 
@@ -103,11 +104,24 @@ Page({
       buildingName: loginInfo.buildingName,
       houseStat: loginInfo.houseStat
     })
-    //切换tabbar,动态修改名称
-    this.setTitleName(loginInfo);
-
-    // life.init(Toast,api,app,this);
     let active = event.detail;//当前处于哪个tabbar
+    //切换tabbar,动态修改名称
+    if(active == 0){
+      this.setTitleName("智慧管家");
+      wx.setNavigationBarColor({
+        frontColor: '#FFFFFF',
+        backgroundColor: '#81D8CF'    
+      })
+    }
+    if(active == 1){
+      this.setTitleName("我的");
+      wx.setNavigationBarColor({
+        frontColor: '#FFFFFF',
+        backgroundColor: '#81D8CF'    
+      })
+    }
+    // life.init(Toast,api,app,this);
+    
     let index = false;//首页
     let isMineActive = false; //我的，默认当前不是点击我的
     let isLife = false;//生活服务
@@ -149,12 +163,12 @@ Page({
     })
   },
   //修改tabbar对应的小区名
-  setTitleName(loginInfo) {
-    var indexName = '首页';
-    var name = loginInfo.commanyShortName;
-    if (name && name != '') {
-      indexName = name;
-    }
+  setTitleName(indexName) {
+    //var indexName = '首页';
+    // var name = loginInfo.commanyShortName;
+    // if (name && name != '') {
+    //   indexName = name;
+    // }
     wx.setNavigationBarTitle({
       title: indexName
     })
@@ -209,18 +223,18 @@ Page({
 
   // 公告
   gonggao(type) {
-    let flag = false;//默认不会弹窗公告
+    //let flag = false;//默认不会弹窗公告
     //点击的时候，不区分是否滚动，直接弹窗
-    try {
-      if (type && type.type === 'click') {
-        flag = true;
-      }
-    } catch (e) { }
+    // try {
+    //   if (type && type.type === 'click') {
+    //     flag = true;
+    //   }
+    // } catch (e) { }
     var data = {};
     data['cstCode'] = app.storage.getCstCode();
     data['wxOpenId'] = app.storage.getWxOpenId();
     data['proNum'] = app.storage.getProNum();   
-    app.req.postRequest(api.queryCurrNotice,data).then(res=>{
+    app.req.postRequest(api.queryGongGao,data).then(res=>{
       console.log('公告查询结果',res);
       var data = res.data;
       if(data.respCode == '000'){
@@ -232,7 +246,8 @@ Page({
           //   flag = (gobj.noticeType == 'P');
           // }
           that.setData({
-            gonggaoList:data.list
+            gonggaoList:data.list,
+            notReadNum:data.notReadNum
             // gobj:gobj,
             // showPost: flag,
             // ggBtn:gobj.noticeUrl != '' ?'查看原文':'确定'
@@ -625,7 +640,6 @@ Page({
               if (res.data.respCode == '000') {
                 console.log('登录成功,开始进入指定的页面');
                 that.initMain();
-                that.gonggao();
               } else {
                 console.log('登录失败');
                 that.showErrDesc(res);
@@ -760,7 +774,6 @@ Page({
     //重新登录
     app.req.doLogin(4, obj.custId, obj.hgjOpenId, obj.wxSeqId).then(value => {
       that.initMain();//已经登录了，且session正常，初始化主页
-      that.gonggao();
       let url = that.data.tempToSpeUrl;
       if (url != '' && url != undefined) {
         that.toSpePage(url)
@@ -887,20 +900,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log('onshow ..........');
-    if (this.data.onLoad) {
-      console.log('已经走过了onLoad，无需再次走onshow处理其他业务');
-      this.setData({
-        onLoad: false
-      })
-      return;
-    }
-    if (!this.checkSession()) {
-      this.sameUserDoLogin();
-      return;
-    }
-
-
+    console.log('主页onshow加载公告 ..........');
+    this.gonggao();
+    // if (this.data.onLoad) {
+    //   console.log('已经走过了onLoad，无需再次走onshow处理其他业务');
+    //   this.setData({
+    //     onLoad: false
+    //   })
+    //   return;
+    // }
+    // if (!this.checkSession()) {
+    //   this.sameUserDoLogin();
+    //   return;
+    // }
   },
 
 
@@ -927,6 +939,7 @@ Page({
       isRefreshing:true
     })
     this.onLoad();
+    this.onShow();
     wx.stopPullDownRefresh({
     })
   },

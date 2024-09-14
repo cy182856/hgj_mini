@@ -48,7 +48,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.queryTypeGonggaos();
   },
 
   /**
@@ -117,7 +117,7 @@ Page({
     app.req.postRequest(api.queryTypeGonggaos, queryParams).then(function (value) {
       console.log("queryTypeGonggaos 返回", value);
       if(value.data.respCode == "000"){
-        var typeGonggaoList = value.data.gonggaoList;
+        var typeGonggaoList = value.data.list;
         let totalNum = value.data.totalNum;
         var pages = parseInt(value.data.pages);
         that.data.typeGonggaos.push.apply(that.data.typeGonggaos,typeGonggaoList);

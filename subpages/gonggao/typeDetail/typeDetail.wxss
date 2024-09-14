@@ -64,7 +64,7 @@ page{
   }
   
   .van-cell{
-	padding:10rpx 30rpx !important;
+	padding:10rpx 20rpx !important;
   }
   
   .vant-cell-title-class{
@@ -88,3 +88,25 @@ page{
 	background-color: #fff;
   }
   
+  .view_hongdian {
+	width: 15rpx;
+	height: 15rpx;
+	margin-left: 15rpx;
+	margin-top: 80%;
+	background-color: red;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  }
+
+  .view_hongdian_not {
+	width: 15rpx;
+	height: 15rpx;
+	margin-left: 15rpx;
+	margin-top: 80%;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  }

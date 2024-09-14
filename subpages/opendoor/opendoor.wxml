@@ -1,0 +1,158 @@
+<view class="margin-top head">
+  <view>
+    <view class="rq-name">{{proName}}</view>
+  </view>
+  <view class="visit-log-view" bindtap="checkVisitInfos">
+    <view class="visit-log-btn">访客记录</view>
+  </view>
+  <image class='visit-info-bg' mode="aspectFill" src='/images/home/back-img2.png'></image>
+</view>
+<view class="visit-log-tab">
+  <van-tabs active="{{ active }}" 
+    nav-class = "nav-class"
+    tab-class = "tab-class"
+    tab-active-class="tab-active-class"
+    color = "#1B1B1B"
+    type="card">
+
+    <van-tab title="访客通行码" 
+    custom-class = "custom-class"
+    >
+    <view class="visit-passcode-view">
+      <van-cell-group border="{{false}}">
+          <view style="margin-left:30rpx;">
+            <view style="height:20rpx;"></view>
+            
+				<view style="margin-left: 5%; margin-top: 10%;">
+					<picker mode="date" start="{{startDate}}" end="{{endDate}}" value="{{expDate}}" bindchange="bindDateChange">
+              <view>
+                <van-row>
+                  <van-col span="7" ><view class="date-picker" style="color: rgb(130, 134, 134);">选择日期<text style="color:red">*</text> </view></van-col>
+                  <van-col span="17" ><view class="expDate">{{expDate}}</view></van-col>
+                </van-row>
+              </view>
+					</picker>
+				</view>
+        
+        <view style=" margin-top: 10epx;padding-bottom: 10rpx;">
+          <van-row>
+            <van-col span="7" >
+              <view style="padding:30rpx 0px 0px 32rpx;color: rgb(130, 134, 134);"><text>选择房屋</text><text style="color:red">*</text></view>
+            </van-col>
+            <van-col span="17" >
+              <view style="position:relative;top:25rpx;">
+                <!-- 选中之后的数据展示 -->
+                <view class="inputPlaceholder" wx:if='{{value}}' bindtap="changejiantou">
+                  <text style="color: rgb(130, 134, 134); margin-left: 8rpx;">{{value}}</text>
+                  <view class="jiantou1" wx:if='{{isjiantou}}'><i class="iconfont icon-jiantou"></i></view>
+                  <view class="jiantou1" wx:else='{{isjiantou}}'><i class="iconfont icon-jiantou1"></i></view>
+                </view>
+                <!-- 未选择时的Placeholder展示 -->
+                <view class="inputPlaceholder" wx:else bindtap="changejiantou">
+                  <text wx:if="{{selectcontent.length == 1}}" style="margin-left: 8rpx;">{{selectcontent[0].resName}}</text>
+                  <text wx:else  style="margin-left: 8rpx;">请选择房屋</text>
+                  <view class="jiantou1" wx:if='{{isjiantou}}'><i class="iconfont icon-jiantou"></i></view>
+                  <view class="jiantou1" wx:else='{{isjiantou}}'><i class="iconfont icon-jiantou1"></i></view>
+                </view>
+                <!-- 下拉展开后的可选择内容 -->
+                <view class="content" wx:if='{{!isjiantou}}'>
+                  <view class="{{item.id==valueid ? 'active':''}}" wx:for="{{selectcontent}}" wx:key="index" bindtap="changecontent" data-datavalue="{{item}}">
+                    {{item.resName}}
+                  </view>
+                </view>
+              </view>
+            </van-col>
+          </van-row>
+        </view>
+
+        <view style="margin-top: 15px;"></view>
+				<view style="margin-left: 5%; font-size: 30rpx; color: rgb(130, 134, 134);">有效期<text style="margin-left: 15%;">当天有效</text></view>
+         
+          </view>
+          <view class="create-passcode-btn" style="margin-top: 70rpx;">
+            <van-button bindtap="createPassCode" custom-class="vant-btn-class" type="info">生成通行码</van-button>
+          </view>
+       
+        </van-cell-group>
+      </view>
+    </van-tab>
+
+    <!-- <van-tab title="快速通行码"
+      custom-class = "custom-class"
+    >
+      <view class="visit-quickcode-view">
+        <view class="visit-quickcode-label">
+          <text style="margin-left:20rpx;">{{randomNum}}</text>
+        </view>
+
+        <view style="margin-top:100rpx;padding-bottom:20rpx;">
+          <van-button bindtap="createQuickCode" custom-class="vant-btn-class" type="info">生成快速通行码</van-button>
+        </view>
+      </view>    
+    </van-tab> -->
+
+
+    <van-tab title="快速通行码" 
+    custom-class = "custom-class"
+    >
+    <view class="visit-passcode-view">
+      <van-cell-group border="{{false}}">
+          <view style="margin-left:30rpx;">
+            <view style="height:20rpx;"></view>
+            
+				<view style="margin-left: 5%; margin-top: 10%;">
+          <view>
+                <van-row>
+                  <van-col span="7" ><view class="date-picker" style="color: rgb(130, 134, 134);">快速通行码<text style="color:red">*</text> </view></van-col>
+                  <van-col span="17" ><view style="font-size:40rpx;margin-left: 10rpx;">{{randomNum}}</view>                        
+                  </van-col>
+                </van-row>
+              </view>            
+				</view>
+        
+        <view style=" margin-top: 10epx;padding-bottom: 10rpx;">
+          <van-row>
+            <van-col span="7" >
+              <view style="padding:30rpx 0px 0px 32rpx;color: rgb(130, 134, 134);"><text>选择房屋</text><text style="color:red">*</text></view>
+            </van-col>
+            <van-col span="17" >
+              <view style="position:relative;top:25rpx;">
+                <!-- 选中之后的数据展示 -->
+                <view class="inputPlaceholder" wx:if='{{value}}' bindtap="changejiantou">
+                  <text style="color: rgb(130, 134, 134); margin-left: 8rpx;">{{value}}</text>
+                  <view class="jiantou1" wx:if='{{isjiantou}}'><i class="iconfont icon-jiantou"></i></view>
+                  <view class="jiantou1" wx:else='{{isjiantou}}'><i class="iconfont icon-jiantou1"></i></view>
+                </view>
+                <!-- 未选择时的Placeholder展示 -->
+                <view class="inputPlaceholder" wx:else bindtap="changejiantou">               
+                  <text wx:if="{{selectcontent.length == 1}}" style="margin-left: 8rpx;">{{selectcontent[0].resName}}</text>
+                  <text wx:else  style="margin-left: 8rpx;">请选择房屋</text>
+                  <view class="jiantou1" wx:if='{{isjiantou}}'><i class="iconfont icon-jiantou"></i></view>
+                  <view class="jiantou1" wx:else='{{isjiantou}}'><i class="iconfont icon-jiantou1"></i></view>
+                </view>
+                <!-- 下拉展开后的可选择内容 -->
+                <view class="content" wx:if='{{!isjiantou}}'>
+                  <view class="{{item.id==valueid ? 'active':''}}" wx:for="{{selectcontent}}" wx:key="index" bindtap="changecontent" data-datavalue="{{item}}">
+                    {{item.resName}}
+                  </view>
+                </view>
+              </view>
+            </van-col>
+          </van-row>
+        </view>
+
+        <view style="margin-top: 15px;"></view>
+				<view style="margin-left: 5%; font-size: 30rpx; color: rgb(130, 134, 134);">有效期<text style="margin-left: 15%;">当天有效</text></view>
+         
+          </view>
+          <view class="create-passcode-btn" style="margin-top: 70rpx;">
+            <van-button bindtap="createQuickCode" custom-class="vant-btn-class" type="info">生成快速通行码</van-button>
+          </view>
+       
+        </van-cell-group>
+      </view>
+    </van-tab>
+
+
+  </van-tabs>
+</view>
