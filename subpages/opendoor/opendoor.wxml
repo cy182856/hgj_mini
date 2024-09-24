@@ -72,7 +72,7 @@
           <view class="create-passcode-btn" style="margin-top: 70rpx;">
             <van-button bindtap="createPassCode" custom-class="vant-btn-class" type="info">生成通行码</van-button>
           </view>
-       
+          <van-panel title="说明" desc="{{visitorCode}}" ></van-panel>
         </van-cell-group>
       </view>
     </van-tab>
@@ -148,7 +148,7 @@
           <view class="create-passcode-btn" style="margin-top: 70rpx;">
             <van-button bindtap="createQuickCode" custom-class="vant-btn-class" type="info">生成快速通行码</van-button>
           </view>
-       
+          <van-panel title="说明" desc="{{quickAccessCode}}" ></van-panel>
         </van-cell-group>
       </view>
     </van-tab>

@@ -50,7 +50,8 @@
       "name": "active",
       "pages": [
         "active",
-        "couponDetail/couponDetail"
+        "couponDetail/couponDetail",
+        "couponCode/couponCode"
       ]
     },
     {

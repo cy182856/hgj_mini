@@ -7,13 +7,34 @@ Page({
    * 页面的初始数据
    */
   data: {
-    pageNum:1,
-    pageSize:10,
-    pages:10,
-    totalNum:1,
-    qns:[],
-    loading: false,//是否正在加载
-    more: false //是否还有数据
+      couponList:[],
+      pageNum:1,
+      pageSize:10,
+      pages:10,
+      totalNum:1,
+      obj:null,
+      cstCode:'',
+      proNum:'',
+      wxOpenId:'',
+      navList: ['全部', '可用', '已用', '未用'],
+      nav_type: 1
+  },
+
+  changeType: function (e) {
+    let {
+      index
+    } = e.currentTarget.dataset;
+    if (this.data.nav_type=== index || index === undefined) {
+      return false;
+    } else {
+      this.setData({
+        nav_type: index
+      })
+    }
+    this.setData({
+      pageNum:1,
+    });
+    this.queryForPage();
   },
 
   loadMore(event){
@@ -21,40 +42,46 @@ Page({
     this.setData({
       pageNum:pageNum,
     });
-    this.queryQns('loadMore');
+    this.queryForPage('loadMore');
   },
 
-  queryQns:function(type){
+
+  queryForPage(type){
+    this.showLoading(1);
+    var datas = this.data;
+    var pageNum = datas.pageNum;
+    var pageSize = datas.pageSize;
+    var couponType = datas.nav_type;
+    var data = {};
+    data['pageNum'] = pageNum;
+    data['pageSize'] = pageSize;
+    data['cstCode'] = app.storage.getCstCode();
+    data['wxOpenId'] = app.storage.getWxOpenId();
+    data['proNum'] = app.storage.getProNum();   
+    data['couponType'] = couponType;
     var that = this;
-    var queryParams = {
-      proNum:app.storage.getProNum(),
-      pageNum:that.data.pageNum,
-      pageSize:that.data.pageSize
-    };
-    that.showLoading(!0)
-    app.req.postRequest(api.couponQuery, queryParams).then(function (value) {
-      console.log("queryQns 返回", value);
-      if(value.data.respCode == "000"){
-        var qnList = value.data.couponGrantList;
-        let totalNum = value.data.totalNum;
-        var pages = parseInt(value.data.pages);
-        that.data.qns.push.apply(that.data.qns,qnList);
-        that.setData({
-          pages:pages,
-          qns:type == 'loadMore'?that.data.qns:qnList,
-          totalNum:totalNum,
-          isRefreshing:false
-        })
-      }
-      that.showLoading(!1)
-    }, function (value) {
-      console.log("queryQns F ", value);
-      wx.showToast({
-        icon:'none',
-        title: '查询问卷失败'
-      })
-      that.showLoading(!1)
-    }); 
+    app.req.postRequest(api.couponQuery,data).then(res=>{
+        console.log("回调用",res);
+        this.showLoading(0);
+        if(res.data.respCode == '000'){
+          var couponList = res.data.couponGrantList;
+          let totalNum = res.data.totalNum;
+          var pages = parseInt(res.data.pages);
+          that.data.couponList.push.apply(that.data.couponList,couponList);
+          that.setData({
+            pages:pages,
+            couponList:type == 'loadMore'?that.data.couponList:couponList,
+            totalNum:totalNum,
+            isRefreshing:false
+          });
+        }else{
+          var desc = res.data.errDesc;
+          if(!desc){
+            desc = '网络异常，请稍后再试';
+          }
+          app.alert.alert(desc);
+        }
+    });
   },
 
   costDetail: function (event) {
@@ -65,14 +92,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.loading(),
-    this.showLoading(!1)
-    this.setData({
-      pageNum:1,
-      pageSize:10,
-      qns:[]
-    })
-    this.queryQns()
+    app.loading(),this.showLoading(0);
+    this.setData({obj:app.storage.getLoginInfo()})
+    this.queryForPage();
   },
 
   /**
@@ -109,14 +131,12 @@ Page({
   onPullDownRefresh: function () {
     this.setData({
       pageNum:1,
-      more:true,
       loading:false,
       isRefreshing:true,
-      qns:new Array()
+      couponList:new Array()
     })
-    this.queryQns()
+    this.queryForPage()
     wx.stopPullDownRefresh({
-      success: (res) => {},
     })
   },
 

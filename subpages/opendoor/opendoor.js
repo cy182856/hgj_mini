@@ -18,6 +18,7 @@ Page({
     ,value:''  //选中的值
     ,valueid:'' //选中的id
     ,houseId:''
+    ,visitorCode:''
   },
 
   /**
@@ -32,6 +33,8 @@ Page({
      this.queryWeekDate();
      //获取客户房屋列表
      this.getHouseList();
+     //获取访客通行码，快速通行码说明文字
+     this.getVisitExplain();
   },
 
   // 选择日期
@@ -53,6 +56,23 @@ Page({
           expDate:res.data.startDate,
           startDate:res.data.startDate,
           endDate:res.data.endDate
+        })
+      }
+    })
+  },
+
+  
+  //获取访客通行码，快速通行码说明文字
+  getVisitExplain(){
+    var data = {
+      cstCode:app.storage.getCstCode(),
+      wxOpenId:app.storage.getWxOpenId()
+    }
+    app.req.postRequest(api.queryOpenDoorExplain,data).then(res=>{
+      if(res.data.respCode == '000'){
+        this.setData({
+          visitorCode:res.data.visitorCode,
+          quickAccessCode:res.data.quickAccessCode
         })
       }
     })
@@ -205,8 +225,8 @@ Page({
     // 获取缓存时间
     var quickCodeClickTime = app.storage.getQuickCodeClickTime();
     // 如果距离上次点击超过5分钟
-    if (currentTime - quickCodeClickTime > 3) { 
-    //if (currentTime - quickCodeClickTime > 300000) { 
+    //if (currentTime - quickCodeClickTime > 3) { 
+    if (currentTime - quickCodeClickTime > 300000) { 
       // 执行按钮点击后的操作
       var cstCode = app.storage.getCstCode();
       var wxOpenId = app.storage.getWxOpenId();

@@ -3,79 +3,95 @@
 <import src="../../../../template/loading/loading.wxml"></import>
 <template is="loading" data="{{..._loading_}}"></template>
 
-<view class="weui-loadmore" wx:if="{{isRefreshing}}">
+<!-- 弹窗 -->
+<van-dialog id="van-dialog"/>
+<!-- 根据UI，距离顶端始终保持14rpx，14+9 -->
+<view style="height:14rpx;"></view>
+
+<!-- tab切换 -->
+<view class="hd">
+  <block wx:for="{{navList}}" wx:key="navList">
+    <view class="hd_flex {{nav_type == index ? 'hd_flex_on' : ''}}" catchtap="changeType" data-index="{{index}}">{{item}}</view>
+  </block>
+</view>
+
+<view class="weui-loadmore" wx:if="{{isRefreshing}}" style="margin-top: 50px;">
     <view class="weui-loading"></view>
     <view class="weui-loadmore-tips">正在刷新...</view>
 </view>
 
-<!-- 弹窗 -->
-<van-dialog id="van-dialog"/>
-<!-- 根据UI，距离顶端始终保持14rpx，14+9 -->
+<!-- 查询的报修记录列表 -->
+<view wx:if="{{couponList == null || couponList.length == 0}}" >
+  <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无记录'}}"></template>
+</view>
 
-
-<view wx:if="{{qns && qns.length > 0}}">
-	<view style="height: auto;" class="view_bg" wx:for="{{qns}}" wx:for-item="qn">
-		<view class="view_desc">
-			<van-row>
-			<van-col span="12"><text class="text_right" decode="{{true}}" >券名称</text></van-col>
-			<van-col span="12"><text class="repair_desc">{{qn.title}}</text></van-col>
-			</van-row>
-
-			<van-row>
-			<van-col span="12"><text class="text_right" decode="{{true}}" >次数</text></van-col>
-			<van-col span="12"><text>{{qn.couNum}}</text></van-col>
-			</van-row>
-
-			<van-row>
-			<van-col span="12"><text class="text_right" decode="{{true}}" >有效开始时间</text></van-col>
-			<van-col span="12"><text>{{qn.startTime}}</text></van-col>
-			</van-row>
-
-			<van-row>
-			<van-col span="12"><text class="text_right" decode="{{true}}" >有效结束时间</text></van-col>
-			<van-col span="12"><text>{{qn.endTime}}</text></van-col>
-			</van-row>
-			
-		</view>
-	</view>
-
-	
-  <!-- <view style="margin-top: 10rpx;">
-    <block wx:for="{{qns}}" wx:for-item="qn">
-      <view class="qn-title">
-        <van-row>
-            <van-col span="12">
-              <view class="qn-title-len" bindtap="fillInQn" data-qn="{{qn}}">{{qn.title}} </view>
-            </van-col>
-            <van-col span="12">
-              <view style="margin-left: 30rpx; font-size: 16px;">
-                <text style="margin-left: 20rpx;">{{qn.createTime}}</text>
-              </view>
-              
-            </van-col>
+<view style="margin-top: 50px;" wx:else>
+  <view style="height: auto;" class="view_bg" wx:for="{{couponList}}" wx:key="*this">
+      <van-cell wx:if="{{item.status == 1}}"
+           custom-class="vb" 
+           title-class="vcell_title txt" 
+           value-class="daishouli" 
+           title="未用" 
+           is-link value="生成二维码" url="../couponCode/couponCode?couponId={{item.id}}" />
+      
+    <van-cell wx:if="{{item.status == 2}}"
+           custom-class="vb" 
+           title-class="vcell_title txt" 
+           value-class="daishouli" 
+           title="已用" 
+            />
+    <van-cell wx:if="{{item.status == 3}}"
+           custom-class="vb" 
+           title-class="vcell_title txt" 
+           value-class="daishouli" 
+           title="未用" 
+            />
+    <view class="view_desc">
+      <van-row>
+          <van-col span="9"><text class="text_right" decode="{{true}}" >券名称</text></van-col>
+          <van-col span="15"> {{item.title}} </van-col>
         </van-row>
-      </view>
-    </block>
-  </view> -->
-</view>
+        <van-row>
+          <van-col span="9"><text class="text_right" decode="{{true}}" >总次数</text></van-col>
+          <van-col span="15"> {{item.couNum}} </van-col>
+        </van-row>
+        <van-row>
+          <van-col span="9"><text class="text_right" decode="{{true}}" >可用次数</text></van-col>
+          <van-col span="15"> {{item.expNum}} </van-col>
+        </van-row>
+        <van-row>
+          <van-col span="9"><text class="text_right" decode="{{true}}" >有效日期</text></van-col>
+          <van-col span="15"> {{item.startTime}} -- {{item.endTime}} </van-col>
+        </van-row>
+        <van-row>
+          <van-col span="9"><text class="text_right" decode="{{true}}" >说明</text></van-col>
+          <!-- <van-col span="13"><text class="repair_desc">{{item.desc}}</text></van-col> -->
+          <van-col span="13"><text>{{item.desc}}</text></van-col>
+        </van-row>
+
+        <view style="display: flex;" class="view_light" wx:if="{{(item.repairStatus=='WOSta_Finish' || item.repairStatus=='WOSta_Visit') && item.labourCost + item.materialCost > 0}}">
+            <text class="text_right">本单费用</text><text style="margin-left: 2.5%;">¥{{item.totalAmount}}</text>
+            <navigator class="costDetail" hover-class="none" url="../repairCostDetailPage/repairCostDetailPage?repairNum={{item.repairNum}}">费用明细</navigator>
+        </view>
+       
+        <view wx:if="{{item.repairStatus=='WOSta_Visit'}}"class="view_light">
+          <text style="margin-left: 85%;">已评价</text>
+        </view>
+        <view wx:if="{{item.repairStatus=='WOSta_Finish'||item.repairStatus=='WOSta_Close'}}"class="view_light">
+          <text style="margin-left: 85%;">未评价</text>
+        </view>
 
 
+    </view>
 
-
-<block wx:else>
-  <view class="empty-view">
-    <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无问卷'}}"></template>
   </view>
-</block>
 
-<view style="margin-top: 40rpx;"></view>
-<view wx:if="{{qns.length > 0 && pageNum < pages}}" 
-        class="last_font" bindtap="loadMore" data-pageNum="{{pageNum}}" data-pageSize="{{pageSize}}">点击加载更多
+  <view wx:if="{{couponList.length > 0 && pageNum < pages}}" 
+        class="last_font" bindtap="loadMore" data-pageNum="{{pageNum}}" data-pageSize="{{pageSize}}">点击加载更多</view>
+  <view wx:elif="{{couponList.length > 0 && pageNum == pages}}" class="last_font">已经到底了</view> 
+  <view wx:else class="last_font">暂无记录</view>
+  <view style="height:20rpx;"></view>
 </view>
-<view wx:elif="{{qns.length > 0 && pageNum == pages}}" class="last_font">已经到底了</view> 
-<view wx:else class="last_font">暂无记录</view>
-<view style="height:50rpx;"></view>
-
 
 
 

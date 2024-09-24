@@ -171,7 +171,10 @@ module.exports = {
   queryOpenDoorLog: ApiRootUrl + "opendoor/queryOpenDoorLog.do", //查询开门记录
   createQuickCode : ApiRootUrl + "opendoor/createQuickCode.do", //创建快速通行码
   queryWeekDate:ApiRootUrl + 'opendoor/queryWeekDate.do', //获取当前及一周后日期
+  queryOpenDoorExplain:ApiRootUrl + 'opendoor/queryVisitExplain.do', //查询访客通行码说明文字
 
+/********************活动中心*************************/
+  addCouponQrCode : ApiRootUrl + "active/addCouponQrCode.do", //生成开门二维码
   openLogQuery: ApiRootUrl + "active/openLog/query.do", //开门记录查询
   couponQuery: ApiRootUrl + "active/coupon/query.do", //券查询
 

@@ -1,6 +1,6 @@
 {
   "usingComponents": {},
   "navigationBarTitleText":"活动中心",
-  "enablePullDownRefresh": true
+  "enablePullDownRefresh": false
 
 }

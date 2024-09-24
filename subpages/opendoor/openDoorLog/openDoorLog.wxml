@@ -9,59 +9,19 @@
   <view style=" padding-bottom:{{padding_bottom}}rpx;">
     <block wx:for="{{visitLogs}}" wx:for-item="visitLog">
       <view class="visit-log-item">
-        <view class="visit-log-title">
-          <view wx:if="{{visitLog.visitName != null}}" class="visit-log-name">
-            {{visitLog.visitName}}
-          </view>
-          <!-- <view class="visit-log-stat">
-            <block wx:if="{{visitLog.stat == 'I' }}">
-              <text class="blue_color">未到访</text>
-            </block>
-            <block wx:if="{{visitLog.stat == 'C' }}">
-              <text class="grey_color">已关闭</text>
-            </block>
-            <block wx:if="{{visitLog.stat == 'V' }}">
-              <text class="green_color">到访中</text>
-            </block>
-            <block wx:if="{{visitLog.stat == 'O' }}">
-              <text class="grey_color">已离场</text>
-            </block>
-          </view> -->
-        </view>
+      
         <view>
           <van-cell-group custom-class="vant-cell-custom-class">
-            <block wx:if="{{visitLog.houseName != null}}">
-              <van-cell title-class="vant-cell-title-class"  title="访问地址" value="{{visitLog.houseName}}" border="{{ false }}" />  
+            <block >
+              <van-cell title-class="vant-cell-title-class"  title="卡号" value="{{visitLog.cardNo}}" border="{{ false }}" />  
             </block>
-            <block wx:if="{{visitLog.carNum != null}}">
-              <van-cell title-class="vant-cell-title-class"  title="车牌号" value="{{visitLog.carNum}}" border="{{ false }}" />  
+            <block wx:if="{{visitLog.isUnlock == 2}}">
+              <van-cell title-class="vant-cell-title-class"  title="进门" value="{{visitLog.openDoorTime}}" border="{{ false }}" />  
             </block>
-            <!-- <block wx:if="{{visitLog.resNum != ''}}">
-              <van-cell title-class="vant-cell-title-class" title="剩余可用次数" value="{{visitLog.resNum == -1 ? '无限制' : visitLog.resNum}}" border="{{ false }}" />
-            </block> -->
-            <block wx:if="{{visitLog.effectuateDate != null}}">
-              <van-cell title-class="vant-cell-title-class" title="生效日期" value="{{visitLog.effectuateDate}}" border="{{ false }}" />
+            <block wx:if="{{visitLog.isUnlock == 4}}">
+              <van-cell title-class="vant-cell-title-class"  title="出门" value="{{visitLog.openDoorTime}}" border="{{ false }}" />  
             </block>
-            <block wx:if="{{visitLog.createTime != ''}}">
-              <van-cell title-class="vant-cell-title-class" title="通行时间" value="{{visitLog.createTime}}" border="{{ false }}" />
-            </block>
-            <block wx:if="{{visitLog.passUrl != null}}">
-              <van-cell title-class="vant-cell-title-class"  title="访客码" value="{{visitLog.passUrl}}" border="{{ false }}" />  
-            </block>
-            <block wx:if="{{visitLog.randNum != null}}">
-              <van-cell title-class="vant-cell-title-class"  title="快速通行码" value="{{visitLog.randNum}}" border="{{ false }}" />  
-            </block>
-            <!-- <van-cell title-class="vant-cell-title-class" title="快速通行码" value="{{visitLog.randNum}}" border="{{ false }}" /> -->
-            <view class="check-visit-code-view">
-              <block wx:if="{{visitLog.visitType == 'V'}}">
-              <block wx:if="{{visitLog.stat == 'I' || visitLog.stat == 'V'}}">
-                  <van-button bindtap="checkVisitLog" data-visitlog="{{visitLog}}" custom-class="check-visitlog-btn" size="small" type="info">查看通行证</van-button>
-                </block>
-              </block>
-              <!-- <block wx:if="{{visitLog.stat != 'C'}}">
-                <van-button bindtap="closeVisitLog" custom-class="close-visitlog-btn" data-visitlog="{{visitLog}}" size="small" type="info">关闭通行码</van-button>
-              </block> -->
-            </view>
+    
             <view style="height:20rpx;"></view>
           </van-cell-group>
         </view>
