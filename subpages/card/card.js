@@ -137,17 +137,17 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    let totalNum = this.data.totalNum;
-    let pageNum = this.data.pageNum;
-    let pageSize = this.data.pageSize;
-    if(pageNum * pageSize < totalNum){
-      this.loadMore();
-    }else{
-      wx.showToast({
-        title: '已经到底了',
-        icon:'none'
-      })
-    }
+    // let totalNum = this.data.totalNum;
+    // let pageNum = this.data.pageNum;
+    // let pageSize = this.data.pageSize;
+    // if(pageNum * pageSize < totalNum){
+    //   this.loadMore();
+    // }else{
+    //   wx.showToast({
+    //     title: '已经到底了',
+    //     icon:'none'
+    //   })
+    // }
   },
 
   /**
