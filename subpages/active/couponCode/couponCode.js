@@ -11,7 +11,8 @@ Page({
     showCode:'none',
     couponQrCode:'',
     expDate:'',
-    couponId:''
+    couponId:'',
+    status:''
   },
 
   /**
@@ -21,7 +22,8 @@ Page({
     var windowW = app.globalData.windowW;
     this.setData({
       windowW:windowW,
-      couponId:options.couponId
+      couponId:options.couponId,
+      status:options.status
     })
 
     this.createPassCode();
@@ -38,7 +40,8 @@ Page({
       wxOpenId: wxOpenId,
       proNum:proNum,
       proName: proName,
-      couponId: that.data.couponId
+      couponId: that.data.couponId,
+      status: that.data.status
     }
     app.req.postRequest(api.addCouponQrCode, visitInfo).then(function (value) {
       console.log("addVisitLog 返回", value);

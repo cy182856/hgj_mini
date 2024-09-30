@@ -1,0 +1,49 @@
+<!-- 引用 -->
+<import src="../../../../template/empty/empty.wxml"></import>
+<import src="../../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+
+<!-- <view class="weui-loadmore" wx:if="{{isRefreshing}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore-tips">正在刷新...</view>
+</view> -->
+
+<!-- 弹窗 -->
+<van-dialog id="van-dialog"/>
+<!-- 根据UI，距离顶端始终保持14rpx，14+9 -->
+
+<view style="margin: 5%;">{{cstName}}</view>
+
+<view>
+  <van-row >
+    <view style="background-color: rgb(221, 238, 240);height: 140px;">
+      <van-col span="14">
+        <view style="background-color:rgb(128, 207, 207); height: 120px;margin: 8px;">背景图片</view>
+      </van-col>
+      <van-col span="10">
+        <view style="height: 120px;margin-top: 25px;margin-left: 10px;">
+          <text style="font-size: 18px;">泳池卡名称<br/>
+          卡号<br/>
+          剩余次数</text>
+          </view>        
+      </van-col>
+    </view>
+  </van-row>
+
+  <view>
+    <van-row >
+      <view >
+        <van-col span="24">
+          <view>
+            <button style="background-color: rgb(221, 238, 240);margin-left: 1px;">二维码</button>
+          </view>
+        </van-col>
+      </view>
+    </van-row>
+  </view>
+
+</view>
+
+
+
+

@@ -55,6 +55,13 @@
       ]
     },
     {
+      "root": "subpages/card",
+      "name": "card",
+      "pages": [
+        "card"
+      ]
+    },
+    {
       "root": "subpages/house",
       "name": "house",
       "pages": [

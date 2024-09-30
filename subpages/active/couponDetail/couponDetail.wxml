@@ -31,15 +31,15 @@
            custom-class="vb" 
            title-class="vcell_title txt" 
            value-class="daishouli" 
-           title="未用" 
-           is-link value="生成二维码" url="../couponCode/couponCode?couponId={{item.id}}" />
+           title="可用" 
+           is-link value="生成二维码" url="../couponCode/couponCode?couponId={{item.id}}&status={{item.status}}" />
       
     <van-cell wx:if="{{item.status == 2}}"
            custom-class="vb" 
            title-class="vcell_title txt" 
            value-class="daishouli" 
            title="已用" 
-            />
+           is-link value="查看二维码" url="../couponCode/couponCode?couponId={{item.id}}&status={{item.status}}"/>
     <van-cell wx:if="{{item.status == 3}}"
            custom-class="vb" 
            title-class="vcell_title txt" 
@@ -68,19 +68,6 @@
           <!-- <van-col span="13"><text class="repair_desc">{{item.desc}}</text></van-col> -->
           <van-col span="13"><text>{{item.desc}}</text></van-col>
         </van-row>
-
-        <view style="display: flex;" class="view_light" wx:if="{{(item.repairStatus=='WOSta_Finish' || item.repairStatus=='WOSta_Visit') && item.labourCost + item.materialCost > 0}}">
-            <text class="text_right">本单费用</text><text style="margin-left: 2.5%;">¥{{item.totalAmount}}</text>
-            <navigator class="costDetail" hover-class="none" url="../repairCostDetailPage/repairCostDetailPage?repairNum={{item.repairNum}}">费用明细</navigator>
-        </view>
-       
-        <view wx:if="{{item.repairStatus=='WOSta_Visit'}}"class="view_light">
-          <text style="margin-left: 85%;">已评价</text>
-        </view>
-        <view wx:if="{{item.repairStatus=='WOSta_Finish'||item.repairStatus=='WOSta_Close'}}"class="view_light">
-          <text style="margin-left: 85%;">未评价</text>
-        </view>
-
 
     </view>
 

@@ -14,8 +14,20 @@
 
 <view style="margin: 5%;">{{cstName}}</view>
 
-<view style="background-color:rgb(104, 202, 202);height: 180px;margin-right:3%;margin-left: 3%; margin-top: 3%; width: auto;border-radius:10px;">
-	<!-- <van-row >
+
+<view style="background-color:rgb(128, 207, 207);height: 180px;margin-right:3%;margin-left: 3%; margin-top: 3%; width: auto;border-radius:10px;">
+
+
+	<van-row >
+        <view>	
+            <van-col span="24"> 
+                <view style="margin-left:0%;font-size: 24px; margin-top: 60px;color: azure;"><button style="width: 50%;" bindtap="couponDetail">我的泳池卡</button></view>
+            </van-col>       
+        </view>
+    </van-row>
+</view>
+
+<!-- <van-row >
         <view>	
             <van-col span="18"> 
 				<text style="margin-left: 4%; font-size: 22px;color: azure;">总次数：{{couponTotalNum}}次</text>
@@ -24,16 +36,7 @@
 				<text bindtap="couponDetail"  style="margin-left: 4%; font-size: 22px;color: azure;">详情 ></text>            
 			</van-col>
         </view>
-  </van-row> -->
-
-	<van-row >
-        <view>	
-            <van-col span="24"> 
-                <view style="margin-left:0%;font-size: 24px; margin-top: 60px;color: azure;"><button style="width: 50%;" bindtap="couponDetail">我的泳池</button></view>
-            </van-col>       
-        </view>
-    </van-row>
-</view>
+</van-row> -->
 
 <!-- <block wx:if="{{qns && qns.length > 0}}">
   <view style="margin-top: 10rpx;">
