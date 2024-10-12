@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    homeDot:false,
     background: [''],
     indicatorDots: false,
     vertical: false,
@@ -385,6 +386,7 @@ Page({
 
     this.setData({
       functionList: loginInfo.funList,
+      homeDot: loginInfo.homeDot,
       commanyShortName: loginInfo.commanyShortName,
       headImgUrl: loginInfo.headImgUrl + "?timestamp=" + that.data.timestamp,
       nickName: loginInfo.nickName,

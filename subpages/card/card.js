@@ -6,72 +6,83 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {
-    pageNum:1,
-    pageSize:10,
-    pages:10,
-    totalNum:1,
-    qns:[],
+  data: { 
     loading: false,//是否正在加载
-    more: false, //是否还有数据
-    cstName:'',
-    couponTotalNum:''
+    cardCstId_swim:'',
+    cardName_swim:'',
+    cardCode_swim:'',
+    cardExpNum_swim:'',
+    startTime_swim:'',
+    endTime_swim:''
   },
 
-  loadMore(event){
-    var pageNum = this.data.pageNum + 1;
-    this.setData({
-      pageNum:pageNum,
+  // 游泳卡信息
+  queryCardSwim(){
+    this.showLoading(1); 
+    var data = {};
+    data['cstCode'] = app.storage.getCstCode();
+    data['proNum'] = app.storage.getProNum();   
+    data['wxOpenId'] = app.storage.getWxOpenId();
+    var that = this;
+    app.req.postRequest(api.queryCardSwim,data).then(res=>{
+        console.log("回调用",res);
+        this.showLoading(0);
+        if(res.data.respCode == '000'){          
+          var cardCstId_swim = res.data.cardCstId;
+          var cardName_swim = res.data.cardName;
+          var cardCode_swim = res.data.cardCode;
+          var cardExpNum_swim = res.data.cardExpNum;
+          var startTime_swim = res.data.startTime;
+          var endTime_swim = res.data.endTime;
+          that.setData({
+            cardCstId_swim:cardCstId_swim,
+            cardName_swim:cardName_swim,
+            cardCode_swim:cardCode_swim,
+            cardExpNum_swim:cardExpNum_swim,
+            startTime_swim:startTime_swim,
+            endTime_swim:endTime_swim,
+            isRefreshing:false
+          });
+        }else{
+          var desc = res.data.errDesc;
+          if(!desc){
+            desc = '网络异常，请稍后再试';
+          }
+          app.alert.alert(desc);
+        }
     });
-    this.queryQns('loadMore');
   },
 
-  couponDetail(e) {
-    wx.navigateTo({
-      url: '/subpages/active/couponDetail/couponDetail'
-    })
-    
-  },
-
-  // queryQns:function(type){
-  //   var that = this;
-  //   var queryParams = {
-  //     proNum:app.storage.getProNum(),
-  //     cstCode:app.storage.getCstCode(),
-  //     pageNum:that.data.pageNum,
-  //     pageNum:that.data.pageNum,
-  //     pageSize:that.data.pageSize
-  //   };
-  //   that.showLoading(!0)
-  //   app.req.postRequest(api.openLogQuery, queryParams).then(function (value) {
-  //     console.log("queryQns 返回", value);
-  //     if(value.data.respCode == "000"){
-  //       var qnList = value.data.openDoorLogList;
-  //       let totalNum = value.data.totalNum;
-  //       var pages = parseInt(value.data.pages);
-  //       that.data.qns.push.apply(that.data.qns,qnList);
-  //       that.setData({
-  //         pages:pages,
-  //         qns:type == 'loadMore'?that.data.qns:qnList,
-  //         totalNum:totalNum,
-  //         cstName:value.data.cstName,
-  //         couponTotalNum:value.data.couponTotalNum,
-  //         isRefreshing:false
-  //       })
-  //     }
-  //     that.showLoading(!1)
-  //   }, function (value) {
-  //     console.log("queryQns F ", value);
-  //     wx.showToast({
-  //       icon:'none',
-  //       title: '查询问卷失败'
-  //     })
-  //     that.showLoading(!1)
-  //   }); 
-  // },
-
-  costDetail: function (event) {
-   
+  // 生成二维码
+  createCardQrCode:function(){  
+    var cstCode = app.storage.getCstCode();
+    var wxOpenId = app.storage.getWxOpenId();
+    var proNum = app.storage.getProNum();
+    var cardCstId = this.data.cardCstId_swim;
+    var data = {
+      cardCstId: cardCstId,
+      cstCode: cstCode,
+      wxOpenId: wxOpenId,
+      proNum: proNum
+    }
+    app.req.postRequest(api.createCardQrCode, data).then(function (value) {
+      console.log("createCardQrCode 返回", value);
+      if(value.data.RESPCODE == "000" && value.data.cardQrCode != null){
+        var cardQrCode = value.data.cardQrCode;
+        var expDate = value.data.expDate;
+        var openDoorTotalNum = value.data.openDoorTotalNum;
+        var openDoorApplyNum = value.data.openDoorApplyNum;
+        wx.navigateTo({
+          url: '/subpages/card/cardQrCode/cardQrCode?cardQrCode=' + cardQrCode +'&expDate=' + expDate +'&openDoorTotalNum=' + openDoorTotalNum +'&openDoorApplyNum=' + openDoorApplyNum
+        })
+      }else{
+        wx.showToast({
+          icon:'none',
+          title: value.data.ERRDESC?value.data.ERRDESC:'失败',
+          duration:3000
+        })
+      }
+    }); 
   },
 
   /**
@@ -80,12 +91,7 @@ Page({
   onLoad: function (options) {
     app.loading(),
     this.showLoading(!1)
-    this.setData({
-      pageNum:1,
-      pageSize:10,
-      qns:[]
-    })
-    //this.queryQns()
+    this.queryCardSwim()
   },
 
   /**
@@ -99,7 +105,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.queryCardSwim();
   },
 
   /**
@@ -119,15 +125,12 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-    this.setData({
-      pageNum:1,
-      more:true,
+  onPullDownRefresh: function () {  
+    this.setData({   
       loading:false,
-      isRefreshing:true,
-      qns:new Array()
+      isRefreshing:true
     })
-    this.queryQns()
+    this.queryCardSwim();
     wx.stopPullDownRefresh({
       success: (res) => {},
     })
@@ -137,17 +140,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    // let totalNum = this.data.totalNum;
-    // let pageNum = this.data.pageNum;
-    // let pageSize = this.data.pageSize;
-    // if(pageNum * pageSize < totalNum){
-    //   this.loadMore();
-    // }else{
-    //   wx.showToast({
-    //     title: '已经到底了',
-    //     icon:'none'
-    //   })
-    // }
+  
   },
 
   /**

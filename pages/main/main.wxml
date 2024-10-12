@@ -516,18 +516,25 @@
     <!--<view style="height:100rpx;background-color:#ffffff;"></view> -->
     <!-- tabbar -->
     <van-tabbar style="position: absolute; z-index: 99;" active="{{ active }}" bind:change="onChange">
-        <van-tabbar-item icon="{{ active == 0 ? '/images/home/home0.png':'/images/home/home.png'}}">首页
+        <van-tabbar-item icon="{{ active == 0 ? '/images/home/home0.png':'/images/home/home.png'}}">
+            <span>首页</span>
         </van-tabbar-item>
         <!-- <van-tabbar-item wx:if="{{showLife}}" icon="{{ active == 1 ? '/images/home/life1.png':'/images/home/life.png'}}">生活服务</van-tabbar-item> -->
-        <van-tabbar-item wx:if="{{showLife}}" icon="{{active == 2  ? '/images/home/me2.png':'/images/home/me.png'}}">我的</van-tabbar-item>
-        <van-tabbar-item wx:else icon="{{active == 1  ? '/images/home/me2.png':'/images/home/me.png'}}">我的
+        <!-- <van-tabbar-item wx:if="{{showLife}}" icon="{{active == 2  ? '/images/home/me2.png':'/images/home/me.png'}}">我的</van-tabbar-item>
+        <van-tabbar-item wx:else icon="{{active == 1  ? '/images/home/me2.png':'/images/home/me.png'}}">我的 -->
             <!-- <view wx:if="{{isShowAvatarUrl == null || userAvatarUrl == ''}}">
                 <button class="my_btn" open-type="chooseAvatar" bindchooseavatar="bindchooseavatar">我的</button>
             </view>
             <view wx:else>
                 <button class="my_btn">我的</button>
             </view> -->
+        <!-- </van-tabbar-item> -->
+
+        <van-tabbar-item icon="{{active == 1  ? '/images/home/me2.png':'/images/home/me.png'}}" dot='{{homeDot}}'>
+            <span>我的</span>   
+               
         </van-tabbar-item>
+
     </van-tabbar>
 
 </view>

@@ -121,7 +121,7 @@
   </van-row>
   
   <view style="margin-top: 40px;">
-    <button type="primary" size="default" bindtap="confirmCheckIn">提交</button>
+    <button style="width: 95%;border-radius: 25px;" type="primary" size="default" bindtap="confirmCheckIn">提交</button>
   </view>
 </view>
 

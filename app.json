@@ -58,7 +58,8 @@
       "root": "subpages/card",
       "name": "card",
       "pages": [
-        "card"
+        "card",
+        "cardQrCode/cardQrCode"
       ]
     },
     {

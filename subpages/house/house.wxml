@@ -29,15 +29,16 @@
 				<view class="cohabit_view_desc">
 
 					<van-row >
-						<view>	
+						<view wx:if="{{item.intoStatus == 1 && (item.houseIntoStatus == null || item.houseIntoStatus == 1)}}">	
 							<van-col span="9"> 
 								<text decode="{{true}}" >{{item.userName}}</text>
 								<text wx:if="{{item.intoRole == 0}}">(客户)</text>
 								<text wx:if="{{item.intoRole == 1}}">(员工)</text>
 								<text wx:if="{{item.intoRole == 2}}">(业主)</text>
 								<text wx:if="{{item.intoRole == 3}}">(住户)</text>
+								<text wx:if="{{item.intoRole == 4}}">(同住人)</text>
 							</van-col>
-							<van-col span="5" wx:if="{{item.intoStatus == 1 && (item.houseIntoStatus == null || item.houseIntoStatus == 1)}}"> 
+							<van-col span="5"> 
 								<text decode="{{true}}" >已入住</text>
 							</van-col>							
 						</view>
@@ -73,6 +74,7 @@
 								<text wx:if="{{item.intoRole == 1}}">(员工)</text>
 								<text wx:if="{{item.intoRole == 2}}">(业主)</text>
 								<text wx:if="{{item.intoRole == 3}}">(住户)</text>
+								<text wx:if="{{item.intoRole == 4}}">(同住人)</text>
 							</van-col>
 							<van-col span="5" wx:if="{{item.houseIntoStatus == 3}}"> 
 								<text decode="{{true}}" >未入住</text>
@@ -81,14 +83,14 @@
 								<text decode="{{true}}" >已入住</text>
 							</van-col>
 							<van-col span="5" wx:if="{{item.houseIntoStatus == 3}}">      
-								<button class="cohabit_button" bindtap="agree" data-datavalue="{{item}}">同意</button>
-							</van-col>
-							<van-col span="5" wx:if="{{item.houseIntoStatus == 3}}">      
-								<button style="margin-left: 15px;" class="cohabit_button" bindtap="refuse" data-datavalue="{{item}}">拒绝</button>
-							</van-col>
-							<van-col span="3" wx:if="{{item.intoRole != 0 && item.intoRole != 2 && item.houseIntoStatus == 1}}">      
-								<button class="cohabit_button" bindtap="remove" data-datavalue="{{item}}">移除</button>
-							</van-col>
+									<button class="cohabit_button" bindtap="agree" data-datavalue="{{item}}">同意</button>
+								</van-col>
+								<van-col span="5" wx:if="{{item.houseIntoStatus == 3}}">      
+									<button style="margin-left: 15px;" class="cohabit_button" bindtap="refuse" data-datavalue="{{item}}">拒绝</button>
+								</van-col>
+								<van-col span="3" wx:if="{{item.houseIntoStatus == 1 && (item.intoRole == 1 || item.intoRole == 3 || item.intoRole == 4)}}">      
+									<button class="cohabit_button" bindtap="remove" data-datavalue="{{item}}">移除</button>
+								</van-col>
 						</view>
             		</van-row>
 

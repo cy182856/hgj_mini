@@ -1,0 +1,43 @@
+<page>
+  <view class="visit-log-view">
+    <view class="visit-header-view">
+    </view>
+      <view style=" background-color:#fff; ">
+        <image style="margin: 5%; padding-bottom: 3%;" src="data:image/png;base64,{{cardQrCode}}"></image>
+      </view>
+   
+      <view class="visit-house-info"> 
+        <view class="houseinfo-flex-display">
+          <view style="flex:2;">
+            <text>二维码有效时间</text>
+          </view>
+          <view class="ellipsis_view text-align-right" style="flex:3;">
+            <text>{{expDate}}</text>
+          </view>
+        </view>
+      </view>
+
+	  <view class="visit-house-info"> 
+        <view class="houseinfo-flex-display">
+          <view style="flex:2;">
+            <text>当天可开门次数</text>
+          </view>
+          <view class="ellipsis_view text-align-right" style="flex:3;">
+            <text>{{openDoorTotalNum}}</text>
+          </view>
+        </view>
+      </view>
+
+	  <view class="visit-house-info"> 
+        <view class="houseinfo-flex-display">
+          <view style="flex:2;">
+            <text>当天已开门次数</text>
+          </view>
+          <view class="ellipsis_view text-align-right" style="flex:3;">
+            <text>{{openDoorApplyNum}}</text>
+          </view>
+        </view>
+      </view>
+    <image class='visit-detail-bg'  src='/images/home/back-img.png'></image>
+</view>
+</page>

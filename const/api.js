@@ -178,6 +178,9 @@ module.exports = {
   openLogQuery: ApiRootUrl + "active/openLog/query.do", //开门记录查询
   couponQuery: ApiRootUrl + "active/coupon/query.do", //券查询
 
+  queryCardSwim: ApiRootUrl + "card/queryCardSwim", //查询游泳卡信息
+  createCardQrCode : ApiRootUrl + "card/createCardQrCode", //生成游泳卡开门二维码
+
   checkVisitLogDetail : ApiRootUrl + "/visitinfo/showVisitInfoDetail.do" //查看单个访客通行证信息
   ,queryVisitLogs: ApiRootUrl + "visitinfo/queryVisitInfos.do" //查询访客记录
   ,updateVisitLog: ApiRootUrl + "/visitinfo/updVisitLog.do" //更新访客通行码
