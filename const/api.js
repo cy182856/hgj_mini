@@ -58,7 +58,11 @@ module.exports = {
 
   ,repairHouseList:ApiRootUrl + 'repairHouseList' //查询客户房屋列表
 
-  ,cohabitOperate:ApiRootUrl + 'cohabitOperate.do'//房主对租户操作
+
+  /**********************我的房屋***************** */
+  ,huOperate:ApiRootUrl + 'hu/operate'//房主对租户操作同意、驳回、移除
+  ,huList:ApiRootUrl + 'hu/list' //我的房屋查询
+  ,huCardPerm:ApiRootUrl + 'hu/cardPerm' //卡权限设置
 
   /**********************查询管家信息***************** */
   ,queryHouseKeepInfo:ApiRootUrl + 'houseKeepInfo.do'//查询管家信息
@@ -185,6 +189,12 @@ module.exports = {
   ,queryVisitLogs: ApiRootUrl + "visitinfo/queryVisitInfos.do" //查询访客记录
   ,updateVisitLog: ApiRootUrl + "/visitinfo/updVisitLog.do" //更新访客通行码
 
+  /********************停车缴费*************************/
+  ,queryCarNum: ApiRootUrl + "carpay/queryCarNum" //查询车牌号
+  ,queryCarPayInfo: ApiRootUrl + "carpay/queryCarPayInfo" //查询车辆缴费信息
+  ,carPayment:ApiRootUrl + 'carpay/carPayment.do'// 缴费
+
+
   /********************问题反馈*************************/
   ,addAdvice: ApiRootUrl + 'advice/addAddvice' //新增投诉建议
   ,queryAdviceLog:ApiRootUrl + 'advice/queryAdviceLog' //查询投诉建议列表
@@ -245,4 +255,8 @@ module.exports = {
    /******************** 门禁 **********************/
    ,queryAcDevList:ApiRootUrl + '/door/queryAcDevList.do'
    ,remoteOpenDoor : ApiRootUrl + "/door/openDoor.do"
+
+    /******************** 租客管理 **********************/
+   ,tenantList:ApiRootUrl + 'tenant/list' // 租客管理查询
+   ,tenantOperate:ApiRootUrl + 'tenant/operate' // 租客同意，拒绝，移除
 }

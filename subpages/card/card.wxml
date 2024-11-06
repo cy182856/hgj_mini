@@ -11,7 +11,7 @@
 <!-- 弹窗 -->
 <van-dialog id="van-dialog"/>
 <!-- 根据UI，距离顶端始终保持14rpx，14+9 -->
-<view wx:if="{{cardCstId_swim != null && cardCstId_swim != ''}}">
+<view wx:if="{{cardCstBatchId_swim != null && cardCstBatchId_swim != ''}}">
   <view style="margin-top: 5px;">
     <van-row >
       <view style="background-color: rgb(231, 253, 253);height: 120px; margin-left: 2%;margin-right: 2%; border-radius: 10px 10px 0px 0px;">
@@ -24,8 +24,8 @@
           <view style="height: 100px;margin-top: 10px;margin-left: 15px;">      
             <view style="font-size: 13px;color: rgb(150, 160, 160);">{{cardName_swim}}</view>  
             <view style="font-size: 13px;color: rgb(150, 160, 160); margin-top: 5px;">{{cardCode_swim}}</view>  
-            <view style="font-size: 13px;color: rgb(150, 160, 160);margin-top: 5px;">剩余次数:<text style="color: black; font-size: 16px;">{{cardExpNum_swim}}次</text></view>
-            <view style="font-size: 13px;color: rgb(150, 160, 160);margin-top: 5px;">有效期:<text style="color: rgb(150, 160, 160); font-size: 12px;">{{startTime_swim}}~{{endTime_swim}}</text></view>        
+            <view style="font-size: 13px;color: rgb(150, 160, 160);margin-top: 5px;">剩余次数：<text style="color: black; font-size: 16px;">{{cardExpNum_swim}}次</text></view>
+            <view style="font-size: 13px;color: rgb(150, 160, 160);margin-top: 5px;">有效年份：<text style="color: rgb(150, 160, 160); font-size: 13px;">{{expDate_swim}}年</text></view>        
           </view>  
         </van-col>
       </view>

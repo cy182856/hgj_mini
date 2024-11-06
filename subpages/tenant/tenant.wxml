@@ -1,0 +1,98 @@
+<!-- 引用 -->
+<import src="../../../../template/empty/empty.wxml"></import>
+<import src="../../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<!-- 弹窗 -->
+<van-dialog id="van-dialog"/>
+
+<view class="weui-loadmore" wx:if="{{isRefreshing}}" style="margin-top: 50px;">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore-tips">正在刷新...</view>
+</view>
+
+<!-- 查询我的房屋列表 -->
+<view wx:if="{{ownerFlag == 0}}">
+    	<view style="height: auto;" class="view_bg" wx:for="{{list}}" wx:key="index">
+			<view class="view_desc">
+				<view class="view_light">
+					<text class="text_right" decode="{{true}}" >楼栋</text>{{item.budName}}
+				</view>
+				<view class="view_light">
+					<text class="text_right">单元</text><text>{{item.unitNo}}</text>
+				</view>
+				<view class="view_light">
+				<text class="text_right" decode="{{true}}" >房号</text><text>{{item.resName}}</text>
+				</view>
+			</view>
+			
+			<view style="height: auto;" class="view_bg" wx:for="{{item.cstIntoList}}" wx:key="index">
+				<view class="cohabit_view_desc">
+
+					<van-row >
+						<view wx:if="{{item.intoStatus == 1 && (item.houseIntoStatus == null || item.houseIntoStatus == 1)}}">	
+							<van-col span="9"> 
+								<text decode="{{true}}" >{{item.userName}}</text>
+								<text>({{item.intoRoleName}})</text>
+							</van-col>
+							<van-col span="5"> 
+								<text decode="{{true}}" >已入住</text>
+							</van-col>							
+						</view>
+            		</van-row>
+
+				</view>
+			</view>			
+    	</view>
+</view>
+
+<view wx:if="{{ownerFlag == 1}}">
+    	<view style="height: auto;" class="view_bg" wx:for="{{list}}" wx:key="index">
+			<view class="view_desc">			
+				<view class="view_light">
+					<text class="text_right" decode="{{true}}" >楼栋</text>{{item.budName}}
+				</view>
+				<view class="view_light">
+					<text class="text_right">单元</text><text>{{item.unitNo}}</text>
+				</view>
+				<view class="view_light">
+				<text class="text_right" decode="{{true}}" >房号</text><text>{{item.resName}}</text>
+				</view>
+			</view>
+			
+			<view style="height: auto;" class="view_bg" wx:for="{{item.cstIntoList}}" wx:key="index">
+				<view class="cohabit_view_desc">
+
+					<van-row >
+						<view>	
+							<van-col span="9"> 
+								<text decode="{{true}}" >{{item.userName}}</text>
+								<text>({{item.intoRoleName}})</text>
+							</van-col>
+							<van-col span="5" wx:if="{{item.houseIntoStatus == 3}}"> 
+								<text decode="{{true}}" >未入住</text>
+							</van-col>
+							<van-col span="5" wx:if="{{item.houseIntoStatus == null || item.houseIntoStatus == 1}}"> 
+								<text decode="{{true}}" >已入住</text>
+							</van-col>
+							<van-col span="5" wx:if="{{item.houseIntoStatus == 3}}">      
+									<button class="cohabit_button" bindtap="agree" data-datavalue="{{item}}">同意</button>
+								</van-col>
+								<van-col span="5" wx:if="{{item.houseIntoStatus == 3}}">      
+									<button style="margin-left: 15px;" class="cohabit_button" bindtap="refuse" data-datavalue="{{item}}">拒绝</button>
+								</van-col>
+								<van-col span="3" wx:if="{{item.houseIntoStatus == 1 && (item.intoRole == 1 || item.intoRole == 3 || item.intoRole == 4)}}">      
+									<button class="cohabit_button" bindtap="remove" data-datavalue="{{item}}">移除</button>
+								</van-col>
+						</view>
+            		</van-row>
+
+				</view>
+			</view>			
+    	</view>
+</view>
+
+<view style="height: 100px;"></view>
+
+
+
+

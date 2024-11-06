@@ -1,6 +1,6 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText":"活动中心",
+  "navigationBarTitleText":"租客管理",
   "enablePullDownRefresh": true
 
 }

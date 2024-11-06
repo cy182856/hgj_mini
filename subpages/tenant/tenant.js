@@ -7,18 +7,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-      checkValue: [], // 用于存储选中的值
-      proNum:'',
-      proName:app.storage.getProName(),
       list:[],
       cstCode:'',
       proNum:'',
       wxOpenId:'',
-      nav_type: 0,
-      payment_button_disabled:false,
-      checkedAll: '',
-      checkIds:[],
-      totalAmount:0,
       ownerFlag:0
   },
 
@@ -27,19 +19,16 @@ Page({
     data['cstCode'] = app.storage.getCstCode();
     data['wxOpenId'] = app.storage.getWxOpenId();
     var that = this;
-    app.req.postRequest(api.huList,data).then(res=>{
+    app.req.postRequest(api.tenantList,data).then(res=>{
         console.log("回调用",res);
         if(res.data.respCode == '000'){
           var list = res.data.data.list;
           var ownerFlag = res.data.data.ownerFlag;
-          var proNum = res.data.data.proNum;
-          app.storage.setProNum(proNum);
           that.setData({
             list:list,
             isRefreshing:false,
-            ownerFlag:ownerFlag,
-            proNum:proNum
-          });      
+            ownerFlag:ownerFlag
+          });
         }else{
           var desc = res.data.errDesc;
           if(!desc){
@@ -48,34 +37,6 @@ Page({
           app.alert.alert(desc);
         }
     });
-  },
-
-  checkboxChange: function(e) {
-    var that = this;
-    var tenantWxOpenId = e.currentTarget.dataset.datavalue.wxOpenId;
-    that.setData({
-        checkValue: e.detail.value // 更新选中的值
-    });
-    console.log("已选中的卡："+that.data.checkValue)
-    console.log("租客或员工微信号："+ tenantWxOpenId)
-
-    var data = {};
-    data['cstCode'] = app.storage.getCstCode();
-    data['wxOpenId'] = app.storage.getWxOpenId();
-    data['proNum'] = app.storage.getProNum();   
-    data['tenantWxOpenId'] = tenantWxOpenId;
-    data['cardIds'] = e.detail.value;
-    
-    var ownerFlag = that.data.ownerFlag;
-    // 只有业主、租户有权限设置，其他身份操作不生效
-    if(ownerFlag == 1){
-      app.req.postRequest(api.huCardPerm,data).then(res=>{
-        if(res.data.respCode == '000'){
-          that.queryForPage(); 
-        }
-      }); 
-    }
-  
   },
 
   agree(e){
@@ -95,7 +56,7 @@ Page({
       success: function (res) {
         if (res.confirm) {
           console.log('用户点击确定');
-          app.req.postRequest(api.huOperate,data).then(res=>{
+          app.req.postRequest(api.tenantOperate,data).then(res=>{
             console.log("同意入住返回",res);
             if(res.data.respCode == '000'){
               that.queryForPage(); 
@@ -129,7 +90,7 @@ Page({
       success: function (res) {
         if (res.confirm) {
           console.log('用户点击确定');
-          app.req.postRequest(api.huOperate,data).then(res=>{
+          app.req.postRequest(api.tenantOperate,data).then(res=>{
             console.log("拒绝入住返回",res);
             if(res.data.respCode == '000'){
               that.queryForPage(); 
@@ -149,14 +110,12 @@ Page({
   remove(e){
     var id = e.currentTarget.dataset.datavalue.id;
     var cstIntoHouseId = e.currentTarget.dataset.datavalue.cstIntoHouseId;
-    var tenantWxOpenId = e.currentTarget.dataset.datavalue.wxOpenId;
     var data = {};
     data['cstCode'] = app.storage.getCstCode();
     data['wxOpenId'] = app.storage.getWxOpenId();
     data['proNum'] = app.storage.getProNum();   
     data['id'] = id;
     data['cstIntoHouseId'] = cstIntoHouseId;
-    data['tenantWxOpenId'] = tenantWxOpenId;
     data['buttonType'] = 'remove';
     var that = this;
     wx.showModal({
@@ -165,7 +124,7 @@ Page({
       success: function (res) {
         if (res.confirm) {
           console.log('用户点击确定');
-          app.req.postRequest(api.huOperate,data).then(res=>{
+          app.req.postRequest(api.tenantOperate,data).then(res=>{
             console.log("移除入住返回",res);
             if(res.data.respCode == '000'){
               that.queryForPage(); 

@@ -65,6 +65,7 @@ Page({
     var that = this;
     var queryParams = {
       proNum:app.storage.getProNum(),
+      wxOpenId:app.storage.getWxOpenId(),
       pageNum:that.data.pageNum,
       pageSize:that.data.pageSize
     };
@@ -111,8 +112,6 @@ Page({
     
   },
 
-
-  
 
   // getQnGatewayUrl(){
   //   var data = {};

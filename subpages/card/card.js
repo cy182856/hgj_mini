@@ -8,12 +8,11 @@ Page({
    */
   data: { 
     loading: false,//是否正在加载
-    cardCstId_swim:'',
+    cardCstBatchId_swim:'',
     cardName_swim:'',
     cardCode_swim:'',
     cardExpNum_swim:'',
-    startTime_swim:'',
-    endTime_swim:''
+    expDate_swim:''
   },
 
   // 游泳卡信息
@@ -28,19 +27,17 @@ Page({
         console.log("回调用",res);
         this.showLoading(0);
         if(res.data.respCode == '000'){          
-          var cardCstId_swim = res.data.cardCstId;
+          var cardCstBatchId_swim = res.data.cardCstBatchId;
           var cardName_swim = res.data.cardName;
           var cardCode_swim = res.data.cardCode;
           var cardExpNum_swim = res.data.cardExpNum;
-          var startTime_swim = res.data.startTime;
-          var endTime_swim = res.data.endTime;
+          var expDate_swim = res.data.expDate;
           that.setData({
-            cardCstId_swim:cardCstId_swim,
+            cardCstBatchId_swim:cardCstBatchId_swim,
             cardName_swim:cardName_swim,
             cardCode_swim:cardCode_swim,
             cardExpNum_swim:cardExpNum_swim,
-            startTime_swim:startTime_swim,
-            endTime_swim:endTime_swim,
+            expDate_swim:expDate_swim,
             isRefreshing:false
           });
         }else{
@@ -58,9 +55,9 @@ Page({
     var cstCode = app.storage.getCstCode();
     var wxOpenId = app.storage.getWxOpenId();
     var proNum = app.storage.getProNum();
-    var cardCstId = this.data.cardCstId_swim;
+    var cardCstBatchId = this.data.cardCstBatchId_swim;
     var data = {
-      cardCstId: cardCstId,
+      cardCstBatchId: cardCstBatchId,
       cstCode: cstCode,
       wxOpenId: wxOpenId,
       proNum: proNum

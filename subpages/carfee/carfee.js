@@ -34,7 +34,7 @@ Page({
       userInfo:userInfo,
       advCfeeMon:userInfo.advCfeeMon
     })
-    that.queryCarInfos();
+    //that.queryCarInfos();
   },
 
   /**
@@ -90,39 +90,39 @@ Page({
       url: './feelog/feelog',
     })
   },
-  queryCarInfos:function(){
-    that.showLoading(!0);
-    app.req.postRequest(api.queryCarInfos, {}).then(function (res) {
-      if(res.data && res.data.respCode == '000'){
-        if(res.data.data && res.data.data.length >0){
-          for(var i in res.data.data){
-            res.data.data[i].carNumber = res.data.data[i].carNumber.substr(0,2) + "-***" 
-            + res.data.data[i].carNumber.substr(res.data.data[i].carNumber.length - 2,2)
-          }
-          that.setData({
-            carInfos:res.data.data,
-            padding_bottom:that.data.isIphoneX ? '176' : '140',
-            isFail:false
-          })
-          that.doCheckCar(res.data.data[0])
-        }else{
-          that.setData({
-            carInfos:new Array(),
-            padding_bottom:0,
-            isFail:false
-          })
-        }
-      }else{
-        wx.showToast({
-          title: '获取车辆信息失败,请稍后重试',
-          icon:'none',
-          duration:2000,
-          isFail:true
-        })
-      }
-      that.showLoading(!1)
-    })
-  },
+  // queryCarInfos:function(){
+  //   that.showLoading(!0);
+  //   app.req.postRequest(api.queryCarInfos, {}).then(function (res) {
+  //     if(res.data && res.data.respCode == '000'){
+  //       if(res.data.data && res.data.data.length >0){
+  //         for(var i in res.data.data){
+  //           res.data.data[i].carNumber = res.data.data[i].carNumber.substr(0,2) + "-***" 
+  //           + res.data.data[i].carNumber.substr(res.data.data[i].carNumber.length - 2,2)
+  //         }
+  //         that.setData({
+  //           carInfos:res.data.data,
+  //           padding_bottom:that.data.isIphoneX ? '176' : '140',
+  //           isFail:false
+  //         })
+  //         that.doCheckCar(res.data.data[0])
+  //       }else{
+  //         that.setData({
+  //           carInfos:new Array(),
+  //           padding_bottom:0,
+  //           isFail:false
+  //         })
+  //       }
+  //     }else{
+  //       wx.showToast({
+  //         title: '获取车辆信息失败,请稍后重试',
+  //         icon:'none',
+  //         duration:2000,
+  //         isFail:true
+  //       })
+  //     }
+  //     that.showLoading(!1)
+  //   })
+  // },
   bindCheckCar:function(e){
     let carInfo = e.currentTarget.dataset.item;
     that.doCheckCar(carInfo);

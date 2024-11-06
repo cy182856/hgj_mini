@@ -10,94 +10,75 @@
     <view class="weui-loadmore-tips">正在刷新...</view>
 </view>
 
-<!-- 查询我的房屋列表 -->
-<view wx:if="{{ownerFlag == 0}}">
-    	<view style="height: auto;" class="view_bg" wx:for="{{list}}" wx:key="index">
-			<view class="view_desc">
-				<view class="view_light">
-					<text class="text_right" decode="{{true}}" >楼栋</text>{{item.budName}}
-				</view>
-				<view class="view_light">
-					<text class="text_right">单元</text><text>{{item.unitNo}}</text>
-				</view>
-				<view class="view_light">
-				<text class="text_right" decode="{{true}}" >房号</text><text>{{item.resName}}</text>
-				</view>
-			</view>
-			
-			<view style="height: auto;" class="view_bg" wx:for="{{item.cstIntoList}}" wx:key="index">
-				<view class="cohabit_view_desc">
-
-					<van-row >
-						<view wx:if="{{item.intoStatus == 1 && (item.houseIntoStatus == null || item.houseIntoStatus == 1)}}">	
-							<van-col span="9"> 
-								<text decode="{{true}}" >{{item.userName}}</text>
-								<text wx:if="{{item.intoRole == 0}}">(客户)</text>
-								<text wx:if="{{item.intoRole == 1}}">(员工)</text>
-								<text wx:if="{{item.intoRole == 2}}">(业主)</text>
-								<text wx:if="{{item.intoRole == 3}}">(住户)</text>
-								<text wx:if="{{item.intoRole == 4}}">(同住人)</text>
-							</van-col>
-							<van-col span="5"> 
-								<text decode="{{true}}" >已入住</text>
-							</van-col>							
-						</view>
-            		</van-row>
-
-				</view>
-			</view>			
-    	</view>
+<view style="margin-left: 5%; margin-top: 20px; font-size: 20px;">
+	我的房屋
 </view>
 
-<view wx:if="{{ownerFlag == 1}}">
-    	<view style="height: auto;" class="view_bg" wx:for="{{list}}" wx:key="index">
-			<view class="view_desc">			
-				<view class="view_light">
-					<text class="text_right" decode="{{true}}" >楼栋</text>{{item.budName}}
-				</view>
-				<view class="view_light">
-					<text class="text_right">单元</text><text>{{item.unitNo}}</text>
-				</view>
-				<view class="view_light">
-				<text class="text_right" decode="{{true}}" >房号</text><text>{{item.resName}}</text>
-				</view>
-			</view>
-			
-			<view style="height: auto;" class="view_bg" wx:for="{{item.cstIntoList}}" wx:key="index">
-				<view class="cohabit_view_desc">
+<view>
 
+	<view wx:for="{{list}}" wx:key="index">
+			
+		<view style="background-color: rgb(82, 154, 172);border-radius: 8px; width: 95%;margin-left: 3%;margin-top: 15px;height: 60px;">
+					<view style="margin-left: 3%;">
+						<view style="font-size: 16px; color: azure;line-height: 60rpx;">{{proName}}</view>
+						<view style="font-size: 12px; color: azure;">{{item.resName}}</view>
+					</view>
+			
+		</view>
+			
+		<view class="view_bg" wx:for="{{item.cstIntoList}}" wx:key="index">
+				<view style="height: 90px; margin-left: 3%;" class="cohabit_view_desc">					
 					<van-row >
 						<view>	
 							<van-col span="9"> 
-								<text decode="{{true}}" >{{item.userName}}</text>
-								<text wx:if="{{item.intoRole == 0}}">(客户)</text>
-								<text wx:if="{{item.intoRole == 1}}">(员工)</text>
-								<text wx:if="{{item.intoRole == 2}}">(业主)</text>
-								<text wx:if="{{item.intoRole == 3}}">(住户)</text>
-								<text wx:if="{{item.intoRole == 4}}">(同住人)</text>
+								<view decode="{{true}}" style="font-size: 16px;color: rgb(56, 55, 55); margin-top: 5px;" >{{item.userName}}</view>
+								<view style="font-size: 12px;" decode="{{true}}" >{{item.intoRoleName}}</view>
 							</van-col>
 							<van-col span="5" wx:if="{{item.houseIntoStatus == 3}}"> 
-								<text decode="{{true}}" >未入住</text>
+								<view style="margin-top: 20px;" decode="{{true}}" >未入住</view>
 							</van-col>
 							<van-col span="5" wx:if="{{item.houseIntoStatus == null || item.houseIntoStatus == 1}}"> 
-								<text decode="{{true}}" >已入住</text>
+								<view style="margin-top: 20px;" decode="{{true}}" >已入住</view>
 							</van-col>
-							<van-col span="5" wx:if="{{item.houseIntoStatus == 3}}">      
-									<button class="cohabit_button" bindtap="agree" data-datavalue="{{item}}">同意</button>
+							<van-col span="5" wx:if="{{item.houseIntoStatus == 3 && ownerFlag == 1}}">      
+									<button style="margin-top: 20px;" class="cohabit_button" bindtap="agree" data-datavalue="{{item}}">同意</button>
 								</van-col>
-								<van-col span="5" wx:if="{{item.houseIntoStatus == 3}}">      
-									<button style="margin-left: 15px;" class="cohabit_button" bindtap="refuse" data-datavalue="{{item}}">拒绝</button>
+								<van-col span="5" wx:if="{{item.houseIntoStatus == 3 && ownerFlag == 1}}">      
+									<button style="margin-left: 5px;margin-top: 20px;" class="cohabit_button" bindtap="refuse" data-datavalue="{{item}}">拒绝</button>
 								</van-col>
-								<van-col span="3" wx:if="{{item.houseIntoStatus == 1 && (item.intoRole == 1 || item.intoRole == 3 || item.intoRole == 4)}}">      
-									<button class="cohabit_button" bindtap="remove" data-datavalue="{{item}}">移除</button>
+								<van-col span="3" wx:if="{{item.houseIntoStatus == 1 && ownerFlag == 1 && (item.intoRole == 1 || item.intoRole == 3 || item.intoRole == 4)}}">      
+									<button style="margin-top: 20px;" class="cohabit_button" bindtap="remove" data-datavalue="{{item}}">移除</button>
 								</van-col>
-						</view>
+							</view>											
             		</van-row>
 
-				</view>
-			</view>			
-    	</view>
+					<view wx:if="{{proNum == 10001}}" style="margin-top: 5px;">
+						<row>
+							<van-col span="19" wx:if="{{item.houseIntoStatus == 1 && (item.intoRole == 1 || item.intoRole == 3 || item.intoRole == 4)}}">
+								<checkbox-group bindchange="checkboxChange" data-datavalue="{{item}}" style="font-size: 12px;">
+									<label wx:if="{{ownerFlag == 1}}">
+										<checkbox value="1" checked="{{item.swimCardChecked}}"/>可用游泳卡
+									</label>
+									<label wx:if="{{ownerFlag == 0}}">
+										<checkbox disabled="true" value="1" checked="{{item.swimCardChecked}}"/>可用游泳卡
+									</label>
+									<label wx:if="{{ownerFlag == 1}}" style="margin-left: 5%;">
+										<checkbox value="2" checked="{{item.parkCardChecked}}"/>可用停车卡
+									</label>
+									<label wx:if="{{ownerFlag == 0}}" style="margin-left: 5%;">
+										<checkbox disabled="true" value="2" checked="{{item.parkCardChecked}}"/>可用停车卡
+									</label>
+								</checkbox-group>	
+							</van-col>						
+						</row>
+					</view>	
+				</view>	
+		</view>	
+
+    </view> 	
+
 </view>
+
 
 <view style="height: 100px;"></view>
 
