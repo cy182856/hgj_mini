@@ -33,42 +33,42 @@ Page({
     
   },
 
-  queryQns:function(type){
-    var that = this;
-    var queryParams = {
-      proNum:app.storage.getProNum(),
-      cstCode:app.storage.getCstCode(),
-      pageNum:that.data.pageNum,
-      pageNum:that.data.pageNum,
-      pageSize:that.data.pageSize
-    };
-    that.showLoading(!0)
-    app.req.postRequest(api.openLogQuery, queryParams).then(function (value) {
-      console.log("queryQns 返回", value);
-      if(value.data.respCode == "000"){
-        var qnList = value.data.openDoorLogList;
-        let totalNum = value.data.totalNum;
-        var pages = parseInt(value.data.pages);
-        that.data.qns.push.apply(that.data.qns,qnList);
-        that.setData({
-          pages:pages,
-          qns:type == 'loadMore'?that.data.qns:qnList,
-          totalNum:totalNum,
-          cstName:value.data.cstName,
-          couponTotalNum:value.data.couponTotalNum,
-          isRefreshing:false
-        })
-      }
-      that.showLoading(!1)
-    }, function (value) {
-      console.log("queryQns F ", value);
-      wx.showToast({
-        icon:'none',
-        title: '查询问卷失败'
-      })
-      that.showLoading(!1)
-    }); 
-  },
+  // queryQns:function(type){
+  //   var that = this;
+  //   var queryParams = {
+  //     proNum:app.storage.getProNum(),
+  //     cstCode:app.storage.getCstCode(),
+  //     pageNum:that.data.pageNum,
+  //     pageNum:that.data.pageNum,
+  //     pageSize:that.data.pageSize
+  //   };
+  //   that.showLoading(!0)
+  //   app.req.postRequest(api.openLogQuery, queryParams).then(function (value) {
+  //     console.log("queryQns 返回", value);
+  //     if(value.data.respCode == "000"){
+  //       var qnList = value.data.openDoorLogList;
+  //       let totalNum = value.data.totalNum;
+  //       var pages = parseInt(value.data.pages);
+  //       that.data.qns.push.apply(that.data.qns,qnList);
+  //       that.setData({
+  //         pages:pages,
+  //         qns:type == 'loadMore'?that.data.qns:qnList,
+  //         totalNum:totalNum,
+  //         cstName:value.data.cstName,
+  //         couponTotalNum:value.data.couponTotalNum,
+  //         isRefreshing:false
+  //       })
+  //     }
+  //     that.showLoading(!1)
+  //   }, function (value) {
+  //     console.log("queryQns F ", value);
+  //     wx.showToast({
+  //       icon:'none',
+  //       title: '查询问卷失败'
+  //     })
+  //     that.showLoading(!1)
+  //   }); 
+  // },
 
   costDetail: function (event) {
    
@@ -85,7 +85,7 @@ Page({
       pageSize:10,
       qns:[]
     })
-    this.queryQns()
+    //this.queryQns()
   },
 
   /**

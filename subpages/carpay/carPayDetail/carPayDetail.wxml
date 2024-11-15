@@ -66,7 +66,7 @@
 		</view>
 	</view>
 
-	<view style="margin-top: 30px;margin-left: 4%;">停车券抵扣</view>
+	<view wx:if="{{parkCardVo.expNum > 0}}" style="margin-top: 30px;margin-left: 4%;">停车卡抵扣</view>
 	<view style="height: auto; width: 95%;" class="view_bg">
 		<view class="view_desc">
 			<radio-group bindtap="radioChange" data-datavalue="{{readioValue}}">
@@ -75,13 +75,13 @@
 						<van-row>
 							<view style="text-align: left;">
 								<van-col span="18">
-									<text>{{stopCouponVo.couponName}}</text> 
+									<text>{{parkCardVo.expNum}}小时</text> 
 								</van-col>
 							</view>
 							<view style="text-align: right;">
 								<van-col span="6">
-									<text>{{stopCouponVo.couponAmount}}元</text> 
-									<radio style="transform: scale(0.7);" value="{{stopCouponVo.couponId}}" checked="{{readioChecked}}"></radio>
+									<text>{{parkCardVo.cardAmount}}元</text> 
+									<radio style="transform: scale(0.7);" value="{{parkCardVo.cardCstBatchId}}" checked="{{radioChecked}}"></radio>
 								</van-col>
 							</view>
 						</van-row>

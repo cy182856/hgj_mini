@@ -123,7 +123,7 @@ Page({
                 cstIntoId:cstIntoId,
                 houseList:houseList
               })    
-              if(this.data.isCHeck == 'Y'){
+              if(this.data.isCHeck == 'Y'){              
                 this.setData({
                   'isCHeckShow':false,
                 });

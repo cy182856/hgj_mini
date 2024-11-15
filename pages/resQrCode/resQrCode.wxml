@@ -22,6 +22,33 @@
             <text>{{endTime}}</text>
           </view>
     </view>
+
+    <view class="houseinfo-flex-display">
+          <view style="flex:2;">
+            <text>姓名</text>
+          </view>		  
+          <view class="ellipsis_view text-align-right" style="flex:3;">
+            <text>{{userName}}</text>
+          </view>
+    </view>
+
+    <view class="houseinfo-flex-display">
+          <view style="flex:2;">
+            <text>身份</text>
+          </view>		  
+          <view class="ellipsis_view text-align-right" style="flex:3;">
+            <text>{{identity}}</text>
+          </view>
+    </view>
+
+    <view class="houseinfo-flex-display">
+          <view style="flex:4;">
+            <text>房号</text>
+          </view>		  
+          <view class="text-align-right" style="flex:3;">
+            <text>{{houseList}}</text>
+          </view>
+    </view>
       
   </view>
 	<image class='visit-detail-bg'  src='/images/home/back-img.png'></image>  

@@ -27,8 +27,8 @@
 		</view>
 			
 		<view class="view_bg" wx:for="{{item.cstIntoList}}" wx:key="index">
-				<view style="height: 90px; margin-left: 3%;" class="cohabit_view_desc">					
-					<van-row >
+				<view class="cohabit_view_desc{{item.intoRole==0||item.intoRole==2||item.intoRole==1?'_55':'_90'}}">					
+					<van-row>
 						<view>	
 							<van-col span="9"> 
 								<view decode="{{true}}" style="font-size: 16px;color: rgb(56, 55, 55); margin-top: 5px;" >{{item.userName}}</view>

@@ -88,7 +88,6 @@ getUploaderList(e) {
 
 // 提交
 submitInfo(){
-  // debugger;
   this.showLoading(1);
   var datas = this.data;
   var d = {};

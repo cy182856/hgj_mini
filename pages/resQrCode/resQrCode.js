@@ -8,7 +8,10 @@ Page({
   data: {
     resQrCode:'',
     createTime:'',
-    endTime:''
+    endTime:'',
+    identity:'',
+    userName:'',
+    houseList:[]
   },
 
   /**
@@ -38,7 +41,10 @@ Page({
         that.setData({
           resQrCode:value.data.resQrCode,
           createTime:value.data.createTime,
-          endTime:value.data.endTime 
+          endTime:value.data.endTime,
+          identity:value.data.identity,
+          userName:value.data.userName,
+          houseList:value.data.houseList
         })    
       }else{
         wx.showToast({

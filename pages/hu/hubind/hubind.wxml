@@ -126,7 +126,10 @@
 </view>
 
 <view wx:if="{{showErrMsg}}">
-  <template is="empty" data="{{src:empty_src,width:232,text:msg}}"></template>
+  <!-- <template is="empty" data="{{src:empty_src,width:232,text:msg}}"></template> -->
+  <template is="empty" data=""></template>
+  <view style="margin-left: 35%;margin-right: 20%; font-size: 18px;">{{msg}}</view>
+
 </view>
 
 <!-- <view wx:if="{{skeletonShow}}">

@@ -104,20 +104,20 @@ class req {
       return;
     }
     if (!this.checkLogin(url)) {
-      console.log('session失效，重新登录');
-      var that = this;
-      var result;
-      return new Promise((resolve, reject) => {
-        this.doLogin(0).then(value => {
-          var header = {
-            'Cookie': new storage().getCookies().toString(),
-            'content-type': 'application/json'
-          }
-          that.requestAll(url, data, header, _.POST).then(res => {
-            resolve(res);
-          })
-        })
-      })
+      // console.log('session失效，重新登录');
+      // var that = this;
+      // var result;
+      // return new Promise((resolve, reject) => {
+      //   this.doLogin(0).then(value => {
+      //     var header = {
+      //       'Cookie': new storage().getCookies().toString(),
+      //       'content-type': 'application/json'
+      //     }
+      //     that.requestAll(url, data, header, _.POST).then(res => {
+      //       resolve(res);
+      //     })
+      //   })
+      // })
     } else {
       var header = {
         'Cookie': new storage().getCookies().toString(),
@@ -139,30 +139,30 @@ class req {
    */
   doLogin(source, custId, hgjOpenId, wxSeqId, huSeqId, cstCode, wxOpenId, proNum) {
     wx.removeStorageSync('COOKIES');
-    let s = new storage();
-    let localCustId = s.getCustId();
-    let localWxSeqId = s.getWxSeqId();
-    let localHgjOpenId = s.getHgjOpenId();
+    //let s = new storage();
+    //let localCustId = s.getCustId();
+    //let localWxSeqId = s.getWxSeqId();
+    //let localHgjOpenId = s.getHgjOpenId();
 
     switch (source) {
-      case 0:
-        if (localCustId == '' || localCustId == undefined) {
-          return this.loginByDefault();
-        } else {
-          return this.loginByFlush(localCustId, localWxSeqId, localHgjOpenId);
-        }
-        case 1:
-          return this.loginByDefault(localCustId);
-        case 2:
-          return this.loginFromMenu(custId);
-        case 3:
-          return this.loginFromTemplet(custId, huSeqId);
-        case 4:
-          return this.loginByChangeCount(custId, wxSeqId, hgjOpenId);
+      // case 0:
+      //   if (localCustId == '' || localCustId == undefined) {
+      //     return this.loginByDefault();
+      //   } else {
+      //     return this.loginByFlush(localCustId, localWxSeqId, localHgjOpenId);
+      //   }
+        // case 1:
+        //   return this.loginByDefault(localCustId);
+        // case 2:
+        //   return this.loginFromMenu(custId);
+        // case 3:
+        //   return this.loginFromTemplet(custId, huSeqId);
+        // case 4:
+        //   return this.loginByChangeCount(custId, wxSeqId, hgjOpenId);
         case 5:
           return this.loginByChangeCount5(cstCode, wxOpenId, proNum);
-        default:
-          return this.loginByDefault(localCustId);
+        // default:
+        //   return this.loginByChangeCount5(cstCode, wxOpenId, proNum);
     }
   }
 
@@ -270,7 +270,7 @@ class req {
     });
   }
 
-  //用户切换登录
+  //用户登录
   loginByChangeCount5(cstCode, wxOpenId, proNum) {
     console.log('network loginByChangeCount5', cstCode, wxOpenId, proNum);
     let that = this;
@@ -321,44 +321,43 @@ class req {
   }
 
   //直接进入小程序,默认登录
-  loginByDefault(custId) {
-    console.log('network default', custId);
-    let that = this;
-    let d = {};
-    return new Promise((resolve, reject) => {
-      wx.login({
-        success: res => {
-          // 发送 res.code 到后台换取 openId, sessionKey, unionId
-          if (res.code) {
-            //发起网络请求
-            d['code'] = res.code;
-            d['custId'] = custId;
-            this.requestBase(api.LOGIN, d, _.POST).then(value => {
-              if (value.data.respCode == 'EEE') {
-                resolve(this.error());
-              } else if (value.data.respCode != '000') {
-                console.log('login fail ...', value);
-                let desc = value.data.errDesc;
-                that.toErrorPage(desc);
-                resolve(value);
-              } else {
-                that.setCache(value);
-                resolve(value);
-              }
-            })
-          } else {
-            console.log('默认登录失败！' + res.errMsg)
-            resolve(res);
-          }
-        },
-        fail: res => {
-          console.log('微信小程序登录接口失败', res);
-          resolve(this.error());
-        }
-      })
-    });
-  }
-
+  // loginByDefault(custId) {
+  //   console.log('network default', custId);
+  //   let that = this;
+  //   let d = {};
+  //   return new Promise((resolve, reject) => {
+  //     wx.login({
+  //       success: res => {
+  //         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+  //         if (res.code) {
+  //           //发起网络请求
+  //           d['code'] = res.code;
+  //           d['custId'] = custId;
+  //           this.requestBase(api.LOGIN, d, _.POST).then(value => {
+  //             if (value.data.respCode == 'EEE') {
+  //               resolve(this.error());
+  //             } else if (value.data.respCode != '000') {
+  //               console.log('login fail ...', value);
+  //               let desc = value.data.errDesc;
+  //               that.toErrorPage(desc);
+  //               resolve(value);
+  //             } else {
+  //               that.setCache(value);
+  //               resolve(value);
+  //             }
+  //           })
+  //         } else {
+  //           console.log('默认登录失败！' + res.errMsg)
+  //           resolve(res);
+  //         }
+  //       },
+  //       fail: res => {
+  //         console.log('微信小程序登录接口失败', res);
+  //         resolve(this.error());
+  //       }
+  //     })
+  //   });
+  // }
 
 
   //进入错误的提示页面
@@ -435,10 +434,8 @@ class req {
             that.setTemp(url, data, header, method);
             // var that = this;
             console.log('need doLogin again');
-            // debugger;
             that.doLogin(0).then(v => {
               that.requestBase(that._url, that._data, that._method).then(v1 => {
-                // debugger;
                 console.log('回掉成功了');
                 result = v1;
                 // wx.hideLoading();

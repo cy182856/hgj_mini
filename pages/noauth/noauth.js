@@ -13,6 +13,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 获取登录人身份
+    
     try {
       var desc = options['errDesc'];
       if( desc && desc != '' && desc != undefined){

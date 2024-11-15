@@ -158,7 +158,6 @@ repairDesc(event){
         if(canvasWidth == imgRes.width && canvasHeight == imgRes.height){
           console.log('图片已经很小，无需进行压缩处理',path);
           var img = {};
-          // debugger;
           img['url'] = path;
           temp.push(img);
           var imgCnt = that.data.imgCnt+1;
@@ -184,7 +183,6 @@ repairDesc(event){
                     console.log('最终的图片信息',res);
                     console.log(res.tempFilePath)//最终图片路径
                     var img = {};
-                    // debugger;
                     img['url'] = res.tempFilePath;
                     temp.push(img);
                     var imgCnt = that.data.imgCnt+1;

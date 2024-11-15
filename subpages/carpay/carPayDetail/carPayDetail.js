@@ -2,7 +2,7 @@ const app = getApp();
 const api = require("../../../const/api");
 
 // 假设你有一个倒计时的总时长，比如1小时（3600秒）
-const totalSeconds = 30;
+const totalSeconds = 7200;
 Page({
 
   /**
@@ -10,13 +10,14 @@ Page({
    */
   data: {
     carCode: '',
-    readioChecked: false,
+    radioChecked: false,
     readioValue:'',
     payment_button_disabled: false,
     carInfoVo: null,
-    stopCouponVo: null,
+    parkCardVo: null,
     interval: 0,
     seconds: totalSeconds, // 初始倒计时秒数
+    orderId:''
   },
 
   /**
@@ -68,11 +69,11 @@ Page({
     app.req.postRequest(api.queryCarPayInfo,data).then(res=>{
       if(res.data.respCode == '000'){               
         var carInfoVo = res.data.carInfoVo;
-        var stopCouponVo = res.data.stopCouponVo;
-        this.setData({
+        var parkCardVo = res.data.parkCardVo;
+        that.setData({
           carInfoVo: carInfoVo,
-          stopCouponVo: stopCouponVo,
-          readioValue: stopCouponVo.couponId
+          parkCardVo: parkCardVo,
+          readioValue: parkCardVo.cardCstBatchId
         });   
         
       }else{
@@ -86,17 +87,17 @@ Page({
   radioChange(e){
     var that = this;
     // 单选框选中状态
-    var readioChecked = that.data.readioChecked;
+    var radioChecked = that.data.radioChecked;
     // 获取单选框的值
     console.log(e.detail.value)
-    if(readioChecked == false){
+    if(radioChecked == false){
       that.setData({
-        readioChecked : true
+        radioChecked : true
       })
     }
-    if(readioChecked == true){
+    if(radioChecked == true){
       that.setData({
-        readioChecked :false
+        radioChecked :false
       })
     }
     console.log("--------------"+that.data.readioValue+"------------")
@@ -105,17 +106,29 @@ Page({
   // 缴费
   carPayment(e){
     var that = this;
+    // 是否选择了停车卡
+    var radioChecked = that.data.radioChecked;
     var data = {};
     data['cstCode'] = app.storage.getCstCode();
     data['wxOpenId'] = app.storage.getWxOpenId();
     data['proNum'] = app.storage.getProNum();   
+    data['carCode'] = that.data.carCode;
+    data['cardCstBatchId'] = that.data.parkCardVo.cardCstBatchId;
+    data['priRev'] = that.data.carInfoVo.totalAmount;
+    data['radioChecked'] = radioChecked;
+    data['cardAmount'] = that.data.parkCardVo.cardAmount;
+    data['orderId'] = that.data.orderId;
     if(!that.data.payment_button_disabled){
       that.setData({ payment_button_disabled: true });
       // 服务端获取支付参数
       app.req.postRequest(api.carPayment,data).then(res=>{
         console.log("下单返回",res);
         if(res.data.respCode == '000'){
-          that.setData({ payment_button_disabled: false });
+          var orderId = res.data.orderId;
+          that.setData({ 
+            payment_button_disabled: false,
+            orderId:orderId
+          });        
           var timeStamp = res.data.signInfoVo.timeStamp;
           var nonceStr = res.data.signInfoVo.nonceStr;
           var repayId = res.data.signInfoVo.repayId;

@@ -462,7 +462,6 @@ Page({
     if (hgjModuleId == '' || hgjModuleId == undefined) {
       return '';
     }
-    // debugger;
     let values = app.storage.getLoginInfo().moduleValues;
     if (values == undefined) {
       return '';
@@ -480,24 +479,6 @@ Page({
     console.log('2.根据功能ID的校验页返回结果', hgjModuleId, pagePath);
     return pagePath;
   },
-  //session存在下，直接跳到指定页面
-  toSpePage(pagePath) {
-    // console.log('进入指定的页：',pagePath);
-    let hgjModuleId = this.data.hgjModuleId;
-    if (hgjModuleId == '') {
-      return;
-    }
-    let url = this.getSpePage(hgjModuleId);
-    if (url == undefined || url == '') {
-      return;
-    }
-    url += pagePath;
-    console.log('进入指定的页：', pagePath, url);
-    wx.navigateTo({
-      url: url,
-    })
-  },
-
 
   //obj-->key=value&key=value
   convertObj2param: function (options) {
@@ -510,79 +491,8 @@ Page({
     return param.substring(0, param.length - 1);
   },
 
-  //重新登录
-  reLogin(options) {
-    let custId = options['custId'];
-    let hgjModuleId = options['hgjModuleId'];
-    let huSeqId = options['huSeqId'];
-    let coopId = options['coopId'];
-    console.log('===============>', custId, hgjModuleId, huSeqId);
-    console.log('--------------->' + options);
-    console.log('主页中，开始重新登录', this.convertObj2param(options));
-
-    if (hgjModuleId == undefined && options == undefined) {
-      console.log('2.直接进入默认登录', url, options);
-      this.loginBusiByDefault();
-      return;
-    }
-
-    //判断是否要进入特殊页面
-    let hasSpePage = false;
-    let url = "?";
-    if (hgjModuleId != '' && hgjModuleId != undefined && hgjModuleId != '00') {
-      url += this.convertObj2param(options);
-      hasSpePage = true;
-
-      //没有客户号情况下登录跳转
-      if (coopId != '' && coopId != undefined) {//充电桩业务情况下跳转
-        // this.loginSkipBusi(hasSpePage,url);//登录后跳转
-        var queryParams = {
-          'coopId': options.coopId,
-          'deviceSn': options.deviceSn,
-        };
-        console.log("queryParams====", queryParams);
-        //通过设备信息反得出客户号信息
-        this.queryChargeDatail(queryParams, options, hasSpePage, url);
-        return;
-      }
-
-    }
-
-    //检查登录来源
-    let loginSource = this.checkLoginSource(custId, huSeqId);
-    console.log('loginSource is:', loginSource);
-    //不同来源进行不同的登录业务处理
-    if (loginSource == 1) {//直接进入
-      this.loginBusiByDefault();
-    } else if (loginSource == 2) {//菜单进入
-      this.loginBusiByMenu(custId, hasSpePage, url);
-    } else if (loginSource == 3) {//模版消息进入
-      //this.loginBusiByTemplet(custId, huSeqId, hasSpePage, url);
-    } else {
-      console.log('未知的登录来源，走默认登录');
-      this.loginBusiByDefault();
-    }
-  },
-
-  //检查登录路径
-  // 1-默认直接进入小程序 2-菜单进入小程序 3-模版消息进入小程序
-  checkLoginSource(custId, huSeqId) {
-    console.log('检查进入小程序的来源', custId, huSeqId);
-    if (custId && custId != '' && custId != undefined) {
-      if (huSeqId && huSeqId != '' && huSeqId != undefined) {
-        console.log('通过模版消息进入的');
-        return 3;
-      }
-      console.log('通过菜单进入小程序')
-      return 2;
-    } else {
-      console.log('直接进入小程序');
-      return 1;
-    }
-  },
-
   //默认进入小程序的业务-正在使用的
-  loginBusiByDefault(custId) {
+  loginBusiByDefault() {
     that.showLoading(1);
     var data = {};
     wx.login({
@@ -638,7 +548,8 @@ Page({
             })
 
             var loginSource = 5;
-            app.req.doLogin(loginSource, '', '', '', '', this.data.cstCode, this.data.wxOpenId, this.data.proNum).then(res => {
+            app.req.doLogin(loginSource, '', '', '', '', this.data.cstCode, this.data.wxOpenId, this.data.proNum).
+            then(res => {
               if (res.data.respCode == '000') {
                 console.log('登录成功,开始进入指定的页面');
                 that.initMain();
@@ -790,7 +701,6 @@ Page({
   initSysClass: function () {
     wx.getSystemInfo({
       success(res) {
-        // debugger
         let sys = res.model;
         console.log("sys======>" + sys);
         if (sys == 'iPhone XR' || sys.indexOf('Plus') != -1 || sys.indexOf('Max') != -1) {
