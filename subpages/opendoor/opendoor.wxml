@@ -23,18 +23,31 @@
           <view style="margin-left:30rpx;">
             <view style="height:20rpx;"></view>
             
-				<view style="margin-left: 5%; margin-top: 10%;">
+          <view style="margin-left: 5%; margin-top: 10%;">
+              <view>
+                <van-row>
+                  <van-col span="7" >
+                    <view class="date-picker" style="color: rgb(130, 134, 134);">访客称呼</view>
+                  </van-col>
+                  <van-col span="17" >
+                    <input class="inputStyle"  bindinput="inputChange" maxlength="20" placeholder="{{cstName}}" value="{{visitName}}"/>
+                  </van-col>
+                </van-row>
+              </view>
+				</view>
+        
+				<view style="margin-left: 5%; margin-top: 15px;">
 					<picker mode="date" start="{{startDate}}" end="{{endDate}}" value="{{expDate}}" bindchange="bindDateChange">
               <view>
                 <van-row>
                   <van-col span="7" ><view class="date-picker" style="color: rgb(130, 134, 134);">选择日期<text style="color:red">*</text> </view></van-col>
-                  <van-col span="17" ><view class="expDate">{{expDate}}</view></van-col>
+                  <van-col span="17" ><view class="inputStyle">{{expDate}}</view></van-col>
                 </van-row>
               </view>
 					</picker>
 				</view>
         
-        <view style=" margin-top: 10epx;padding-bottom: 10rpx;">
+        <view>
           <van-row>
             <van-col span="7" >
               <view style="padding:30rpx 0px 0px 32rpx;color: rgb(130, 134, 134);"><text>选择房屋</text><text style="color:red">*</text></view>

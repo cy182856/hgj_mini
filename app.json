@@ -3,6 +3,7 @@
     "pages/main/main",
     "pages/hu/hubind/hubind",
     "pages/hu/hubindTenant/hubindTenant",
+    "pages/hu/invite/invite",
     "pages/noauth/noauth",
     "pages/await/await",
     "pages/smartDoor/smartDoor",

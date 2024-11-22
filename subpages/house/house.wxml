@@ -27,7 +27,7 @@
 		</view>
 			
 		<view class="view_bg" wx:for="{{item.cstIntoList}}" wx:key="index">
-				<view class="cohabit_view_desc{{item.intoRole==0||item.intoRole==2||item.intoRole==1?'_55':'_90'}}">					
+				<view class="cohabit_view_desc{{item.intoRole==0||item.intoRole==2||item.intoRole==1?'_58':'_90'}}">					
 					<van-row>
 						<view>	
 							<van-col span="9"> 

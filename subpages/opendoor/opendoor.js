@@ -19,6 +19,8 @@ Page({
     ,valueid:'' //选中的id
     ,houseId:''
     ,visitorCode:''
+    ,visitName:''
+    ,cstName:app.storage.getCstName()
   },
 
   /**
@@ -100,6 +102,12 @@ Page({
         }
        console.log('selectcontent===>',this.data.selectcontent);
       }
+    })
+  },
+
+  inputChange(event) {
+    this.setData({
+      visitName: event.detail.value // 将input的值存入data中的inputVal
     })
   },
 
@@ -186,14 +194,15 @@ Page({
       proNum:proNum,
       proName: proName,
       expDate:that.data.expDate,
-      houseId: that.data.valueid
+      houseId: that.data.valueid,
+      visitName: that.data.visitName
     }
     app.req.postRequest(api.addOpenDoorQrCode, visitInfo).then(function (value) {
       console.log("addVisitLog 返回", value);
       if(value.data.RESPCODE == "000" && value.data.visitQrCode != null){
-        var visiPass = value.data.openDoorLogVo;
+        var visiPass = value.data.openDoorCodeVo;
         wx.navigateTo({
-          url: '/subpages/opendoor/openDoorDetail/openDoorDetail?'+'visitQrCode=' + value.data.visitQrCode + '&expDate=' + visiPass.expDate
+          url: '/subpages/opendoor/openDoorDetail/openDoorDetail?'+'visitQrCode=' + value.data.visitQrCode + '&visitName=' + visiPass.visitName + '&expDate=' + visiPass.expDate
         })
       }else{
         wx.showToast({

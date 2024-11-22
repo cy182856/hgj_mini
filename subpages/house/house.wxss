@@ -219,9 +219,9 @@
 	background-color: rgb(82, 154, 172);
 	color: rgb(253, 250, 250);
 }
-.cohabit_view_desc_55{
+.cohabit_view_desc_58{
 	color:#6e6d6d;
-	height: 55px; 
+	height: 58px; 
 	margin-left: 3%;
 	/* margin-left: 0px;
 	padding: var(--cell-vertical-padding,5px) var(--cell-horizontal-padding,16px); */

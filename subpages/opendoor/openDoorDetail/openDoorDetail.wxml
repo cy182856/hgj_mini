@@ -14,8 +14,20 @@
         <canvas canvas-id="qrcode"/>
       </view>
       
-      </view>
-      <view class="visit-house-info"> 
+    </view>
+
+    <view class="visit-house-info"> 
+        <view class="houseinfo-flex-display">
+          <view style="flex:2;">
+            <text>访客称呼</text>
+          </view>
+          <view class="ellipsis_view text-align-right" style="flex:3;">
+            <text>{{visitName}}</text>
+          </view>
+        </view>
+    </view>
+
+    <view class="visit-house-info"> 
         <view class="houseinfo-flex-display">
           <view style="flex:2;">
             <text>有效日期</text>
@@ -24,7 +36,7 @@
             <text>{{expDate}}</text>
           </view>
         </view>
-      </view>
+    </view>
     <image class='visit-detail-bg'  src='/images/home/back-img.png'></image>
 </view>
 </page>

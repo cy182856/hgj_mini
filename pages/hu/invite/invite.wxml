@@ -1,0 +1,29 @@
+<view class="title-class">请选择入住人身份</view>
+<radio-group class="radio-group" bindchange="radioChange">
+  <label style="line-height: 40px; width:50px" class="radio-label" wx:for="{{identityOptions}}" wx:key="key">
+    <radio style="margin-left: 5%; color: rgb(77, 75, 75);" value="{{item.code}}">{{item.miniDesc}}</radio>
+  </label>
+</radio-group>
+
+<view wx:if="{{identityCode == 1 || identityCode == 3 || identityCode == 4}}">
+	<view class="title-class">请选择入住房屋</view>
+	<view style="margin-top: 10px; margin-left: 5%; width: 90%;">
+		<view>
+		<view class="weui-cells weui-cells_after-title">
+			<checkbox-group bindchange="checkboxChange">
+			<label class="weui-cell" wx:for="{{houseOptions}}" wx:key="{{item.id}}">
+				<view>
+				<checkbox value="{{item.id}}"/>
+				</view>
+				<view style="color: rgb(77, 75, 75);">{{item.resName}}</view>
+			</label>
+			</checkbox-group>
+		</view>
+		</view>
+	</view>
+</view>
+
+<view>
+  <button style="background: rgb(101, 209, 168); margin-top: 20px;" open-type="share">发送邀请</button>
+</view>
+<view style="margin-top: 20px;height: 20px;"></view>

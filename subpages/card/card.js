@@ -66,17 +66,18 @@ Page({
       console.log("createCardQrCode 返回", value);
       if(value.data.RESPCODE == "000" && value.data.cardQrCode != null){
         var cardQrCode = value.data.cardQrCode;
-        var expDate = value.data.expDate;
+        var startExpDate = value.data.startExpDate;
+        var endExpDate = value.data.endExpDate;
         var openDoorTotalNum = value.data.openDoorTotalNum;
         var openDoorApplyNum = value.data.openDoorApplyNum;
         wx.navigateTo({
-          url: '/subpages/card/cardQrCode/cardQrCode?cardQrCode=' + cardQrCode +'&expDate=' + expDate +'&openDoorTotalNum=' + openDoorTotalNum +'&openDoorApplyNum=' + openDoorApplyNum
+          url: '/subpages/card/cardQrCode/cardQrCode?cardQrCode=' + cardQrCode +'&startExpDate=' + startExpDate +'&endExpDate=' + endExpDate +'&openDoorTotalNum=' + openDoorTotalNum +'&openDoorApplyNum=' + openDoorApplyNum
         })
       }else{
         wx.showToast({
           icon:'none',
           title: value.data.ERRDESC?value.data.ERRDESC:'失败',
-          duration:3000
+          duration:5000
         })
       }
     }); 
@@ -144,6 +145,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+ 
+    
   }
 })

@@ -7,7 +7,8 @@ Page({
    */
   data: {
     visitQrCode:'', 
-    expDate:'',
+    startExpDate:'',
+    endExpDate:'',
     openDoorTotalNum:'',
     openDoorApplyNum:''
   },
@@ -18,7 +19,8 @@ Page({
   onLoad: function (options) {
     this.setData({
       cardQrCode: options.cardQrCode,
-      expDate: options.expDate,
+      startExpDate: options.startExpDate,
+      endExpDate: options.endExpDate,
       openDoorTotalNum: options.openDoorTotalNum,
       openDoorApplyNum : options.openDoorApplyNum
     })

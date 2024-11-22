@@ -69,7 +69,7 @@ Page({
     var ownerFlag = that.data.ownerFlag;
     // 只有业主、租户有权限设置，其他身份操作不生效
     if(ownerFlag == 1){
-      app.req.postRequest(api.huCardPerm,data).then(res=>{
+      app.req.postRequest(api.cardPerm,data).then(res=>{
         if(res.data.respCode == '000'){
           that.queryForPage(); 
         }

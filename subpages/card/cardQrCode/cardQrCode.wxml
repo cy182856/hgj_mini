@@ -8,36 +8,47 @@
    
       <view class="visit-house-info"> 
         <view class="houseinfo-flex-display">
-          <view style="flex:2;">
-            <text>二维码有效时间</text>
+          <view style="flex:3;">
+            <text style="font-size: 15px;">二维码有效开始时间</text>
           </view>
           <view class="ellipsis_view text-align-right" style="flex:3;">
-            <text>{{expDate}}</text>
+            <text style="font-size: 16px;">{{startExpDate}}</text>
           </view>
         </view>
       </view>
 
-	  <view class="visit-house-info"> 
+      <view class="visit-house-info"> 
         <view class="houseinfo-flex-display">
-          <view style="flex:2;">
-            <text>当天可开门次数</text>
+          <view style="flex:3;">
+            <text style="font-size: 15px;">二维码有效结束时间</text>
           </view>
           <view class="ellipsis_view text-align-right" style="flex:3;">
-            <text>{{openDoorTotalNum}}</text>
+            <text style="font-size: 16px;">{{endExpDate}}</text>
           </view>
         </view>
       </view>
 
-	  <view class="visit-house-info"> 
+	    <view class="visit-house-info"> 
+        <view class="houseinfo-flex-display">
+          <view style="flex:3;">
+            <text style="font-size: 15px;">当天可开门次数</text>
+          </view>
+          <view class="ellipsis_view text-align-right" style="flex:3;">
+            <text style="font-size: 18px;">{{openDoorTotalNum}}次</text>
+          </view>
+        </view>
+      </view>
+
+	  <!-- <view class="visit-house-info"> 
         <view class="houseinfo-flex-display">
           <view style="flex:2;">
             <text>当天已开门次数</text>
           </view>
           <view class="ellipsis_view text-align-right" style="flex:3;">
-            <text>{{openDoorApplyNum}}</text>
+            <text style="font-size: 20px;">{{openDoorApplyNum}}</text>
           </view>
         </view>
-      </view>
+      </view> -->
     <image class='visit-detail-bg'  src='/images/home/back-img.png'></image>
-</view>
+  </view>
 </page>

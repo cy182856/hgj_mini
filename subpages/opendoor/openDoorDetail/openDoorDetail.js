@@ -10,7 +10,8 @@ Page({
     refreash:false,
     showCode:'none',
     visitQrCode:'',
-    expDate:''
+    expDate:'',
+    visitName:''
   },
 
   /**
@@ -21,6 +22,7 @@ Page({
     this.setData({
       windowW:windowW,
       visitQrCode:options.visitQrCode,
+      visitName:options.visitName,
       expDate:options.expDate
     })
   },

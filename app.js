@@ -78,6 +78,7 @@ App({
       new storage().cleanSessionId();
     }
   },
+
   globalData: {
     userInfo: null,
     env:'env',

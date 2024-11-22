@@ -212,7 +212,7 @@
 	color: #56D88A;
   }
 
-  .expDate{
+  .inputStyle{
 	color: rgb(130, 134, 134);
 	height: 50rpx;
 	width: 348rpx;
