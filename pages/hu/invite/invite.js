@@ -25,6 +25,10 @@ app = getApp();
   },
 
   radioChange(e) {
+    this.setData({
+      houseIds:[],
+      houseOptions:[]
+    })
     var checkValue = e.detail.value;
     this.setData({identityCode:checkValue});
     console.log("------identityCode--------" + this.data.identityCode);
@@ -96,6 +100,47 @@ app = getApp();
     })
   },
 
+  // 创建入住信息
+  createIntoInfo(){
+    var cstCode = app.storage.getCstCode();
+    var orgId = app.storage.getProNum();
+    var cstName = app.storage.getCstName();
+    var resId = this.data.houseIds;
+    var intoType = this.data.identityCode;
+    if(intoType == null || intoType == ''){
+      wx.showToast({
+        title: '请选择身份',
+        icon: 'none'
+      });
+      return false;
+    }
+    if ((intoType == '1' || intoType == '3' || intoType == '4') && (resId == null || resId.length == 0)) {
+      wx.showToast({
+        title: '请选择房屋',
+        icon: 'none'
+      });
+      return false;
+    }
+    var data = {
+      resId:resId,
+      cstCode:cstCode,
+      intoType:intoType,
+      orgId:orgId
+    }
+    app.req.postRequest(api.createIntoInfo,data).then(res=>{
+      if(res.data.respCode == '000'){
+        var cstIntoId = res.data.cstIntoId;
+        this.setData({
+          cstIntoId:cstIntoId
+        })
+        // 跳转到分享页
+        wx.redirectTo({
+          url: '/pages/hu/intoShare/intoShare?cstCode=' + cstCode + '&cstName=' + cstName + '&cstIntoId=' + cstIntoId + '&proNum=' + orgId
+        })
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -142,30 +187,30 @@ app = getApp();
    * 用户点击右上角分享
    */
   onShareAppMessage() {
-    创建入住信息
-    var cstCode = app.storage.getCstCode();
-    var orgId = app.storage.getProNum();
-    var cstName = app.storage.getCstName();
-    var resId = this.data.houseIds;
-    var intoType = this.data.identityCode;
-    var data = {
-      resId:resId,
-      cstCode:cstCode,
-      intoType:intoType,
-      orgId:orgId
-    }
-    app.req.postRequest(api.createIntoInfo,data).then(res=>{
-      if(res.data.respCode == '000'){
-        var cstIntoId = res.data.cstIntoId;
-        this.setData({
-          cstIntoId:cstIntoId
-        })
-      }
-    })
-    var path = 'pages/hu/hubind/hubind?cstCode=' + cstCode + '&cstName=' + cstName + '&cstIntoId=' + this.data.cstIntoId + '&proNum=' + orgId;
-    return {
-        title:'房屋入住邀请',
-        path: path
-    }
+    // 创建入住信息
+    // var cstCode = app.storage.getCstCode();
+    // var orgId = app.storage.getProNum();
+    // var cstName = app.storage.getCstName();
+    // var resId = this.data.houseIds;
+    // var intoType = this.data.identityCode;
+    // var data = {
+    //   resId:resId,
+    //   cstCode:cstCode,
+    //   intoType:intoType,
+    //   orgId:orgId
+    // }
+    // app.req.postRequest(api.createIntoInfo,data).then(res=>{
+    //   if(res.data.respCode == '000'){
+    //     var cstIntoId = res.data.cstIntoId;
+    //     this.setData({
+    //       cstIntoId:cstIntoId
+    //     })
+    //   }
+    // })
+    // var path = 'pages/hu/hubind/hubind?cstCode=' + cstCode + '&cstName=' + cstName + '&cstIntoId=' + this.data.cstIntoId + '&proNum=' + orgId;
+    // return {
+    //     title:'房屋入住邀请',
+    //     path: path
+    // }
   }
 })

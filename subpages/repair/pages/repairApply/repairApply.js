@@ -638,11 +638,11 @@ submitInfo(){
     app.req.postRequest(api.repairHouseList,data).then(res=>{
       let data = res.data;
       if(data.respCode == '000'){
-        console.log('data===>',data);
+        //console.log('data===>',data);
         this.setData({
           selectcontent:data.data.list
         })
-       console.log('selectcontent===>',this.data.selectcontent);
+       //console.log('selectcontent===>',this.data.selectcontent);
       }
     })
   },

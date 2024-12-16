@@ -335,10 +335,9 @@ Page({
      
     //初始化loading
     //针对iOS设备的适配
-    this.initSysClass();
+    that.initSysClass();
     // 登录
-    this.loginBusiByDefault();
-
+    that.loginBusiByDefault();
     //初始化custId,带参数的custId,
     let custId = options['custId'];
     let cstCode = options['cstCode'];
@@ -348,7 +347,7 @@ Page({
     //let url = options['url'];
 
     //初始化onLoad,初始化参数
-    this.setData({
+    that.setData({
       onLoad: true,
       custId: custId,
       cstCode: cstCode,
@@ -497,7 +496,7 @@ Page({
     var data = {};
     wx.login({
       success: res => {
-        let cstCode = this.data.cstCode;
+        let cstCode = that.data.cstCode;
         data['code'] = res.code;
         data['cstCode'] = cstCode;
         console.log('成功获取了code');
@@ -850,7 +849,9 @@ Page({
       loading:false,
       isRefreshing:true
     })
-    this.onLoad();
+    // this.onLoad();
+    // 登录
+    this.loginBusiByDefault();
     this.onShow();
     wx.stopPullDownRefresh({
     })

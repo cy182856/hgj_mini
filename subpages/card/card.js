@@ -12,7 +12,8 @@ Page({
     cardName_swim:'',
     cardCode_swim:'',
     cardExpNum_swim:'',
-    expDate_swim:''
+    expDate_swim:'',
+    cardNo_swin:''
   },
 
   // 游泳卡信息
@@ -70,8 +71,9 @@ Page({
         var endExpDate = value.data.endExpDate;
         var openDoorTotalNum = value.data.openDoorTotalNum;
         var openDoorApplyNum = value.data.openDoorApplyNum;
+        var cardNo = value.data.cardNo;
         wx.navigateTo({
-          url: '/subpages/card/cardQrCode/cardQrCode?cardQrCode=' + cardQrCode +'&startExpDate=' + startExpDate +'&endExpDate=' + endExpDate +'&openDoorTotalNum=' + openDoorTotalNum +'&openDoorApplyNum=' + openDoorApplyNum
+          url: '/subpages/card/cardQrCode/cardQrCode?cardQrCode=' + cardQrCode +'&startExpDate=' + startExpDate +'&endExpDate=' + endExpDate +'&openDoorTotalNum=' + openDoorTotalNum +'&openDoorApplyNum=' + openDoorApplyNum + '&cardNo=' + cardNo
         })
       }else{
         wx.showToast({

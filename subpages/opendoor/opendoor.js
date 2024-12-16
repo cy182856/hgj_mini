@@ -21,6 +21,7 @@ Page({
     ,visitorCode:''
     ,visitName:''
     ,cstName:app.storage.getCstName()
+    ,quickCodeInterTime:''
   },
 
   /**
@@ -37,6 +38,8 @@ Page({
      this.getHouseList();
      //获取访客通行码，快速通行码说明文字
      this.getVisitExplain();
+     //获取创建快速码的间隔时间
+     this.queryQuickCodeInterTime();
   },
 
   // 选择日期
@@ -63,7 +66,21 @@ Page({
     })
   },
 
-  
+  //获取创建快速码的间隔时间
+  queryQuickCodeInterTime(){
+    var data = {
+      cstCode:app.storage.getCstCode(),
+      wxOpenId:app.storage.getWxOpenId()
+    }
+    app.req.postRequest(api.queryQuickCodeInterTime,data).then(res=>{
+      if(res.data.respCode == '000'){
+        this.setData({
+          quickCodeInterTime:res.data.quickCodeInterTime
+        })
+      }
+    })
+  },
+
   //获取访客通行码，快速通行码说明文字
   getVisitExplain(){
     var data = {
@@ -233,9 +250,11 @@ Page({
     var currentTime = Date.now();
     // 获取缓存时间
     var quickCodeClickTime = app.storage.getQuickCodeClickTime();
-    // 如果距离上次点击超过5分钟
+    // 如果距离上次点击超过N分钟,配置获取
     //if (currentTime - quickCodeClickTime > 3) { 
-    if (currentTime - quickCodeClickTime > 300000) { 
+    var quickCodeInterTime = that.data.quickCodeInterTime;
+    //var quickCodeInterTimeMin = quickCodeInterTime/1000/60;
+    if (currentTime - quickCodeClickTime > quickCodeInterTime) { 
       // 执行按钮点击后的操作
       var cstCode = app.storage.getCstCode();
       var wxOpenId = app.storage.getWxOpenId();
@@ -272,9 +291,9 @@ Page({
         })
       });       
     } else {
-      // 如果没有超过五分钟，不执行操作，并给出提示
+      // 如果没有超过N分钟，不执行操作，并给出提示
       wx.showToast({
-        title: '请5分钟后再点击！',
+        title: '请稍后重试！',
         icon: 'none'
       });
     }

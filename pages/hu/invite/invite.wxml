@@ -23,7 +23,10 @@
 	</view>
 </view>
 
-<view>
+<!-- <view>
   <button style="background: rgb(101, 209, 168); margin-top: 20px;" open-type="share">发送邀请</button>
+</view> -->
+<view>
+  <button style="background: rgb(101, 209, 168); margin-top: 20px;" bindtap="createIntoInfo">下一步</button>
 </view>
 <view style="margin-top: 20px;height: 20px;"></view>

@@ -4,6 +4,8 @@
 <!-- 弹窗 -->
 <van-dialog id="van-dialog" />
 
+<view style="margin: 3%;">此投诉为本小程序自有投诉渠道，非微信官方投诉渠道。</view>
+
 <view class="contant">
   <view class="view_jilu view_jilu_height">
     <van-row>

@@ -24,7 +24,7 @@ Page({
     app.loading(),this.showLoading(!1)
     this.setData({
       pageNum:1,
-      pageSize:5,
+      pageSize:10,
       visitLogs:[],
       iphoneX:app.globalData.iphoneX
     })

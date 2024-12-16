@@ -16,10 +16,10 @@
               <van-cell title-class="vant-cell-title-class"  title="卡号" value="{{visitLog.cardNo}}" border="{{ false }}" />  
             </block>
             <block wx:if="{{visitLog.isUnlock == 2}}">
-              <van-cell title-class="vant-cell-title-class"  title="进门" value="{{visitLog.openDoorTime}}" border="{{ false }}" />  
+              <van-cell title-class="vant-cell-title-class"  title="进门时间" value="{{visitLog.openDoorTime}}" border="{{ false }}" />  
             </block>
             <block wx:if="{{visitLog.isUnlock == 4}}">
-              <van-cell title-class="vant-cell-title-class"  title="出门" value="{{visitLog.openDoorTime}}" border="{{ false }}" />  
+              <van-cell title-class="vant-cell-title-class"  title="出门时间" value="{{visitLog.openDoorTime}}" border="{{ false }}" />  
             </block>
     
             <view style="height:20rpx;"></view>
