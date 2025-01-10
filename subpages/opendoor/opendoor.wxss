@@ -179,7 +179,7 @@
 	position: relative;
 	margin-left: 5%;
 	padding-left: 0px;
-	width: 360rpx;
+	width: 400rpx;
 	box-sizing: border-box;
 	text-align: left;
 	z-index: 1;
@@ -215,7 +215,7 @@
   .inputStyle{
 	color: rgb(130, 134, 134);
 	height: 50rpx;
-	width: 348rpx;
+	width: 385rpx;
 	padding: 1%;
 	border-radius: 0.25em;
 	border: 1px solid #d0d0d0;

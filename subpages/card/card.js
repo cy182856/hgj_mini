@@ -13,7 +13,8 @@ Page({
     cardCode_swim:'',
     cardExpNum_swim:'',
     expDate_swim:'',
-    cardNo_swin:''
+    cardNo_swin:'',
+    card_button_disabled:false
   },
 
   // 游泳卡信息
@@ -53,36 +54,42 @@ Page({
 
   // 生成二维码
   createCardQrCode:function(){  
+    var that = this;
     var cstCode = app.storage.getCstCode();
     var wxOpenId = app.storage.getWxOpenId();
     var proNum = app.storage.getProNum();
-    var cardCstBatchId = this.data.cardCstBatchId_swim;
+    var cardCstBatchId = that.data.cardCstBatchId_swim;
     var data = {
       cardCstBatchId: cardCstBatchId,
       cstCode: cstCode,
       wxOpenId: wxOpenId,
       proNum: proNum
     }
-    app.req.postRequest(api.createCardQrCode, data).then(function (value) {
-      console.log("createCardQrCode 返回", value);
-      if(value.data.RESPCODE == "000" && value.data.cardQrCode != null){
-        var cardQrCode = value.data.cardQrCode;
-        var startExpDate = value.data.startExpDate;
-        var endExpDate = value.data.endExpDate;
-        var openDoorTotalNum = value.data.openDoorTotalNum;
-        var openDoorApplyNum = value.data.openDoorApplyNum;
-        var cardNo = value.data.cardNo;
-        wx.navigateTo({
-          url: '/subpages/card/cardQrCode/cardQrCode?cardQrCode=' + cardQrCode +'&startExpDate=' + startExpDate +'&endExpDate=' + endExpDate +'&openDoorTotalNum=' + openDoorTotalNum +'&openDoorApplyNum=' + openDoorApplyNum + '&cardNo=' + cardNo
-        })
-      }else{
-        wx.showToast({
-          icon:'none',
-          title: value.data.ERRDESC?value.data.ERRDESC:'失败',
-          duration:5000
-        })
-      }
-    }); 
+    if(!that.data.card_button_disabled){
+      that.setData({ card_button_disabled: true });
+      app.req.postRequest(api.createCardQrCode, data).then(function (value) {
+        console.log("createCardQrCode 返回", value);
+        if(value.data.RESPCODE == "000" && value.data.cardQrCode != null){
+          that.setData({ card_button_disabled: false });
+          var cardQrCode = value.data.cardQrCode;
+          var startExpDate = value.data.startExpDate;
+          var endExpDate = value.data.endExpDate;
+          var openDoorTotalNum = value.data.openDoorTotalNum;
+          var openDoorApplyNum = value.data.openDoorApplyNum;
+          var cardNo = value.data.cardNo;
+          wx.navigateTo({
+            url: '/subpages/card/cardQrCode/cardQrCode?cardQrCode=' + cardQrCode +'&startExpDate=' + startExpDate +'&endExpDate=' + endExpDate +'&openDoorTotalNum=' + openDoorTotalNum +'&openDoorApplyNum=' + openDoorApplyNum + '&cardNo=' + cardNo
+          })
+        }else{
+          that.setData({ card_button_disabled: false });
+          wx.showToast({
+            icon:'none',
+            title: value.data.ERRDESC?value.data.ERRDESC:'失败',
+            duration:5000
+          })
+        }
+      }); 
+    }    
   },
 
   /**

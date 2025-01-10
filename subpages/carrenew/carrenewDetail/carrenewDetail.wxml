@@ -18,7 +18,7 @@
 					</view>
 					<view  style="text-align: right;">
 						<van-col span="6">
-							<text>{{carInfoVo.carCode}}</text>
+							<text>{{carCode}}</text>
 						</van-col>
 					</view>
 				</van-row>
@@ -28,12 +28,12 @@
 				<van-row>
 					<view  style="text-align: left;">
 						<van-col span="12">
-							<text>进场时间</text>
+							<text>车辆类型编码</text>
 						</van-col>
 					</view>
 					<view  style="text-align: right;">
 						<van-col span="11">
-							<text>{{carInfoVo.inParkTime}}</text>
+							<text>{{carTypeNo}}</text>
 						</van-col>
 					</view>
 				</van-row>
@@ -43,12 +43,12 @@
 				<van-row>
 					<view  style="text-align: left;">
 						<van-col span="12">
-							<text>出场时间</text>
+							<text>车位有效期开始时间</text>
 						</van-col>
 					</view>
 					<view  style="text-align: right;">
 						<van-col span="11">
-							<text>{{carInfoVo.outParkTime}}</text>
+							<text>{{beginTime}}</text>
 						</van-col>
 					</view>
 				</van-row>
@@ -58,12 +58,12 @@
 				<van-row>
 					<view  style="text-align: left;">
 						<van-col span="12">
-							<text>停车时长</text>
+							<text>车位有效期结束时间</text>
 						</van-col>
 					</view>
 					<view  style="text-align: right;">
 						<van-col span="11">
-							<text>{{carInfoVo.parkDur}}</text>
+							<text>{{endTime}}</text>
 						</van-col>
 					</view>
 				</van-row>
@@ -73,12 +73,27 @@
 				<van-row>
 					<view  style="text-align: left;">
 						<van-col span="12">
-							<text>总金额</text>
+							<text>车主姓名</text>
 						</van-col>
 					</view>
 					<view  style="text-align: right;">
 						<van-col span="11">
-							<text>{{carInfoVo.totalAmount}}元</text>
+							<text>{{userName}}</text>
+						</van-col>
+					</view>
+				</van-row>
+			</view>
+
+			<view style="margin-top: 10px;">
+				<van-row>
+					<view  style="text-align: left;">
+						<van-col span="12">
+							<text>电话</text>
+						</van-col>
+					</view>
+					<view  style="text-align: right;">
+						<van-col span="11">
+							<text>{{phone}}</text>
 						</van-col>
 					</view>
 				</van-row>
@@ -87,41 +102,32 @@
 		</view>
 	</view>
 
-	<view wx:if="{{parkCardVo != null}}">
-		<view style="margin-top: 30px;margin-left: 4%;"></view>
-		<view style="height: auto; width: 95%;" class="view_bg">
-			<view class="view_desc">
-				<radio-group bindtap="radioChange" data-datavalue="{{radioValue}}">
-					<label class="custom-radio">
-						<view>
-							<van-row>
-								<view style="text-align: left;">
-									<van-col span="18">
-										<text>停车卡抵扣</text> 
-									</van-col>
-								</view>
-								<view style="text-align: right;">
-									<van-col span="6">
-										<radio style="transform: scale(0.7);" value="{{parkCardVo.cardCstBatchId}}" checked="{{radioChecked}}"></radio>
-									</van-col>
-								</view>
-							</van-row>
-						</view>
-					</label>
-				</radio-group>	
-			</view>
-		</view>
-		<view style="margin-left: 7%;color:#444444;font-size: 12px;">停车卡本月剩余<text style="color: rgb(6, 91, 248);font-size: 14px;">{{parkCardVo.expNum}}</text>小时(将优先扣除停车卡时长)</view>
-	</view>
+	<van-row >
+    <view style="margin-top: 30px;">
+      <van-col span = "7">
+        <view>
+          <text style="font-size: 16px; margin-left: 15%; color: rgb(65, 62, 62);">续费月数:<text style="color: red;">*</text></text>
+        </view>
+      </van-col>
+      <van-col span = "15">
+        <view>
+          <input style="text-align: left; border-style: solid;border-width: 1px;width: 90%; height: 30px; color: rgb(136, 133, 133); padding-left: 5px;" placeholder="" bindinput="inputChangeMonth"
+          value="{{monthNum}}" maxlength="2"/>
+        </view>
+      </van-col>
+    </view>
+  </van-row>
+
+	
 
 	<view style="margin-top: 30px;margin-left: 4%;"> 支付方式</view>
 	<image src="/images/carpay/wxpay.png" style="height: 100rpx; width: 93%; margin-left: 3%;"></image>
 
 	<view style="position: fixed;bottom: 0;width: 750rpx; height: 80px;background-color: rgb(250, 248, 248);">
 		<van-row>
-			<van-col span="15"><text style="color:#2c2c2c;margin-left: 15%;">实际支付： <text style="color: rgb(248, 10, 10);">{{carInfoVo.totalAmount}}</text>元</text></van-col>
+			<van-col span="15"><text style="color:#2c2c2c;margin-left: 15%;">实际支付： <text style="color: rgb(248, 10, 10);">{{payAmount}}</text>元</text></van-col>
 			<van-col span="9">
-			<button wx:if="{{(payment_button_disabled == false)}}"  class="bill_button_payment" hover-class="bill_button_payment_class" bindtap="carPayment" data-datavalue="{{item}}">立即支付</button>
+			<button wx:if="{{(payment_button_disabled == false)}}"  class="bill_button_payment" hover-class="bill_button_payment_class" bindtap="carRenew" data-datavalue="{{item}}">立即支付</button>
 			</van-col>
 		</van-row>
 	</view>

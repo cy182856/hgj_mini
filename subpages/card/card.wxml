@@ -33,7 +33,7 @@
   </view>
 
   <view style="margin-left: 2%;margin-right: 2%;margin-top: 5px;">
-    <button bindtap="createCardQrCode">生成二维码</button>
+    <button wx:if="{{(card_button_disabled == false)}}" bindtap="createCardQrCode">生成二维码</button>
   </view>
 </view>
 

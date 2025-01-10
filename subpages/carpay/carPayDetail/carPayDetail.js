@@ -11,7 +11,7 @@ Page({
   data: {
     carCode: '',
     radioChecked: false,
-    readioValue:'',
+    radioValue:'',
     payment_button_disabled: false,
     carInfoVo: null,
     parkCardVo: null,
@@ -31,7 +31,7 @@ Page({
     // 调用接口查询车牌缴费信息
     that.queryCarPayInfo();
     // 开始倒计时
-    that.countdown();
+    //that.countdown();
    
   },
 
@@ -49,7 +49,6 @@ Page({
           //url: '/subpages/carpay/carpay'
           delta: 1
         });
-
       }
       that.setData({ 
         seconds: seconds,
@@ -61,21 +60,26 @@ Page({
   // 查询车辆缴费信息
   queryCarPayInfo(){
     var that = this;
+    var radioChecked = that.data.radioChecked;
     var data = {};
     data['cstCode'] = app.storage.getCstCode();
     data['proNum'] = app.storage.getProNum();   
     data['wxOpenId'] = app.storage.getWxOpenId();
     data['carCode'] = that.data.carCode;
-    app.req.postRequest(api.queryCarPayInfo,data).then(res=>{
+    data['radioChecked'] = radioChecked;
+    app.req.postRequest(api.queryCarNum,data).then(res=>{
       if(res.data.respCode == '000'){               
         var carInfoVo = res.data.carInfoVo;
         var parkCardVo = res.data.parkCardVo;
+        if(parkCardVo != null){
+          that.setData({
+            radioValue: parkCardVo.cardCstBatchId
+          });
+        }
         that.setData({
           carInfoVo: carInfoVo,
-          parkCardVo: parkCardVo,
-          readioValue: parkCardVo.cardCstBatchId
-        });   
-        
+          parkCardVo: parkCardVo
+        });
       }else{
         app.alert.alert(res.data.errDesc);
       }
@@ -90,7 +94,7 @@ Page({
     var radioChecked = that.data.radioChecked;
     // 获取单选框的值
     console.log(e.detail.value)
-    if(radioChecked == false){
+    if(radioChecked == false){ 
       that.setData({
         radioChecked : true
       })
@@ -98,9 +102,10 @@ Page({
     if(radioChecked == true){
       that.setData({
         radioChecked :false
-      })
+      })   
     }
-    console.log("--------------"+that.data.readioValue+"------------")
+    console.log("--------------"+that.data.radioValue+"------------")
+    that.queryCarPayInfo();
   },
 
   // 缴费
@@ -113,11 +118,10 @@ Page({
     data['wxOpenId'] = app.storage.getWxOpenId();
     data['proNum'] = app.storage.getProNum();   
     data['carCode'] = that.data.carCode;
-    data['cardCstBatchId'] = that.data.parkCardVo.cardCstBatchId;
-    data['priRev'] = that.data.carInfoVo.totalAmount;
+    if(radioChecked == true){
+      data['cardCstBatchId'] = that.data.parkCardVo.cardCstBatchId;
+    }
     data['radioChecked'] = radioChecked;
-    data['cardAmount'] = that.data.parkCardVo.cardAmount;
-    data['orderId'] = that.data.orderId;
     if(!that.data.payment_button_disabled){
       that.setData({ payment_button_disabled: true });
       // 服务端获取支付参数
@@ -127,33 +131,46 @@ Page({
           var orderId = res.data.orderId;
           that.setData({ 
             payment_button_disabled: false,
-            orderId:orderId
-          });        
-          var timeStamp = res.data.signInfoVo.timeStamp;
-          var nonceStr = res.data.signInfoVo.nonceStr;
-          var repayId = res.data.signInfoVo.repayId;
-          var paySign = res.data.signInfoVo.paySign;
-          wx.requestPayment({
-            timeStamp: timeStamp,
-            nonceStr: nonceStr,
-            package: repayId,
-            signType: 'RSA',
-            paySign: paySign,
-            success (res) {
-                console.log("-------------成功---------------" + res);
-                // 支付完成，修改支付状态为支付中
-                app.req.postRequest(api.paymentCompleted,data).then(res=>{
-                  console.log("支付完成返回",res);
-                  if(res.data.respCode == '000'){
-                    console.log("支付完成返回成功！")   
-                  }
-                });
-               
-            },
-            fail (res) {
-              console.log("-------------失败---------------" + res);
-            }
-          });
+            orderId: orderId
+          });  
+          var totalAmount = that.data.carInfoVo.totalAmount;
+          if(totalAmount > 0){
+            var timeStamp = res.data.signInfoVo.timeStamp;
+            var nonceStr = res.data.signInfoVo.nonceStr;
+            var repayId = res.data.signInfoVo.repayId;
+            var paySign = res.data.signInfoVo.paySign;
+            wx.requestPayment({
+              timeStamp: timeStamp,
+              nonceStr: nonceStr,
+              package: repayId,
+              signType: 'RSA',
+              paySign: paySign,       
+              success (res) {
+                  console.log("-------------成功---------------" + res);
+                  // 支付完成，修改支付状态为支付中
+                  data['id'] = orderId;
+                  app.req.postRequest(api.parkPayOrderStatusUpdate,data).then(res=>{
+                    console.log("支付完成返回",res);
+                    if(res.data.respCode == '000'){
+                      console.log("支付完成返回成功！")   
+                    }
+                  });  
+                  // 跳转到支付成功页
+                  wx.navigateTo({
+                    url: '/subpages/carpay/carPaySuccess/carPaySuccess'
+                  })
+              },        
+              fail (res) {
+                console.log("-------------失败---------------" + res);
+              }
+            });
+          }else{
+             // 跳转到支付成功页
+             wx.navigateTo({
+              url: '/subpages/carpay/carPaySuccess/carPaySuccess'
+            })
+          }      
+         
         }else{
           that.setData({ payment_button_disabled: false });
           var code = res.data.errCode;
@@ -182,16 +199,16 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide() {
-    var that = this;
-    clearInterval(that.data.interval);
+    // var that = this;
+    // clearInterval(that.data.interval);
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload() {
-    var that = this;
-    clearInterval(that.data.interval);
+    // var that = this;
+    // clearInterval(that.data.interval);
   },
 
   /**

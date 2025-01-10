@@ -2,7 +2,7 @@ const api = require('../../const/api'),
 app = getApp();
 Page({
   data: {
-    carCode: '',
+    carCode: ''
   },
   onLoad: function (e) {
      
@@ -31,29 +31,27 @@ Page({
     console.log("-------------------" + carCode + "--------------------")
     that.closekeyboard();
     if (carCode.length == 7 || carCode.length == 8) {
-      // 调用接口查询车牌号信息
+      // 调用接口根据车牌号查询月租车信息
       var data = {};
       data['cstCode'] = app.storage.getCstCode();
       data['proNum'] = app.storage.getProNum();   
       data['wxOpenId'] = app.storage.getWxOpenId();
       data['carCode'] = carCode;
-      data['radioChecked'] = false;
-      app.req.postRequest(api.queryCarNum,data).then(res=>{
-        if(res.data.respCode == '000'){                   
-          var payFeeStatus = res.data.payFeeStatus;
-          if(payFeeStatus == true){
-            // 如果有欠费信息，跳转到车辆缴费页面
-            wx.navigateTo({
-              url: '/subpages/carpay/carPayDetail/carPayDetail?carCode=' + carCode
-            })
-          }else{
-            // 无欠费信息，提示车辆可以直接离场
-            wx.showToast({
-              icon:'none',
-              title: '该车牌目前无需付费，可直接出场',
-              duration:3000
-            })
-          }              
+      app.req.postRequest(api.queryCarInfoByCarNum,data).then(res=>{
+        if(res.data.respCode == '000'){
+          var carRenewInfoVo = res.data.carRenewInfoVo;
+          var carCode = carRenewInfoVo.carCode;
+          var carTypeNo = carRenewInfoVo.carTypeNo; 
+          var beginTime = carRenewInfoVo.beginTime;
+          var endTime = carRenewInfoVo.endTime;
+          var userName = carRenewInfoVo.userName;
+          var phone = carRenewInfoVo.phone;
+          var homeAddress = carRenewInfoVo.homeAddress;
+          var monthAmount = carRenewInfoVo.monthAmount;
+          // 如果车辆类型符合要求，跳转到车辆缴费页面
+          wx.navigateTo({
+            url: '/subpages/carrenew/carrenewDetail/carrenewDetail?carCode=' + carCode + '&carTypeNo=' + carTypeNo + '&beginTime=' + beginTime +'&endTime=' + endTime + '&userName=' + userName + '&phone=' + phone + '&homeAddress=' + homeAddress + '&monthAmount=' + monthAmount
+          })              
         }else{
           wx.showToast({
             icon:'none',

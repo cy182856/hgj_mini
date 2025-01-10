@@ -22,6 +22,7 @@ Page({
     ,visitName:''
     ,cstName:app.storage.getCstName()
     ,quickCodeInterTime:''
+    ,pass_code_button_disabled:false
   },
 
   /**
@@ -181,6 +182,12 @@ Page({
       url: '/subpages/opendoor/openDoorLog/openDoorLog',
     })
   },
+
+  queryQuickCodeDayLog:function(){
+    wx.navigateTo({
+      url: '/subpages/opendoor/openDoorQuickCode/openDoorQuickCode',
+    })
+  },
  
   createPassCode:function(){
     console.log(this.data.expDate)
@@ -214,28 +221,35 @@ Page({
       houseId: that.data.valueid,
       visitName: that.data.visitName
     }
-    app.req.postRequest(api.addOpenDoorQrCode, visitInfo).then(function (value) {
-      console.log("addVisitLog 返回", value);
-      if(value.data.RESPCODE == "000" && value.data.visitQrCode != null){
-        var visiPass = value.data.openDoorCodeVo;
-        wx.navigateTo({
-          url: '/subpages/opendoor/openDoorDetail/openDoorDetail?'+'visitQrCode=' + value.data.visitQrCode + '&visitName=' + visiPass.visitName + '&expDate=' + visiPass.expDate
-        })
-      }else{
+
+    if(!that.data.pass_code_button_disabled){
+      that.setData({ pass_code_button_disabled: true });
+      app.req.postRequest(api.addOpenDoorQrCode, visitInfo).then(function (value) {
+        console.log("addVisitLog 返回", value);
+        if(value.data.RESPCODE == "000" && value.data.visitQrCode != null){
+          that.setData({ pass_code_button_disabled: false });
+          var visiPass = value.data.openDoorCodeVo;
+          wx.navigateTo({
+            url: '/subpages/opendoor/openDoorDetail/openDoorDetail?'+'visitQrCode=' + value.data.visitQrCode + '&visitName=' + visiPass.visitName + '&expDate=' + visiPass.expDate
+          })
+        }else{
+          that.setData({ pass_code_button_disabled: false });
+          wx.showToast({
+            icon:'none',
+            title: value.data.ERRDESC?value.data.ERRDESC:'生成访客通行码失败',
+            duration:3000
+          })
+        }
+      }, function (value) {
+        that.setData({ pass_code_button_disabled: false });
+        console.log("addVisitLog F ", value);
         wx.showToast({
           icon:'none',
-          title: value.data.ERRDESC?value.data.ERRDESC:'生成访客通行码失败',
+          title: '生成访客通行码失败',
           duration:3000
         })
-      }
-    }, function (value) {
-      console.log("addVisitLog F ", value);
-      wx.showToast({
-        icon:'none',
-        title: '生成访客通行码失败',
-        duration:3000
-      })
-    }); 
+      }); 
+    }  
   },
   createQuickCode:function(){
     var that = this;  

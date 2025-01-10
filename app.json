@@ -159,7 +159,8 @@
       "pages": [
         "opendoor",
         "openDoorDetail/openDoorDetail",
-        "openDoorLog/openDoorLog" 
+        "openDoorLog/openDoorLog",
+        "openDoorQuickCode/openDoorQuickCode"
       ]
     },
     {
@@ -238,7 +239,17 @@
       "name": "carpay",
       "pages": [
         "carpay",
-        "carPayDetail/carPayDetail"
+        "carPayDetail/carPayDetail",
+        "carPaySuccess/carPaySuccess"
+      ]
+    },
+    {
+      "root": "subpages/carrenew",
+      "name": "carrenew",
+      "pages": [
+        "carrenew",
+        "carrenewDetail/carrenewDetail",
+        "carrenewSuccess/carrenewSuccess"
       ]
     },
     {

@@ -2,9 +2,9 @@
   <view>
     <view class="rq-name">{{proName}}</view>
   </view>
-  <view class="visit-log-view" bindtap="checkVisitInfos">
+  <!-- <view class="visit-log-view" bindtap="checkVisitInfos">
     <view class="visit-log-btn">访客记录</view>
-  </view>
+  </view> -->
   <image class='visit-info-bg' mode="aspectFill" src='/images/home/back-img2.png'></image>
 </view>
 <view class="visit-log-tab">
@@ -22,8 +22,23 @@
       <van-cell-group border="{{false}}">
           <view style="margin-left:30rpx;">
             <view style="height:20rpx;"></view>
+
+          <view style="margin-left: 5%; margin-top: 8%;">        
+            <view >
+                  <van-row>
+                    <van-col span="7" ><view style="color: rgb(130, 134, 134);margin-top: 4px;">有效期 </view></van-col>
+                    <van-col span="8" ><view style="font-size:28rpx;margin-left: 5rpx;color: rgb(130, 134, 134);margin-top: 5px;">当天有效</view>                        
+                    </van-col>
+                    <van-col span="8" >
+                      <view bindtap="checkVisitInfos">
+                        <button style="font-size: 12px; width: 80%;">访客记录</button>
+                      </view>                        
+                    </van-col>
+                  </van-row>
+              </view>           
+          </view>
             
-          <view style="margin-left: 5%; margin-top: 10%;">
+          <view style="margin-left: 5%; margin-top: 5%;">
               <view>
                 <van-row>
                   <van-col span="7" >
@@ -78,12 +93,12 @@
           </van-row>
         </view>
 
-        <view style="margin-top: 15px;"></view>
-				<view style="margin-left: 5%; font-size: 30rpx; color: rgb(130, 134, 134);">有效期<text style="margin-left: 15%;">当天有效</text></view>
+        <!-- <view style="margin-top: 15px;"></view>
+				<view style="margin-left: 5%; font-size: 30rpx; color: rgb(130, 134, 134);">有效期<text style="margin-left: 15%;">当天有效</text></view> -->
          
           </view>
           <view class="create-passcode-btn" style="margin-top: 70rpx;">
-            <van-button bindtap="createPassCode" custom-class="vant-btn-class" type="info">生成通行码</van-button>
+            <van-button wx:if="{{(pass_code_button_disabled == false)}}" bindtap="createPassCode" custom-class="vant-btn-class" type="info">生成通行码</van-button>
           </view>
           <van-panel title="说明" desc="{{visitorCode}}" ></van-panel>
         </van-cell-group>
@@ -112,15 +127,20 @@
       <van-cell-group border="{{false}}">
           <view style="margin-left:30rpx;">
             <view style="height:20rpx;"></view>
-            
-				<view style="margin-left: 5%; margin-top: 10%;">
+    
+				<view style="margin-left: 5%; margin-top: 8%;">
           <view>
                 <van-row>
-                  <van-col span="7" ><view class="date-picker" style="color: rgb(130, 134, 134);">快速通行码<text style="color:red">*</text> </view></van-col>
-                  <van-col span="17" ><view style="font-size:40rpx;margin-left: 10rpx;">{{randomNum}}</view>                        
+                  <van-col span="7" ><view class="date-picker" style="color: rgb(130, 134, 134);margin-top: 3px;">快速通行码<text style="color:red">*</text> </view></van-col>
+                  <van-col span="8" ><view style="font-size:40rpx;margin-left: 10rpx;">{{randomNum}}</view>                        
+                  </van-col>
+                  <van-col span="8" >
+                    <view bindtap="queryQuickCodeDayLog">
+                      <button style="font-size: 12px; width: 80%;">当日记录</button>
+                    </view>                        
                   </van-col>
                 </van-row>
-              </view>            
+          </view>            
 				</view>
         
         <view style=" margin-top: 10epx;padding-bottom: 10rpx;">

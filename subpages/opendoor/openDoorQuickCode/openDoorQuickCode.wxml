@@ -1,0 +1,45 @@
+<import src="../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<import src="../../../template/empty/empty.wxml"></import>
+<view class="weui-loadmore" wx:if="{{isRefreshing}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore-tips">正在刷新...</view>
+</view>
+<block wx:if="{{visitLogs && visitLogs.length > 0}}">
+  <view style=" padding-bottom:{{padding_bottom}}rpx;">
+    <block wx:for="{{visitLogs}}" wx:for-item="visitLog">
+      <view class="visit-log-item">
+      
+        <view>
+          <van-cell-group custom-class="vant-cell-custom-class">
+            <block >
+              <van-cell title-class="vant-cell-title-class"  title="快速通行码" value="{{visitLog.quickCode}}" border="{{ false }}" />  
+            </block>
+			<block >
+              <van-cell wx:if="{{visitLog.isExpire == 1}}" title-class="vant-cell-title-class"  title="状态" value="未用" border="{{ false }}" /> 
+			  <van-cell wx:if="{{visitLog.isExpire == 0}}" title-class="vant-cell-title-class"  title="状态" value="已用" border="{{ false }}" />  
+ 
+            </block>  
+            <view style="height:20rpx;"></view>
+          </van-cell-group>
+        </view>
+      </view>
+    </block>
+    <!-- 点击加载更多 -->
+    <block wx:if="{{more}}">
+      <view wx:if="{{loading}}" class="loading-container">
+        <van-loading type="spinner" size="26rpx" text-size="22rpx">正在加载更多...</van-loading>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="loading-container" bindtap="" >没有更多内容啦</view>
+    </block>
+  </view>
+</block>
+<block wx:else>
+  <view class="empty-view">
+    <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无记录'}}"></template>
+  </view>
+</block>
+
+<van-dialog id="van-dialog" overlay-style ="z-index:6666 !important;"  confirm-button-color ="#189AFE" />

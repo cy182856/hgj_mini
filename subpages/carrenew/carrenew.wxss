@@ -1,0 +1,340 @@
+/**index.wxss**/
+
+.userinfo {
+	display: flex;
+	flex-direction: row;
+	color: rgb(224, 224, 224);
+	margin-top: 5%;
+	margin-left: 5%;
+	height: 30%;
+	width: 90%;
+	align-items: left;
+  }
+  .limittxt{
+	height: 50rpx;
+	background:rgba(176,43,71, 0.4);
+	border-radius: 50rpx;
+	color:rgb(255, 251, 251);
+	font-size:30rpx;
+	 margin-left:-12%;
+	 margin-top:100rpx;
+	 padding-left: 10rpx;
+	 padding-right: 10rpx;
+  }
+  .userinfo-avatar {
+	overflow: hidden;
+	width: 90rpx;
+	height: 90rpx;
+	margin-left: 5%;
+	margin-top: 5%;
+	border-radius: 50%;
+	color: #aaa;
+	border: 3rpx double #b4bbdd98;
+  }
+  
+  .head{
+	position: fixed;
+	top:0;
+	left: 0;
+	width: 100%;
+	background-size:cover;
+	z-index:1;
+  }
+  .head image{
+   height: 180rpx; 
+   width: 85%;
+   display: block; 
+   border-radius: 20rpx;
+   box-sizing: border-box; 
+   left: 0rpx; 
+   margin-top: 5%;
+   margin-left: 60rpx;
+   opacity:0.2;
+  }
+  .bg{
+	height:100%;
+	position: fixed;
+	top:0;
+	left: 0;
+	width: 100%;
+	z-index:-1;
+	background-color: #4e7ca1;
+  }
+  .bg-img{
+	width: 30%;
+	height: 10%;
+	background-size:cover;
+	margin-top: 170%;
+	margin-left: 65%;
+  }
+  .container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	box-sizing: border-box;
+	background-color: rgb(93, 132, 158);
+  } 
+  .container>image{
+	width: 100%;
+	height: 100%;
+  }
+  /*swiper*/
+  swiper{
+	width:100%;
+	height: 330rpx;
+	margin-top: 45rpx;
+  }
+  swiper image{
+	display: block;
+	width: 85%;
+	height: 300rpx;
+	border-radius: 20rpx;
+	margin-left: 7.5%; 
+	opacity:0.8;
+	border: 1rpx solid #ffe28d;
+  }
+  .index-button
+  {
+	position: relative; left: 0rpx; top: 40rpx;
+	width:50%;
+  }
+  /*搜索查询和支付*/
+  .park-query{
+	/*overflow: hidden;*/
+	width: 100%; 
+	position: relative;
+	box-sizing: border-box;
+	padding: 10rpx  0;  
+  
+  }
+  .park-search{
+	overflow: hidden;
+	width: 100%;
+	margin-top: 30%;
+  }
+  .search-title{
+	overflow: hidden;
+	width: 100%;
+	margin-bottom: 20rpx;
+	text-align: center;
+  }
+  .search-desc{
+	font-size:32rpx;
+  }
+  .search-input{
+	overflow: hidden;
+	width: 85%;
+	margin: 0 auto;
+	height: 98rpx;
+	border-radius: 8rpx;
+	border: 1rpx solid #ffb900;
+	background: white;
+	position: relative;
+	border-radius: 20rpx;
+  }
+  .section-input{
+	display: inline-block;
+	width: 85%;
+	height: 98rpx;
+	box-sizing: border-box;
+	padding-left:30rpx;
+  }
+  .section-input input{
+	background: white;
+	padding: 0 0 0 36rpx;
+	box-sizing: border-box;
+	font-size: 32rpx;
+	width: 100%;
+	height: 98rpx;
+	border-top-left-radius: 8rpx;
+	border-bottom-left-radius: 8rpx;
+  }
+  .section-input input:focus {
+	  border: 1px solid #3b99fc;
+	  outline: 0;
+	  box-shadow: 0 0 3rpx 0rpx #3b99fc;
+	  -webkit-box-shadow: 0 0 3rpx 0rpx #3b99fc; 
+  }
+  
+  #simpleKeyboard{
+	width: 100%;
+	height: 100%;
+	background: white;
+	font-size: 32rpx;
+  }
+  .section-button{
+	display: inline-block;
+	width: 175rpx;
+	height: 98rpx;
+	position: absolute;
+	right: 0;
+	top:0;
+  }
+  .container_reg{
+	color: #ffffffc7;
+	font-size: larger;
+	text-align: center;
+  }
+  .reg_button{
+	width: 200rpx;
+	height: 80rpx;
+	border-radius: 8rpx;
+	border: 1rpx solid #ffb900;
+	background: #ffb900;
+	border-radius: 20rpx;
+  }
+  .section-button button::after{
+	border: 0rpx;
+  }
+  .section-button text{
+	width: 100%;
+	height: 100%;
+	color: #282828;
+	font-size: 38rpx;
+   /* background: #ffb900;*/
+   background: linear-gradient(135deg, rgba(255,185,0,1), rgb(247, 228, 147)); 
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	letter-spacing:18rpx;
+	text-indent: 18rpx;
+  }
+  
+  /*//////////////////////////////////////////////////////////*/
+  .pupContentBG {
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+  }
+  
+  .pupContent {
+	display:inline-block;
+	width: 85%;
+	/*background-color: rgba(198, 228, 67, 0.3);*/
+	position: absolute;
+	/*bottom: 0rpx;*/
+	box-shadow: 0 0 10rpx rgb(160, 226, 147);
+	height: 0;
+	z-index: 1;
+	border-radius: 20rpx;
+	background: linear-gradient(60deg, rgba(102, 102, 134, 0.8), rgba(1, 161, 235, 0.5)); 
+	margin-top: 110rpx;
+  }
+  .puptext{
+	width:70%;
+	color: rgb(255, 196, 0);
+	float: left;
+	line-height:95%;
+	white-space: pre-wrap;
+	margin-top: 30rpx;
+	font-size: 38rpx;
+  }
+  .pupContent button{
+	padding: 0;
+	 width: 27%;
+   /*background: rgba(255,185,0,0.8);*/
+	background: linear-gradient(135deg, rgba(255,185,0,0.8), rgba(247, 228, 147,1)); 
+	box-shadow: 0 0 10rpx #333;
+	margin-right: 0;
+	margin-top: 0;
+	border-radius: 20rpx;
+	line-height:300rpx;
+	opacity:1;
+	font-size: 38rpx;
+  }
+  
+  /* 设置显示的背景 
+  .showBG {
+	display: block;
+  }
+  .hideBG {
+	display: none;
+  }*/
+  /* 弹出或关闭动画来动态设置内容高度 */
+  @keyframes slideBGtUp {
+	from {    background: transparent;  }
+	to {    background: rgba(0, 0, 0, 0.1);  }
+  }
+  
+  @keyframes slideBGDown {
+	from {    background: rgba(0, 0, 0, 0.1);  }
+	to {    background: transparent;  }
+  }
+  /* 显示或关闭内容时动画 
+  .openBG {
+	animation: slideBGtUp 0.5s ease-in both;
+	 animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 
+  }
+  .closeBG {
+	animation: slideBGDown 0.5s ease-in both;
+	 animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 
+  }*/
+  /* 设置显示内容 */
+  .showContent {
+	display: block;
+	font-size: 28rpx;
+  }
+  .hideContent {
+	display: none;
+  }
+  /* 弹出或关闭动画来动态设置内容高度 */
+  @keyframes slideContentUp {
+	from {    height: 0;  }
+	to {    height: 350rpx;  }
+  }
+  @keyframes slideContentDown {
+	from {    height: 350rpx;  }
+	to {    height: 0;  }
+  }
+  /* 显示或关闭内容时动画 */
+  .open {
+	animation: slideContentUp 0.3s ease-in both;
+	/* animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 */
+  }
+  
+  .close {
+	animation: slideContentDown 0.3s ease-in both;
+	/* animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 */
+  }
+  
+  
+  @keyframes slideContentUp1 {
+	from {    height: 0;  }
+	to {    height: 350rpx;  }
+  }
+  @keyframes slideContentDown1 {
+	from {    height: 350rpx;  }
+	to {    height: 0;  }
+  }
+	/* .open1 {
+	animation: slideContentUp1 0.3s ease-in both;
+  }
+  .close1 {
+	animation: slideContentDown1 0.3s ease-in both;
+  }*/
+  
+  @keyframes slideContentUp2 {
+	from {    height: 0;  }
+	to {    height: 350rpx;  }
+  }
+  @keyframes slideContentDown2 {
+	from {    height: 350rpx;  }
+	to {    height: 0;  }
+  }
+  /*.open2 {
+	animation: slideContentUp2 0.5s ease-in both;
+	}
+  
+  .close2 {
+	animation: slideContentDown2 0.5s ease-in both;
+  }*/
+  .shuoming{
+	padding: 20rpx 10rpx;
+	font-size: 38rpx;
+	text-align: center;
+	color:rgba(247, 228, 147,1);
+  }

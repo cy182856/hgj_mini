@@ -76,15 +76,6 @@ Page({
     })
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  // onReachBottom: function () {
-  //   if (this.data.isRefreshing || this.data.loading || !this.data.more) {
-  //     return;
-  //   }
-  //   this.onLoadMore()
-  // },
   onReachBottom: function () {
     let totalNum = this.data.totalNum;
     let pageNum = this.data.pageNum;
@@ -116,10 +107,10 @@ Page({
       pageSize:that.data.pageSize
     };
     that.showLoading(!0)
-    app.req.postRequest(api.queryOpenDoorLog, queryParams).then(function (value) {
+    app.req.postRequest(api.queryOpenDoorQuickCodeLog, queryParams).then(function (value) {
       console.log("queryVisitLogs 返回", value);
       if(value.data.respCode == "000"){
-        var visitLogList = value.data.list;
+        var visitLogList = value.data.quickCodeList;
         let totalNum = value.data.totalNum;
         var pages = parseInt(value.data.pages);
         that.data.visitLogs.push.apply(that.data.visitLogs,visitLogList);
@@ -136,7 +127,7 @@ Page({
       console.log("queryVisitLogs F ", value);
       wx.showToast({
         icon:'none',
-        title: '查询访客记录失败'
+        title: '查询当日记录失败'
       })
       that.showLoading(!1)
     }); 
