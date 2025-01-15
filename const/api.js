@@ -55,14 +55,15 @@ module.exports = {
   ,repairCommonList:ApiRootUrl + 'repairCommonList' //查询报修快捷描述语
   ,updRepairCommon:ApiRootUrl + 'updRepairCommon' //快捷描述语使用频次
   ,repairAddMsgBody:ApiRootUrl + 'repair/addRepairMsg.do' //报修留言
-
   ,repairHouseList:ApiRootUrl + 'repairHouseList' //查询客户房屋列表
 
-
-  /**********************我的房屋***************** */
+  /**********************房屋相关***************** */
+  ,houseListByCstCode:ApiRootUrl + 'hu/houseListByCstCode' //根据客户编号查询房屋
   ,huOperate:ApiRootUrl + 'hu/operate'//房主对租户操作同意、驳回、移除
   ,huList:ApiRootUrl + 'hu/list' //我的房屋查询
-  ,huCardPerm:ApiRootUrl + 'hu/cardPerm' //卡权限设置
+  ,createIntoInfo:ApiRootUrl + 'hu/createIntoInfo' //创建入住信息
+  ,queryIntoInfo:ApiRootUrl + 'hu/queryIntoInfo' //查询入住信息
+  
 
   /**********************查询管家信息***************** */
   ,queryHouseKeepInfo:ApiRootUrl + 'houseKeepInfo.do'//查询管家信息
@@ -80,6 +81,8 @@ module.exports = {
 
   ,paymentCompleted:ApiRootUrl + 'paymentCompleted.do'//支付完成，修改支付状态为支付中
 
+  /********************入住邀请*************************/
+  ,identityList:ApiRootUrl + 'identity/list' //获取身份
 
   /********************问卷调查*************************/
   ,QueryQnQueList: ApiRootUrl + 'queryQnQueList.do',//查询问卷问题（及答案）列表
@@ -172,18 +175,25 @@ module.exports = {
 
  /********************扫码开门*************************/
   addOpenDoorQrCode : ApiRootUrl + "opendoor/addOpenDoorQrCode.do", //扫码开门-生成二维码
-  queryOpenDoorLog: ApiRootUrl + "opendoor/queryOpenDoorLog.do", //查询开门记录
+  queryOpenDoorLog: ApiRootUrl + "opendoor/queryOpenDoorLog.do", //查询访客通行码开门记录
+  queryOpenDoorQuickCodeLog: ApiRootUrl + "opendoor/queryOpenDoorQuickCodeLog.do", //查询快速通行码记录
+
+  queryOpenDoorLogByCardNo: ApiRootUrl + "opendoor/queryOpenDoorLogByCardNo.do", //根据卡号查询开门记录
   createQuickCode : ApiRootUrl + "opendoor/createQuickCode.do", //创建快速通行码
   queryWeekDate:ApiRootUrl + 'opendoor/queryWeekDate.do', //获取当前及一周后日期
   queryOpenDoorExplain:ApiRootUrl + 'opendoor/queryVisitExplain.do', //查询访客通行码说明文字
+  queryQuickCodeInterTime:ApiRootUrl + 'opendoor/queryQuickCodeInterTime.do', //获取创建快速码的间隔时间
 
-/********************活动中心*************************/
+
+/********************健身中心*************************/
   addCouponQrCode : ApiRootUrl + "active/addCouponQrCode.do", //生成开门二维码
   openLogQuery: ApiRootUrl + "active/openLog/query.do", //开门记录查询
   couponQuery: ApiRootUrl + "active/coupon/query.do", //券查询
 
   queryCardSwim: ApiRootUrl + "card/queryCardSwim", //查询游泳卡信息
   createCardQrCode : ApiRootUrl + "card/createCardQrCode", //生成游泳卡开门二维码
+  cardPerm:ApiRootUrl + 'card/cardPerm', //卡权限设置
+
 
   checkVisitLogDetail : ApiRootUrl + "/visitinfo/showVisitInfoDetail.do" //查看单个访客通行证信息
   ,queryVisitLogs: ApiRootUrl + "visitinfo/queryVisitInfos.do" //查询访客记录
@@ -191,8 +201,13 @@ module.exports = {
 
   /********************停车缴费*************************/
   ,queryCarNum: ApiRootUrl + "carpay/queryCarNum" //查询车牌号
-  ,queryCarPayInfo: ApiRootUrl + "carpay/queryCarPayInfo" //查询车辆缴费信息
   ,carPayment:ApiRootUrl + 'carpay/carPayment.do'// 缴费
+  ,parkPayOrderStatusUpdate:ApiRootUrl + 'parkPayOrderStatusUpdate.do'//支付完成，修改支付状态为支付中
+
+  /********************车辆续费*************************/
+  ,queryCarInfoByCarNum: ApiRootUrl + "carrenew/queryCarInfoByCarNum" //车牌号查询月租车信息
+  ,carRenew:ApiRootUrl + 'carrenew/carRenew.do'// 缴费
+  ,carRenewOrderStatusUpdate:ApiRootUrl + 'carRenewOrderStatusUpdate.do'//支付完成，修改支付状态为支付中
 
 
   /********************问题反馈*************************/

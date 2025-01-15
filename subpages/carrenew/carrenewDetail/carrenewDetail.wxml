@@ -28,7 +28,7 @@
 				<van-row>
 					<view  style="text-align: left;">
 						<van-col span="12">
-							<text>车辆类型编码</text>
+							<text>车辆类型</text>
 						</van-col>
 					</view>
 					<view  style="text-align: right;">

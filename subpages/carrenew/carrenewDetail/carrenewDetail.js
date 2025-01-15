@@ -41,7 +41,7 @@ Page({
   inputChangeMonth(event) {
     var monthNum = event.detail.value;
     if(/^[1-9]\d*$/.test(monthNum) == false && monthNum != '' && monthNum != null){
-      app.alert.alert('续费月数请填写数字！');
+      app.alert.alert('续费月数请填写正确的数字！');
       return;
     }
     console.log(monthNum);
