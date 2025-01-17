@@ -14,10 +14,12 @@ Page({
     radioValue:'',
     payment_button_disabled: false,
     carInfoVo: null,
-    parkCardVo: null,
     interval: 0,
     seconds: totalSeconds, // 初始倒计时秒数
-    orderId:''
+    orderId:'',
+    isCard:false,
+    cardCstBatchId:'',
+    expNum:''
   },
 
   /**
@@ -28,11 +30,47 @@ Page({
     that.setData({
       carCode: options.carCode
     })
+    // 查询停车卡剩余时长及批次
+    that.queryCardExpNum();
     // 调用接口查询车牌缴费信息
-    that.queryCarPayInfo();
+    //that.queryCarPayInfo();
     // 开始倒计时
     //that.countdown();
-   
+  },
+
+  queryCardExpNum(){
+    var that = this;
+    var data = {};
+    data['cstCode'] = app.storage.getCstCode();
+    data['proNum'] = app.storage.getProNum();   
+    data['wxOpenId'] = app.storage.getWxOpenId();
+    app.req.postRequest(api.queryCardExpNum,data).then(res=>{
+      if(res.data.respCode == '000'){     
+        var isCard = res.data.isCard;
+        var cardCstBatchId = res.data.cardCstBatchId;
+        var expNum = res.data.expNum;  
+        if(isCard == true && expNum > 0){
+          that.setData({
+            radioChecked:true,
+            radioValue: cardCstBatchId
+          })       
+        }else{
+          that.setData({
+            radioChecked:false
+          })     
+        }
+        that.setData({
+          isCard:isCard,
+          cardCstBatchId:cardCstBatchId,
+          expNum:expNum,
+          isRefreshing:false
+        })   
+        // 调用接口查询车牌缴费信息
+        that.queryCarPayInfo();
+      }else{
+        app.alert.alert(res.data.errDesc);
+      }
+    });  
   },
 
   countdown: function() {
@@ -69,16 +107,9 @@ Page({
     data['radioChecked'] = radioChecked;
     app.req.postRequest(api.queryCarNum,data).then(res=>{
       if(res.data.respCode == '000'){               
-        var carInfoVo = res.data.carInfoVo;
-        var parkCardVo = res.data.parkCardVo;
-        if(parkCardVo != null){
-          that.setData({
-            radioValue: parkCardVo.cardCstBatchId
-          });
-        }
+        var carInfoVo = res.data.carInfoVo;  
         that.setData({
-          carInfoVo: carInfoVo,
-          parkCardVo: parkCardVo
+          carInfoVo: carInfoVo
         });
       }else{
         app.alert.alert(res.data.errDesc);
@@ -118,9 +149,7 @@ Page({
     data['wxOpenId'] = app.storage.getWxOpenId();
     data['proNum'] = app.storage.getProNum();   
     data['carCode'] = that.data.carCode;
-    if(radioChecked == true){
-      data['cardCstBatchId'] = that.data.parkCardVo.cardCstBatchId;
-    }
+    data['cardCstBatchId'] = that.data.cardCstBatchId;
     data['radioChecked'] = radioChecked;
     if(!that.data.payment_button_disabled){
       that.setData({ payment_button_disabled: true });
@@ -156,7 +185,7 @@ Page({
                     }
                   });  
                   // 跳转到支付成功页
-                  wx.navigateTo({
+                  wx.redirectTo({
                     url: '/subpages/carpay/carPaySuccess/carPaySuccess'
                   })
               },        
@@ -166,7 +195,7 @@ Page({
             });
           }else{
              // 跳转到支付成功页
-             wx.navigateTo({
+             wx.redirectTo({
               url: '/subpages/carpay/carPaySuccess/carPaySuccess'
             })
           }      
@@ -175,7 +204,7 @@ Page({
           that.setData({ payment_button_disabled: false });
           var code = res.data.errCode;
           var desc = res.data.errDesc;
-          app.alert.alert(code + ":" + desc);
+          app.alert.alert(desc);
         }
       }); 
     }
@@ -192,7 +221,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    var that = this;
+    // 查询停车卡剩余时长及批次
+    that.queryCardExpNum();
   },
 
   /**
@@ -215,6 +246,13 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh() {
+    var that = this;
+    that.setData({
+      isRefreshing:true
+    })
+    that.queryCardExpNum();
+    wx.stopPullDownRefresh({
+    })
 
   },
 

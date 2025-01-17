@@ -203,6 +203,7 @@ module.exports = {
   ,queryCarNum: ApiRootUrl + "carpay/queryCarNum" //查询车牌号
   ,carPayment:ApiRootUrl + 'carpay/carPayment.do'// 缴费
   ,parkPayOrderStatusUpdate:ApiRootUrl + 'parkPayOrderStatusUpdate.do'//支付完成，修改支付状态为支付中
+  ,queryCardExpNum: ApiRootUrl + "carpay/queryCardExpNum" //查询停车卡时长
 
   /********************车辆续费*************************/
   ,queryCarInfoByCarNum: ApiRootUrl + "carrenew/queryCarInfoByCarNum" //车牌号查询月租车信息

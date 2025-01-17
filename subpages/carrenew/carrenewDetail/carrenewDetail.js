@@ -103,7 +103,7 @@ Page({
                 }
               });
               // 跳转到支付成功页
-              wx.navigateTo({
+              wx.redirectTo({
                 url: '/subpages/carrenew/carrenewSuccess/carrenewSuccess'
               })
             },

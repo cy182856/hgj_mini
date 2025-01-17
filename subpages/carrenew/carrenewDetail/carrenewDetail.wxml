@@ -4,6 +4,7 @@
 <!-- 弹窗 -->
 <van-dialog id="van-dialog" />
 
+
 <view>
 	<view style="margin-top: 20px;margin-left: 4%;">车辆信息</view>
 	<view style="height: auto;" class="view_bg">
@@ -43,6 +44,36 @@
 				<van-row>
 					<view  style="text-align: left;">
 						<van-col span="12">
+							<text>车主姓名</text>
+						</van-col>
+					</view>
+					<view  style="text-align: right;">
+						<van-col span="11">
+							<text>{{userName}}</text>
+						</van-col>
+					</view>
+				</van-row>
+			</view>
+
+			<view style="margin-top: 10px;">
+				<van-row>
+					<view  style="text-align: left;">
+						<van-col span="12">
+							<text>车主电话</text>
+						</van-col>
+					</view>
+					<view  style="text-align: right;">
+						<van-col span="11">
+							<text>{{phone}}</text>
+						</van-col>
+					</view>
+				</van-row>
+			</view>
+
+			<view style="margin-top: 10px;">
+				<van-row>
+					<view  style="text-align: left;">
+						<van-col span="12">
 							<text>车位有效期开始时间</text>
 						</van-col>
 					</view>
@@ -64,36 +95,6 @@
 					<view  style="text-align: right;">
 						<van-col span="11">
 							<text>{{endTime}}</text>
-						</van-col>
-					</view>
-				</van-row>
-			</view>
-
-			<view style="margin-top: 10px;">
-				<van-row>
-					<view  style="text-align: left;">
-						<van-col span="12">
-							<text>车主姓名</text>
-						</van-col>
-					</view>
-					<view  style="text-align: right;">
-						<van-col span="11">
-							<text>{{userName}}</text>
-						</van-col>
-					</view>
-				</van-row>
-			</view>
-
-			<view style="margin-top: 10px;">
-				<van-row>
-					<view  style="text-align: left;">
-						<van-col span="12">
-							<text>电话</text>
-						</van-col>
-					</view>
-					<view  style="text-align: right;">
-						<van-col span="11">
-							<text>{{phone}}</text>
 						</van-col>
 					</view>
 				</van-row>
