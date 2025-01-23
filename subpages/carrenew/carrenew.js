@@ -70,4 +70,10 @@ Page({
     }
   },
 
+  carRenewLog:function(){
+    wx.navigateTo({
+      url: '/subpages/carrenew/carrenewLog/carrenewLog',
+    })
+  }
+
 })

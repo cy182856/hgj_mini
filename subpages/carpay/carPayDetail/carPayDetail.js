@@ -11,15 +11,17 @@ Page({
   data: {
     carCode: '',
     radioChecked: false,
-    radioValue:'',
+    radioValue: '',
     payment_button_disabled: false,
     carInfoVo: null,
     interval: 0,
     seconds: totalSeconds, // 初始倒计时秒数
-    orderId:'',
-    isCard:false,
-    cardCstBatchId:'',
-    expNum:''
+    orderId: '',
+    isCard: false,
+    cardCstBatchId: '',
+    expNum: '',
+    hourNumArray: [],
+    hourNumValue: 1
   },
 
   /**
@@ -38,42 +40,63 @@ Page({
     //that.countdown();
   },
 
-  queryCardExpNum(){
+  queryCardExpNum() {
     var that = this;
     var data = {};
     data['cstCode'] = app.storage.getCstCode();
-    data['proNum'] = app.storage.getProNum();   
+    data['proNum'] = app.storage.getProNum();
     data['wxOpenId'] = app.storage.getWxOpenId();
-    app.req.postRequest(api.queryCardExpNum,data).then(res=>{
-      if(res.data.respCode == '000'){     
+    app.req.postRequest(api.queryCardExpNum, data).then(res => {
+      if (res.data.respCode == '000') {
         var isCard = res.data.isCard;
         var cardCstBatchId = res.data.cardCstBatchId;
-        var expNum = res.data.expNum;  
-        if(isCard == true && expNum > 0){
+        var expNum = res.data.expNum;
+        if (isCard == true && expNum > 0) {
           that.setData({
-            radioChecked:true,
+            radioChecked: true,
             radioValue: cardCstBatchId
-          })       
-        }else{
+          })
+        } else {
           that.setData({
-            radioChecked:false
-          })     
+            radioChecked: false
+          })
         }
         that.setData({
-          isCard:isCard,
-          cardCstBatchId:cardCstBatchId,
-          expNum:expNum,
-          isRefreshing:false
-        })   
+          isCard: isCard,
+          cardCstBatchId: cardCstBatchId,
+          expNum: expNum,
+          isRefreshing: false
+        })
+        // 查询选择停车卡时长数组
+        that.queryHourNum();
         // 调用接口查询车牌缴费信息
         that.queryCarPayInfo();
-      }else{
+      } else {
         app.alert.alert(res.data.errDesc);
       }
-    });  
+    });
   },
 
-  countdown: function() {
+  queryHourNum() {
+    var that = this;
+    var data = {};
+    data['cstCode'] = app.storage.getCstCode();
+    data['proNum'] = app.storage.getProNum();
+    data['wxOpenId'] = app.storage.getWxOpenId();
+    data['carCode'] = that.data.carCode;
+    app.req.postRequest(api.queryHourNum, data).then(res => {
+      if (res.data.respCode == '000') {
+        var hourNumArray = res.data.hourNumArray;      
+        that.setData({
+          hourNumArray: hourNumArray
+        })
+      } else {
+        app.alert.alert(res.data.errDesc);
+      }
+    });
+  },
+
+  countdown: function () {
     var that = this;
     // 每秒钟更新倒计时 
     var interval = setInterval(() => {
@@ -88,82 +111,92 @@ Page({
           delta: 1
         });
       }
-      that.setData({ 
+      that.setData({
         seconds: seconds,
         interval: interval
-       });
+      });
     }, 1000);
   },
 
   // 查询车辆缴费信息
-  queryCarPayInfo(){
+  queryCarPayInfo() {
     var that = this;
     var radioChecked = that.data.radioChecked;
     var data = {};
     data['cstCode'] = app.storage.getCstCode();
-    data['proNum'] = app.storage.getProNum();   
+    data['proNum'] = app.storage.getProNum();
     data['wxOpenId'] = app.storage.getWxOpenId();
     data['carCode'] = that.data.carCode;
     data['radioChecked'] = radioChecked;
-    app.req.postRequest(api.queryCarNum,data).then(res=>{
-      if(res.data.respCode == '000'){               
-        var carInfoVo = res.data.carInfoVo;  
+    data['hourNumValue'] = that.data.hourNumValue;
+    app.req.postRequest(api.queryCarNum, data).then(res => {
+      if (res.data.respCode == '000') {
+        var carInfoVo = res.data.carInfoVo;
         that.setData({
           carInfoVo: carInfoVo
         });
-      }else{
+      } else {
         app.alert.alert(res.data.errDesc);
       }
 
-    });  
+    });
   },
 
   // 单选框选中,取消事件
-  radioChange(e){
+  radioChange(e) {
     var that = this;
     // 单选框选中状态
     var radioChecked = that.data.radioChecked;
     // 获取单选框的值
     console.log(e.detail.value)
-    if(radioChecked == false){ 
+    if (radioChecked == false) {
       that.setData({
-        radioChecked : true
+        radioChecked: true,
+        hourNumValue:1
       })
     }
-    if(radioChecked == true){
+    if (radioChecked == true) {
       that.setData({
-        radioChecked :false
-      })   
+        radioChecked: false,
+        hourNumValue:1
+      })
     }
-    console.log("--------------"+that.data.radioValue+"------------")
+    console.log("--------------" + that.data.radioValue + "------------")
     that.queryCarPayInfo();
   },
 
   // 缴费
-  carPayment(e){
+  carPayment(e) {
     var that = this;
+    var hourNumValue = that.data.hourNumValue;
+    var radioChecked = that.data.radioChecked;
+    if(radioChecked == true &&  (hourNumValue == null || hourNumValue == '')){
+      app.alert.alert('请选择抵扣时长！');
+      return;
+    }
     // 是否选择了停车卡
     var radioChecked = that.data.radioChecked;
     var data = {};
     data['cstCode'] = app.storage.getCstCode();
     data['wxOpenId'] = app.storage.getWxOpenId();
-    data['proNum'] = app.storage.getProNum();   
+    data['proNum'] = app.storage.getProNum();
     data['carCode'] = that.data.carCode;
     data['cardCstBatchId'] = that.data.cardCstBatchId;
     data['radioChecked'] = radioChecked;
-    if(!that.data.payment_button_disabled){
+    data['hourNumValue'] = that.data.hourNumValue;
+    if (!that.data.payment_button_disabled) {
       that.setData({ payment_button_disabled: true });
       // 服务端获取支付参数
-      app.req.postRequest(api.carPayment,data).then(res=>{
-        console.log("下单返回",res);
-        if(res.data.respCode == '000'){
+      app.req.postRequest(api.carPayment, data).then(res => {
+        console.log("下单返回", res);
+        if (res.data.respCode == '000') {
           var orderId = res.data.orderId;
-          that.setData({ 
+          that.setData({
             payment_button_disabled: false,
             orderId: orderId
-          });  
+          });
           var totalAmount = that.data.carInfoVo.totalAmount;
-          if(totalAmount > 0){
+          if (totalAmount > 0) {
             var timeStamp = res.data.signInfoVo.timeStamp;
             var nonceStr = res.data.signInfoVo.nonceStr;
             var repayId = res.data.signInfoVo.repayId;
@@ -173,41 +206,52 @@ Page({
               nonceStr: nonceStr,
               package: repayId,
               signType: 'RSA',
-              paySign: paySign,       
-              success (res) {
-                  console.log("-------------成功---------------" + res);
-                  // 支付完成，修改支付状态为支付中
-                  data['id'] = orderId;
-                  app.req.postRequest(api.parkPayOrderStatusUpdate,data).then(res=>{
-                    console.log("支付完成返回",res);
-                    if(res.data.respCode == '000'){
-                      console.log("支付完成返回成功！")   
-                    }
-                  });  
-                  // 跳转到支付成功页
-                  wx.redirectTo({
-                    url: '/subpages/carpay/carPaySuccess/carPaySuccess'
-                  })
-              },        
-              fail (res) {
+              paySign: paySign,
+              success(res) {
+                console.log("-------------成功---------------" + res);
+                // 支付完成，修改支付状态为支付中
+                data['id'] = orderId;
+                app.req.postRequest(api.parkPayOrderStatusUpdate, data).then(res => {
+                  console.log("支付完成返回", res);
+                  if (res.data.respCode == '000') {
+                    console.log("支付完成返回成功！")
+                  }
+                });
+                // 跳转到支付成功页
+                wx.redirectTo({
+                  url: '/subpages/carpay/carPaySuccess/carPaySuccess'
+                })
+              },
+              fail(res) {
                 console.log("-------------失败---------------" + res);
               }
             });
-          }else{
-             // 跳转到支付成功页
-             wx.redirectTo({
+          } else {
+            // 跳转到支付成功页
+            wx.redirectTo({
               url: '/subpages/carpay/carPaySuccess/carPaySuccess'
             })
-          }      
-         
-        }else{
+          }
+
+        } else {
           that.setData({ payment_button_disabled: false });
           var code = res.data.errCode;
           var desc = res.data.errDesc;
           app.alert.alert(desc);
         }
-      }); 
+      });
     }
+  },
+
+  // 选择抵扣小时,选择器选择的 
+  bindPickerChange(e) {
+    console.log(e)
+    this.setData({
+      index: e.detail.value,
+      hourNumValue: this.data.hourNumArray[e.detail.value]
+    })
+    this.queryCarPayInfo();
+    console.log('选中的数据:' + this.data.hourNumValue)
   },
 
   /**
@@ -248,12 +292,12 @@ Page({
   onPullDownRefresh() {
     var that = this;
     that.setData({
-      isRefreshing:true
+      isRefreshing: true,
+      hourNumValue:1
     })
     that.queryCardExpNum();
     wx.stopPullDownRefresh({
     })
-
   },
 
   /**

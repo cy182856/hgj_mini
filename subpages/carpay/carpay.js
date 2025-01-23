@@ -72,4 +72,10 @@ Page({
     }
   },
 
+  carPayLog:function(){
+    wx.navigateTo({
+      url: '/subpages/carpay/carPayLog/carPayLog',
+    })
+  }
+
 })

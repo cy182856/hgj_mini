@@ -107,14 +107,17 @@
     <view style="margin-top: 30px;">
       <van-col span = "7">
         <view>
-          <text style="font-size: 16px; margin-left: 15%; color: rgb(65, 62, 62);">续费月数:<text style="color: red;">*</text></text>
+          <text style="font-size: 16px; margin-left: 14%; color: rgb(65, 62, 62);">续费月数:<text style="color: red;">*</text></text>
         </view>
       </van-col>
-      <van-col span = "15">
+      <van-col span = "12">
         <view>
-          <input style="text-align: left; border-style: solid;border-width: 1px;width: 90%; height: 30px; color: rgb(136, 133, 133); padding-left: 5px;" placeholder="" bindinput="inputChangeMonth"
+          <input style="text-align: left; border-style: solid;border-width: 1px;width: 90%; height: 25px; color: rgb(136, 133, 133); padding-left: 5px;" placeholder="" bindinput="inputChangeMonth"
           value="{{monthNum}}" maxlength="2"/>
         </view>
+      </van-col>
+	  <van-col span = "5">
+        <view style="font-size: 16px; color: rgb(65, 62, 62);">个月</view>
       </van-col>
     </view>
   </van-row>

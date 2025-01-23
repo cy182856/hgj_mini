@@ -12,4 +12,9 @@
         </view>
       </view>
     </view>
+
+    <view style="height: 300px;" bindtap="carRenewLog">
+      <image style="height: 50px; width: 50px; margin-left: 0px;" src="/images/carpay/paylog.png"></image>
+      <view style="color: azure; font-size: 12px;">历史记录</view>
+    </view>
 </view>

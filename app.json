@@ -240,7 +240,8 @@
       "pages": [
         "carpay",
         "carPayDetail/carPayDetail",
-        "carPaySuccess/carPaySuccess"
+        "carPaySuccess/carPaySuccess",
+        "carPayLog/carPayLog"
       ]
     },
     {
@@ -249,7 +250,8 @@
       "pages": [
         "carrenew",
         "carrenewDetail/carrenewDetail",
-        "carrenewSuccess/carrenewSuccess"
+        "carrenewSuccess/carrenewSuccess",
+        "carrenewLog/carrenewLog"
       ]
     },
     {

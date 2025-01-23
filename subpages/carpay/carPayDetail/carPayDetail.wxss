@@ -40,6 +40,29 @@
 
 
 
+.box{
+	padding: 30rpx;
+  }
+  .form-item{
+	display: flex;
+	background-color: rgb(221, 230, 230);
+	margin-bottom: 10rpx;
+	border-radius: 30rpx;
+  }
+  .head{
+	line-height: 100rpx;
+	margin-left: 30rpx;
+  }
+  .tail{
+	height: 100rpx;
+  }
+  .pic{
+	height: 100rpx;
+	width: 400rpx;
+	margin-left: -2rpx;
+  }
+  
+
   
 
 
