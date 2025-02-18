@@ -22,8 +22,8 @@
             <block>
 			  <van-cell>
 				<van-col span="5">实付金额</van-col>
-    			<van-col span="11">{{carPayLogs.payAmount}}元</van-col>
-				<van-col span="8" wx:if="{{carPayLogs.payAmount > 0}}"><button style="width: 50%; font-size: 10px; margin-left: 53px;">开票</button></van-col>
+    			<van-col span="11">{{carPayLogs.actAmount}}元</van-col>
+				<van-col span="8" wx:if="{{carPayLogs.actAmount > 0}}"><button style="width: 50%; font-size: 10px; margin-left: 53px;">开票</button></van-col>
 			  </van-cell>
             </block>
             <block>

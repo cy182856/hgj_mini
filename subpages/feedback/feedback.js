@@ -100,7 +100,7 @@ submitInfo(){
 
   if(!datas.feedbackDesc || datas.feedbackDesc == ''){
     this.showLoading(0);
-    app.alert.alert('请描述您的投诉建议，以便我们为您提供更好的服务！');
+    app.alert.alert('请描述您的反馈建议，以便我们为您提供更好的服务！');
     return;
   }
 
@@ -122,7 +122,7 @@ submitInfo(){
   if(!that.data.feedback_button_disabled){
     that.setData({ feedback_button_disabled: true });
     app.req.postRequest(api.feedback,d).then(value => {
-        console.log('投诉响应结果',value.data);
+        console.log('反馈响应结果',value.data);
         that.showLoading(0);
         if(value.data.respCode == '000'){
           that.setData({ feedback_button_disabled: false });  
@@ -134,7 +134,7 @@ submitInfo(){
         }else{
           that.setData({ feedback_button_disabled: false });
           Toast.alert({
-            message:'投诉失败,' + value.data.errDesc,
+            message:'提交失败,' + value.data.errDesc,
           })
         }
     });

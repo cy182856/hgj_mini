@@ -1,6 +1,6 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText":"车牌缴费",
+  "navigationBarTitleText":"车辆缴费",
   "enablePullDownRefresh": true
 
 }

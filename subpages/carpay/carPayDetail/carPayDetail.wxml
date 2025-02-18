@@ -93,6 +93,7 @@
 	</view>
 
 	<view wx:if="{{isCard == true && expNum > 0}}">
+	
 		<view style="margin-top: 30px;margin-left: 4%;"></view>
 		<view style="height: auto; width: 95%;" class="view_bg">
 			<view class="view_desc">
@@ -147,11 +148,6 @@
 				</van-col>
 			</van-row>		
 		</view>
-
-	
-
-		
-		
 
 	</view>
 

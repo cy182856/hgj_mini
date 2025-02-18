@@ -3,9 +3,9 @@
 
 //const ApiRootUrl = 'https://zhgj.shofw.com/wx/';//tech
 //const ApiRootUrl = 'http://192.168.79.5:85/wx/';
-const ApiRootUrl = 'http://192.168.23.108:85/wx/';//tech
+//const ApiRootUrl = 'http://192.168.23.108:85/wx/';//tech
 //const ApiRootUrl = 'http://zhgjtest.shofw.com:85/wx/';
-//const ApiRootUrl = 'https://zhgj.xhguanjia.cn/wx/';
+const ApiRootUrl = 'https://zhgj.xhguanjia.cn/wx/';
 
 // const ApiRootUrl = 'https://jia.huiguan.com/jiasv/';//prod
 // const ApiRootUrl = 'http://dev.huiguan.com:60103/jiasv/';//local
@@ -204,11 +204,14 @@ module.exports = {
   ,carPayment:ApiRootUrl + 'carpay/carPayment.do'// 缴费
   ,parkPayOrderStatusUpdate:ApiRootUrl + 'parkPayOrderStatusUpdate.do'//支付完成，修改支付状态为支付中
   ,queryCardExpNum: ApiRootUrl + "carpay/queryCardExpNum" //查询停车卡时长
+  ,queryHourNum: ApiRootUrl + "carpay/queryHourNum" //查询选择停车卡时长数组
+  ,queryCarPayLog: ApiRootUrl + "carpay/queryCarPayLog.do" //查询停车缴费历史记录
 
   /********************车辆续费*************************/
   ,queryCarInfoByCarNum: ApiRootUrl + "carrenew/queryCarInfoByCarNum" //车牌号查询月租车信息
   ,carRenew:ApiRootUrl + 'carrenew/carRenew.do'// 缴费
   ,carRenewOrderStatusUpdate:ApiRootUrl + 'carRenewOrderStatusUpdate.do'//支付完成，修改支付状态为支付中
+  ,queryCarRenewLog: ApiRootUrl + "carrenew/queryCarRenewLog.do" //查询车辆续费历史记录
 
 
   /********************问题反馈*************************/
