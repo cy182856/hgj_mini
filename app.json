@@ -255,6 +255,17 @@
       ]
     },
     {
+      "root": "subpages/moncarren",
+      "name": "moncarren",
+      "pages": [
+        "monCarRen",
+        "monCarRenDetail/monCarRenDetail",
+        "monCarRenSuccess/monCarRenSuccess",
+        "monCarRenLog/monCarRenLog",
+        "monCarInvoice/monCarInvoice"
+      ]
+    },
+    {
       "root": "subpages/charge",
       "name": "charge",
       "pages": [

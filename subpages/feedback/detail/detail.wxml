@@ -2,9 +2,9 @@
 <template is="loading" data="{{..._loading_}}"></template>
 <!-- 弹窗 -->
 <van-dialog id="van-dialog" />
-<!-- 反馈详情模块 -->
+<!-- 详情模块 -->
 <view class="view_detail">
-  <!-- 反馈详情 -->
+  
   <view class="view_title_desc" style="padding-top:13rpx;">
     <van-cell title-class="txt" title="{{obj.feedbackDesc}}" border="{{false}}" />
   </view>
@@ -43,7 +43,7 @@
       </van-col>
     </van-row>
     
-    <!--反馈图片-->
+    <!--图片-->
     <view wx:if="{{fileList != null && fileList != '' && fileList.length > 0}}">
       <view wx:for="{{fileList}}" wx:for-index="idx" wx:for-item="image">
         <van-col span="8">

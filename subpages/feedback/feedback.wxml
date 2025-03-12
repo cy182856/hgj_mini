@@ -9,10 +9,10 @@
 <view class="contant">
   <view class="view_jilu view_jilu_height">
     <van-row>
-      <van-col span="18"><text class="leixing">问题反馈</text></van-col>    
+      <van-col span="18"><text class="leixing">监督渠道</text></van-col>    
       <van-col span="6">
         <view style="padding-left:5rpx;" bindtap="toListPage">
-          <text class="jilu">反馈记录</text>
+          <text class="jilu">历史记录</text>
         </view>
       </van-col>
     </van-row>
@@ -24,7 +24,7 @@
       <van-col span="21">
         <view class="text_area1">
           <van-cell-group>
-            <van-field value="{{ feedbackDesc }}" type="textarea" placeholder="请描述您的反馈内容，以便我们为您提供更好的服务" autosize="{{textArea}}" border="{{ false }}" custom-style="padding: var(--cell-vertical-padding,5px) var(--cell-horizontal-padding,2px);" bind:input="feedbackDesc" maxlength="200" show-word-limit="{{true}}" />
+            <van-field value="{{ feedbackDesc }}" type="textarea" placeholder="请描述您的举报内容，以便我们为您提供更好的服务,举报信息由凡享内审部直接负责。" autosize="{{textArea}}" border="{{ false }}" custom-style="padding: var(--cell-vertical-padding,5px) var(--cell-horizontal-padding,2px);" bind:input="feedbackDesc" maxlength="200" show-word-limit="{{true}}" />
           </van-cell-group>
         </view>
       </van-col>  

@@ -1,0 +1,76 @@
+<import src="../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<import src="../../../template/empty/empty.wxml"></import>
+<view class="weui-loadmore" wx:if="{{isRefreshing}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore-tips">正在刷新...</view>
+</view>
+<block wx:if="{{carPayLogs && carPayLogs.length > 0}}">
+  <view style=" padding-bottom:{{padding_bottom}}rpx;">
+    <block wx:for="{{carPayLogs}}" wx:for-item="carPayLogs">
+      <view class="visit-log-item">
+
+          <van-cell-group>
+            <block >
+              <van-cell>
+				<van-col span="5" style="color: black;">车牌号</van-col>
+    			<van-col span="11" style="color: black;">{{carPayLogs.carCode}}</van-col>
+				<van-col span="8" wx:if="{{carPayLogs.orderStatus == 1}}" style="color: rgb(93, 156, 117);">支付中</van-col>
+				<van-col span="8" wx:if="{{carPayLogs.orderStatus == 2}}" style="color: rgb(93, 156, 117);">缴费成功</van-col>
+			  </van-cell>
+            </block>
+            <block>
+			  <van-cell>
+				<van-col span="5">实付金额</van-col>
+    			<van-col span="11">{{carPayLogs.payAmount}}元</van-col>
+				<van-col span="8" wx:if="{{carPayLogs.payAmount > 0 && carPayLogs.orderStatus == 2 && carPayLogs.timeStatus == 0}}"><button style="width: 50%; font-size: 10px; margin-left: 53px;" bindtap="makeInvoiceCheck" data-datavalue="{{carPayLogs}}">开票</button></van-col>
+			  </van-cell>
+            </block>
+            <block>
+			  <van-cell>
+				<van-col span="5">续费月数</van-col>
+    			<van-col span="11">{{carPayLogs.monthNum}}个月</van-col>
+			  </van-cell>
+            </block>
+			<block>
+			  <van-cell>
+				<van-col span="5">开始时间</van-col>
+    			<van-col span="11">{{carPayLogs.renewBeginTime}}</van-col>
+			  </van-cell>
+            </block>
+			<block>
+			  <van-cell>
+				<van-col span="5">结束时间</van-col>
+    			<van-col span="11">{{carPayLogs.renewEndTime}}</van-col>
+			  </van-cell>
+            </block>
+			<block wx:if="{{carPayLogs.successTime != '' && carPayLogs.successTime != null}}">
+			  <van-cell>
+				<van-col span="5">缴费时间</van-col>
+    			<van-col span="11">{{carPayLogs.successTime}}</van-col>
+			  </van-cell>
+            </block>
+            <view style="height:20rpx;"></view>
+          </van-cell-group>
+        </view>
+    </block>
+    <!-- 点击加载更多 -->
+    <block wx:if="{{more}}">
+      <view wx:if="{{loading}}" class="loading-container">
+        <van-loading type="spinner" size="26rpx" text-size="22rpx">正在加载更多...</van-loading>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="loading-container" bindtap="" >没有更多内容啦</view>
+    </block>
+  </view>
+</block>
+<block wx:else>
+  <view class="empty-view">
+    <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无历史记录'}}"></template>
+  </view>
+</block>
+
+<view style="height: 20px;"></view>
+
+<van-dialog id="van-dialog" overlay-style ="z-index:6666 !important;"  confirm-button-color ="#189AFE" />

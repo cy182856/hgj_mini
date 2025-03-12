@@ -100,7 +100,7 @@ submitInfo(){
 
   if(!datas.feedbackDesc || datas.feedbackDesc == ''){
     this.showLoading(0);
-    app.alert.alert('请描述您的反馈建议，以便我们为您提供更好的服务！');
+    app.alert.alert('请描述您的举报内容，以便我们为您提供更好的服务！');
     return;
   }
 

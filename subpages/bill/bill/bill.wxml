@@ -11,8 +11,7 @@
     <view class="weui-loading"></view>
     <view class="weui-loadmore-tips">正在刷新...</view>
 </view>
-
-<view bindtap="payLogChange" style="margin-left:80%; margin-top: 5px; color: rgb(112, 192, 192);">缴费记录</view>
+<view wx:if="{{proNum == '10001'}}" bindtap="payLogChange" style="margin-left:80%; margin-top: 5px; color: rgb(112, 192, 192);">缴费记录</view>
 
 <view style="background-color:rgb(135, 175, 185);height: 110px;margin-right:3%; width: 100%;margin-top: 10px;">
 	<van-row >
@@ -114,7 +113,7 @@
 <view wx:else class="last_font">暂无记录</view>
 <view style="height:20px;"></view>
 
-<view wx:if="{{nav_type == 0}}" style="position: fixed;bottom: 0;width: 750rpx; height: 80px;background-color: rgb(250, 248, 248);">
+<view wx:if="{{nav_type == 0 && proNum == '10001'}}" style="position: fixed;bottom: 0;width: 750rpx; height: 80px;background-color: rgb(250, 248, 248);">
 		<van-row>
         <van-col span="16"><text style="color:#ABABAB;margin-left: 5%;">实付金额： <text style="color: red;">¥{{totalAmount}}</text></text></van-col>
         <van-col span="8">

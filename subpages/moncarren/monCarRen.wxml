@@ -1,0 +1,20 @@
+
+<view class="container" >
+    <!--查询-->
+    <view class='park-search'>
+      <view class="search-input">
+        <view class="section-input">
+          <simpleKeyboard bind:keyboardStatus="keyboardStatusHandler" id="simpleKeyboard"
+            placeholderText="无需输入中文首字" style="width: 750rpx; height:100%; display: inline; box-sizing: content-box"></simpleKeyboard>
+        </view>
+        <view class="section-button">
+          <text bindtap='bt_query'>查询</text>
+        </view>
+      </view>
+    </view>
+
+    <view style="height: 300px;" bindtap="monCarRenLog">
+      <image style="height: 50px; width: 50px; margin-left: 0px;" src="/images/carpay/paylog.png"></image>
+      <view style="color: azure; font-size: 12px;">历史记录</view>
+    </view>
+</view>

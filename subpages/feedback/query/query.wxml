@@ -21,7 +21,7 @@
 
 <!-- 查询的报修记录列表 -->
 <view wx:if="{{feedbackList == null || feedbackList.length == 0}}" >
-  <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无我的报修记录'}}"></template>
+  <template is="empty" data="{{src:'/assets/icons/empty/no-data.png',width:232,text:'暂无记录'}}"></template>
 </view>
 
 <view style="margin-top: 0px;" wx:else>
@@ -30,7 +30,7 @@
            custom-class="vb" 
            title-class="vcell_title txt" 
            value-class="daishouli" 
-           title="反馈信息" 
+           title="详细信息" 
            is-link value="详情" url="../detail/detail?id={{item.id}}" />
     <view class="view_desc">
        

@@ -4,5 +4,5 @@
     "van-popup": "@vant/weapp/popup/index",
     "picupload":"./picupload/picupload"
   },
-  "navigationBarTitleText":"问题反馈"
+  "navigationBarTitleText":"监督渠道"
 }

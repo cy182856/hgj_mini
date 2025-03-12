@@ -1,0 +1,230 @@
+<!-- 引用 -->
+<import src="../../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<!-- 弹窗 -->
+<van-dialog id="van-dialog" />
+
+
+<view>
+	<view style="margin-top: 20px;margin-left: 4%;">车辆信息</view>
+	<view style="height: auto;" class="view_bg">
+		<view class="view_desc">
+			
+			<view style="margin-top: 5px;">
+				<van-row>
+					<view  style="text-align: left;">
+						<van-col span="17">
+							<text>车牌号码</text>
+						</van-col>
+					</view>
+					<view  style="text-align: right;">
+						<van-col span="6">
+							<text>{{carCode}}</text>
+						</van-col>
+					</view>
+				</van-row>
+			</view>
+
+			<view style="margin-top: 5px;">
+				<van-row>
+					<view  style="text-align: left;">
+						<van-col span="14">
+							<text>姓名</text>
+						</van-col>
+					</view>
+					<view  style="text-align: right;">
+						<van-col span="9">
+							<text>{{userName}}</text>
+						</van-col>
+					</view>
+				</van-row>
+			</view>
+
+			<view wx:if="{{userTel != null && userTel != ''}}" style="margin-top: 5px;">
+				<van-row>
+					<view  style="text-align: left;">
+						<van-col span="14">
+							<text>电话</text>
+						</van-col>
+					</view>
+					<view  style="text-align: right;">
+						<van-col span="9">
+							<text>{{userTel}}</text>
+						</van-col>
+					</view>
+				</van-row>
+			</view>
+
+			<view wx:if="{{userAddress != null && userAddress != ''}}" style="margin-top: 5px;">
+				<van-row>
+					<view  style="text-align: left;">
+						<van-col span="4">
+							<text>地址</text>
+						</van-col>
+					</view>
+					<view  style="text-align: right;">
+						<van-col span="19">
+							<text>{{userAddress}}</text>
+						</van-col>
+					</view>
+				</van-row>
+			</view>
+
+			<!-- <view style="margin-top: 10px;">
+				<van-row>
+					<view  style="text-align: left;">
+						<van-col span="12">
+							<text>规则ID</text>
+						</van-col>
+					</view>
+					<view  style="text-align: right;">
+						<van-col span="11">
+							<text>{{ruleID}}</text>
+						</van-col>
+					</view>
+				</van-row>
+			</view> -->
+
+			<view style="margin-top: 10px;">
+				<van-row>
+					<view  style="text-align: left;">
+						<van-col span="12">
+							<text>规则</text>
+						</van-col>
+					</view>
+					<view  style="text-align: right;">
+						<van-col span="11">
+							<text>{{ruleName}}</text>
+						</van-col>
+					</view>
+				</van-row>
+			</view>
+
+			<!-- <view style="margin-top: 10px;">
+				<van-row>
+					<view  style="text-align: left;">
+						<van-col span="12">
+							<text>按期类型</text>
+						</van-col>
+					</view>
+					<view  style="text-align: right;">
+						<van-col span="11">
+							<text>{{ruleType}}</text>
+						</van-col>
+					</view>
+				</van-row>
+			</view> -->
+
+			<!-- <view style="margin-top: 10px;">
+				<van-row>
+					<view  style="text-align: left;">
+						<van-col span="12">
+							<text>按期周期</text>
+						</van-col>
+					</view>
+					<view  style="text-align: right;">
+						<van-col span="11">
+							<text>{{ruleCount}}</text>
+						</van-col>
+					</view>
+				</van-row>
+			</view> -->
+
+			<!-- <view style="margin-top: 10px;">
+				<van-row>
+					<view  style="text-align: left;">
+						<van-col span="12">
+							<text>每期金额</text>
+						</van-col>
+					</view>
+					<view  style="text-align: right;">
+						<van-col span="11">
+							<text>{{ruleAmount/100}}元</text>
+						</van-col>
+					</view>
+				</van-row>
+			</view> -->
+
+			<view style="margin-top: 10px;">
+				<van-row>
+					<view  style="text-align: left;">
+						<van-col span="12">
+							<text>有效期开始时间</text>
+						</van-col>
+					</view>
+					<view  style="text-align: right;">
+						<van-col span="11">
+							<text>{{beginTime}}</text>
+						</van-col>
+					</view>
+				</van-row>
+			</view>
+
+			<view style="margin-top: 10px;">
+				<van-row>
+					<view  style="text-align: left;">
+						<van-col span="12">
+							<text>有效期结束时间</text>
+						</van-col>
+					</view>
+					<view  style="text-align: right;">
+						<van-col span="11">
+							<text>{{endTime}}</text>
+						</van-col>
+					</view>
+				</van-row>
+			</view>
+
+		</view>
+	</view>
+
+	<van-row >
+    <view style="margin-top: 30px;">
+      <van-col span = "9">
+        <view>
+          <text style="font-size: 16px; margin-left: 15%; color: rgb(65, 62, 62);">选择续费月数:<text style="color: red;">*</text></text>
+        </view>
+      </van-col>
+      <van-col span = "10">
+        <view>
+          <!-- <input style="text-align: left; border-style: solid;border-width: 1px;width: 90%; height: 25px; color: rgb(136, 133, 133); padding-left: 5px;" placeholder="" bindinput="inputChangeMonth"
+          value="{{monthNum}}" maxlength="2"/> -->
+
+		  	<picker style="border-style:solid;border-color: rgb(204, 204, 204);border-width: 2px;" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">  
+				<view class="picker" style="margin-left: 45%;">  {{array[index]}}  </view>  
+			</picker> 
+
+        </view>
+      </van-col>
+	  <van-col span = "4">
+        <view style="font-size: 16px; color: rgb(65, 62, 62); margin-left: 10%;">个月</view>
+      </van-col>
+    </view>
+  </van-row>
+
+  <van-row>
+	<van-col span = "24">
+	<view style="font-size: 14px; margin-left: 20px; color: rgb(65, 62, 62); margin-top: 10px;">
+		<view>续费后有效开始时间：{{renewBeginTime}}</view>
+		<view>续费后有效结束时间：{{renewEndTime}}</view>
+	</view>
+	</van-col>
+  </van-row>
+	
+
+	<view style="margin-top: 30px;margin-left: 4%;"> 支付方式</view>
+	<image src="/images/carpay/wxpay.png" style="height: 100rpx; width: 93%; margin-left: 3%;"></image>
+
+	<view style="position: fixed;bottom: 0;width: 750rpx; height: 80px;background-color: rgb(250, 248, 248);">
+		<van-row>
+			<van-col span="15"><text style="color:#2c2c2c;margin-left: 15%;">实际支付： <text style="color: rgb(248, 10, 10);">{{payAmount}}</text>元</text></van-col>
+			<van-col span="9">
+			<button wx:if="{{(payment_button_disabled == false)}}"  class="bill_button_payment" hover-class="bill_button_payment_class" bindtap="carRenew" data-datavalue="{{item}}">立即支付</button>
+			</van-col>
+		</van-row>
+	</view>
+
+
+	<!-- <view style="margin-left: 32%; margin-top: 20%;">请在 <text style="color: red;">{{seconds}}</text> 秒内完成支付</view> -->
+
+</view>

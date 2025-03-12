@@ -13,7 +13,7 @@
 </view>
 
 <view class="li" style="margin-top: 10px;" data-index="0" bindtap=''>
-    <view class="left" style="font-size: 20px; margin-left: 10px;color:rgb(82, 77, 77)">{{proName}}</view><text style="color:rgb(82, 77, 77)">¥{{priRevAmount}}</text>
+    <view class="left" style="font-size: 20px; margin-left: 10px;color:rgb(82, 77, 77)">欠费总金额</view><text style="color:rgb(82, 77, 77)">¥{{priRevAmount}}</text>
 </view>
 
 <view class="index_head">

@@ -15,7 +15,7 @@ Page({
       totalNum:1,
       obj:null,
       cstCode:'',
-      proNum:'',
+      proNum:app.storage.getProNum(),
       proName:app.storage.getProName(),
       wxOpenId:'',
       navList: ['未交清', '已交清'],
@@ -267,6 +267,19 @@ Page({
   onLoad: function (options) {
     app.loading(),this.showLoading(0);
     this.queryForPage();
+
+    // 设置标题
+    var proNum = app.storage.getProNum();
+    var newTitle = '';
+    if(proNum == '10000'){
+      newTitle = '费用查询'
+    }
+    if(proNum == '10001'){
+      newTitle = '物业缴费'
+    }
+    wx.setNavigationBarTitle({
+      title: newTitle
+    })
   },
 
   /**
