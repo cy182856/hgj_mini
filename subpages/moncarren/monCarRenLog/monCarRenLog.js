@@ -151,7 +151,7 @@ Page({
     data['cstCode'] = app.storage.getCstCode();
     data['wxOpenId'] = app.storage.getWxOpenId();
     data['proNum'] = app.storage.getProNum();
-    // 后端接口验证 开票条件：1、缴费成功  2、90天以内
+    // 后端接口验证 开票条件：1、缴费成功  2、N月以内
     app.req.postRequest(api.monCarInvoiceCheck,data).then(res=>{
       if(res.data.respCode == '000'){
           wx.navigateTo({
@@ -167,6 +167,15 @@ Page({
     });   
   },
  
+
+  // 已开票，查看发票
+  viewInvoice:function(e){
+    var orderId = e.currentTarget.dataset.datavalue.id;
+    wx.navigateTo({
+      url: '/subpages/moncarren/viewInvoice/viewInvoice?orderId=' + orderId,
+    })   
+  },
+
   loadMore(event){
     var pageNum = this.data.pageNum + 1;
     this.setData({

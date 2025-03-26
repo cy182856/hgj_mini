@@ -18,7 +18,7 @@ Page({
     ruleName: '',
     ruleType: '',
     ruleCount: '',
-    monthNum: 1,
+    monthNum: '',
     monthAmount: '',
     payment_button_disabled: false,
     payAmount: '0',
@@ -45,13 +45,12 @@ Page({
       ruleName: options.ruleName,
       ruleType: options.ruleType,
       ruleCount: options.ruleCount,
-      monthAmount: options.monthAmount,
-      payAmount: that.data.monthNum * options.monthAmount
+      monthAmount: options.monthAmount
+      //payAmount: that.data.monthNum * options.monthAmount
     })
-    // 根据选择月份回显开始日期、结束日期
-    that.queryMonCarRenDate(options.carCode,that.data.monthNum,options.endTime);
     // 下拉框续费月数数组
     that.renewMonthArray();
+    
   },
 
   // 根据选择月份回显开始日期、结束日期
@@ -84,8 +83,12 @@ Page({
       if(res.data.respCode == '000'){
           var renewMonthArray = res.data.renewMonthArray;
           that.setData({ 
-            array: renewMonthArray
-          })           
+            array: renewMonthArray,
+            monthNum: renewMonthArray[0],
+            payAmount: renewMonthArray[0] * that.data.monthAmount
+          })    
+           // 根据选择月份回显开始日期、结束日期
+          that.queryMonCarRenDate(that.data.carCode,renewMonthArray[0],that.data.endTime);       
       }
     });   
   },
@@ -168,9 +171,9 @@ Page({
                   console.log("支付完成返回成功！")
                 }
               });
-              // 跳转到支付成功页
+              // 跳转到缴费记录页面
               wx.redirectTo({
-                url: '/subpages/moncarren/monCarRenSuccess/monCarRenSuccess'
+                url: '/subpages/moncarren/monCarRenLog/monCarRenLog'
               })
             },
             fail(res) {

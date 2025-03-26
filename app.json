@@ -262,7 +262,17 @@
         "monCarRenDetail/monCarRenDetail",
         "monCarRenSuccess/monCarRenSuccess",
         "monCarRenLog/monCarRenLog",
-        "monCarInvoice/monCarInvoice"
+        "monCarInvoice/monCarInvoice",
+        "viewInvoice/viewInvoice"
+      ]
+    },
+    {
+      "root": "subpages/electricity",
+      "name": "electricity",
+      "pages": [
+        "electricity",
+        "electricityDetaile/electricityDetaile",
+        "electricityError/electricityError"    
       ]
     },
     {

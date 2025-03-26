@@ -1,0 +1,35 @@
+<import src="../../../template/empty/empty.wxml"></import>
+
+<view style="margin-left: 5%;margin-top: 5%;">
+  <view>
+    <view>抬头：{{monCarRenInvoice.buyerName}}</view>   
+  </view>
+
+  <view class="input-container">
+    <view>邮箱：{{monCarRenInvoice.pushEmail}}</view>
+  </view>
+
+
+  <view style="margin-top: 30px;width: 90%;">
+    <view><button bindtap="onCopyUrl">复制发票链接,前往浏览器打开</button></view>
+  </view>
+
+  <!-- <view style="margin-top: 30px;width: 90%;">
+    <view><button bindtap="downInvoice">查看发票</button></view>
+  </view> -->
+</view>
+
+<!-- <view wx:if="{{pdfUrl != '' && pdfUrl != null}}">
+    <web-view src="{{pdfUrl}}"></web-view>
+</view>  -->
+
+
+
+
+
+
+
+
+
+
+

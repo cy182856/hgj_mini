@@ -1,0 +1,108 @@
+
+<!-- 引用 -->
+<import src="../../template/empty/empty.wxml"></import>
+<import src="../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+
+<view class="weui-loadmore" wx:if="{{isRefreshing}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore-tips">正在刷新...</view>
+</view>
+
+<view class="" style="margin-left: 2%; margin-right: 2%; margin-top: 10px; border-style:solid;border-color: rgb(204, 204, 204);border-width: 1px;">
+	<view style="margin-top: 10px;margin-left: 5px; ">
+		<van-row>
+			<van-col span="5"><view style="margin-left: 5px;font-size: 14px;">开始日期:</view></van-col>
+			<van-col span="6">
+				<picker style="border-style:solid; border-color: rgb(204, 204, 204); border-width: 1px; font-size: 14px;" mode="date" value="{{startDate}}" start="{{pickerStartDate}}" end="{{pickerEndDate}}" bindchange="onStartDateChange">
+					{{startDate}}
+				</picker>
+			</van-col>
+			
+			<van-col span="6"><view style="margin-left: 20px; font-size: 14px;">结束日期:</view></van-col>
+			<van-col span="6">
+				<picker style="border-style:solid;border-color: rgb(204, 204, 204);border-width: 1px; font-size: 14px;" mode="date" value="{{endDate}}" start="{{pickerStartDate}}" end="{{pickerEndDate}}" bindchange="onEndDateChange">
+					{{endDate}}
+				</picker>
+			</van-col>
+		</van-row>
+		<van-row>	
+			<van-col span="15">
+				<view style="margin-left: 60%;margin-top: 15px;"><button style="width: 100%; font-size: 12px;" bindtap="queryElectricity">查询</button></view>
+			</van-col>
+		</van-row>
+	</view>	
+	<view style="height: 10px;"></view>
+</view>
+
+<!-- <block wx:if="{{electricitys && electricitys.length > 0}}">
+  <view style=" padding-bottom:{{padding_bottom}}rpx;">
+    <block wx:for="{{electricitys}}" wx:for-item="electricity">
+      <view class="visit-log-item">
+
+        <view>
+          <van-cell-group custom-class="vant-cell-custom-class">
+            <block >
+              <van-cell title-class="vant-cell-title-class"  title="用户编号" value="{{electricity.userId}}" border="{{ false }}" />  
+            </block>
+            <block>
+              <van-cell title-class="vant-cell-title-class"  title="用户名称" value="{{electricity.userName}}" border="{{ false }}" />  
+            </block>
+            <block>
+              <van-cell title-class="vant-cell-title-class"  title="商铺号" value="{{electricity.roomId}}" border="{{ false }}" />  
+            </block>
+			<block>
+              <van-cell title-class="vant-cell-title-class"  title="表号" value="{{electricity.meterId}}" border="{{ false }}" />  
+            </block>
+			<block>
+              <van-cell title-class="vant-cell-title-class"  title="用电量" value="{{electricity.usedPower}}" border="{{ false }}" />  
+            </block>
+			<block>
+              <van-cell title-class="vant-cell-title-class"  title="日期" value="{{electricity.date}}" border="{{ false }}" />  
+            </block>
+			<block>
+              <van-cell title-class="vant-cell-title-class"  title="合计" value="666" border="{{ false }}" />  
+            </block>
+          </van-cell-group>
+        </view>
+      </view>
+    </block>
+
+	<view style="margin-top: 20px;margin-left: 40%;">总计:19879</view>
+	<view style="height:50px;"></view>
+   
+  </view>
+</block> -->
+
+<view wx:if="{{electricitys != null && electricitys.length > 0}}">
+	<view style="margin-left: 6%; margin-top: 15px;">
+		<van-row>
+			<van-col span="8"><text class="text_right" decode="{{true}}">用户名称</text></van-col>
+			<van-col span="13"><text class="repair_desc">{{electricitys[0].userName}}</text></van-col>
+		</van-row>
+	</view>
+
+	<view style="height: auto; margin-top: 15px;" class="view_bg" wx:for="{{electricitys}}" wx:for-item="electricity">
+      <van-cell 
+           custom-class="vb" 
+           title-class="vcell_title txt" 
+           value-class="daishouli" 
+           title="表号：{{electricity.meterId}}" 
+           is-link value="详细" url="../electricity/electricityDetaile/electricityDetaile?roomId={{electricity.roomId}}&startDate={{startDate}}&endDate={{endDate}}" />
+     
+    	<view class="view_desc">
+			<van-row>
+				<van-col span="8"><text class="text_right" decode="{{true}}" >商铺号</text></van-col>
+				<van-col span="13"><text class="repair_desc">{{electricity.roomId}}</text></van-col>
+			</van-row>
+			<van-row>
+				<van-col span="8"><text class="text_right" decode="{{true}}" >用电量</text></van-col>
+				<van-col span="16"> {{electricity.sumUsedPowerStr}} </van-col>
+			</van-row>
+    	</view>
+  </view>
+
+  <view style="margin-top: 30px;margin-left: 5%;">合计用电量：{{totalUsedPower}}</view>
+  <view style="height:50px;"></view>
+
+</view>

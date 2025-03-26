@@ -1,0 +1,39 @@
+<import src="../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<import src="../../../template/empty/empty.wxml"></import>
+<view class="weui-loadmore" wx:if="{{isRefreshing}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore-tips">正在刷新...</view>
+</view>
+
+<view wx:if="{{electricitys && electricitys.length > 0}}">
+	<view style="margin-left: 6%; margin-top: 15px;">
+		<van-row>
+			<van-col span="8"><text class="text_right" decode="{{true}}">商铺号</text></van-col>
+			<van-col span="13"><text class="repair_desc">{{electricitys[0].roomId}}</text></van-col>
+		</van-row>
+	</view>
+
+	<view style="height: auto;" class="view_bg" wx:for="{{electricitys}}" wx:for-item="electricity">
+      <!-- <van-cell 
+           custom-class="vb" 
+           title-class="vcell_title txt" 
+           value-class="daishouli" 
+           title="表号：{{electricity.meterId}}" 
+           is-link value="详细" url="../electricity/electricityDetaile/electricityDetaile?roomId={{electricity.roomId}}" /> -->
+     
+    	<view class="view_desc" style="margin-top: 15px;">
+			<van-row>
+				<van-col span="8"><text class="text_right" decode="{{true}}" >用电量</text></van-col>
+				<van-col span="16"> {{electricity.usedPower}} </van-col>
+			</van-row>
+			<van-row>
+				<van-col span="8"><text class="text_right" decode="{{true}}" >日期</text></van-col>
+				<van-col span="13"><text class="repair_desc">{{electricity.date}}</text></van-col>
+			</van-row>
+    	</view>
+  </view>
+
+  <view style="height:50px;"></view>
+
+</view>

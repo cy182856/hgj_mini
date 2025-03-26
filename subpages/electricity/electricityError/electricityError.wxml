@@ -1,0 +1,1 @@
+<view style="padding: 20%;">{{errDesc}}</view>

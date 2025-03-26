@@ -1,20 +1,77 @@
 <import src="../../../template/loading/loading.wxml"></import>
 <import src="../../../template/empty/empty.wxml"></import>
 
-<view style="margin-left: 3%; margin-top: 20px;">填写开票信息</view>
+<!-- 引用 -->
+<!-- 弹窗 -->
+<van-dialog id="van-dialog" />
+
+<view style="margin-left: 38%; margin-top: 20px; font-size: 18px;">填写开票信息</view>
 
 <view class="input-container">
-  <input class="input" placeholder="请输入内容" />
+  <view>开票类型：</view>
+</view>
+<radio-group class="radio-group" bindchange="radioChange">
+  <label style="line-height: 40px; width:50px" class="radio-label" wx:key="key">
+    <radio style="margin-left: 10%; color: rgb(77, 75, 75);" value="1">单位</radio>
+    <radio style="margin-left: 45%; color: rgb(77, 75, 75);" value="2">个人</radio>
+    
+  </label>
+</radio-group>
+
+<view wx:if="{{invoiceType == '1'}}" style="margin-top: 20px;">
+
+  <van-row>
+    <van-col span="16">
+      <view style="margin-left: 10%;">
+        <input style="border: 1px solid #ccc; border-radius: 5px;width: 100%;box-sizing: border-box;height: 30px;border-radius: 4px;" type="text" confirm-type="search" placeholder="单位名称搜索" maxlength="30" bindinput="handleInput"/>
+      </view>
+    </van-col>
+    <van-col span="5">
+      <view style="margin-left: 10%;">
+        <button bindtap="handleSearch" style="height: 30px; width: 90%; line-height: 28px;background-color: rgb(113, 201, 236);">搜索</button>
+      </view>
+    </van-col>
+  </van-row>
+
+  <view wx:if="{{companyInfoList != null && companyInfoList.length > 0}}" style="margin-left: 6%;margin-top: 10px;font-size: 14px; color: rgb(4, 142, 197); width: 80%;border-style:solid;border-color: rgb(204, 204, 204);border-width: 1px;">
+    <view wx:for="{{companyInfoList}}" wx:for-item="companyInfo" style="margin-top: 10px;">
+      <view bindtap="invoiceInfo" data-datavalue="{{companyInfo}}">{{companyInfo.name}}</view>
+      <view bindtap="invoiceInfo" data-datavalue="{{companyInfo}}">税号:{{companyInfo.taxId}}</view>
+    </view>
+  </view>
+
+  <view class="input-container" style="margin-top: 10px;">
+    <view >发票抬头：</view>
+    <input value="{{buyerName}}" style="margin-top: 5px;" type="text" class="input" disabled="true" bindinput="buyerNameInputValue" placeholder="购方名称"/>   
+  </view>
+
+  <view class="input-container">
+    <view>税号：</view>
+    <input value="{{buyerTaxNo}}" style="margin-top: 5px;" class="input" disabled="true" placeholder="购方税号" />
+  </view>
+
+  <view class="input-container">
+    <view>邮箱：</view>
+    <input value="{{pushEmail}}" style="margin-top: 5px;" type="text" class="input" bindinput="pushEmailInputValue" placeholder="邮箱" maxlength="30"/>
+  </view>
+
+  <view style="margin-left: 2%; margin-right: 2%;margin-top: 15px;">
+      <button bindtap="makeInvoice">确定</button>
+  </view>
 </view>
 
-<view class="input-container">
-  <input class="input" placeholder="请输入内容" />
-</view>
+<view wx:if="{{invoiceType == '2'}}">
+  <view class="input-container" style="margin-top: 10px;">
+    <view >发票抬头：</view>
+    <input value="{{buyerName}}" style="margin-top: 5px;" type="text" class="input" bindinput="buyerNameInputValue" placeholder="购方名称"/>  
+  </view>
 
-<view class="input-container">
-  <input class="input" placeholder="请输入内容" />
-</view>
+  <view class="input-container">
+    <view>邮箱：</view>
+    <input value="{{pushEmail}}" style="margin-top: 5px;" type="text" class="input" bindinput="pushEmailInputValue" placeholder="邮箱" maxlength="30"/>
+  </view>
 
-<view style="margin-left: 2%; margin-right: 2%;margin-top: 15px;">
-    <button bindtap="makeInvoice">确定</button>
+  <view style="margin-left: 2%; margin-right: 2%;margin-top: 15px;">
+      <button bindtap="makeInvoice">确定</button>
+  </view>
 </view>

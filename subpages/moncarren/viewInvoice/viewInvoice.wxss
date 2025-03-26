@@ -1,15 +1,4 @@
-.input-container {
-	padding: 15px;
-}
-  
-.input {
-	width: 80%;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	padding: 5px 10px;
-	font-size: 16px;
-	margin-left: 3%;
-}
+/* subpages/moncarren/viewInvoice/viewInvoice.wxss */
 
 button {
 	font-size: 13px;
