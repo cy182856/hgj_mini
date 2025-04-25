@@ -9,7 +9,7 @@
     <view class="weui-loadmore-tips">正在刷新...</view>
 </view>
 
-<view class="" style="margin-left: 2%; margin-right: 2%; margin-top: 10px; border-style:solid;border-color: rgb(204, 204, 204);border-width: 1px;">
+<!-- <view class="" style="margin-left: 2%; margin-right: 2%; margin-top: 10px; border-style:solid;border-color: rgb(204, 204, 204);border-width: 1px;">
 	<view style="margin-top: 10px;margin-left: 5px; ">
 		<van-row>
 			<van-col span="5"><view style="margin-left: 5px;font-size: 14px;">开始日期:</view></van-col>
@@ -33,7 +33,7 @@
 		</van-row>
 	</view>	
 	<view style="height: 10px;"></view>
-</view>
+</view> -->
 
 <!-- <block wx:if="{{electricitys && electricitys.length > 0}}">
   <view style=" padding-bottom:{{padding_bottom}}rpx;">
@@ -76,10 +76,10 @@
 
 <view wx:if="{{electricitys != null && electricitys.length > 0}}">
 	<view style="margin-left: 6%; margin-top: 15px;">
-		<!-- <van-row>
+		<van-row>
 			<van-col span="8"><text class="text_right" decode="{{true}}">用户名称</text></van-col>
 			<van-col span="13"><text class="repair_desc">{{electricitys[0].userName}}</text></van-col>
-		</van-row> -->
+		</van-row>
 	</view>
 
 	<view style="height: auto; margin-top: 15px;" class="view_bg" wx:for="{{electricitys}}" wx:for-item="electricity">
@@ -87,22 +87,21 @@
            custom-class="vb" 
            title-class="vcell_title txt" 
            value-class="daishouli" 
-           title="表号：{{electricity.meterId}}" 
-           is-link value="详细" url="../electricity/electricityDetaile/electricityDetaile?roomId={{electricity.roomId}}&startDate={{startDate}}&endDate={{endDate}}&userId={{electricity.userId}}" />
+           title="户号：{{electricity.userId}}_{{electricity.meterId}}" 
+           is-link value="电量查询" url="../../electricity/electricity?userId={{electricity.userId}}" />
      
     	<view class="view_desc">
 			<van-row>
-				<van-col span="8"><text class="text_right" decode="{{true}}" >商铺号</text></van-col>
-				<van-col span="13"><text class="repair_desc">{{electricity.roomId}}</text></van-col>
+				<van-col span="8"><text class="text_right" decode="{{true}}" >电费余额</text></van-col>
+				<van-col span="13"><text class="repair_desc">{{electricity.money}}</text></van-col>
 			</van-row>
 			<van-row>
-				<van-col span="8"><text class="text_right" decode="{{true}}" >用电量</text></van-col>
-				<van-col span="16"> {{electricity.sumUsedPowerStr}} </van-col>
+				<van-col span="8"><text class="text_right" decode="{{true}}" >查询时间</text></van-col>
+				<van-col span="16"> {{electricity.dateTime}} </van-col>
 			</van-row>
     	</view>
   </view>
 
-  <view style="margin-top: 30px;margin-left: 5%;">合计用电量：{{totalUsedPower}}</view>
   <view style="height:50px;"></view>
 
 </view>

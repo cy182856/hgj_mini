@@ -24,17 +24,18 @@
               <van-col span="5">实付金额</van-col>
               <van-col span="11">{{carPayLogs.payAmount}}元</van-col>
 
-              <van-col span="8" wx:if="{{carPayLogs.payAmount > 0 && carPayLogs.orderStatus == 2 && carPayLogs.timeStatus == 0}} "><button style="width: 60px; font-size: 10px; margin-left: 48px;">
-                  <test wx:if="{{carPayLogs.invoiceStatus == 1}}">开票中</test>
+              <van-col span="8"><button style="width: 60px; font-size: 10px; margin-left: 48px;">
+                  <test wx:if="{{carPayLogs.invoiceStatus == 1 && carPayLogs.payAmount > 0 && carPayLogs.orderStatus == 2 && carPayLogs.timeStatus == 0}}">开票中</test>
                 </button></van-col>
 
-              <van-col span="8" wx:if="{{carPayLogs.payAmount > 0 && carPayLogs.orderStatus == 2 && carPayLogs.timeStatus == 0}} "><button style="width: 60px; font-size: 10px; margin-left: 48px;" bindtap="viewInvoice" data-datavalue="{{carPayLogs}}">
-                  <test wx:if="{{carPayLogs.invoiceStatus == 2}}">已开票</test>
+              <van-col span="8"><button style="width: 60px; font-size: 10px; margin-left: 48px;" bindtap="viewInvoice" data-datavalue="{{carPayLogs}}">
+                  <test wx:if="{{carPayLogs.invoiceStatus == 2 && carPayLogs.payAmount > 0 && carPayLogs.orderStatus == 2 && carPayLogs.timeStatus == 0}}">已开票</test>
                 </button></van-col>
 
-              <van-col span="8" wx:if="{{carPayLogs.payAmount > 0 && carPayLogs.orderStatus == 2 && carPayLogs.timeStatus == 0}} "><button style="width: 60px; font-size: 10px; margin-left: 48px;" bindtap="makeInvoiceCheck" data-datavalue="{{carPayLogs}}">
-                  <test wx:if="{{carPayLogs.invoiceStatus == 3}}">未开票</test>
-                </button></van-col>
+              <van-col span="8"><button style="width: 60px; font-size: 10px; margin-left: 48px;" bindtap="makeInvoiceCheck" data-datavalue="{{carPayLogs}}">
+                  <test wx:if="{{carPayLogs.invoiceStatus == 3 && carPayLogs.payAmount > 0 && carPayLogs.orderStatus == 2 && carPayLogs.timeStatus == 0}}">未开票</test>
+                </button>
+              </van-col>
 
             </van-cell>
           </block>

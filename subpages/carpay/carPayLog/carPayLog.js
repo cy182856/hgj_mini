@@ -31,6 +31,39 @@ Page({
     this.queryCarPayLogs()
   },
 
+  // 开票验证
+  makeInvoiceCheck:function(e){
+    var that = this;
+    var orderId = e.currentTarget.dataset.datavalue.id;
+    var data = {};
+    data['orderId'] = orderId;
+    data['cstCode'] = app.storage.getCstCode();
+    data['wxOpenId'] = app.storage.getWxOpenId();
+    data['proNum'] = app.storage.getProNum();
+    // 后端接口验证 开票条件：1、缴费成功  2、N月以内
+    app.req.postRequest(api.parkPayInvoiceCheck,data).then(res=>{
+      if(res.data.respCode == '000'){
+          wx.navigateTo({
+            url: '/subpages/carpay/carPayInvoice/carPayInvoice?orderId=' + orderId,
+          })       
+      }else{
+        wx.showToast({
+          icon:'none',
+          title: res.data.errDesc,
+          duration:3000
+        })
+      }
+    });   
+  },
+
+  // 已开票，查看发票
+  viewInvoice:function(e){
+    var orderId = e.currentTarget.dataset.datavalue.id;
+    wx.navigateTo({
+      url: '/subpages/carpay/viewInvoice/viewInvoice?orderId=' + orderId,
+    })   
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

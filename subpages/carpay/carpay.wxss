@@ -68,7 +68,7 @@
 	margin-left: 65%;
   }
   .container {
-	height: 100%;
+	height: 95%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

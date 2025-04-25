@@ -2,46 +2,73 @@
 <template is="loading" data="{{..._loading_}}"></template>
 <import src="../../../template/empty/empty.wxml"></import>
 <view class="weui-loadmore" wx:if="{{isRefreshing}}">
-    <view class="weui-loading"></view>
-    <view class="weui-loadmore-tips">正在刷新...</view>
+  <view class="weui-loading"></view>
+  <view class="weui-loadmore-tips">正在刷新...</view>
 </view>
 <block wx:if="{{carPayLogs && carPayLogs.length > 0}}">
   <view style=" padding-bottom:{{padding_bottom}}rpx;">
     <block wx:for="{{carPayLogs}}" wx:for-item="carPayLogs">
       <view class="visit-log-item">
+        <van-cell-group>
+          <block>
+            <van-cell>
+              <van-col span="5" style="color: black;">车牌号</van-col>
+              <van-col span="11" style="color: black;">{{carPayLogs.carCode}}</van-col>
+              <van-col span="8" wx:if="{{carPayLogs.orderStatus == 1}}" style="color: rgb(93, 156, 117);">支付中</van-col>
+              <van-col span="8" wx:if="{{carPayLogs.orderStatus == 2}}" style="color: rgb(93, 156, 117);">缴费成功</van-col>
+            </van-cell>
+          </block>
+          
+          <block>
+            <van-cell>
+              <van-col span="5">实付金额</van-col>
+              <van-col span="11" wx:if="{{carPayLogs.actAmount > 0}}">{{carPayLogs.actAmount}}元</van-col>
+              <van-col span="11" wx:if="{{carPayLogs.actAmount <= 0 || carPayLogs.actAmount == null}}">0元</van-col>
+              
+              <van-col span="8">
+                <button style="width: 60px; font-size: 10px; margin-left: 48px;">
+                    <test wx:if="{{carPayLogs.invoiceStatus == 1 && carPayLogs.actAmount > 0 && carPayLogs.orderStatus == 2 && carPayLogs.timeStatus == 0}}">开票中</test>
+                </button>
+              </van-col>
 
-          <van-cell-group>
-            <block >
-              <van-cell>
-				<van-col span="5" style="color: black;">车牌号</van-col>
-    			<van-col span="11" style="color: black;">{{carPayLogs.carCode}}</van-col>
-				<van-col span="8" wx:if="{{carPayLogs.orderStatus == 1}}" style="color: rgb(93, 156, 117);">支付中</van-col>
-				<van-col span="8" wx:if="{{carPayLogs.orderStatus == 2}}" style="color: rgb(93, 156, 117);">缴费成功</van-col>
-			  </van-cell>
-            </block>
-            <block>
-			  <van-cell>
-				<van-col span="5">实付金额</van-col>
-    			<van-col span="11">{{carPayLogs.actAmount}}元</van-col>
-				<van-col span="8" wx:if="{{carPayLogs.actAmount > 0}}"><button style="width: 50%; font-size: 10px; margin-left: 53px;">开票</button></van-col>
-			  </van-cell>
-            </block>
-            <block>
-			  <van-cell>
-				<van-col span="5">入场时间</van-col>
-    			<van-col span="11">{{carPayLogs.inTime}}</van-col>
-			  </van-cell>
-            </block>
-			<block>
-			  <van-cell>
-				<van-col span="5">缴费时间</van-col>
-    			<van-col span="11" wx:if="{{carPayLogs.isDeduction == 0}}">{{carPayLogs.successTime}}</van-col>
-				<van-col span="11" wx:if="{{carPayLogs.isDeduction == 1}}">{{carPayLogs.updateTime}}</van-col>
-			  </van-cell>
-            </block>
-            <view style="height:20rpx;"></view>
-          </van-cell-group>
-        </view>
+              <van-col span="8" >
+                <button style="width: 60px; font-size: 10px; margin-left: 48px;" bindtap="viewInvoice" data-datavalue="{{carPayLogs}}">
+                  <test wx:if="{{carPayLogs.invoiceStatus == 2 && carPayLogs.actAmount > 0 && carPayLogs.orderStatus == 2 && carPayLogs.timeStatus == 0}}">已开票</test>
+                </button>
+              </van-col>
+
+              <van-col span="8" >
+                <button style="width: 60px; font-size: 10px; margin-left: 48px;" bindtap="makeInvoiceCheck" data-datavalue="{{carPayLogs}}">
+                    <test wx:if="{{carPayLogs.invoiceStatus == 3 && carPayLogs.actAmount > 0 && carPayLogs.orderStatus == 2 && carPayLogs.timeStatus == 0}}">未开票</test>
+                </button>
+              </van-col>
+
+            </van-cell>
+          </block>
+
+          <block>
+            <van-cell>
+              <van-col span="5">抵扣时长</van-col>
+              <van-col span="11" wx:if="{{carPayLogs.deductionNum > 0}}">{{carPayLogs.deductionNum}}小时</van-col>
+              <van-col span="11" wx:if="{{carPayLogs.deductionNum == null}}">0小时</van-col>
+            </van-cell>
+          </block>
+          <block>
+            <van-cell>
+              <van-col span="5">入场时间</van-col>
+              <van-col span="11">{{carPayLogs.inTime}}</van-col>
+            </van-cell>
+          </block>
+          <block>
+            <van-cell>
+              <van-col span="5">缴费时间</van-col>
+              <van-col span="11" wx:if="{{carPayLogs.isDeduction == 0}}">{{carPayLogs.successTime}}</van-col>
+              <van-col span="11" wx:if="{{carPayLogs.isDeduction == 1}}">{{carPayLogs.updateTime}}</van-col>
+            </van-cell>
+          </block>
+          <view style="height:20rpx;"></view>
+        </van-cell-group>
+      </view>
     </block>
     <!-- 点击加载更多 -->
     <block wx:if="{{more}}">
@@ -50,7 +77,7 @@
       </view>
     </block>
     <block wx:else>
-      <view class="loading-container" bindtap="" >没有更多内容啦</view>
+      <view class="loading-container" bindtap="">没有更多内容啦</view>
     </block>
   </view>
 </block>
@@ -62,4 +89,4 @@
 
 <view style="height: 20px;"></view>
 
-<van-dialog id="van-dialog" overlay-style ="z-index:6666 !important;"  confirm-button-color ="#189AFE" />
+<van-dialog id="van-dialog" overlay-style="z-index:6666 !important;" confirm-button-color="#189AFE" />

@@ -63,10 +63,10 @@
 										<checkbox disabled="true" value="1" checked="{{item.swimCardChecked}}"/>可用游泳卡
 									</label>
 									<label wx:if="{{ownerFlag == 1}}" style="margin-left: 5%;">
-										<checkbox value="2" checked="{{item.parkCardChecked}}"/>可用停车卡
+										<checkbox value="2" checked="{{item.parkCardChecked}}"/>可用停车优惠
 									</label>
 									<label wx:if="{{ownerFlag == 0}}" style="margin-left: 5%;">
-										<checkbox disabled="true" value="2" checked="{{item.parkCardChecked}}"/>可用停车卡
+										<checkbox disabled="true" value="2" checked="{{item.parkCardChecked}}"/>可用停车优惠
 									</label>
 								</checkbox-group>	
 							</van-col>						

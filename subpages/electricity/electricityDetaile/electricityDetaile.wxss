@@ -96,7 +96,7 @@ page{
   }
   .view_bg{
 	background-color: #ffffff;
-	width: 92%;
+	width: 94%;
 	height: 290rpx;
 	margin-left: 3%;
 	margin-top: 20rpx;

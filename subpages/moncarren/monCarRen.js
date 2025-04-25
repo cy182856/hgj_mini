@@ -2,7 +2,8 @@ const api = require('../../const/api'),
 app = getApp();
 Page({
   data: {
-    carCode: ''
+    carCode: '',
+    serch_button_disabled: false
   },
   onLoad: function (e) {
      
@@ -37,32 +38,39 @@ Page({
       data['proNum'] = app.storage.getProNum();   
       data['wxOpenId'] = app.storage.getWxOpenId();
       data['carCode'] = carCode;
-      app.req.postRequest(api.queryMonCarInfoByCarNum,data).then(res=>{
-        if(res.data.respCode == '000'){
-          var monCarRenInfoVo = res.data.monCarRenInfoVo;
-          var carCode = monCarRenInfoVo.carCode;
-          var beginTime = monCarRenInfoVo.beginTime;
-          var endTime = monCarRenInfoVo.endTime;
-          var userName = monCarRenInfoVo.userName;
-          var userTel = monCarRenInfoVo.userTel;
-          var userAddress = monCarRenInfoVo.userAddress;
-          var ruleID = monCarRenInfoVo.ruleID;
-          var ruleName = monCarRenInfoVo.ruleName;
-          var ruleType = monCarRenInfoVo.ruleType;
-          var ruleCount = monCarRenInfoVo.ruleCount;
-          var monthAmount = monCarRenInfoVo.monthAmount;
-          // 如果车辆类型符合要求，跳转到车辆缴费页面
-          wx.navigateTo({
-            url: '/subpages/moncarren/monCarRenDetail/monCarRenDetail?carCode=' + carCode + '&beginTime=' + beginTime +'&endTime=' + endTime +'&userName=' + userName + '&userTel=' + userTel + '&userAddress=' + userAddress + '&ruleID=' + ruleID + '&ruleName=' + ruleName + '&ruleType=' + ruleType + '&ruleCount=' + ruleCount + '&monthAmount=' + monthAmount
-          })              
-        }else{
-          wx.showToast({
-            icon:'none',
-            title: res.data.errDesc,
-            duration:3000
-          })
-        }
-      });  
+      if (!that.data.serch_button_disabled) {
+        that.setData({ serch_button_disabled: true });
+        app.req.postRequest(api.queryMonCarInfoByCarNum,data).then(res=>{
+          if(res.data.respCode == '000'){
+            var monCarRenInfoVo = res.data.monCarRenInfoVo;
+            var carCode = monCarRenInfoVo.carCode;
+            var beginTime = monCarRenInfoVo.beginTime;
+            var endTime = monCarRenInfoVo.endTime;
+            var userName = monCarRenInfoVo.userName;
+            var userTel = monCarRenInfoVo.userTel;
+            var userAddress = monCarRenInfoVo.userAddress;
+            var ruleID = monCarRenInfoVo.ruleID;
+            var ruleName = monCarRenInfoVo.ruleName;
+            var ruleType = monCarRenInfoVo.ruleType;
+            var ruleCount = monCarRenInfoVo.ruleCount;
+            var monthAmount = monCarRenInfoVo.monthAmount;
+            // 如果车辆类型符合要求，跳转到车辆缴费页面
+            wx.navigateTo({
+              url: '/subpages/moncarren/monCarRenDetail/monCarRenDetail?carCode=' + carCode + '&beginTime=' + beginTime +'&endTime=' + endTime +'&userName=' + userName + '&userTel=' + userTel + '&userAddress=' + userAddress + '&ruleID=' + ruleID + '&ruleName=' + ruleName + '&ruleType=' + ruleType + '&ruleCount=' + ruleCount + '&monthAmount=' + monthAmount
+            })   
+            that.setData({
+              serch_button_disabled: false
+            });              
+          }else{
+            that.setData({ serch_button_disabled: false });
+            wx.showToast({
+              icon:'none',
+              title: res.data.errDesc,
+              duration:3000
+            })
+          }
+        });  
+      }
     } else {
         wx.showToast({
           icon:'none',

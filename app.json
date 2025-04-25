@@ -241,7 +241,9 @@
         "carpay",
         "carPayDetail/carPayDetail",
         "carPaySuccess/carPaySuccess",
-        "carPayLog/carPayLog"
+        "carPayLog/carPayLog",
+        "carPayInvoice/carPayInvoice",
+        "viewInvoice/viewInvoice"
       ]
     },
     {
@@ -272,7 +274,8 @@
       "pages": [
         "electricity",
         "electricityDetaile/electricityDetaile",
-        "electricityError/electricityError"    
+        "electricityError/electricityError",
+        "electricitySurplus/electricitySurplus"
       ]
     },
     {

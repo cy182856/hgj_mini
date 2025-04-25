@@ -103,7 +103,7 @@
 							<van-row>
 								<view style="text-align: left;">
 									<van-col span="18">
-										<text>停车卡抵扣</text>
+										<text>停车抵扣</text>
 									</van-col>
 								</view>
 								<view style="text-align: right;">
@@ -117,7 +117,7 @@
 				</radio-group>
 			</view>
 		</view>
-		<view style="margin-left: 7%;color:#444444;font-size: 12px;">停车卡本月剩余<text style="color: rgb(6, 91, 248);font-size: 14px;">{{expNum}}</text>小时(将优先扣除停车卡时长)</view>
+		<view style="margin-left: 7%;color:#444444;font-size: 12px;">停车抵扣本月剩余<text style="color: rgb(6, 91, 248);font-size: 14px;">{{expNum}}</text>小时(将优先扣除停车抵扣时长)</view>
 
 
 		<!-- <view class="box" wx:if="{{radioChecked == true}}">
@@ -143,7 +143,7 @@
 				</van-col>
 				<van-col span="13">
 					<view wx:if="{{hourNumValue > 0}}" style="margin-left: 3%;">
-						<view style="font-size: 14px;border: 1px solid rgb(230, 228, 228); padding: 5px;">停车卡抵扣时长:<text style="color: rgb(248, 10, 10);">{{hourNumValue}}</text>小时</view>	
+						<view style="font-size: 14px;border: 1px solid rgb(230, 228, 228); padding: 5px;">停车抵扣时长:<text style="color: rgb(248, 10, 10);">{{hourNumValue}}</text>小时</view>	
 					</view>
 				</van-col>
 			</van-row>		

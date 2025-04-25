@@ -1,0 +1,12 @@
+/* subpages/moncarren/viewInvoice/viewInvoice.wxss */
+
+button {
+	font-size: 13px;
+    text-align: center;
+    color: #FFF;
+    background-color: rgb(101, 209, 168);
+    border-radius: 25px;
+    height: 35px;
+    line-height: 35px;
+    width: 100%;
+}

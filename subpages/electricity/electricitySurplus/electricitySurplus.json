@@ -1,5 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "电量查询",
+  "navigationBarTitleText": "电费查询",
   "enablePullDownRefresh": true
 }

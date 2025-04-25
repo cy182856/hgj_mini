@@ -3,11 +3,19 @@ app = getApp();
 Page({
   data: {
     carCode: '',
+    expNum: '',
+    serch_button_disabled: false
   },
   onLoad: function (e) {
-     
+    this.queryCardExpNum();
   },
-  
+
+   /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    this.queryCardExpNum();
+  },
   
   keyboardStatusHandler: function () { //当点击输入框时，查询窗口关闭
     let that = this;
@@ -38,30 +46,36 @@ Page({
       data['wxOpenId'] = app.storage.getWxOpenId();
       data['carCode'] = carCode;
       data['radioChecked'] = false;
-      app.req.postRequest(api.queryCarNum,data).then(res=>{
-        if(res.data.respCode == '000'){                   
-          var payFeeStatus = res.data.payFeeStatus;
-          if(payFeeStatus == true){
-            // 如果有欠费信息，跳转到车辆缴费页面
-            wx.navigateTo({
-              url: '/subpages/carpay/carPayDetail/carPayDetail?carCode=' + carCode
-            })
+      if (!that.data.serch_button_disabled) {
+        that.setData({ serch_button_disabled: true });
+        app.req.postRequest(api.queryCarNum,data).then(res=>{
+          if(res.data.respCode == '000'){                              
+            var payFeeStatus = res.data.payFeeStatus;
+            if(payFeeStatus == true){
+              // 如果有欠费信息，跳转到车辆缴费页面
+              wx.navigateTo({
+                url: '/subpages/carpay/carPayDetail/carPayDetail?carCode=' + carCode
+              })   
+              that.setData({ serch_button_disabled: false });   
+            }else{
+              // 无欠费信息，提示车辆可以直接离场
+              that.setData({ serch_button_disabled: false }); 
+              wx.showToast({
+                icon:'none',
+                title: '该车牌目前无需付费，可直接出场',
+                duration:3000
+              })
+            }              
           }else{
-            // 无欠费信息，提示车辆可以直接离场
+            that.setData({ serch_button_disabled: false });
             wx.showToast({
               icon:'none',
-              title: '该车牌目前无需付费，可直接出场',
+              title: res.data.errDesc,
               duration:3000
             })
-          }              
-        }else{
-          wx.showToast({
-            icon:'none',
-            title: res.data.errDesc,
-            duration:3000
-          })
-        }
-      });  
+          }
+        });  
+      }
     } else {
         wx.showToast({
           icon:'none',
@@ -76,6 +90,23 @@ Page({
     wx.navigateTo({
       url: '/subpages/carpay/carPayLog/carPayLog',
     })
-  }
+  },
+
+  queryCardExpNum() {
+    var that = this;
+    var data = {};
+    data['cstCode'] = app.storage.getCstCode();
+    data['proNum'] = app.storage.getProNum();
+    data['wxOpenId'] = app.storage.getWxOpenId();
+    app.req.postRequest(api.queryCardExpNum, data).then(res => {
+      if (res.data.respCode == '000') {      
+          that.setData({
+            expNum: res.data.expNum
+          })              
+      } else {
+        app.alert.alert(res.data.errDesc);
+      }
+    });
+  },
 
 })

@@ -1,5 +1,5 @@
 const app = getApp();
-const api = require("../../const/api");
+const api = require("../../../const/api");
 
 Page({
 
@@ -19,20 +19,19 @@ Page({
     endDate: '',
     pickerStartDate:'',
     pickerEndDate:'',
-    totalUsedPower:'',
-    userId: ''
+    totalUsedPower:''
   },
 
-  onStartDateChange: function(e) {
-    this.setData({
-      startDate: e.detail.value
-    });
-  },
-  onEndDateChange: function(e) {
-    this.setData({
-      endDate: e.detail.value
-    });
-  },
+  // onStartDateChange: function(e) {
+  //   this.setData({
+  //     startDate: e.detail.value
+  //   });
+  // },
+  // onEndDateChange: function(e) {
+  //   this.setData({
+  //     endDate: e.detail.value
+  //   });
+  // },
 
   /**
    * 生命周期函数--监听页面加载
@@ -43,34 +42,33 @@ Page({
       pageNum:1,
       pageSize:10,
       electricitys:[],
-      iphoneX:app.globalData.iphoneX,
-      userId: options.userId
+      iphoneX:app.globalData.iphoneX
     })
-    this.queryCurrentDate();
-    //this.queryElectricity() 
+    //this.queryCurrentDate();
+    this.queryElectricity(); 
   },
   
   // 获取当前时间、时间选择框日期
-  queryCurrentDate(){
-    var that = this;
-    var data = {};
-    data['cstCode'] = app.storage.getCstCode();
-    data['wxOpenId'] = app.storage.getWxOpenId();
-    data['proNum'] = app.storage.getProNum();
-    app.req.postRequest(api.queryCurrentDate,data).then(res=>{
-      if(res.data.respCode == '000'){
-        var sysTime = res.data.sysTime;
-        var beforeMonth = res.data.beforeMonth;
-        that.setData({ 
-          pickerStartDate: beforeMonth,
-          pickerEndDate: sysTime,
-          startDate: sysTime,
-          endDate: sysTime
-        })  
-        that.queryElectricity();
-      }
-    });   
-  },
+  // queryCurrentDate(){
+  //   var that = this;
+  //   var data = {};
+  //   data['cstCode'] = app.storage.getCstCode();
+  //   data['wxOpenId'] = app.storage.getWxOpenId();
+  //   data['proNum'] = app.storage.getProNum();
+  //   app.req.postRequest(api.queryCurrentDate,data).then(res=>{
+  //     if(res.data.respCode == '000'){
+  //       var sysTime = res.data.sysTime;
+  //       var beforeMonth = res.data.beforeMonth;
+  //       that.setData({ 
+  //         pickerStartDate: beforeMonth,
+  //         pickerEndDate: sysTime,
+  //         startDate: sysTime,
+  //         endDate: sysTime
+  //       })  
+  //       that.queryElectricity();
+  //     }
+  //   });   
+  // },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -145,17 +143,15 @@ Page({
       proNum:app.storage.getProNum(),
       proName:app.storage.getProName(),
       pageNum:that.data.pageNum,
-      pageSize:that.data.pageSize,
-      startDate:that.data.startDate,
-      endDate:that.data.endDate,
-      userId:that.data.userId
+      pageSize:that.data.pageSize
+      //startDate:that.data.startDate,
+      //endDate:that.data.endDate
     };
     that.showLoading(1)
-    app.req.postRequest(api.queryElectricity, queryParams).then(function (value) {
+    app.req.postRequest(api.queryElectricitySurplus, queryParams).then(function (value) {
       console.log("queryElectricity 返回", value);
       var errDesc = value.data.errDesc;
       if(value.data.respCode == "000"){
-        var totalUsedPower = value.data.totalUsedPower;
         var electricityList = value.data.list;
         let totalNum = value.data.totalNum;
         var pages = parseInt(value.data.pages);
@@ -165,8 +161,7 @@ Page({
           pages:pages,
           electricitys:type == 'loadMore'?that.data.electricitys:electricityList,
           totalNum:totalNum,
-          isRefreshing:false,
-          totalUsedPower:totalUsedPower
+          isRefreshing:false
         })
         that.showLoading(0)
       }else if(value.data.respCode == "111"){
