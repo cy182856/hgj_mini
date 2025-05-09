@@ -3,9 +3,9 @@
 
 //const ApiRootUrl = 'https://zhgj.shofw.com/wx/';//tech
 //const ApiRootUrl = 'http://192.168.79.5:85/wx/';
-//const ApiRootUrl = 'http://192.168.23.108:85/wx/';//tech
+const ApiRootUrl = 'http://192.168.23.108:85/wx/';//tech
 //const ApiRootUrl = 'http://zhgjtest.shofw.com:85/wx/';
-const ApiRootUrl = 'https://zhgj.xhguanjia.cn/wx/';
+//const ApiRootUrl = 'https://zhgj.xhguanjia.cn/wx/';
 
 // const ApiRootUrl = 'https://jia.huiguan.com/jiasv/';//prod
 // const ApiRootUrl = 'http://dev.huiguan.com:60103/jiasv/';//local
@@ -106,7 +106,8 @@ module.exports = {
   /********************公告****************************/
   queryTypes: ApiRootUrl +'gonggao/queryType.do',
   queryTypeGonggaos: ApiRootUrl +'gonggao/queryTypeGonggao.do',
-  queryGonggaoContent: ApiRootUrl +'gonggao/queryGonggaoContent.do',
+  queryGonggaoContent: ApiRootUrl +'gonggao/queryGonggaoContent.do',//编辑器查询公告内容
+  queryGonggaoUrl: ApiRootUrl +'gonggao/queryGonggaoUrl.do',//金数据查询公告内容
 
   /********************邻里圈*************************/
   queryHeoTypeList: ApiRootUrl + "/heo/queryHeoTypeList.do", //查询邻里圈类型列表
@@ -185,6 +186,13 @@ module.exports = {
   queryQuickCodeInterTime:ApiRootUrl + 'opendoor/queryQuickCodeInterTime.do', //获取创建快速码的间隔时间
 
 
+  /********************电费查询*************************/
+  queryElectricitySurplus: ApiRootUrl + "electricity/queryElectricitySurplus.do", //电费查询
+  queryElectricity: ApiRootUrl + "electricity/queryElectricity.do", //用电量查询
+  queryElectricityDetail: ApiRootUrl + "electricity/queryElectricityDetail.do", //电费明细查询
+  queryCurrentDate: ApiRootUrl + "electricity/queryCurrentDate.do", //获取当前时间、时间选择框日期
+
+
 /********************健身中心*************************/
   addCouponQrCode : ApiRootUrl + "active/addCouponQrCode.do", //生成开门二维码
   openLogQuery: ApiRootUrl + "active/openLog/query.do", //开门记录查询
@@ -206,12 +214,39 @@ module.exports = {
   ,queryCardExpNum: ApiRootUrl + "carpay/queryCardExpNum" //查询停车卡时长
   ,queryHourNum: ApiRootUrl + "carpay/queryHourNum" //查询选择停车卡时长数组
   ,queryCarPayLog: ApiRootUrl + "carpay/queryCarPayLog.do" //查询停车缴费历史记录
+  ,parkPayInvoiceCheck: ApiRootUrl + "carpay/parkPayInvoiceCheck.do" //开票验证
+  ,parkPayCompanySearch: ApiRootUrl + "carpay/parkPayCompanySearch.do" //停车缴费开票抬头模糊查询
+  ,parkPayInvoice: ApiRootUrl + "carpay/parkPayInvoice.do" //停车缴费开票
+  ,parkPayViewInvoice: ApiRootUrl + "carpay/parkPayViewInvoice.do" //查看发票
+
+/********************新弘停车缴费*************************/
+,xhQueryCarNum: ApiRootUrl + "xhParkPay/queryCarNum" //车牌号查询计费信息
+,carNoFreeTimeCoupon: ApiRootUrl + "xhParkPay/carNoFreeTimeCoupon" //车牌时间优惠
+,carNoCoupon: ApiRootUrl + "xhParkPay/carNoCoupon" //车牌优惠
+,xhQueryCardExpNum: ApiRootUrl + "xhParkPay/queryCardExpNum" //查询停车卡时长
+,xhQueryHourNum: ApiRootUrl + "xhParkPay/queryHourNum" //查询选择停车卡时长数组
+,xhQueryParkDeductionLog: ApiRootUrl + "xhParkPay/parkDeductionLog.do" //查询停车抵扣历史记录
+
 
   /********************车辆续费*************************/
   ,queryCarInfoByCarNum: ApiRootUrl + "carrenew/queryCarInfoByCarNum" //车牌号查询月租车信息
   ,carRenew:ApiRootUrl + 'carrenew/carRenew.do'// 缴费
   ,carRenewOrderStatusUpdate:ApiRootUrl + 'carRenewOrderStatusUpdate.do'//支付完成，修改支付状态为支付中
   ,queryCarRenewLog: ApiRootUrl + "carrenew/queryCarRenewLog.do" //查询车辆续费历史记录
+
+
+  /********************月租车续费*************************/
+  ,queryMonCarInfoByCarNum: ApiRootUrl + "monCarRen/queryMonCarInfoByCarNum" //车牌号查询月租车信息
+  ,monCarRen:ApiRootUrl + 'monCarRen/monCarRen.do'// 月租车缴费
+  ,monCarRenOrderStatusUpdate:ApiRootUrl + 'monCarRenOrderStatusUpdate.do'//支付完成，修改支付状态为支付中
+  ,queryMonCarRenLog: ApiRootUrl + "monCarRen/queryMonCarRenLog.do" //查询车辆续费历史记录
+  ,queryMonCarRenDate: ApiRootUrl + "monCarRen/queryMonCarRenDate.do" //根据月份查询车辆续费时间
+  ,queryRenewMonthArray: ApiRootUrl + "monCarRen/queryRenewMonthArray.do" //获取下拉框月份
+  ,monCarInvoiceCheck: ApiRootUrl + "monCarRen/monCarInvoiceCheck.do" //开票验证
+  ,monCarInvoice: ApiRootUrl + "monCarRen/monCarInvoice.do" //开票
+  ,companySearch: ApiRootUrl + "monCarRen/companySearch.do" //开票抬头模糊查询
+  ,viewInvoice: ApiRootUrl + "monCarRen/viewInvoice.do" //查看发票
+
 
 
   /********************问题反馈*************************/
