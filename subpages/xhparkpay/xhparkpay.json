@@ -1,0 +1,7 @@
+{
+  "backgroundColor": "#f0eff7",
+  "usingComponents": {
+    "simpleKeyboard": "../component/keyboard"
+  },
+  "navigationBarTitleText":"车牌号查询"
+}

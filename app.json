@@ -247,6 +247,16 @@
       ]
     },
     {
+      "root": "subpages/xhparkpay",
+      "name": "xhparkpay",
+      "pages": [
+        "xhparkpay",
+        "xhParkPayDetail/xhParkPayDetail",
+        "xhParkPaySuccess/xhParkPaySuccess",
+        "xhParkPayLog/xhParkPayLog"
+      ]
+    },
+    {
       "root": "subpages/carrenew",
       "name": "carrenew",
       "pages": [

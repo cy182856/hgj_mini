@@ -1,0 +1,76 @@
+.bg{
+	background-color: #EDEFEF;
+  }
+  .vcell_title{
+	color: #474747;
+
+  }
+  .view_bg{
+	background-color: #ffffff;
+	width: 94%;
+	height: 120rpx;
+	margin-left: 3%;
+	margin-top: 20rpx;
+	border-radius: 10rpx;
+	font-size: 26rpx;
+  }
+  .view_light{
+	line-height: 60rpx;  
+  
+  }
+  .text_right{
+	padding-right: 50rpx;
+  }
+  .view_desc{
+	color:#2c2c2c;
+	padding: var(--cell-vertical-padding,10px) var(--cell-horizontal-padding,16px);
+  }
+
+  .bill_button_payment {
+    text-align: center;
+    border-radius: 5px;
+    height:40px;
+    line-height: 40px;
+	width: 80%;
+	margin-left: 0%;
+	font-size: 16px;
+	color: rgb(244, 248, 246);
+	background-color: rgba(252, 6, 6, 0.637);
+}
+
+
+
+.box{
+	padding: 30rpx;
+  }
+  .form-item{
+	display: flex;
+	background-color: rgb(221, 230, 230);
+	margin-bottom: 10rpx;
+	border-radius: 30rpx;
+  }
+  .head{
+	line-height: 100rpx;
+	margin-left: 30rpx;
+  }
+  .tail{
+	height: 100rpx;
+  }
+  .pic{
+	height: 100rpx;
+	width: 400rpx;
+	margin-left: -2rpx;
+  }
+  
+
+  
+
+
+  
+
+ 
+
+
+
+
+  

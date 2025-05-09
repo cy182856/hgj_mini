@@ -1,0 +1,158 @@
+<!-- 引用 -->
+<import src="../../../../template/loading/loading.wxml"></import>
+<template is="loading" data="{{..._loading_}}"></template>
+<!-- 弹窗 -->
+<van-dialog id="van-dialog" />
+
+<view class="weui-loadmore" wx:if="{{isRefreshing}}" style="margin-top: 50px;">
+	<view class="weui-loading"></view>
+	<view class="weui-loadmore-tips">正在刷新...</view>
+</view>
+
+<view>
+	<view style="margin-top: 20px;margin-left: 4%;">车辆信息</view>
+	<view style="height: auto;" class="view_bg">
+		<view class="view_desc">
+
+			<view style="margin-top: 5px;">
+				<van-row>
+					<view style="text-align: left;">
+						<van-col span="17">
+							<text>车牌号码</text>
+						</van-col>
+					</view>
+					<view style="text-align: right;">
+						<van-col span="6">
+							<text>{{carInfoVo.carCode}}</text>
+						</van-col>
+					</view>
+				</van-row>
+			</view>
+
+			<view style="margin-top: 10px;">
+				<van-row>
+					<view style="text-align: left;">
+						<van-col span="12">
+							<text>进场时间</text>
+						</van-col>
+					</view>
+					<view style="text-align: right;">
+						<van-col span="11">
+							<text>{{carInfoVo.inParkTime}}</text>
+						</van-col>
+					</view>
+				</van-row>
+			</view>
+
+			<!-- <view style="margin-top: 10px;">
+				<van-row>
+					<view style="text-align: left;">
+						<van-col span="12">
+							<text>出场时间</text>
+						</van-col>
+					</view>
+					<view style="text-align: right;">
+						<van-col span="11">
+							<text>{{carInfoVo.outParkTime}}</text>
+						</van-col>
+					</view>
+				</van-row>
+			</view> -->
+
+			<view style="margin-top: 10px;">
+				<van-row>
+					<view style="text-align: left;">
+						<van-col span="12">
+							<text>停车时长</text>
+						</van-col>
+					</view>
+					<view style="text-align: right;">
+						<van-col span="11">
+							<text>{{carInfoVo.parkDur}}</text>
+						</van-col>
+					</view>
+				</van-row>
+			</view>
+
+			<view style="margin-top: 10px;">
+				<van-row>
+					<view style="text-align: left;">
+						<van-col span="12">
+							<text>总金额</text>
+						</van-col>
+					</view>
+					<view style="text-align: right;">
+						<van-col span="11">
+							<text>{{carInfoVo.totalAmount}}元</text>
+						</van-col>
+					</view>
+				</van-row>
+			</view>
+
+		</view>
+	</view>
+
+	<view >
+		<view style="margin-top: 30px;margin-left: 4%;"></view>
+		<view wx:if="{{isCard == true && expNum > 0}}" style="height: auto; width: 95%;" class="view_bg">
+			<view class="view_desc">
+				<radio-group>
+					<label class="custom-radio">
+						<view>
+							<van-row>
+								<view style="text-align: left;">
+									<van-col span="18">
+										<text>停车抵扣</text>
+									</van-col>
+								</view>
+								<view style="text-align: right;">
+									<van-col span="6">
+										<radio style="transform: scale(0.7);" value="{{cardCstBatchId}}" checked="true"></radio>
+									</van-col>
+								</view>
+							</van-row>
+						</view>
+					</label>
+				</radio-group>
+			</view>
+		</view>
+		<view style="margin-left: 7%;color:#444444;font-size: 12px;">停车抵扣本月剩余<text style="color: rgb(6, 91, 248);font-size: 14px;">{{expNum}}</text>小时(将优先扣除停车抵扣时长)</view>
+
+		
+		<view class="box" wx:if="{{isCard == true && expNum > 0}}">
+			<van-row >
+				<van-col span="11">
+					<view>
+						<picker mode="selector" bindchange="bindPickerChange" value="{{index}}" range="{{hourNumArray}}">
+							<button style="font-size: 14px;background-color: rgb(252, 204, 170); width: 90%;">请选择抵扣时长</button>	
+						</picker>
+					</view>
+				</van-col>
+				<van-col span="13">
+					<view wx:if="{{hourNumValue > 0}}" style="margin-left: 3%;">
+						<view style="font-size: 14px;border: 1px solid rgb(230, 228, 228); padding: 5px;">停车抵扣时长:<text style="color: rgb(248, 10, 10);">{{hourNumValue}}</text>小时</view>	
+					</view>
+				</van-col>
+			</van-row>		
+		</view>
+
+	</view>
+
+
+	<view wx:if="{{isCard == true && expNum > 0}}" style="margin-left: 6%; margin-top: 5%; color: red; font-size: 18px;">使用说明:</view>
+	<view wx:if="{{isCard == true && expNum > 0}}" style="margin-left: 8%; margin-right: 8%; margin-top: 2%; font-size: 14px;color: rgb(6, 91, 248);">
+		{{xhParkCouponDesc}}	
+	</view>
+
+
+	<view wx:if="{{isCard == true && expNum > 0}}" style="position: fixed;bottom: 0;width: 750rpx; height: 80px;background-color: rgb(250, 248, 248);">
+		<van-row>
+			<van-col span="15"><text style="color:#2c2c2c;margin-left: 15%;">抵扣时长： <text style="color: rgb(248, 10, 10);">{{hourNumValue}}</text>小时</text></van-col>
+			<van-col span="9">
+				<button wx:if="{{(payment_button_disabled == false)}}" class="bill_button_payment" hover-class="bill_button_payment_class" bindtap="carNoCoupon" data-datavalue="{{item}}">确认抵扣</button>
+			</van-col>
+		</van-row>
+	</view>
+
+
+</view>

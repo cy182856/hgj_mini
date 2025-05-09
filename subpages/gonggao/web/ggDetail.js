@@ -31,7 +31,39 @@ Page({
     this.setData({
       id:id
     })
-    this.queryGongGaoContent(id)
+    // 编辑器获取公告内容
+    //this.queryGongGaoContent(id)
+    // 金数据获取公告内容
+    this.queryGongGaoUrl(id)
+  },
+
+  queryGongGaoUrl:function(id){
+    var that = this;
+    var queryParams = {   
+      id:id,
+      wxOpenId:app.storage.getWxOpenId(),
+      proNum:app.storage.getProNum()
+    };
+    that.showLoading(!0)
+    app.req.postRequest(api.queryGonggaoUrl, queryParams).then(function (value) {
+      console.log("queryGonggaoUrl 返回", value);
+      if(value.data.respCode == "000"){
+        var gonggao = value.data.gonggao;
+        let content = gonggao.url;     
+        that.setData({
+          content:content,
+          isRefreshing:false
+        })
+      }
+      that.showLoading(!1)
+    }, function (value) {
+      console.log("queryGonggaoUrl: ", value);
+      wx.showToast({
+        icon:'none',
+        title: '查询失败'
+      })
+      that.showLoading(!1)
+    }); 
   },
 
   queryGongGaoContent:function(id){

@@ -7,7 +7,7 @@
     <view class="weui-loadmore-tips">正在刷新...</view>
 </view>
 
-<!-- <web-view src="{{url}}"></web-view> -->
-<view style="padding:5%;">
+<web-view src="{{url}}"></web-view>
+<!-- <view style="padding:5%;">
     <rich-text space="nbsp" decode="{{true}}" nodes="{{content}}"></rich-text>
-</view>
+</view> -->
