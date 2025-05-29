@@ -20,7 +20,7 @@
   <view style="color: azure; font-size: 12px;">历史记录</view>
 </view>
 
-<view style="color:white">停车抵扣本月剩余 <text style="color: rgb(6, 248, 18);font-size: 14px;">{{expNum}}</text> 小时</view>
+<view style="color:white">临停抵扣时长本月剩余 <text style="color: rgb(6, 248, 18);font-size: 14px;">{{expNum}}</text> 小时</view>
 
 </view> 
 

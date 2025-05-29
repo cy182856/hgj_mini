@@ -1,6 +1,6 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText":"停车抵扣",
+  "navigationBarTitleText":"临停时长抵扣",
   "enablePullDownRefresh": true
 
 }

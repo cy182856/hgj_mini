@@ -12,7 +12,7 @@
         {
           "name": "客户入住",
           "pathName": "pages/hu/hubind/hubind",
-          "query": "cstCode=202402210001&cstName=上海宁波商会&cstIntoId=20250407104557b0yj5z&proNum=10001",
+          "query": "cstCode=202402210001&cstName=李大龙,郭哲&cstIntoId=20250519111159nttly3&proNum=10001",
           "launchMode": "default",
           "scene": null
         },

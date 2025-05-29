@@ -12,21 +12,27 @@
         <van-cell-group>
           <block>
             <van-cell>
-              <van-col span="5" style="color: black;">车牌号</van-col>
-              <van-col span="11" style="color: black;">{{carPayLogs.carCode}}</van-col>
-              <van-col span="8" style="color: rgb(93, 156, 117);">抵扣成功</van-col>
+              <van-col span="6" style="color: black;">车牌号</van-col>
+              <van-col span="12" style="color: black;">{{carPayLogs.carCode}}</van-col>
+              <van-col span="6" style="color: rgb(93, 156, 117);">发券成功</van-col>
             </van-cell>
           </block>
           <block>
             <van-cell>
-              <van-col span="5">抵扣时长</van-col>
-              <van-col span="11">{{carPayLogs.deductionNum}}小时</van-col>
+              <van-col span="6">抵扣时长</van-col>
+              <van-col span="12">{{carPayLogs.deductionNum}}小时</van-col>
             </van-cell>
           </block>
           <block>
             <van-cell>
-              <van-col span="5">抵扣时间</van-col>
-              <van-col span="11">{{carPayLogs.createTime}}</van-col>
+              <van-col span="6">发券时间</van-col>
+              <van-col span="12">{{carPayLogs.createTime}}</van-col>
+            </van-cell>
+          </block>
+          <block>
+            <van-cell>
+              <van-col span="6">优惠券编号</van-col>
+              <van-col span="12">{{carPayLogs.couponKey}}</van-col>
             </van-cell>
           </block>
           <view style="height:20rpx;"></view>

@@ -3,9 +3,9 @@
 
 //const ApiRootUrl = 'https://zhgj.shofw.com/wx/';//tech
 //const ApiRootUrl = 'http://192.168.79.5:85/wx/';
-const ApiRootUrl = 'http://192.168.23.108:85/wx/';//tech
+//const ApiRootUrl = 'http://192.168.23.108:85/wx/';//tech
 //const ApiRootUrl = 'http://zhgjtest.shofw.com:85/wx/';
-//const ApiRootUrl = 'https://zhgj.xhguanjia.cn/wx/';
+const ApiRootUrl = 'https://zhgj.xhguanjia.cn/wx/';
 
 // const ApiRootUrl = 'https://jia.huiguan.com/jiasv/';//prod
 // const ApiRootUrl = 'http://dev.huiguan.com:60103/jiasv/';//local

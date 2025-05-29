@@ -93,8 +93,8 @@
 	</view>
 
 	<view >
-		<view style="margin-top: 30px;margin-left: 4%;"></view>
-		<view wx:if="{{isCard == true && expNum > 0}}" style="height: auto; width: 95%;" class="view_bg">
+		<view style="margin-top: 20px;margin-left: 4%;"></view>
+		<view wx:if="{{isCard == true && expNum > 0 && carInfoVo.isTimeOut == false}}" style="height: auto; width: 95%;" class="view_bg">
 			<view class="view_desc">
 				<radio-group>
 					<label class="custom-radio">
@@ -102,7 +102,7 @@
 							<van-row>
 								<view style="text-align: left;">
 									<van-col span="18">
-										<text>停车抵扣</text>
+										<text>时长抵扣</text>
 									</van-col>
 								</view>
 								<view style="text-align: right;">
@@ -116,10 +116,10 @@
 				</radio-group>
 			</view>
 		</view>
-		<view style="margin-left: 7%;color:#444444;font-size: 12px;">停车抵扣本月剩余<text style="color: rgb(6, 91, 248);font-size: 14px;">{{expNum}}</text>小时(将优先扣除停车抵扣时长)</view>
+		<view style="margin-left: 7%;color:#444444;font-size: 12px;">临停时长抵扣本月剩余<text style="color: rgb(6, 91, 248);font-size: 14px;">{{expNum}}</text>小时</view>
 
 		
-		<view class="box" wx:if="{{isCard == true && expNum > 0}}">
+		<view class="box" wx:if="{{isCard == true && expNum > 0 && carInfoVo.isTimeOut == false}}">
 			<van-row >
 				<van-col span="11">
 					<view>
@@ -130,7 +130,7 @@
 				</van-col>
 				<van-col span="13">
 					<view wx:if="{{hourNumValue > 0}}" style="margin-left: 3%;">
-						<view style="font-size: 14px;border: 1px solid rgb(230, 228, 228); padding: 5px;">停车抵扣时长:<text style="color: rgb(248, 10, 10);">{{hourNumValue}}</text>小时</view>	
+						<view style="font-size: 14px;border: 1px solid rgb(230, 228, 228); padding: 5px;">临停抵扣时长:<text style="color: rgb(248, 10, 10);">{{hourNumValue}}</text>小时</view>	
 					</view>
 				</van-col>
 			</van-row>		
@@ -138,21 +138,18 @@
 
 	</view>
 
-
-	<view wx:if="{{isCard == true && expNum > 0}}" style="margin-left: 6%; margin-top: 5%; color: red; font-size: 18px;">使用说明:</view>
-	<view wx:if="{{isCard == true && expNum > 0}}" style="margin-left: 8%; margin-right: 8%; margin-top: 2%; font-size: 14px;color: rgb(6, 91, 248);">
-		{{xhParkCouponDesc}}	
+	<view style="margin-left: 6%; color: red; font-size: 16px;">临停时长抵扣使用规则:</view>
+	<view style="margin-left: 8%; margin-right: 8%; font-size: 14px;color: rgb(83, 86, 90); margin-top: -5%;">
+		<rich-text nodes="{{xhParkCouponDesc}}"></rich-text>
 	</view>
 
-
-	<view wx:if="{{isCard == true && expNum > 0}}" style="position: fixed;bottom: 0;width: 750rpx; height: 80px;background-color: rgb(250, 248, 248);">
+	<view wx:if="{{isCard == true && expNum > 0 && carInfoVo.isTimeOut == false}}" style="position: fixed;bottom: 0;width: 750rpx; height: 80px;background-color: rgb(250, 248, 248);">
 		<van-row>
-			<van-col span="15"><text style="color:#2c2c2c;margin-left: 15%;">抵扣时长： <text style="color: rgb(248, 10, 10);">{{hourNumValue}}</text>小时</text></van-col>
+			<van-col span="15"><text style="color:#2c2c2c;margin-left: 15%;">临停抵扣时长： <text style="color: rgb(248, 10, 10);">{{hourNumValue}}</text>小时</text></van-col>
 			<van-col span="9">
-				<button wx:if="{{(payment_button_disabled == false)}}" class="bill_button_payment" hover-class="bill_button_payment_class" bindtap="carNoCoupon" data-datavalue="{{item}}">确认抵扣</button>
+				<button wx:if="{{(payment_button_disabled == false)}}" class="bill_button_payment" hover-class="bill_button_payment_class" bindtap="carNoCoupon" data-datavalue="{{item}}">确认发券</button>
 			</van-col>
 		</van-row>
 	</view>
-
 
 </view>

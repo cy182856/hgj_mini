@@ -78,6 +78,8 @@ Page({
 
     , showLife: false //生活服务，默认不开启
 
+    , gonggaoIsLoad : '0'
+
     , menu: {
       //问题反馈
       showAdvice: false
@@ -145,17 +147,6 @@ Page({
       //当前有生活服务板块
       life.init(Toast, api, app, this);
     }
-    if (isMineActive) {
-      // let myTime = this.data.myTime;
-      // if(myTime == 0){
-      //   this.setData({
-      //     myTime:1
-      //   })
-      //this.initCanShowMyRelease();
-      //this.queryMutipUsr();
-      //this.queryMenuList();
-      // }
-    }
     // 修改昵称后，页面切换，nickName 不刷新
     var loginNickName = loginInfo.nickName == '' ? '' : loginInfo.nickName
     this.setData({
@@ -165,11 +156,6 @@ Page({
   },
   //修改tabbar对应的小区名
   setTitleName(indexName) {
-    //var indexName = '首页';
-    // var name = loginInfo.commanyShortName;
-    // if (name && name != '') {
-    //   indexName = name;
-    // }
     wx.setNavigationBarTitle({
       title: indexName
     })
@@ -224,39 +210,22 @@ Page({
 
   // 公告
   gonggao(type) {
-    //let flag = false;//默认不会弹窗公告
-    //点击的时候，不区分是否滚动，直接弹窗
-    // try {
-    //   if (type && type.type === 'click') {
-    //     flag = true;
-    //   }
-    // } catch (e) { }
     var data = {};
     data['cstCode'] = app.storage.getCstCode();
     data['wxOpenId'] = app.storage.getWxOpenId();
-    data['proNum'] = app.storage.getProNum();   
+    data['proNum'] = app.storage.getProNum();
     app.req.postRequest(api.queryGongGao,data).then(res=>{
       console.log('公告查询结果',res);
       var data = res.data;
       if(data.respCode == '000'){
-        if(data.list != null && data.list.length > 0){
-          // var gobj = data.gonggaoLIst[0];
-          // var noticeDate = gobj.noticeDate.substring(0,4)+ '-' + gobj.noticeDate.substring(4,6)+'-'+gobj.noticeDate.substring(6,8);
-          // gobj.noticeDate = noticeDate;
-          // if(type == '1'){//初始化加载的时候，需要判断模式
-          //   flag = (gobj.noticeType == 'P');
-          // }
+        if(data.list != null && data.list.length > 0){    
           that.setData({
             gonggaoList:data.list,
             notReadNum:data.notReadNum
-            // gobj:gobj,
-            // showPost: flag,
-            // ggBtn:gobj.noticeUrl != '' ?'查看原文':'确定'
           })
         }else{
           console.log('没有公告');
           that.setData({
-           // gobj:null
             gonggaoList:null
           })
         }
@@ -374,15 +343,6 @@ Page({
       background.push(imgurl);
     }
 
-    // 获取管家电话，企业微信二维码
-    this.getUserMobile();
-
-    // 渲染页面的同时判断生活服务
-    this.hasLife();
-
-    // 获取广告
-    this.getAdverts();
-
     this.setData({
       functionList: loginInfo.funList,
       homeDot: loginInfo.homeDot,
@@ -395,8 +355,22 @@ Page({
       obj: loginInfo,
       active: this.data.active,
       userList: app.storage.getUsrList(),
-      isRefreshing:false
+      isRefreshing:false,
+      gonggaoIsLoad:'1'
     });
+
+    // 获取管家电话，企业微信二维码
+    this.getUserMobile();
+
+    // 渲染页面的同时判断生活服务
+    this.hasLife();
+
+    // 获取广告
+    this.getAdverts();
+
+    // 获取公告
+    this.gonggao();
+
     return true;
   },
 
@@ -811,21 +785,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log('主页onshow加载公告 ..........');
-    this.gonggao();
-    // if (this.data.onLoad) {
-    //   console.log('已经走过了onLoad，无需再次走onshow处理其他业务');
-    //   this.setData({
-    //     onLoad: false
-    //   })
-    //   return;
-    // }
-    // if (!this.checkSession()) {
-    //   this.sameUserDoLogin();
-    //   return;
-    // }
+    // 第一次进页面不加载
+    if(this.data.gonggaoIsLoad == 1){
+      console.log('主页onshow加载公告 ..........');
+      this.gonggao();   
+    }
   },
-
 
   /**
    * 生命周期函数--监听页面隐藏

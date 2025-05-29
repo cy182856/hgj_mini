@@ -121,7 +121,7 @@ Page({
     data['hourNumValue'] = that.data.hourNumValue;
     wx.showModal({
       title: '提示',
-      content: '确定抵扣吗?',
+      content: '确定发券吗?',
       success: function (res) {
         if (res.confirm) {
           console.log('用户点击确定');
@@ -135,7 +135,7 @@ Page({
                   payment_button_disabled: false
                 });
                 Toast.alert({
-                  message:'抵扣成功'
+                  message:'发券成功'
                 }).then(()=>{             
                 // 跳转到抵扣记录页
                   wx.redirectTo({
